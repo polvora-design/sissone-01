@@ -982,7 +982,7 @@ const SissonePrototype = () => {
 
                 {/* Content */}
                 {/* Content */}
-                <div className="p-4 space-y-2 min-w-0 overflow-hidden flex-shrink-0">
+                <div className="p-4 space-y-2 min-w-0 overflow-hidden flex-shrink-0 py-4">
                   {/* Top row with tag and like button */}
                   <div className="flex justify-between items-center gap-2">
                     <Badge className={`${classItem.tagColor} text-xs font-medium flex-shrink-0`}>{classItem.tag}</Badge>
