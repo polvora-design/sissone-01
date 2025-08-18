@@ -19,6 +19,9 @@ const SissonePrototype = () => {
   const [searchLocation, setSearchLocation] = useState("")
   const [searchWhen, setSearchWhen] = useState("")
   const [searchModality, setSearchModality] = useState<string[]>([])
+  const [showCalendarModal, setShowCalendarModal] = useState(false)
+  const [selectedDate, setSelectedDate] = useState("")
+  const [selectedTime, setSelectedTime] = useState("")
 
   const toggleFavorite = (id: number) => {
     setFavorites((prev) => (prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]))
@@ -191,13 +194,20 @@ const SissonePrototype = () => {
                       ? "bg-[#CFB2A8] text-[#3D2C2E]"
                       : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
                   }`}
-                  onClick={() => setSearchWhen("specific")}
+                  onClick={() => {
+                    setSearchWhen("specific")
+                    setShowCalendarModal(true)
+                  }}
                 >
                   <div className="flex items-center gap-3">
                     <Calendar className="h-5 w-5" />
                     <div className="text-left">
                       <div className="font-medium">Data específica</div>
-                      <div className="text-sm opacity-70">Escolher data e horário</div>
+                      <div className="text-sm opacity-70">
+                        {selectedDate && selectedTime
+                          ? `${selectedDate} às ${selectedTime}`
+                          : "Escolher data e horário"}
+                      </div>
                     </div>
                   </div>
                 </Button>
@@ -279,6 +289,90 @@ const SissonePrototype = () => {
               </div>
             </div>
           </div>
+
+          {/* Calendar Modal */}
+          {showCalendarModal && (
+            <div className="fixed inset-0 bg-white z-60 flex flex-col">
+              {/* Calendar Header */}
+              <div className="flex items-center justify-between p-4 border-b">
+                <Button variant="ghost" size="icon" onClick={() => setShowCalendarModal(false)}>
+                  <ArrowLeft className="h-5 w-5" />
+                </Button>
+                <h2 className="text-lg font-semibold text-[#3D2C2E]">Selecionar Data</h2>
+                <div className="w-10" />
+              </div>
+
+              {/* Calendar Content */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-6">
+                {/* Date Selection */}
+                <div>
+                  <h3 className="text-base font-semibold text-[#3D2C2E] mb-3">Data</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    {["Hoje", "Amanhã", "Esta semana", "Próxima semana"].map((dateOption) => (
+                      <Button
+                        key={dateOption}
+                        variant={selectedDate === dateOption ? "default" : "outline"}
+                        className={`h-12 ${
+                          selectedDate === dateOption
+                            ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                            : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                        }`}
+                        onClick={() => setSelectedDate(dateOption)}
+                      >
+                        {dateOption}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Time Selection */}
+                <div>
+                  <h3 className="text-base font-semibold text-[#3D2C2E] mb-3">Horário</h3>
+                  <div className="grid grid-cols-3 gap-2">
+                    {["08:00", "10:00", "14:00", "16:00", "18:00", "20:00"].map((timeOption) => (
+                      <Button
+                        key={timeOption}
+                        variant={selectedTime === timeOption ? "default" : "outline"}
+                        className={`h-10 ${
+                          selectedTime === timeOption
+                            ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                            : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                        }`}
+                        onClick={() => setSelectedTime(timeOption)}
+                      >
+                        {timeOption}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Calendar Footer */}
+              <div className="p-4 border-t bg-white">
+                <div className="flex gap-3">
+                  <Button
+                    variant="outline"
+                    className="flex-1 border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                    onClick={() => {
+                      setSelectedDate("")
+                      setSelectedTime("")
+                    }}
+                  >
+                    Limpar
+                  </Button>
+                  <Button
+                    className="flex-1 bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]"
+                    onClick={() => {
+                      setShowCalendarModal(false)
+                    }}
+                    disabled={!selectedDate || !selectedTime}
+                  >
+                    Confirmar
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Modal Footer */}
           <div className="p-4 border-t bg-white">
