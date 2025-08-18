@@ -982,10 +982,10 @@ const SissonePrototype = () => {
 
                 {/* Content */}
                 {/* Content */}
-                <div className="flex-1 p-4 space-y-2">
+                <div className="flex-1 p-4 space-y-2 min-w-0 overflow-hidden">
                   {/* Top row with tag and like button */}
-                  <div className="flex justify-between items-center">
-                    <Badge className={`${classItem.tagColor} text-xs font-medium`}>{classItem.tag}</Badge>
+                  <div className="flex justify-between items-center gap-2">
+                    <Badge className={`${classItem.tagColor} text-xs font-medium flex-shrink-0`}>{classItem.tag}</Badge>
                     <Button
                       variant="ghost"
                       size="sm"
@@ -993,7 +993,7 @@ const SissonePrototype = () => {
                         e.stopPropagation()
                         toggleFavorite(classItem.id)
                       }}
-                      className="p-1"
+                      className="p-1 flex-shrink-0"
                     >
                       <Heart
                         className={`h-4 w-4 ${
@@ -1003,36 +1003,36 @@ const SissonePrototype = () => {
                     </Button>
                   </div>
 
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1 min-w-0">
+                  <div className="flex justify-between items-start gap-2">
+                    <div className="flex-1 min-w-0 overflow-hidden">
                       <h3 className="font-semibold text-[#3D2C2E] text-base leading-tight truncate">
                         {classItem.name}
                       </h3>
                       <p className="text-sm text-[#3D2C2E] opacity-70 truncate">{classItem.school}</p>
                     </div>
-                    <div className="flex items-center gap-1 ml-2 flex-shrink-0">
+                    <div className="flex items-center gap-1 flex-shrink-0">
                       <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
                       <span className="text-sm text-[#3D2C2E] font-medium">{classItem.rating}</span>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 text-sm text-[#3D2C2E] opacity-70">
-                    <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-3 text-sm text-[#3D2C2E] opacity-70 overflow-hidden">
+                    <div className="flex items-center gap-1 flex-shrink-0">
                       <Calendar className="h-4 w-4" />
-                      <span>{classItem.days[0]}</span>
+                      <span className="truncate">{classItem.days[0]}</span>
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1 flex-shrink-0">
                       <Clock className="h-4 w-4" />
                       <span>{classItem.time}</span>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1 min-w-0">
+                  <div className="flex items-center justify-between gap-2 overflow-hidden">
+                    <div className="flex items-center gap-1 min-w-0 overflow-hidden">
                       <MapPin className="h-4 w-4 text-[#3D2C2E] opacity-70 flex-shrink-0" />
                       <span className="text-sm text-[#3D2C2E] opacity-70 truncate">{classItem.location}</span>
                     </div>
-                    <div className="text-right flex-shrink-0 ml-2">
+                    <div className="text-right flex-shrink-0">
                       <span className="text-lg font-semibold text-[#3D2C2E]">{classItem.price}</span>
                       <span className="text-sm text-[#3D2C2E] opacity-70"> /aula</span>
                     </div>
