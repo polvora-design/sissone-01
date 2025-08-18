@@ -208,8 +208,8 @@ const SissonePrototype = () => {
               </svg>
             </div>
             <div className="text-left">
-              <div className="font-medium text-sm">Para onde?</div>
-              <div className="text-xs text-gray-500">Qualquer lugar • Qualquer data • Modalidade</div>
+              <div className="font-medium text-sm">{"Iniciar busca"}  </div>
+              <div className="text-xs text-gray-500">{"Lugar • Data • Modalidade"}</div>
             </div>
           </div>
         </Button>
@@ -614,7 +614,7 @@ const SissonePrototype = () => {
       <div className="space-y-6">
         {/* Faça uma aula ainda hoje */}
         <div>
-          <div className="px-4 mb-3">
+          <div className="px-4 mb-3 mt-3">
             <h2 className="text-lg font-semibold text-[#3D2C2E]">Faça uma aula ainda hoje</h2>
           </div>
           <div className="flex gap-3 px-4 overflow-x-auto scrollbar-hide">
