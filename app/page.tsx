@@ -1561,7 +1561,7 @@ const SissonePrototype = () => {
               <Badge className={`${selectedClass.tagColor} font-medium`}>{selectedClass.tag}</Badge>
             </div>
 
-            <div className="flex items-center gap-4 mt-3">
+            <div className="flex items-center gap-4 mt-3 mb-3">
               <div className="flex items-center gap-1">
                 <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
                 <span className="text-[#3D2C2E]">{selectedClass.rating}</span>
