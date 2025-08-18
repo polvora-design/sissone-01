@@ -9,7 +9,7 @@ import { ArrowLeft, Filter, Heart, MapPin, Star, Clock, Calendar, User, Check } 
 
 type Screen = "home" | "filters" | "detail" | "schedule" | "confirmation"
 
-export default function SissonePrototype() {
+const SissonePrototype = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>("home")
   const [favorites, setFavorites] = useState<number[]>([])
   const [selectedClass, setSelectedClass] = useState<any>(null)
@@ -126,90 +126,288 @@ export default function SissonePrototype() {
       </div>
 
       {/* Classes Feed */}
-      <div className="p-4 space-y-4">
-        <h2 className="text-lg font-semibold text-[#3D2C2E]">Descubra Aulas</h2>
+      <div className="space-y-6">
+        {/* Faça uma aula ainda hoje */}
+        <div>
+          <div className="px-4 mb-3">
+            <h2 className="text-lg font-semibold text-[#3D2C2E]">Faça uma aula ainda hoje</h2>
+          </div>
+          <div className="flex gap-3 px-4 overflow-x-auto scrollbar-hide">
+            {classes.slice(0, 3).map((classItem) => (
+              <div
+                key={classItem.id}
+                className="flex-shrink-0 w-64 cursor-pointer"
+                onClick={() => {
+                  setSelectedClass(classItem)
+                  setCurrentScreen("detail")
+                }}
+              >
+                <Card className="bg-white border-[#E5D6CD]">
+                  <CardContent className="p-0">
+                    {/* Foto com overlay de tag e like */}
+                    <div className="relative">
+                      <div className="w-full h-40 bg-[#E5D6CD] rounded-t-lg flex items-center justify-center">
+                        <span className="text-xs text-[#3D2C2E]">FOTO</span>
+                      </div>
 
-        {classes.map((classItem) => (
-          <Card
-            key={classItem.id}
-            className="bg-white border-[#E5D6CD] cursor-pointer relative"
-            onClick={() => {
-              setSelectedClass(classItem)
-              setCurrentScreen("detail")
-            }}
-          >
-            <CardContent className="p-0">
-              {/* Foto com overlay de tag e like */}
-              <div className="relative">
-                <div className="w-full h-48 bg-[#E5D6CD] rounded-t-lg flex items-center justify-center">
-                  <span className="text-xs text-[#3D2C2E]">FOTO</span>
-                </div>
+                      {/* Tag no canto superior esquerdo */}
+                      <div className="absolute top-2 left-2 z-10">
+                        <Badge className={`${classItem.tagColor} text-xs font-medium shadow-sm`}>{classItem.tag}</Badge>
+                      </div>
 
-                {/* Tag no canto superior esquerdo */}
-                <div className="absolute top-3 left-3 z-10">
-                  <Badge className={`${classItem.tagColor} text-xs font-medium shadow-sm`}>{classItem.tag}</Badge>
-                </div>
+                      {/* Botão de like no canto superior direito */}
+                      <div className="absolute top-2 right-2 z-10">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            toggleFavorite(classItem.id)
+                          }}
+                          className={`p-1.5 rounded-full shadow-sm ${
+                            favorites.includes(classItem.id)
+                              ? "bg-white/90 hover:bg-white"
+                              : "bg-white/70 hover:bg-white/90"
+                          }`}
+                        >
+                          <Heart
+                            className={`h-4 w-4 ${
+                              favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            }`}
+                          />
+                        </Button>
+                      </div>
+                    </div>
 
-                {/* Botão de like no canto superior direito */}
-                <div className="absolute top-3 right-3 z-10">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      toggleFavorite(classItem.id)
-                    }}
-                    className={`p-2 rounded-full shadow-sm ${
-                      favorites.includes(classItem.id) ? "bg-white/90 hover:bg-white" : "bg-white/70 hover:bg-white/90"
-                    }`}
-                  >
-                    <Heart
-                      className={`h-5 w-5 ${
-                        favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                      }`}
-                    />
-                  </Button>
-                </div>
+                    {/* Informações abaixo da foto */}
+                    <div className="p-3 space-y-2">
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight">{classItem.name}</h3>
+                          <p className="text-xs text-[#3D2C2E] opacity-70">{classItem.school}</p>
+                        </div>
+                        <div className="flex items-center gap-1 ml-2">
+                          <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
+                          <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          <span>{classItem.days[0]}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          <span>{classItem.time}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1">
+                          <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70" />
+                          <span className="text-xs text-[#3D2C2E] opacity-70">{classItem.location}</span>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
+                          <span className="text-xs text-[#3D2C2E] opacity-70"> /aula</span>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
+            ))}
+          </div>
+        </div>
 
-              {/* Informações abaixo da foto */}
-              <div className="p-4 space-y-2">
-                <div className="flex justify-between items-start">
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-[#3D2C2E] text-base">{classItem.name}</h3>
-                    <p className="text-sm text-[#3D2C2E] opacity-70">{classItem.school}</p>
-                  </div>
-                  <div className="flex items-center gap-1 ml-2">
-                    <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                    <span className="text-sm text-[#3D2C2E] font-medium">{classItem.rating}</span>
-                  </div>
-                </div>
+        {/* Próximos eventos */}
+        <div>
+          <div className="px-4 mb-3">
+            <h2 className="text-lg font-semibold text-[#3D2C2E]">Próximos eventos</h2>
+          </div>
+          <div className="flex gap-3 px-4 overflow-x-auto scrollbar-hide">
+            {classes.map((classItem) => (
+              <div
+                key={`event-${classItem.id}`}
+                className="flex-shrink-0 w-64 cursor-pointer"
+                onClick={() => {
+                  setSelectedClass(classItem)
+                  setCurrentScreen("detail")
+                }}
+              >
+                <Card className="bg-white border-[#E5D6CD]">
+                  <CardContent className="p-0">
+                    {/* Foto com overlay de tag e like */}
+                    <div className="relative">
+                      <div className="w-full h-40 bg-[#E5D6CD] rounded-t-lg flex items-center justify-center">
+                        <span className="text-xs text-[#3D2C2E]">FOTO</span>
+                      </div>
 
-                <div className="flex items-center gap-3 text-sm text-[#3D2C2E] opacity-70">
-                  <div className="flex items-center gap-1">
-                    <Calendar className="h-4 w-4" />
-                    <span>{classItem.days.join(" e ")}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Clock className="h-4 w-4" />
-                    <span>{classItem.time}</span>
-                  </div>
-                </div>
+                      {/* Tag no canto superior esquerdo */}
+                      <div className="absolute top-2 left-2 z-10">
+                        <Badge className="bg-blue-100 text-blue-800 text-xs font-medium shadow-sm">Evento</Badge>
+                      </div>
 
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1">
-                    <MapPin className="h-4 w-4 text-[#3D2C2E] opacity-70" />
-                    <span className="text-sm text-[#3D2C2E] opacity-70">{classItem.location}</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-base font-semibold text-[#3D2C2E]">{classItem.price}</span>
-                    <span className="text-sm text-[#3D2C2E] opacity-70"> /aula</span>
-                  </div>
-                </div>
+                      {/* Botão de like no canto superior direito */}
+                      <div className="absolute top-2 right-2 z-10">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            toggleFavorite(classItem.id)
+                          }}
+                          className={`p-1.5 rounded-full shadow-sm ${
+                            favorites.includes(classItem.id)
+                              ? "bg-white/90 hover:bg-white"
+                              : "bg-white/70 hover:bg-white/90"
+                          }`}
+                        >
+                          <Heart
+                            className={`h-4 w-4 ${
+                              favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            }`}
+                          />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Informações abaixo da foto */}
+                    <div className="p-3 space-y-2">
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight">{classItem.name}</h3>
+                          <p className="text-xs text-[#3D2C2E] opacity-70">{classItem.school}</p>
+                        </div>
+                        <div className="flex items-center gap-1 ml-2">
+                          <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
+                          <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          <span>{classItem.days[0]}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          <span>{classItem.time}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1">
+                          <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70" />
+                          <span className="text-xs text-[#3D2C2E] opacity-70">{classItem.location}</span>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
+                          <span className="text-xs text-[#3D2C2E] opacity-70"> /aula</span>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
-            </CardContent>
-          </Card>
-        ))}
+            ))}
+          </div>
+        </div>
+
+        {/* Mais populares */}
+        <div>
+          <div className="px-4 mb-3">
+            <h2 className="text-lg font-semibold text-[#3D2C2E]">Mais populares</h2>
+          </div>
+          <div className="flex gap-3 px-4 overflow-x-auto scrollbar-hide">
+            {classes.reverse().map((classItem) => (
+              <div
+                key={`popular-${classItem.id}`}
+                className="flex-shrink-0 w-64 cursor-pointer"
+                onClick={() => {
+                  setSelectedClass(classItem)
+                  setCurrentScreen("detail")
+                }}
+              >
+                <Card className="bg-white border-[#E5D6CD]">
+                  <CardContent className="p-0">
+                    {/* Foto com overlay de tag e like */}
+                    <div className="relative">
+                      <div className="w-full h-40 bg-[#E5D6CD] rounded-t-lg flex items-center justify-center">
+                        <span className="text-xs text-[#3D2C2E]">FOTO</span>
+                      </div>
+
+                      {/* Tag no canto superior esquerdo */}
+                      <div className="absolute top-2 left-2 z-10">
+                        <Badge className={`${classItem.tagColor} text-xs font-medium shadow-sm`}>{classItem.tag}</Badge>
+                      </div>
+
+                      {/* Botão de like no canto superior direito */}
+                      <div className="absolute top-2 right-2 z-10">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            toggleFavorite(classItem.id)
+                          }}
+                          className={`p-1.5 rounded-full shadow-sm ${
+                            favorites.includes(classItem.id)
+                              ? "bg-white/90 hover:bg-white"
+                              : "bg-white/70 hover:bg-white/90"
+                          }`}
+                        >
+                          <Heart
+                            className={`h-4 w-4 ${
+                              favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            }`}
+                          />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Informações abaixo da foto */}
+                    <div className="p-3 space-y-2">
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight">{classItem.name}</h3>
+                          <p className="text-xs text-[#3D2C2E] opacity-70">{classItem.school}</p>
+                        </div>
+                        <div className="flex items-center gap-1 ml-2">
+                          <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
+                          <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          <span>{classItem.days[0]}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          <span>{classItem.time}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1">
+                          <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70" />
+                          <span className="text-xs text-[#3D2C2E] opacity-70">{classItem.location}</span>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
+                          <span className="text-xs text-[#3D2C2E] opacity-70"> /aula</span>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -597,5 +795,22 @@ export default function SissonePrototype() {
     }
   }
 
-  return <div className="max-w-sm mx-auto bg-white shadow-xl">{renderCurrentScreen()}</div>
+  const scrollbarHideStyle = `
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+  `
+
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: scrollbarHideStyle }} />
+      <div className="max-w-sm mx-auto bg-white shadow-xl">{renderCurrentScreen()}</div>
+    </>
+  )
 }
+
+export default SissonePrototype
