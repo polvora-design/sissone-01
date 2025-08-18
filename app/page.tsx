@@ -148,6 +148,32 @@ const SissonePrototype = () => {
         </Button>
       </div>
 
+      {/* Quick Filters */}
+      <div className="p-4 bg-white border-b">
+        <div className="flex gap-3 overflow-x-auto scrollbar-hide">
+          {[
+            { name: "Ballet", icon: "🩰" },
+            { name: "Jazz", icon: "🎷" },
+            { name: "Forró", icon: "🪗" },
+            { name: "Ao ar livre", icon: "🌳" },
+            { name: "Profissionais", icon: "👨‍🏫" },
+            { name: "Dança de salão", icon: "💃🕺" },
+            { name: "Aula Particular", icon: "👤" },
+          ].map((filter) => (
+            <Button
+              key={filter.name}
+              variant="outline"
+              className="flex-shrink-0 h-12 px-4 border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#CFB2A8] hover:text-white"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-lg">{filter.icon}</span>
+                <span className="text-sm font-medium whitespace-nowrap">{filter.name}</span>
+              </div>
+            </Button>
+          ))}
+        </div>
+      </div>
+
       {/* Search Modal */}
       {showSearchModal && (
         <div className="fixed inset-0 bg-white z-50 flex flex-col">
