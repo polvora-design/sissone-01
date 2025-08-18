@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Heart, MapPin, Star, Clock, Calendar, User, Check } from "lucide-react"
+import { ArrowLeft, Heart, MapPin, Star, Clock, Calendar, User, Check, Filter, Edit3, Map } from "lucide-react"
 
-type Screen = "home" | "filters" | "detail" | "schedule" | "confirmation"
+type Screen = "home" | "filters" | "detail" | "schedule" | "confirmation" | "search-results"
 
 const SissonePrototype = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>("home")
@@ -27,6 +27,17 @@ const SissonePrototype = () => {
   const [showWeeklyModal, setShowWeeklyModal] = useState(false)
   const [selectedDays, setSelectedDays] = useState<string[]>([])
   const [selectedShifts, setSelectedShifts] = useState<string[]>([])
+
+  // Search results state
+  const [showSearchFiltersModal, setShowSearchFiltersModal] = useState(false)
+  const [searchFilters, setSearchFilters] = useState({
+    categories: [] as string[],
+    days: [] as string[],
+    shifts: [] as string[],
+    priceMin: "",
+    priceMax: "",
+    rating: "",
+  })
 
   const toggleFavorite = (id: number) => {
     setFavorites((prev) => (prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]))
@@ -110,7 +121,64 @@ const SissonePrototype = () => {
         { name: "Helena Martins", rating: 5, comment: "Ambiente elegante e profissional, recomendo muito!" },
       ],
     },
+    {
+      id: 4,
+      name: "Salsa Iniciante",
+      school: "Ritmo Latino",
+      rating: 4.6,
+      price: "R$ 40",
+      time: "20:00",
+      days: ["Quinta-feira", "Sábado"],
+      location: "Centro",
+      image: "/placeholder.svg?height=120&width=200",
+      images: [
+        "/placeholder.svg?height=300&width=400&text=Aula+Salsa+1",
+        "/placeholder.svg?height=300&width=400&text=Aula+Salsa+2",
+        "/placeholder.svg?height=300&width=400&text=Aula+Salsa+3",
+      ],
+      tag: "Quente",
+      tagColor: "bg-red-100 text-red-800",
+      reviews: [
+        { name: "Pedro Oliveira", rating: 5, comment: "Ambiente descontraído e professores incríveis!" },
+        { name: "Carla Mendes", rating: 4, comment: "Ótimo para quem está começando na salsa." },
+        { name: "Roberto Silva", rating: 5, comment: "Melhor escola de salsa da cidade!" },
+      ],
+    },
+    {
+      id: 5,
+      name: "Jazz Moderno",
+      school: "Studio Movimento",
+      rating: 4.8,
+      price: "R$ 50",
+      time: "19:30",
+      days: ["Segunda-feira", "Quarta-feira"],
+      location: "Zona Sul",
+      image: "/placeholder.svg?height=120&width=200",
+      images: [
+        "/placeholder.svg?height=300&width=400&text=Aula+Jazz+1",
+        "/placeholder.svg?height=300&width=400&text=Aula+Jazz+2",
+        "/placeholder.svg?height=300&width=400&text=Aula+Jazz+3",
+      ],
+      tag: "Trending",
+      tagColor: "bg-yellow-100 text-yellow-800",
+      reviews: [
+        { name: "Marina Santos", rating: 5, comment: "Técnica excelente e coreografias incríveis!" },
+        { name: "Lucas Ferreira", rating: 5, comment: "Professor muito didático e paciente." },
+        { name: "Amanda Costa", rating: 4, comment: "Aulas dinâmicas e muito divertidas." },
+      ],
+    },
   ]
+
+  const getSearchSummary = () => {
+    const parts = []
+    if (searchLocation) parts.push(searchLocation)
+    if (searchWhen === "today") parts.push("Hoje")
+    else if (searchWhen === "specific" && selectedDate) parts.push(selectedDate)
+    else if (searchWhen === "weekly" && selectedDays.length > 0) parts.push(selectedDays.join(", "))
+    if (searchModality.length > 0) parts.push(searchModality.join(", "))
+
+    return parts.length > 0 ? parts.join(" • ") : "Buscar aulas"
+  }
 
   const renderHomeScreen = () => (
     <div className="min-h-screen bg-[#F5F0EB]">
@@ -533,7 +601,7 @@ const SissonePrototype = () => {
                 className="flex-1 bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]"
                 onClick={() => {
                   setShowSearchModal(false)
-                  // Apply search logic here
+                  setCurrentScreen("search-results")
                 }}
               >
                 Buscar
@@ -827,6 +895,536 @@ const SissonePrototype = () => {
           </div>
         </div>
       </div>
+    </div>
+  )
+
+  const renderSearchResultsScreen = () => (
+    <div className="min-h-screen bg-[#F5F0EB]">
+      {/* Header */}
+      <div className="bg-white p-4 shadow-sm">
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")}>
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
+
+          {/* Search Summary - Editable */}
+          <Button
+            variant="ghost"
+            className="flex-1 justify-start px-3 py-2 h-auto min-h-[40px]"
+            onClick={() => setShowSearchModal(true)}
+          >
+            <div className="flex items-center gap-2">
+              <Edit3 className="h-4 w-4 text-[#3D2C2E] opacity-70" />
+              <div className="text-left">
+                <div className="text-sm font-medium text-[#3D2C2E] truncate">{getSearchSummary()}</div>
+                <div className="text-xs text-[#3D2C2E] opacity-70">Toque para editar</div>
+              </div>
+            </div>
+          </Button>
+
+          {/* Filter Button */}
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+            onClick={() => setShowSearchFiltersModal(true)}
+          >
+            <Filter className="h-4 w-4 mr-1" />
+            Filtros
+          </Button>
+        </div>
+      </div>
+
+      {/* Results Count */}
+      <div className="px-4 py-2 bg-white border-b">
+        <p className="text-sm text-[#3D2C2E] opacity-70">{classes.length} aulas encontradas</p>
+      </div>
+
+      {/* Map Section */}
+      <div className="bg-white border-b">
+        <div className="h-48 bg-[#E5D6CD] flex items-center justify-center relative">
+          <div className="text-center">
+            <Map className="h-8 w-8 text-[#3D2C2E] opacity-70 mx-auto mb-2" />
+            <span className="text-sm text-[#3D2C2E] opacity-70">Mapa com resultados</span>
+          </div>
+
+          {/* Mock map pins */}
+          <div className="absolute top-4 left-8 w-6 h-6 bg-[#CFB2A8] rounded-full flex items-center justify-center">
+            <span className="text-xs text-white font-bold">3</span>
+          </div>
+          <div className="absolute top-12 right-12 w-6 h-6 bg-[#CFB2A8] rounded-full flex items-center justify-center">
+            <span className="text-xs text-white font-bold">2</span>
+          </div>
+          <div className="absolute bottom-8 left-1/3 w-6 h-6 bg-[#CFB2A8] rounded-full flex items-center justify-center">
+            <span className="text-xs text-white font-bold">1</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Results List */}
+      <div className="p-4 space-y-4">
+        {classes.map((classItem) => (
+          <Card
+            key={classItem.id}
+            className="bg-white border-[#E5D6CD] cursor-pointer hover:shadow-md transition-shadow"
+            onClick={() => {
+              setSelectedClass(classItem)
+              setCurrentScreen("detail")
+            }}
+          >
+            <CardContent className="p-0">
+              <div className="flex">
+                {/* Image */}
+                <div className="relative w-32 h-32 flex-shrink-0">
+                  <div className="w-full h-full bg-[#E5D6CD] rounded-l-lg flex items-center justify-center">
+                    <span className="text-xs text-[#3D2C2E]">FOTO</span>
+                  </div>
+
+                  {/* Tag */}
+                  <div className="absolute top-2 left-2">
+                    <Badge className={`${classItem.tagColor} text-xs font-medium shadow-sm`}>{classItem.tag}</Badge>
+                  </div>
+
+                  {/* Like Button */}
+                  <div className="absolute top-2 right-2">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        toggleFavorite(classItem.id)
+                      }}
+                      className={`p-1.5 rounded-full shadow-sm ${
+                        favorites.includes(classItem.id)
+                          ? "bg-white/90 hover:bg-white"
+                          : "bg-white/70 hover:bg-white/90"
+                      }`}
+                    >
+                      <Heart
+                        className={`h-4 w-4 ${
+                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                        }`}
+                      />
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 p-4 space-y-2">
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-[#3D2C2E] text-base leading-tight">{classItem.name}</h3>
+                      <p className="text-sm text-[#3D2C2E] opacity-70">{classItem.school}</p>
+                    </div>
+                    <div className="flex items-center gap-1 ml-2">
+                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                      <span className="text-sm text-[#3D2C2E] font-medium">{classItem.rating}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 text-sm text-[#3D2C2E] opacity-70">
+                    <div className="flex items-center gap-1">
+                      <Calendar className="h-4 w-4" />
+                      <span>{classItem.days[0]}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-4 w-4" />
+                      <span>{classItem.time}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1">
+                      <MapPin className="h-4 w-4 text-[#3D2C2E] opacity-70" />
+                      <span className="text-sm text-[#3D2C2E] opacity-70">{classItem.location}</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-lg font-semibold text-[#3D2C2E]">{classItem.price}</span>
+                      <span className="text-sm text-[#3D2C2E] opacity-70"> /aula</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Search Filters Modal */}
+      {showSearchFiltersModal && (
+        <div className="fixed inset-0 bg-white z-50 flex flex-col">
+          {/* Modal Header */}
+          <div className="flex items-center justify-between p-4 border-b">
+            <Button variant="ghost" size="icon" onClick={() => setShowSearchFiltersModal(false)}>
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+            <h2 className="text-lg font-semibold text-[#3D2C2E]">Filtros</h2>
+            <Button
+              variant="ghost"
+              className="text-sm text-[#3D2C2E]"
+              onClick={() => {
+                setSearchFilters({
+                  categories: [],
+                  days: [],
+                  shifts: [],
+                  priceMin: "",
+                  priceMax: "",
+                  rating: "",
+                })
+              }}
+            >
+              Limpar
+            </Button>
+          </div>
+
+          {/* Modal Content */}
+          <div className="flex-1 overflow-y-auto p-4 space-y-6">
+            {/* Categories */}
+            <div>
+              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Categorias</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { name: "Ballet", icon: "🩰" },
+                  { name: "Jazz", icon: "🎷" },
+                  { name: "Hip Hop", icon: "🎤" },
+                  { name: "Contemporary", icon: "💃" },
+                  { name: "Salsa", icon: "💃🏻" },
+                  { name: "Forró", icon: "🪗" },
+                ].map((category) => (
+                  <Button
+                    key={category.name}
+                    variant={searchFilters.categories.includes(category.name) ? "default" : "outline"}
+                    className={`h-16 ${
+                      searchFilters.categories.includes(category.name)
+                        ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                        : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                    }`}
+                    onClick={() => {
+                      const newCategories = searchFilters.categories.includes(category.name)
+                        ? searchFilters.categories.filter((c) => c !== category.name)
+                        : [...searchFilters.categories, category.name]
+                      setSearchFilters({ ...searchFilters, categories: newCategories })
+                    }}
+                  >
+                    <div className="flex flex-col items-center gap-1">
+                      <span className="text-xl">{category.icon}</span>
+                      <span className="text-xs font-medium">{category.name}</span>
+                    </div>
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* Days of Week */}
+            <div>
+              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Dias da Semana</h3>
+              <div className="grid grid-cols-2 gap-2">
+                {["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"].map((day) => (
+                  <Button
+                    key={day}
+                    variant={searchFilters.days.includes(day) ? "default" : "outline"}
+                    className={`h-12 ${
+                      searchFilters.days.includes(day)
+                        ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                        : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                    }`}
+                    onClick={() => {
+                      const newDays = searchFilters.days.includes(day)
+                        ? searchFilters.days.filter((d) => d !== day)
+                        : [...searchFilters.days, day]
+                      setSearchFilters({ ...searchFilters, days: newDays })
+                    }}
+                  >
+                    {day}
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* Shifts */}
+            <div>
+              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Turnos</h3>
+              <div className="grid grid-cols-1 gap-2">
+                {[
+                  { name: "Manhã", time: "06:00 - 12:00" },
+                  { name: "Tarde", time: "12:00 - 18:00" },
+                  { name: "Noite", time: "18:00 - 23:00" },
+                ].map((shift) => (
+                  <Button
+                    key={shift.name}
+                    variant={searchFilters.shifts.includes(shift.name) ? "default" : "outline"}
+                    className={`h-16 justify-start ${
+                      searchFilters.shifts.includes(shift.name)
+                        ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                        : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                    }`}
+                    onClick={() => {
+                      const newShifts = searchFilters.shifts.includes(shift.name)
+                        ? searchFilters.shifts.filter((s) => s !== shift.name)
+                        : [...searchFilters.shifts, shift.name]
+                      setSearchFilters({ ...searchFilters, shifts: newShifts })
+                    }}
+                  >
+                    <div className="text-left">
+                      <div className="font-medium">{shift.name}</div>
+                      <div className="text-sm opacity-70">{shift.time}</div>
+                    </div>
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* Price Range */}
+            <div>
+              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Faixa de Preço</h3>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Mínimo</label>
+                  <Input
+                    placeholder="R$ 0"
+                    className="border-[#CFB2A8]"
+                    value={searchFilters.priceMin}
+                    onChange={(e) => setSearchFilters({ ...searchFilters, priceMin: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Máximo</label>
+                  <Input
+                    placeholder="R$ 100"
+                    className="border-[#CFB2A8]"
+                    value={searchFilters.priceMax}
+                    onChange={(e) => setSearchFilters({ ...searchFilters, priceMax: e.target.value })}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Rating */}
+            <div>
+              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Avaliação Mínima</h3>
+              <div className="flex gap-2">
+                {["4.0", "4.5", "4.8", "5.0"].map((rating) => (
+                  <Button
+                    key={rating}
+                    variant={searchFilters.rating === rating ? "default" : "outline"}
+                    className={`flex-1 ${
+                      searchFilters.rating === rating
+                        ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                        : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                    }`}
+                    onClick={() => {
+                      setSearchFilters({
+                        ...searchFilters,
+                        rating: searchFilters.rating === rating ? "" : rating,
+                      })
+                    }}
+                  >
+                    <div className="flex items-center gap-1">
+                      <Star className="h-4 w-4 fill-current" />
+                      <span>{rating}+</span>
+                    </div>
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Modal Footer */}
+          <div className="p-4 border-t bg-white">
+            <Button
+              className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]"
+              onClick={() => {
+                setShowSearchFiltersModal(false)
+                // Apply filters logic here
+              }}
+            >
+              Aplicar Filtros
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* Search Modal (reused from home) */}
+      {showSearchModal && (
+        <div className="fixed inset-0 bg-white z-50 flex flex-col">
+          {/* Modal Header */}
+          <div className="flex items-center justify-between p-4 border-b">
+            <Button variant="ghost" size="icon" onClick={() => setShowSearchModal(false)}>
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+            <h2 className="text-lg font-semibold text-[#3D2C2E]">Editar Busca</h2>
+            <div className="w-10" />
+          </div>
+
+          {/* Modal Content - Same as home screen search modal */}
+          <div className="flex-1 overflow-y-auto">
+            {/* ONDE Section */}
+            <div className="p-4 border-b">
+              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Onde</h3>
+              <Input
+                placeholder="Buscar destinos"
+                className="w-full h-12 border-[#CFB2A8] mb-4"
+                value={searchLocation}
+                onChange={(e) => setSearchLocation(e.target.value)}
+              />
+              <Button
+                variant="ghost"
+                className="w-full justify-start p-3 h-auto"
+                onClick={() => setSearchLocation("Perto de mim")}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-[#E5D6CD] rounded-full flex items-center justify-center">
+                    <MapPin className="h-5 w-5 text-[#3D2C2E]" />
+                  </div>
+                  <div className="text-left">
+                    <div className="font-medium text-[#3D2C2E]">Perto de mim</div>
+                    <div className="text-sm text-gray-500">Encontrar aulas próximas</div>
+                  </div>
+                </div>
+              </Button>
+            </div>
+
+            {/* QUANDO Section */}
+            <div className="p-4 border-b">
+              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Quando</h3>
+              <div className="space-y-3">
+                <Button
+                  variant={searchWhen === "specific" ? "default" : "outline"}
+                  className={`w-full justify-start p-3 h-auto ${
+                    searchWhen === "specific"
+                      ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                      : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                  }`}
+                  onClick={() => {
+                    setSearchWhen("specific")
+                    setShowCalendarModal(true)
+                  }}
+                >
+                  <div className="flex items-center gap-3">
+                    <Calendar className="h-5 w-5" />
+                    <div className="text-left">
+                      <div className="font-medium">Data específica</div>
+                      <div className="text-sm opacity-70">
+                        {selectedDate && selectedTime
+                          ? `${selectedDate} às ${selectedTime}`
+                          : "Escolher data e horário"}
+                      </div>
+                    </div>
+                  </div>
+                </Button>
+
+                <Button
+                  variant={searchWhen === "weekly" ? "default" : "outline"}
+                  className={`w-full justify-start p-3 h-auto ${
+                    searchWhen === "weekly"
+                      ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                      : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                  }`}
+                  onClick={() => {
+                    setSearchWhen("weekly")
+                    setShowWeeklyModal(true)
+                  }}
+                >
+                  <div className="flex items-center gap-3">
+                    <Clock className="h-5 w-5" />
+                    <div className="text-left">
+                      <div className="font-medium">Dias da semana</div>
+                      <div className="text-sm opacity-70">
+                        {selectedDays.length > 0 && selectedShifts.length > 0
+                          ? `${selectedDays.join(" e ")} - ${selectedShifts.join(", ")}`
+                          : "Escolher dias e turnos"}
+                      </div>
+                    </div>
+                  </div>
+                </Button>
+
+                <Button
+                  variant={searchWhen === "today" ? "default" : "outline"}
+                  className={`w-full justify-start p-3 h-auto ${
+                    searchWhen === "today"
+                      ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                      : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                  }`}
+                  onClick={() => setSearchWhen("today")}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 bg-[#CFB2A8] rounded-full flex items-center justify-center">
+                      <div className="w-2 h-2 bg-white rounded-full" />
+                    </div>
+                    <div className="text-left">
+                      <div className="font-medium">Hoje</div>
+                      <div className="text-sm opacity-70">Aulas disponíveis hoje</div>
+                    </div>
+                  </div>
+                </Button>
+              </div>
+            </div>
+
+            {/* MODALIDADE Section */}
+            <div className="p-4">
+              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Modalidade</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { name: "Ballet", icon: "🩰" },
+                  { name: "Hip Hop", icon: "🎤" },
+                  { name: "Contemporary", icon: "💃" },
+                  { name: "Jazz", icon: "🎷" },
+                  { name: "Salsa", icon: "💃🏻" },
+                  { name: "Tango", icon: "🌹" },
+                ].map((modality) => (
+                  <Button
+                    key={modality.name}
+                    variant={searchModality.includes(modality.name) ? "default" : "outline"}
+                    className={`h-16 ${
+                      searchModality.includes(modality.name)
+                        ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                        : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                    }`}
+                    onClick={() => {
+                      if (searchModality.includes(modality.name)) {
+                        setSearchModality(searchModality.filter((m) => m !== modality.name))
+                      } else {
+                        setSearchModality([...searchModality, modality.name])
+                      }
+                    }}
+                  >
+                    <div className="flex flex-col items-center gap-1">
+                      <span className="text-xl">{modality.icon}</span>
+                      <span className="text-xs font-medium">{modality.name}</span>
+                    </div>
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Modal Footer */}
+          <div className="p-4 border-t bg-white">
+            <div className="flex gap-3">
+              <Button
+                variant="outline"
+                className="flex-1 border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                onClick={() => {
+                  setSearchLocation("")
+                  setSearchWhen("")
+                  setSearchModality([])
+                }}
+              >
+                Limpar tudo
+              </Button>
+              <Button
+                className="flex-1 bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]"
+                onClick={() => {
+                  setShowSearchModal(false)
+                  // Stay on search results screen
+                }}
+              >
+                Atualizar
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 
@@ -1208,6 +1806,8 @@ const SissonePrototype = () => {
         return renderScheduleScreen()
       case "confirmation":
         return renderConfirmationScreen()
+      case "search-results":
+        return renderSearchResultsScreen()
       default:
         return renderHomeScreen()
     }
