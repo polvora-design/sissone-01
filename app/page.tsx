@@ -1568,6 +1568,28 @@ const SissonePrototype = () => {
               </div>
               <Badge className="bg-[#CFB2A8] text-[#3D2C2E]">{selectedClass.price}</Badge>
             </div>
+
+            {/* Participants */}
+            <div className="flex items-center gap-3">
+              <div className="flex -space-x-2">
+                <div className="w-8 h-8 bg-[#CFB2A8] rounded-full border-2 border-white flex items-center justify-center">
+                  <span className="text-xs text-white font-medium">A</span>
+                </div>
+                <div className="w-8 h-8 bg-[#E5D6CD] rounded-full border-2 border-white flex items-center justify-center">
+                  <span className="text-xs text-[#3D2C2E] font-medium">M</span>
+                </div>
+                <div className="w-8 h-8 bg-[#CFB2A8] rounded-full border-2 border-white flex items-center justify-center">
+                  <span className="text-xs text-white font-medium">J</span>
+                </div>
+                <div className="w-8 h-8 bg-[#E5D6CD] rounded-full border-2 border-white flex items-center justify-center">
+                  <span className="text-xs text-[#3D2C2E] font-medium">L</span>
+                </div>
+                <div className="w-8 h-8 bg-[#CFB2A8] rounded-full border-2 border-white flex items-center justify-center">
+                  <span className="text-xs text-white font-medium">+3</span>
+                </div>
+              </div>
+              <span className="text-sm text-[#3D2C2E] opacity-70">Participantes</span>
+            </div>
           </div>
 
           {/* Schedule Info */}
