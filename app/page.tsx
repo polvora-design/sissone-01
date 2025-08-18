@@ -138,68 +138,72 @@ export default function SissonePrototype() {
               setCurrentScreen("detail")
             }}
           >
-            <CardContent className="p-4">
-              {/* Tag no canto superior direito */}
-              <div className="absolute top-2 right-2 z-10">
-                <Badge className={`${classItem.tagColor} text-xs font-medium`}>{classItem.tag}</Badge>
-              </div>
-
-              <div className="flex gap-3">
-                <div className="w-20 h-20 bg-[#E5D6CD] rounded-lg flex items-center justify-center">
+            <CardContent className="p-0">
+              {/* Foto com overlay de tag e like */}
+              <div className="relative">
+                <div className="w-full h-48 bg-[#E5D6CD] rounded-t-lg flex items-center justify-center">
                   <span className="text-xs text-[#3D2C2E]">FOTO</span>
                 </div>
 
-                <div className="flex-1">
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1 pr-2">
-                      <h3 className="font-semibold text-[#3D2C2E]">{classItem.name}</h3>
-                      <p className="text-sm text-[#3D2C2E] opacity-70">{classItem.school}</p>
-                    </div>
-                    {/* Botão de like mais destacado */}
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleFavorite(classItem.id)
-                      }}
-                      className={`p-2 rounded-full ${
-                        favorites.includes(classItem.id)
-                          ? "bg-[#CFB2A8] hover:bg-[#CFB2A8]/80"
-                          : "bg-gray-100 hover:bg-gray-200"
+                {/* Tag no canto superior esquerdo */}
+                <div className="absolute top-3 left-3 z-10">
+                  <Badge className={`${classItem.tagColor} text-xs font-medium shadow-sm`}>{classItem.tag}</Badge>
+                </div>
+
+                {/* Botão de like no canto superior direito */}
+                <div className="absolute top-3 right-3 z-10">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      toggleFavorite(classItem.id)
+                    }}
+                    className={`p-2 rounded-full shadow-sm ${
+                      favorites.includes(classItem.id) ? "bg-white/90 hover:bg-white" : "bg-white/70 hover:bg-white/90"
+                    }`}
+                  >
+                    <Heart
+                      className={`h-5 w-5 ${
+                        favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
                       }`}
-                    >
-                      <Heart
-                        className={`h-5 w-5 ${
-                          favorites.includes(classItem.id) ? "fill-white text-white" : "text-[#3D2C2E]"
-                        }`}
-                      />
-                    </Button>
-                  </div>
+                    />
+                  </Button>
+                </div>
+              </div>
 
-                  <div className="flex items-center gap-2 mt-2">
-                    <div className="flex items-center gap-1">
-                      <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
-                      <span className="text-xs text-[#3D2C2E]">{classItem.rating}</span>
-                    </div>
-                    <Badge variant="secondary" className="bg-[#E5D6CD] text-[#3D2C2E] text-xs">
-                      {classItem.price}
-                    </Badge>
+              {/* Informações abaixo da foto */}
+              <div className="p-4 space-y-2">
+                <div className="flex justify-between items-start">
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-[#3D2C2E] text-base">{classItem.name}</h3>
+                    <p className="text-sm text-[#3D2C2E] opacity-70">{classItem.school}</p>
                   </div>
+                  <div className="flex items-center gap-1 ml-2">
+                    <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                    <span className="text-sm text-[#3D2C2E] font-medium">{classItem.rating}</span>
+                  </div>
+                </div>
 
-                  <div className="flex items-center gap-3 mt-2 text-xs text-[#3D2C2E] opacity-70">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      <span>{classItem.days.join(" e ")}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-3 w-3" />
-                      <span>{classItem.time}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <MapPin className="h-3 w-3" />
-                      <span>{classItem.location}</span>
-                    </div>
+                <div className="flex items-center gap-3 text-sm text-[#3D2C2E] opacity-70">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="h-4 w-4" />
+                    <span>{classItem.days.join(" e ")}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4" />
+                    <span>{classItem.time}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1">
+                    <MapPin className="h-4 w-4 text-[#3D2C2E] opacity-70" />
+                    <span className="text-sm text-[#3D2C2E] opacity-70">{classItem.location}</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-base font-semibold text-[#3D2C2E]">{classItem.price}</span>
+                    <span className="text-sm text-[#3D2C2E] opacity-70"> /aula</span>
                   </div>
                 </div>
               </div>
