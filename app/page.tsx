@@ -23,6 +23,11 @@ const SissonePrototype = () => {
   const [selectedDate, setSelectedDate] = useState("")
   const [selectedTime, setSelectedTime] = useState("")
 
+  // New state variables for weekly selection
+  const [showWeeklyModal, setShowWeeklyModal] = useState(false)
+  const [selectedDays, setSelectedDays] = useState<string[]>([])
+  const [selectedShifts, setSelectedShifts] = useState<string[]>([])
+
   const toggleFavorite = (id: number) => {
     setFavorites((prev) => (prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]))
   }
@@ -219,13 +224,20 @@ const SissonePrototype = () => {
                       ? "bg-[#CFB2A8] text-[#3D2C2E]"
                       : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
                   }`}
-                  onClick={() => setSearchWhen("weekly")}
+                  onClick={() => {
+                    setSearchWhen("weekly")
+                    setShowWeeklyModal(true)
+                  }}
                 >
                   <div className="flex items-center gap-3">
                     <Clock className="h-5 w-5" />
                     <div className="text-left">
                       <div className="font-medium">Dias da semana</div>
-                      <div className="text-sm opacity-70">Escolher dias e turnos</div>
+                      <div className="text-sm opacity-70">
+                        {selectedDays.length > 0 && selectedShifts.length > 0
+                          ? `${selectedDays.join(" e ")} - ${selectedShifts.join(", ")}`
+                          : "Escolher dias e turnos"}
+                      </div>
                     </div>
                   </div>
                 </Button>
@@ -366,6 +378,109 @@ const SissonePrototype = () => {
                       setShowCalendarModal(false)
                     }}
                     disabled={!selectedDate || !selectedTime}
+                  >
+                    Confirmar
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Weekly Selection Modal */}
+          {showWeeklyModal && (
+            <div className="fixed inset-0 bg-white z-60 flex flex-col">
+              {/* Weekly Header */}
+              <div className="flex items-center justify-between p-4 border-b">
+                <Button variant="ghost" size="icon" onClick={() => setShowWeeklyModal(false)}>
+                  <ArrowLeft className="h-5 w-5" />
+                </Button>
+                <h2 className="text-lg font-semibold text-[#3D2C2E]">Dias e Turnos</h2>
+                <div className="w-10" />
+              </div>
+
+              {/* Weekly Content */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-6">
+                {/* Days Selection */}
+                <div>
+                  <h3 className="text-base font-semibold text-[#3D2C2E] mb-3">Dias da Semana</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    {["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"].map((day) => (
+                      <Button
+                        key={day}
+                        variant={selectedDays.includes(day) ? "default" : "outline"}
+                        className={`h-12 ${
+                          selectedDays.includes(day)
+                            ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                            : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                        }`}
+                        onClick={() => {
+                          if (selectedDays.includes(day)) {
+                            setSelectedDays(selectedDays.filter((d) => d !== day))
+                          } else {
+                            setSelectedDays([...selectedDays, day])
+                          }
+                        }}
+                      >
+                        {day}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Shifts Selection */}
+                <div>
+                  <h3 className="text-base font-semibold text-[#3D2C2E] mb-3">Turnos</h3>
+                  <div className="grid grid-cols-1 gap-2">
+                    {[
+                      { name: "Manhã", time: "06:00 - 12:00" },
+                      { name: "Tarde", time: "12:00 - 18:00" },
+                      { name: "Noite", time: "18:00 - 23:00" },
+                    ].map((shift) => (
+                      <Button
+                        key={shift.name}
+                        variant={selectedShifts.includes(shift.name) ? "default" : "outline"}
+                        className={`h-16 justify-start ${
+                          selectedShifts.includes(shift.name)
+                            ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                            : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                        }`}
+                        onClick={() => {
+                          if (selectedShifts.includes(shift.name)) {
+                            setSelectedShifts(selectedShifts.filter((s) => s !== shift.name))
+                          } else {
+                            setSelectedShifts([...selectedShifts, shift.name])
+                          }
+                        }}
+                      >
+                        <div className="text-left">
+                          <div className="font-medium">{shift.name}</div>
+                          <div className="text-sm opacity-70">{shift.time}</div>
+                        </div>
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Weekly Footer */}
+              <div className="p-4 border-t bg-white">
+                <div className="flex gap-3">
+                  <Button
+                    variant="outline"
+                    className="flex-1 border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                    onClick={() => {
+                      setSelectedDays([])
+                      setSelectedShifts([])
+                    }}
+                  >
+                    Limpar
+                  </Button>
+                  <Button
+                    className="flex-1 bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]"
+                    onClick={() => {
+                      setShowWeeklyModal(false)
+                    }}
+                    disabled={selectedDays.length === 0 || selectedShifts.length === 0}
                   >
                     Confirmar
                   </Button>
