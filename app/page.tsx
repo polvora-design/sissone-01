@@ -156,7 +156,6 @@ const SissonePrototype = () => {
       image: "/placeholder.svg?height=120&width=200",
       images: [
         "/placeholder.svg?height=300&width=400&text=Aula+Jazz+1",
-        "/placeholder.svg?height=300&width=400&text=Aula+Jazz+2",
         "/placeholder.svg?height=300&width=400&text=Aula+Jazz+3",
       ],
       tag: "Trending",
@@ -982,31 +981,36 @@ const SissonePrototype = () => {
                 </div>
 
                 {/* Content */}
+                {/* Content */}
                 <div className="flex-1 p-4 space-y-2">
+                  {/* Top row with tag and like button */}
+                  <div className="flex justify-between items-center">
+                    <Badge className={`${classItem.tagColor} text-xs font-medium`}>{classItem.tag}</Badge>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        toggleFavorite(classItem.id)
+                      }}
+                      className="p-1"
+                    >
+                      <Heart
+                        className={`h-4 w-4 ${
+                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                        }`}
+                      />
+                    </Button>
+                  </div>
+
                   <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-semibold text-[#3D2C2E] text-base leading-tight">{classItem.name}</h3>
-                        <Badge className={`${classItem.tagColor} text-xs font-medium`}>{classItem.tag}</Badge>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            toggleFavorite(classItem.id)
-                          }}
-                          className="p-1 ml-auto"
-                        >
-                          <Heart
-                            className={`h-4 w-4 ${
-                              favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                            }`}
-                          />
-                        </Button>
-                      </div>
-                      <p className="text-sm text-[#3D2C2E] opacity-70">{classItem.school}</p>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-[#3D2C2E] text-base leading-tight truncate">
+                        {classItem.name}
+                      </h3>
+                      <p className="text-sm text-[#3D2C2E] opacity-70 truncate">{classItem.school}</p>
                     </div>
-                    <div className="flex items-center gap-1 ml-2">
+                    <div className="flex items-center gap-1 ml-2 flex-shrink-0">
                       <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
                       <span className="text-sm text-[#3D2C2E] font-medium">{classItem.rating}</span>
                     </div>
@@ -1024,11 +1028,11 @@ const SissonePrototype = () => {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1">
-                      <MapPin className="h-4 w-4 text-[#3D2C2E] opacity-70" />
-                      <span className="text-sm text-[#3D2C2E] opacity-70">{classItem.location}</span>
+                    <div className="flex items-center gap-1 min-w-0">
+                      <MapPin className="h-4 w-4 text-[#3D2C2E] opacity-70 flex-shrink-0" />
+                      <span className="text-sm text-[#3D2C2E] opacity-70 truncate">{classItem.location}</span>
                     </div>
-                    <div className="text-right">
+                    <div className="text-right flex-shrink-0 ml-2">
                       <span className="text-lg font-semibold text-[#3D2C2E]">{classItem.price}</span>
                       <span className="text-sm text-[#3D2C2E] opacity-70"> /aula</span>
                     </div>
