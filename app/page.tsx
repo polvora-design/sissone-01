@@ -973,39 +973,11 @@ const SissonePrototype = () => {
             }}
           >
             <CardContent className="p-0">
-              <div className="flex">
-                {/* Image */}
-                <div className="relative w-32 h-32 flex-shrink-0">
+              <div className="flex h-32">
+                {/* Image - Full Height */}
+                <div className="relative w-32 h-full flex-shrink-0">
                   <div className="w-full h-full bg-[#E5D6CD] rounded-l-lg flex items-center justify-center">
                     <span className="text-xs text-[#3D2C2E]">FOTO</span>
-                  </div>
-
-                  {/* Tag */}
-                  <div className="absolute top-2 left-2">
-                    <Badge className={`${classItem.tagColor} text-xs font-medium shadow-sm`}>{classItem.tag}</Badge>
-                  </div>
-
-                  {/* Like Button */}
-                  <div className="absolute top-2 right-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleFavorite(classItem.id)
-                      }}
-                      className={`p-1.5 rounded-full shadow-sm ${
-                        favorites.includes(classItem.id)
-                          ? "bg-white/90 hover:bg-white"
-                          : "bg-white/70 hover:bg-white/90"
-                      }`}
-                    >
-                      <Heart
-                        className={`h-4 w-4 ${
-                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                        }`}
-                      />
-                    </Button>
                   </div>
                 </div>
 
@@ -1013,7 +985,25 @@ const SissonePrototype = () => {
                 <div className="flex-1 p-4 space-y-2">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
-                      <h3 className="font-semibold text-[#3D2C2E] text-base leading-tight">{classItem.name}</h3>
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-semibold text-[#3D2C2E] text-base leading-tight">{classItem.name}</h3>
+                        <Badge className={`${classItem.tagColor} text-xs font-medium`}>{classItem.tag}</Badge>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            toggleFavorite(classItem.id)
+                          }}
+                          className="p-1 ml-auto"
+                        >
+                          <Heart
+                            className={`h-4 w-4 ${
+                              favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            }`}
+                          />
+                        </Button>
+                      </div>
                       <p className="text-sm text-[#3D2C2E] opacity-70">{classItem.school}</p>
                     </div>
                     <div className="flex items-center gap-1 ml-2">
