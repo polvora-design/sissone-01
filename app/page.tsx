@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Filter, Heart, MapPin, Star, Clock, Calendar, User, Check } from "lucide-react"
+import { ArrowLeft, Heart, MapPin, Star, Clock, Calendar, User, Check } from "lucide-react"
 
 type Screen = "home" | "filters" | "detail" | "schedule" | "confirmation"
 
@@ -15,6 +15,10 @@ const SissonePrototype = () => {
   const [selectedClass, setSelectedClass] = useState<any>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0)
+  const [showSearchModal, setShowSearchModal] = useState(false)
+  const [searchLocation, setSearchLocation] = useState("")
+  const [searchWhen, setSearchWhen] = useState("")
+  const [searchModality, setSearchModality] = useState<string[]>([])
 
   const toggleFavorite = (id: number) => {
     setFavorites((prev) => (prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]))
@@ -110,20 +114,199 @@ const SissonePrototype = () => {
         </div>
       </div>
 
-      {/* Search and Filter */}
+      {/* Search Button */}
       <div className="p-4 bg-white border-b">
-        <div className="flex gap-2">
-          <Input placeholder="Buscar aulas, estilos, instrutores..." className="flex-1 border-[#CFB2A8]" />
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => setCurrentScreen("filters")}
-            className="border-[#CFB2A8] text-[#3D2C2E]"
-          >
-            <Filter className="h-4 w-4" />
-          </Button>
-        </div>
+        <Button
+          variant="outline"
+          className="w-full h-12 border-[#CFB2A8] text-[#3D2C2E] bg-white justify-start px-4"
+          onClick={() => setShowSearchModal(true)}
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-[#CFB2A8] rounded-full flex items-center justify-center">
+              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+            <div className="text-left">
+              <div className="font-medium text-sm">Para onde?</div>
+              <div className="text-xs text-gray-500">Qualquer lugar • Qualquer data • Modalidade</div>
+            </div>
+          </div>
+        </Button>
       </div>
+
+      {/* Search Modal */}
+      {showSearchModal && (
+        <div className="fixed inset-0 bg-white z-50 flex flex-col">
+          {/* Modal Header */}
+          <div className="flex items-center justify-between p-4 border-b">
+            <Button variant="ghost" size="icon" onClick={() => setShowSearchModal(false)}>
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+            <h2 className="text-lg font-semibold text-[#3D2C2E]">Buscar</h2>
+            <div className="w-10" />
+          </div>
+
+          {/* Modal Content */}
+          <div className="flex-1 overflow-y-auto">
+            {/* ONDE Section */}
+            <div className="p-4 border-b">
+              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Onde</h3>
+              <Input
+                placeholder="Buscar destinos"
+                className="w-full h-12 border-[#CFB2A8] mb-4"
+                value={searchLocation}
+                onChange={(e) => setSearchLocation(e.target.value)}
+              />
+              <Button
+                variant="ghost"
+                className="w-full justify-start p-3 h-auto"
+                onClick={() => setSearchLocation("Perto de mim")}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-[#E5D6CD] rounded-full flex items-center justify-center">
+                    <MapPin className="h-5 w-5 text-[#3D2C2E]" />
+                  </div>
+                  <div className="text-left">
+                    <div className="font-medium text-[#3D2C2E]">Perto de mim</div>
+                    <div className="text-sm text-gray-500">Encontrar aulas próximas</div>
+                  </div>
+                </div>
+              </Button>
+            </div>
+
+            {/* QUANDO Section */}
+            <div className="p-4 border-b">
+              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Quando</h3>
+              <div className="space-y-3">
+                <Button
+                  variant={searchWhen === "specific" ? "default" : "outline"}
+                  className={`w-full justify-start p-3 h-auto ${
+                    searchWhen === "specific"
+                      ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                      : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                  }`}
+                  onClick={() => setSearchWhen("specific")}
+                >
+                  <div className="flex items-center gap-3">
+                    <Calendar className="h-5 w-5" />
+                    <div className="text-left">
+                      <div className="font-medium">Data específica</div>
+                      <div className="text-sm opacity-70">Escolher data e horário</div>
+                    </div>
+                  </div>
+                </Button>
+
+                <Button
+                  variant={searchWhen === "weekly" ? "default" : "outline"}
+                  className={`w-full justify-start p-3 h-auto ${
+                    searchWhen === "weekly"
+                      ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                      : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                  }`}
+                  onClick={() => setSearchWhen("weekly")}
+                >
+                  <div className="flex items-center gap-3">
+                    <Clock className="h-5 w-5" />
+                    <div className="text-left">
+                      <div className="font-medium">Dias da semana</div>
+                      <div className="text-sm opacity-70">Escolher dias e turnos</div>
+                    </div>
+                  </div>
+                </Button>
+
+                <Button
+                  variant={searchWhen === "today" ? "default" : "outline"}
+                  className={`w-full justify-start p-3 h-auto ${
+                    searchWhen === "today"
+                      ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                      : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                  }`}
+                  onClick={() => setSearchWhen("today")}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 bg-[#CFB2A8] rounded-full flex items-center justify-center">
+                      <div className="w-2 h-2 bg-white rounded-full" />
+                    </div>
+                    <div className="text-left">
+                      <div className="font-medium">Hoje</div>
+                      <div className="text-sm opacity-70">Aulas disponíveis hoje</div>
+                    </div>
+                  </div>
+                </Button>
+              </div>
+            </div>
+
+            {/* MODALIDADE Section */}
+            <div className="p-4">
+              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Modalidade</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { name: "Ballet", icon: "🩰" },
+                  { name: "Hip Hop", icon: "🎤" },
+                  { name: "Contemporary", icon: "💃" },
+                  { name: "Jazz", icon: "🎷" },
+                  { name: "Salsa", icon: "💃🏻" },
+                  { name: "Tango", icon: "🌹" },
+                ].map((modality) => (
+                  <Button
+                    key={modality.name}
+                    variant={searchModality.includes(modality.name) ? "default" : "outline"}
+                    className={`h-16 ${
+                      searchModality.includes(modality.name)
+                        ? "bg-[#CFB2A8] text-[#3D2C2E]"
+                        : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                    }`}
+                    onClick={() => {
+                      if (searchModality.includes(modality.name)) {
+                        setSearchModality(searchModality.filter((m) => m !== modality.name))
+                      } else {
+                        setSearchModality([...searchModality, modality.name])
+                      }
+                    }}
+                  >
+                    <div className="flex flex-col items-center gap-1">
+                      <span className="text-xl">{modality.icon}</span>
+                      <span className="text-xs font-medium">{modality.name}</span>
+                    </div>
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Modal Footer */}
+          <div className="p-4 border-t bg-white">
+            <div className="flex gap-3">
+              <Button
+                variant="outline"
+                className="flex-1 border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
+                onClick={() => {
+                  setSearchLocation("")
+                  setSearchWhen("")
+                  setSearchModality([])
+                }}
+              >
+                Limpar tudo
+              </Button>
+              <Button
+                className="flex-1 bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]"
+                onClick={() => {
+                  setShowSearchModal(false)
+                  // Apply search logic here
+                }}
+              >
+                Buscar
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Classes Feed */}
       <div className="space-y-6">
