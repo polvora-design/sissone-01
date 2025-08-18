@@ -1501,6 +1501,168 @@ const SissonePrototype = () => {
     <div className="min-h-screen bg-[#F5F0EB]">
       {/* Header */}
       <div className="bg-white p-4 shadow-sm flex items-center gap-3">
+        <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")}>
+          <ArrowLeft className="h-4 w-4" />
+        </Button>
+        <h1 className="text-lg font-semibold text-[#3D2C2E]">Detalhes da Aula</h1>
+        <Button variant="ghost" size="icon" onClick={() => toggleFavorite(selectedClass?.id)} className="ml-auto">
+          <Heart
+            className={`h-5 w-5 ${
+              favorites.includes(selectedClass?.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+            }`}
+          />
+        </Button>
+      </div>
+
+      {selectedClass && (
+        <div className="p-4 space-y-6">
+          {/* Carrossel de Imagens */}
+          <div className="relative">
+            <div className="w-full h-48 bg-[#E5D6CD] rounded-lg overflow-hidden">
+              <div className="w-full h-full flex items-center justify-center">
+                <span className="text-[#3D2C2E]">FOTO {currentImageIndex + 1}</span>
+              </div>
+            </div>
+
+            {/* Indicadores do carrossel */}
+            <div className="flex justify-center gap-2 mt-3">
+              {selectedClass.images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`w-2 h-2 rounded-full ${index === currentImageIndex ? "bg-[#CFB2A8]" : "bg-[#E5D6CD]"}`}
+                />
+              ))}
+            </div>
+
+            {/* Botões de navegação */}
+            <button
+              onClick={() => setCurrentImageIndex((prev) => (prev === 0 ? selectedClass.images.length - 1 : prev - 1))}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+            <button
+              onClick={() => setCurrentImageIndex((prev) => (prev === selectedClass.images.length - 1 ? 0 : prev + 1))}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2"
+            >
+              <ArrowLeft className="h-4 w-4 rotate-180" />
+            </button>
+          </div>
+
+          {/* Class Info */}
+          <div>
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold text-[#3D2C2E]">{selectedClass.name}</h2>
+                <p className="text-lg text-[#3D2C2E] opacity-70">{selectedClass.school}</p>
+              </div>
+              {/* Tag */}
+              <Badge className={`${selectedClass.tagColor} font-medium`}>{selectedClass.tag}</Badge>
+            </div>
+
+            <div className="flex items-center gap-4 mt-3">
+              <div className="flex items-center gap-1">
+                <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                <span className="text-[#3D2C2E]">{selectedClass.rating}</span>
+              </div>
+              <Badge className="bg-[#CFB2A8] text-[#3D2C2E]">{selectedClass.price}</Badge>
+            </div>
+          </div>
+
+          {/* Schedule Info */}
+          <Card className="bg-white border-[#E5D6CD]">
+            <CardHeader>
+              <h3 className="font-semibold text-[#3D2C2E]">Horários</h3>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4 text-[#3D2C2E]" />
+                <span className="text-[#3D2C2E]">{selectedClass.days.join(" e ")}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4 text-[#3D2C2E]" />
+                <span className="text-[#3D2C2E]">{selectedClass.time}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-[#3D2C2E]" />
+                <span className="text-[#3D2C2E]">{selectedClass.location}</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Carrossel de Depoimentos */}
+          <Card className="bg-white border-[#E5D6CD]">
+            <CardHeader>
+              <h3 className="font-semibold text-[#3D2C2E]">Depoimentos</h3>
+            </CardHeader>
+            <CardContent>
+              <div className="relative">
+                <div className="text-center space-y-3">
+                  <div className="flex justify-center">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`h-4 w-4 ${
+                          i < selectedClass.reviews[currentReviewIndex].rating
+                            ? "fill-[#CFB2A8] text-[#CFB2A8]"
+                            : "text-gray-300"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-[#3D2C2E] italic">"{selectedClass.reviews[currentReviewIndex].comment}"</p>
+                  <p className="text-sm text-[#3D2C2E] opacity-70 font-medium">
+                    - {selectedClass.reviews[currentReviewIndex].name}
+                  </p>
+                </div>
+
+                {/* Indicadores dos depoimentos */}
+                <div className="flex justify-center gap-2 mt-4">
+                  {selectedClass.reviews.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentReviewIndex(index)}
+                      className={`w-2 h-2 rounded-full ${
+                        index === currentReviewIndex ? "bg-[#CFB2A8]" : "bg-[#E5D6CD]"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Description */}
+          <Card className="bg-white border-[#E5D6CD]">
+            <CardHeader>
+              <h3 className="font-semibold text-[#3D2C2E]">Sobre Esta Aula</h3>
+            </CardHeader>
+            <CardContent>
+              <p className="text-[#3D2C2E] opacity-80">
+                Perfeita para iniciantes e dançarinos intermediários que buscam explorar movimento e expressão. Esta
+                aula foca no desenvolvimento de força, flexibilidade e interpretação artística através de técnicas de
+                dança contemporânea.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* CTA Button */}
+          <Button
+            className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E] py-6 text-lg"
+            onClick={() => setCurrentScreen("schedule")}
+          >
+            Agendar Aula Experimental
+          </Button>
+        </div>
+      )}
+    </div>
+  )
+
+  const renderScheduleScreenContent = () => (
+    <div className="min-h-screen bg-[#F5F0EB]">
+      {/* Header */}
+      <div className="bg-white p-4 shadow-sm flex items-center gap-3">
         <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("detail")}>
           <ArrowLeft className="h-4 w-4" />
         </Button>
@@ -1626,7 +1788,7 @@ const SissonePrototype = () => {
     </div>
   )
 
-  const renderScheduleScreen = () => <div>Schedule Screen</div>
+  const renderScheduleScreen = () => renderScheduleScreenContent()
 
   const renderCurrentScreen = () => {
     switch (currentScreen) {
