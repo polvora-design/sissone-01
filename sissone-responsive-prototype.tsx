@@ -49,11 +49,11 @@ export default function SissoneResponsivePrototype() {
   }
 
   const navigationItems = [
-    { id: "dashboard", label: "Dashboard", icon: Home },
-    { id: "profile", label: "Profile", icon: User },
-    { id: "create-event", label: "Create Class", icon: Plus },
-    { id: "scheduled-students", label: "Students", icon: Users },
-    { id: "analytics", label: "Analytics", icon: BarChart3 },
+    { id: "dashboard", label: "Painel", icon: Home },
+    { id: "profile", label: "Perfil", icon: User },
+    { id: "create-event", label: "Criar Aula", icon: Plus },
+    { id: "scheduled-students", label: "Alunos", icon: Users },
+    { id: "analytics", label: "Relatórios", icon: BarChart3 },
   ]
 
   const renderSidebar = () => (
@@ -80,7 +80,7 @@ export default function SissoneResponsivePrototype() {
                 </div>
               </div>
               <p className="text-xs" style={{ color: "#3D2C2E" }}>
-                For those who want to learn, teach, and live dance
+                Para quem quer aprender, ensinar e viver a dança
               </p>
             </div>
             <Button variant="ghost" size="sm" className="lg:hidden" onClick={() => setSidebarOpen(false)}>
@@ -117,12 +117,12 @@ export default function SissoneResponsivePrototype() {
         {/* Quick Stats in Sidebar (Desktop only) */}
         <div className="hidden lg:block p-4 mt-8">
           <h3 className="text-sm font-semibold mb-3" style={{ color: "#3D2C2E" }}>
-            Quick Stats
+            Resumo Rápido
           </h3>
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-xs" style={{ color: "#3D2C2E" }}>
-                Active Classes
+                Aulas Ativas
               </span>
               <span className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
                 12
@@ -130,7 +130,7 @@ export default function SissoneResponsivePrototype() {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-xs" style={{ color: "#3D2C2E" }}>
-                Total Students
+                Total de Alunos
               </span>
               <span className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
                 48
@@ -138,7 +138,7 @@ export default function SissoneResponsivePrototype() {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-xs" style={{ color: "#3D2C2E" }}>
-                Rating
+                Avaliação
               </span>
               <span className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
                 4.8
@@ -173,10 +173,10 @@ export default function SissoneResponsivePrototype() {
       {/* Welcome Section - Desktop only */}
       <div className="hidden lg:block mb-8">
         <h2 className="text-xl font-semibold mb-2" style={{ color: "#3D2C2E" }}>
-          Welcome back, Instructor!
+          Bem-vindo de volta, Professor!
         </h2>
         <p className="text-sm" style={{ color: "#3D2C2E" }}>
-          Here's what's happening with your classes today.
+          Aqui está o que está acontecendo com suas aulas hoje.
         </p>
       </div>
 
@@ -188,7 +188,7 @@ export default function SissoneResponsivePrototype() {
               12
             </div>
             <div className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-              Active Classes
+              Aulas Ativas
             </div>
           </CardContent>
         </Card>
@@ -198,7 +198,7 @@ export default function SissoneResponsivePrototype() {
               48
             </div>
             <div className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-              Students
+              Alunos
             </div>
           </CardContent>
         </Card>
@@ -208,17 +208,17 @@ export default function SissoneResponsivePrototype() {
               4.8
             </div>
             <div className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-              Rating
+              Avaliação
             </div>
           </CardContent>
         </Card>
         <Card style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-shadow hidden lg:block">
           <CardContent className="p-6 text-center">
             <div className="text-3xl font-bold" style={{ color: "#3D2C2E" }}>
-              $2.4k
+              R$ 2.4k
             </div>
             <div className="text-sm" style={{ color: "#3D2C2E" }}>
-              This Month
+              Este Mês
             </div>
           </CardContent>
         </Card>
@@ -229,7 +229,7 @@ export default function SissoneResponsivePrototype() {
         {/* Quick Actions */}
         <div className="lg:col-span-1">
           <h2 className="text-sm lg:text-base font-semibold mb-3 lg:mb-4" style={{ color: "#3D2C2E" }}>
-            Quick Actions
+            Ações Rápidas
           </h2>
           <div className="grid grid-cols-2 lg:grid-cols-1 gap-3">
             <Button
@@ -240,7 +240,7 @@ export default function SissoneResponsivePrototype() {
             >
               <Plus className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: "#3D2C2E" }} />
               <span className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-                New Class
+                Nova Aula
               </span>
             </Button>
             <Button
@@ -251,7 +251,7 @@ export default function SissoneResponsivePrototype() {
             >
               <Users className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: "#3D2C2E" }} />
               <span className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-                Students
+                Alunos
               </span>
             </Button>
             <Button
@@ -262,7 +262,7 @@ export default function SissoneResponsivePrototype() {
             >
               <BarChart3 className="w-6 h-6" style={{ color: "#3D2C2E" }} />
               <span className="text-sm" style={{ color: "#3D2C2E" }}>
-                Analytics
+                Relatórios
               </span>
             </Button>
           </div>
@@ -271,7 +271,7 @@ export default function SissoneResponsivePrototype() {
         {/* Recent Classes */}
         <div className="lg:col-span-2">
           <h2 className="text-sm lg:text-base font-semibold mb-3 lg:mb-4" style={{ color: "#3D2C2E" }}>
-            Recent Classes
+            Aulas Recentes
           </h2>
           <div className="space-y-3 lg:space-y-4">
             {[1, 2, 3].map((i) => (
@@ -280,14 +280,14 @@ export default function SissoneResponsivePrototype() {
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
                       <h3 className="text-sm lg:text-base font-medium" style={{ color: "#3D2C2E" }}>
-                        Beginner Ballet Class {i}
+                        Aula de Ballet Iniciante {i}
                       </h3>
                       <div className="flex flex-col lg:flex-row lg:items-center lg:gap-4 mt-1">
                         <p className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-                          Today, 6:00 PM
+                          Hoje, 18:00
                         </p>
                         <p className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-                          8 students enrolled
+                          8 alunos inscritos
                         </p>
                       </div>
                     </div>
@@ -323,7 +323,7 @@ export default function SissoneResponsivePrototype() {
               </div>
             </div>
             <Button variant="ghost" size="sm" className="mt-2 hover:bg-white/50">
-              <span style={{ color: "#CFB2A8" }}>Change Photo</span>
+              <span style={{ color: "#CFB2A8" }}>Alterar Foto</span>
             </Button>
           </div>
 
@@ -331,11 +331,11 @@ export default function SissoneResponsivePrototype() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
             <div className="lg:col-span-2">
               <Label htmlFor="school-name" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                School/Instructor Name
+                Nome da Escola/Professor
               </Label>
               <Input
                 id="school-name"
-                placeholder="Enter name"
+                placeholder="Digite o nome"
                 className="mt-1 h-10 lg:h-12"
                 style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
               />
@@ -343,11 +343,11 @@ export default function SissoneResponsivePrototype() {
 
             <div className="lg:col-span-2">
               <Label htmlFor="bio" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                Bio
+                Biografia
               </Label>
               <Textarea
                 id="bio"
-                placeholder="Tell students about yourself..."
+                placeholder="Conte aos alunos sobre você..."
                 rows={4}
                 className="mt-1"
                 style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
@@ -356,11 +356,11 @@ export default function SissoneResponsivePrototype() {
 
             <div>
               <Label htmlFor="location" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                Location
+                Localização
               </Label>
               <Input
                 id="location"
-                placeholder="City, State"
+                placeholder="Cidade, Estado"
                 className="mt-1 h-10 lg:h-12"
                 style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
               />
@@ -368,7 +368,7 @@ export default function SissoneResponsivePrototype() {
 
             <div>
               <Label htmlFor="specialties" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                Dance Specialties
+                Especialidades de Dança
               </Label>
               <Input
                 id="specialties"
@@ -383,7 +383,7 @@ export default function SissoneResponsivePrototype() {
             className="w-full lg:w-auto lg:px-8 h-10 lg:h-12"
             style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
           >
-            Save Profile
+            Salvar Perfil
           </Button>
         </div>
       </div>
@@ -396,11 +396,11 @@ export default function SissoneResponsivePrototype() {
         <div className="space-y-4 lg:space-y-6">
           <div>
             <Label htmlFor="title" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-              Class Title
+              Título da Aula
             </Label>
             <Input
               id="title"
-              placeholder="e.g., Beginner Ballet"
+              placeholder="ex: Ballet Iniciante"
               value={eventData.title}
               onChange={(e) => setEventData({ ...eventData, title: e.target.value })}
               className="mt-1 h-10 lg:h-12"
@@ -411,7 +411,7 @@ export default function SissoneResponsivePrototype() {
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
             <div>
               <Label htmlFor="date" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                Date
+                Data
               </Label>
               <Input
                 id="date"
@@ -424,7 +424,7 @@ export default function SissoneResponsivePrototype() {
             </div>
             <div>
               <Label htmlFor="time" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                Time
+                Horário
               </Label>
               <Input
                 id="time"
@@ -437,11 +437,11 @@ export default function SissoneResponsivePrototype() {
             </div>
             <div>
               <Label htmlFor="price" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                Price ($)
+                Preço (R$)
               </Label>
               <Input
                 id="price"
-                placeholder="25.00"
+                placeholder="25,00"
                 value={eventData.price}
                 onChange={(e) => setEventData({ ...eventData, price: e.target.value })}
                 className="mt-1 h-10 lg:h-12"
@@ -452,11 +452,11 @@ export default function SissoneResponsivePrototype() {
 
           <div>
             <Label htmlFor="description" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-              Description
+              Descrição
             </Label>
             <Textarea
               id="description"
-              placeholder="Class details, requirements, what to bring..."
+              placeholder="Detalhes da aula, requisitos, o que trazer..."
               rows={4}
               value={eventData.description}
               onChange={(e) => setEventData({ ...eventData, description: e.target.value })}
@@ -472,10 +472,10 @@ export default function SissoneResponsivePrototype() {
               className="lg:flex-1 h-10 lg:h-12"
               style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
             >
-              Preview
+              Visualizar
             </Button>
             <Button className="lg:flex-1 h-10 lg:h-12" style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
-              Save Draft
+              Salvar Rascunho
             </Button>
           </div>
         </div>
@@ -490,56 +490,56 @@ export default function SissoneResponsivePrototype() {
           {/* Class Image */}
           <div className="w-full h-48 lg:h-64 rounded-lg" style={{ backgroundColor: "#E5D6CD" }}>
             <div className="flex items-center justify-center h-full text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-              Class Image Placeholder
+              Imagem da Aula (Placeholder)
             </div>
           </div>
 
           {/* Class Details */}
           <div className="space-y-4 lg:space-y-6">
             <h1 className="text-xl lg:text-3xl font-bold" style={{ color: "#3D2C2E" }}>
-              {eventData.title || "Beginner Ballet Class"}
+              {eventData.title || "Aula de Ballet Iniciante"}
             </h1>
 
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
                 <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                  {eventData.date || "March 15, 2024"}
+                  {eventData.date || "15 de março, 2024"}
                 </span>
               </div>
 
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
                 <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                  {eventData.time || "6:00 PM"} - 7:30 PM
+                  {eventData.time || "18:00"} - 19:30
                 </span>
               </div>
 
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
                 <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                  Studio A
+                  Estúdio A
                 </span>
               </div>
 
               <div className="flex items-center gap-2">
                 <DollarSign className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
                 <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                  ${eventData.price || "25.00"}
+                  R$ {eventData.price || "25,00"}
                 </span>
               </div>
 
               <div className="flex items-center gap-2">
                 <Star className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
                 <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                  4.8 rating
+                  4.8 avaliação
                 </span>
               </div>
             </div>
 
             <div className="space-y-3 lg:space-y-4">
               <Button className="w-full h-10 lg:h-12" style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
-                Publish Class
+                Publicar Aula
               </Button>
               <Button
                 variant="outline"
@@ -547,7 +547,7 @@ export default function SissoneResponsivePrototype() {
                 onClick={() => navigateTo("create-event")}
                 style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
               >
-                Edit Class
+                Editar Aula
               </Button>
             </div>
           </div>
@@ -556,11 +556,11 @@ export default function SissoneResponsivePrototype() {
         {/* Description */}
         <div className="mt-6 lg:mt-8">
           <h3 className="font-semibold mb-2 lg:mb-3 text-base lg:text-lg" style={{ color: "#3D2C2E" }}>
-            Description
+            Descrição
           </h3>
           <p className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
             {eventData.description ||
-              "Perfect for beginners looking to learn the fundamentals of ballet. We'll cover basic positions, movements, and terminology in a supportive environment."}
+              "Perfeito para iniciantes que querem aprender os fundamentos do ballet. Vamos cobrir posições básicas, movimentos e terminologia em um ambiente acolhedor."}
           </p>
         </div>
       </div>
@@ -573,14 +573,14 @@ export default function SissoneResponsivePrototype() {
         {isScheduled && (
           <div className="mb-6">
             <h2 className="text-base lg:text-lg font-semibold" style={{ color: "#3D2C2E" }}>
-              Today's Classes
+              Aulas de Hoje
             </h2>
           </div>
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
           {isScheduled
-            ? ["Beginner Ballet - 6:00 PM", "Jazz Fundamentals - 8:00 PM"].map((className, idx) => (
+            ? ["Ballet Iniciante - 18:00", "Jazz Fundamentos - 20:00"].map((className, idx) => (
                 <Card key={idx} style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-shadow">
                   <CardHeader className="pb-2">
                     <CardTitle className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
@@ -598,14 +598,14 @@ export default function SissoneResponsivePrototype() {
                               </div>
                             </div>
                             <span className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-                              Student {i}
+                              Aluno {i}
                             </span>
                           </div>
                           <span
                             className="text-xs lg:text-sm px-2 py-1 rounded"
                             style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
                           >
-                            Confirmed
+                            Confirmado
                           </span>
                         </div>
                       ))}
@@ -625,10 +625,10 @@ export default function SissoneResponsivePrototype() {
                         </div>
                         <div>
                           <h3 className="text-sm lg:text-base font-medium" style={{ color: "#3D2C2E" }}>
-                            Student {i}
+                            Aluno {i}
                           </h3>
                           <p className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-                            Interested in Beginner Ballet
+                            Interessado em Ballet Iniciante
                           </p>
                         </div>
                       </div>
@@ -658,10 +658,10 @@ export default function SissoneResponsivePrototype() {
                 156
               </div>
               <div className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-                Total Check-ins
+                Check-ins Totais
               </div>
               <div className="text-xs lg:text-sm" style={{ color: "#CFB2A8" }}>
-                +12% this week
+                +12% esta semana
               </div>
             </CardContent>
           </Card>
@@ -671,23 +671,23 @@ export default function SissoneResponsivePrototype() {
                 4.8
               </div>
               <div className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-                Avg Rating
+                Avaliação Média
               </div>
               <div className="text-xs lg:text-sm" style={{ color: "#CFB2A8" }}>
-                24 reviews
+                24 avaliações
               </div>
             </CardContent>
           </Card>
           <Card style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-shadow hidden lg:block">
             <CardContent className="p-6 text-center">
               <div className="text-3xl font-bold" style={{ color: "#3D2C2E" }}>
-                $2.4k
+                R$ 2.4k
               </div>
               <div className="text-sm" style={{ color: "#3D2C2E" }}>
-                Revenue
+                Receita
               </div>
               <div className="text-sm" style={{ color: "#CFB2A8" }}>
-                This month
+                Este mês
               </div>
             </CardContent>
           </Card>
@@ -697,10 +697,10 @@ export default function SissoneResponsivePrototype() {
                 92%
               </div>
               <div className="text-sm" style={{ color: "#3D2C2E" }}>
-                Attendance
+                Presença
               </div>
               <div className="text-sm" style={{ color: "#CFB2A8" }}>
-                Average
+                Média
               </div>
             </CardContent>
           </Card>
@@ -711,7 +711,7 @@ export default function SissoneResponsivePrototype() {
           <Card style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-shadow">
             <CardHeader>
               <CardTitle className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                Peak Hours
+                Horários de Pico
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -729,13 +729,13 @@ export default function SissoneResponsivePrototype() {
                 ))}
               </div>
               <div className="flex justify-between mt-2 text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
-                <span>Sun</span>
+                <span>Seg</span>
+                <span>Ter</span>
+                <span>Qua</span>
+                <span>Qui</span>
+                <span>Sex</span>
+                <span>Sáb</span>
+                <span>Dom</span>
               </div>
             </CardContent>
           </Card>
@@ -744,14 +744,14 @@ export default function SissoneResponsivePrototype() {
           <Card style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-shadow">
             <CardHeader>
               <CardTitle className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                Recent Feedback
+                Avaliações Recentes
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 lg:space-y-4">
               {[
-                { rating: 5, comment: "Amazing class! Great instructor." },
-                { rating: 4, comment: "Really enjoyed the session." },
-                { rating: 5, comment: "Perfect for beginners like me." },
+                { rating: 5, comment: "Aula incrível! Professora excelente." },
+                { rating: 4, comment: "Gostei muito da aula." },
+                { rating: 5, comment: "Perfeito para iniciantes como eu." },
               ].map((feedback, i) => (
                 <div key={i} className="border-b pb-2 lg:pb-3" style={{ borderColor: "#CFB2A8" }}>
                   <div className="flex items-center gap-1 mb-1">
@@ -789,13 +789,13 @@ export default function SissoneResponsivePrototype() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-h-screen lg:ml-0">
         {/* Header */}
-        {currentScreen === "dashboard" && renderHeader("Dashboard", false)}
-        {currentScreen === "profile" && renderHeader("Profile")}
-        {currentScreen === "create-event" && renderHeader("Create Class")}
-        {currentScreen === "event-preview" && renderHeader("Class Preview")}
-        {currentScreen === "interested-students" && renderHeader("Interested Students")}
-        {currentScreen === "scheduled-students" && renderHeader("Scheduled Students")}
-        {currentScreen === "analytics" && renderHeader("Analytics")}
+        {currentScreen === "dashboard" && renderHeader("Painel", false)}
+        {currentScreen === "profile" && renderHeader("Perfil")}
+        {currentScreen === "create-event" && renderHeader("Criar Aula")}
+        {currentScreen === "event-preview" && renderHeader("Visualizar Aula")}
+        {currentScreen === "interested-students" && renderHeader("Alunos Interessados")}
+        {currentScreen === "scheduled-students" && renderHeader("Alunos Agendados")}
+        {currentScreen === "analytics" && renderHeader("Relatórios")}
 
         {/* Content */}
         <div className="flex-1 overflow-auto">
@@ -803,8 +803,8 @@ export default function SissoneResponsivePrototype() {
           {currentScreen === "profile" && renderProfile()}
           {currentScreen === "create-event" && renderCreateEvent()}
           {currentScreen === "event-preview" && renderEventPreview()}
-          {currentScreen === "interested-students" && renderStudentsList("Interested Students")}
-          {currentScreen === "scheduled-students" && renderStudentsList("Scheduled Students", true)}
+          {currentScreen === "interested-students" && renderStudentsList("Alunos Interessados")}
+          {currentScreen === "scheduled-students" && renderStudentsList("Alunos Agendados", true)}
           {currentScreen === "analytics" && renderAnalytics()}
         </div>
       </div>
