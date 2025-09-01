@@ -258,7 +258,7 @@ export default function SissoneResponsivePrototype() {
             Bem-vindo de volta, Gestor!
           </h2>
           <p className="text-sm" style={{ color: "#3D2C2E" }}>
-            Aproveite os nossos dados para tomar as melhores decisões!
+            Proveite os nossos dados para tomar as melhores decisões!
           </p>
         </div>
 
