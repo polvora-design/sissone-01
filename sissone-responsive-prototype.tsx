@@ -117,7 +117,7 @@ export default function SissoneResponsivePrototype() {
   }
 
   const renderUnitFilter = () => (
-    <div className="flex items-center gap-2 mb-4">
+    <div className="flex gap-2 mb-4 mr-[] mt-6 items-center flex-row">
       <Filter className="w-4 h-4" style={{ color: "#3D2C2E" }} />
       <Select value={selectedUnit} onValueChange={setSelectedUnit}>
         <SelectTrigger className="w-48" style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
