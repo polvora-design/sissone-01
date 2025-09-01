@@ -258,8 +258,77 @@ export default function SissoneResponsivePrototype() {
             Bem-vindo de volta, Gestor!
           </h2>
           <p className="text-sm" style={{ color: "#3D2C2E" }}>
-            Proveite os nossos dados para tomar as melhores decisões!    
+            Proveite os nossos dados para tomar as melhores decisões!
           </p>
+        </div>
+
+        {/* Units Ranking - Desktop only */}
+        <div className="hidden lg:block mt-8">
+          <h2 className="text-base font-semibold mb-4" style={{ color: "#3D2C2E" }}>
+            Unidades
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            {mockUnits
+              .sort((a, b) => b.rating - a.rating)
+              .map((unit, index) => (
+                <Card
+                  key={unit.id}
+                  style={{ backgroundColor: "#E5D6CD" }}
+                  className="hover:shadow-md transition-shadow"
+                >
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div
+                        className="flex items-center justify-center w-8 h-8 rounded-full"
+                        style={{ backgroundColor: index === 0 ? "#CFB2A8" : "#F5F0EB" }}
+                      >
+                        {index === 0 ? (
+                          <Trophy className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+                        ) : (
+                          <span className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
+                            {index + 1}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                          {unit.name}
+                        </h3>
+                        <p className="text-xs" style={{ color: "#3D2C2E" }}>
+                          {unit.address}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 text-center">
+                      <div>
+                        <div className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
+                          {unit.rating}
+                        </div>
+                        <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                          Rating
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
+                          {unit.students}
+                        </div>
+                        <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                          Alunos
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
+                          R${unit.revenue}
+                        </div>
+                        <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                          Receita
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+          </div>
         </div>
 
         {/* Unit Filter */}
@@ -393,77 +462,6 @@ export default function SissoneResponsivePrototype() {
             </div>
           </div>
         </div>
-
-        {/* Units Ranking - Desktop only */}
-        {selectedUnit === "all" && (
-          <div className="hidden lg:block mt-8">
-            <h2 className="text-base font-semibold mb-4" style={{ color: "#3D2C2E" }}>
-               Unidades
-            </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              {mockUnits
-                .sort((a, b) => b.rating - a.rating)
-                .map((unit, index) => (
-                  <Card
-                    key={unit.id}
-                    style={{ backgroundColor: "#E5D6CD" }}
-                    className="hover:shadow-md transition-shadow"
-                  >
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div
-                          className="flex items-center justify-center w-8 h-8 rounded-full"
-                          style={{ backgroundColor: index === 0 ? "#CFB2A8" : "#F5F0EB" }}
-                        >
-                          {index === 0 ? (
-                            <Trophy className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-                          ) : (
-                            <span className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
-                              {index + 1}
-                            </span>
-                          )}
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
-                            {unit.name}
-                          </h3>
-                          <p className="text-xs" style={{ color: "#3D2C2E" }}>
-                            {unit.address}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-3 gap-2 text-center">
-                        <div>
-                          <div className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
-                            {unit.rating}
-                          </div>
-                          <div className="text-xs" style={{ color: "#3D2C2E" }}>
-                            Rating
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
-                            {unit.students}
-                          </div>
-                          <div className="text-xs" style={{ color: "#3D2C2E" }}>
-                            Alunos
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
-                            R${unit.revenue}
-                          </div>
-                          <div className="text-xs" style={{ color: "#3D2C2E" }}>
-                            Receita
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-            </div>
-          </div>
-        )}
       </div>
     )
   }
