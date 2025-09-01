@@ -258,7 +258,7 @@ export default function SissoneResponsivePrototype() {
             Bem-vindo de volta, Gestor!
           </h2>
           <p className="text-sm" style={{ color: "#3D2C2E" }}>
-            Aqui está o que está acontecendo com seus eventos hoje.
+            Proveite os nossos dados para tomar as melhores decisões!    
           </p>
         </div>
 
@@ -345,7 +345,7 @@ export default function SissoneResponsivePrototype() {
                 onClick={() => navigateTo("analytics")}
                 style={{ borderColor: "#CFB2A8", backgroundColor: "#F5F0EB" }}
               >
-                <BarChart3 className="w-6 h-6" style={{ color: "#3D2C2E" }} />
+                <BarChart3 className="w-6 h-6 rounded-none opacity-0" style={{ color: "#3D2C2E" }} />
                 <span className="text-sm" style={{ color: "#3D2C2E" }}>
                   Relatórios
                 </span>
@@ -398,7 +398,7 @@ export default function SissoneResponsivePrototype() {
         {selectedUnit === "all" && (
           <div className="hidden lg:block mt-8">
             <h2 className="text-base font-semibold mb-4" style={{ color: "#3D2C2E" }}>
-              Ranking de Unidades
+               Unidades
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               {mockUnits
