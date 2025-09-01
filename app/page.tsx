@@ -1,5 +1,5 @@
-import SissonePrototype from "../sissone-prototype"
+import SissoneResponsivePrototype from "../sissone-responsive-prototype"
 
 export default function Page() {
-  return <SissonePrototype />
+  return <SissoneResponsivePrototype />
 }
