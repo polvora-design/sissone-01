@@ -32,7 +32,7 @@ export default function SissonePrototype() {
   }
 
   return (
-    <div className="max-w-sm md:max-w-2xl lg:max-w-4xl mx-auto bg-[#F5F0EB] min-h-screen">
+    <div className="w-full min-h-screen bg-[#F5F0EB]">
       {/* Navigation dots */}
       <div className="flex justify-center gap-2 p-4">
         {screens.map((screen, index) => (
@@ -40,14 +40,13 @@ export default function SissonePrototype() {
             key={screen}
             onClick={() => goToScreen(screen)}
             className={`w-2 h-2 rounded-full transition-colors ${
-              currentScreen === screen ? "bg-[#CFB2A8]" : "bg-[#E5D6CD]"
+              currentScreen === screen ? "bg-[#3D2C2E]" : "bg-[#E5D6CD]"
             }`}
           />
         ))}
       </div>
 
-      {/* Screen Content */}
-      <div className="px-4 pb-8 md:px-8 lg:px-12">
+      <div className="px-4 pb-8 md:px-8 lg:px-12 xl:px-16">
         {currentScreen === "landing" && <LandingScreen onNext={nextScreen} />}
         {currentScreen === "registration" && <RegistrationScreen onNext={nextScreen} onPrev={prevScreen} />}
         {currentScreen === "onboarding" && <OnboardingScreen />}
@@ -76,10 +75,9 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
   ]
 
   return (
-    <div className="space-y-12 md:space-y-16">
-      {/* Logo */}
+    <div className="space-y-12 md:space-y-16 max-w-6xl mx-auto">
       <div className="flex justify-center">
-        <img src="/sissone-dance-platform-logo.jpg" alt="Sissone" className="h-12 md:h-16" />
+        <img src="/sissone-logo.svg" alt="Sissone" className="h-8 md:h-10 lg:h-12" />
       </div>
 
       {/* Hero section */}
@@ -91,8 +89,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
           </p>
         </div>
 
-        {/* Hero image */}
-        <div className="h-64 md:h-80 lg:h-96 bg-[#E5D6CD] rounded-lg flex items-center justify-center overflow-hidden">
+        <div className="w-full h-64 md:h-80 lg:h-96 bg-[#E5D6CD] rounded-lg flex items-center justify-center overflow-hidden">
           <img
             src="/dance-instructor-teaching-a-class-with-students.jpg"
             alt="Instrutor de dança ensinando alunos"
@@ -111,7 +108,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
           {benefits.map((benefit, index) => (
             <Card key={index} className="bg-white border-[#E5D6CD]">
               <CardContent className="p-6 flex flex-col items-center text-center space-y-3">
-                <div className="bg-[#CFB2A8] p-3 rounded-lg">
+                <div className="bg-[#E5D6CD] p-3 rounded-lg">
                   <benefit.icon className="h-6 w-6 text-[#3D2C2E]" />
                 </div>
                 <div>
@@ -171,7 +168,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
                     <p className="text-sm text-[#3D2C2E] opacity-80">Iniciante • 60 min</p>
                     <p className="text-sm font-semibold text-[#3D2C2E] mt-1">R$ 50/aula</p>
                   </div>
-                  <Button size="sm" className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]">
+                  <Button size="sm" className="bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white">
                     Reservar
                   </Button>
                 </div>
@@ -189,7 +186,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
                     <p className="text-sm text-[#3D2C2E] opacity-80">Avançado • 90 min</p>
                     <p className="text-sm font-semibold text-[#3D2C2E] mt-1">R$ 75/aula</p>
                   </div>
-                  <Button size="sm" className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]">
+                  <Button size="sm" className="bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white">
                     Reservar
                   </Button>
                 </div>
@@ -205,7 +202,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
         <p className="text-lg text-[#3D2C2E] opacity-80">Junte-se a centenas de instrutores que já estão na Sissone</p>
         <Button
           onClick={onNext}
-          className="w-full md:w-auto md:px-12 bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E] font-semibold text-lg py-6"
+          className="w-full md:w-auto md:px-12 bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white font-semibold text-lg py-6"
         >
           Começar Agora
           <ArrowRight className="ml-2 h-5 w-5" />
@@ -241,7 +238,7 @@ function RegistrationScreen({ onNext, onPrev }: { onNext: () => void; onPrev: ()
           <Input type="password" placeholder="Crie uma senha" className="border-[#E5D6CD] focus:border-[#CFB2A8]" />
         </div>
 
-        <Button onClick={onNext} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E] font-semibold">
+        <Button onClick={onNext} className="w-full bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white font-semibold">
           Criar Conta
         </Button>
 
@@ -286,7 +283,7 @@ function OnboardingScreen() {
       <h2 className="text-xl md:text-2xl font-bold text-[#3D2C2E] text-center">Bem-vindo à Sissone!</h2>
 
       <div className="text-center">
-        <div className="w-16 h-16 bg-[#CFB2A8] rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="w-16 h-16 bg-[#E5D6CD] rounded-full flex items-center justify-center mx-auto mb-4">
           <CheckCircle className="h-8 w-8 text-[#3D2C2E]" />
         </div>
         <p className="text-[#3D2C2E] opacity-80">Você está pronto! Veja o que fazer a seguir:</p>
@@ -296,7 +293,7 @@ function OnboardingScreen() {
         {steps.map((step, index) => (
           <Card key={index} className="bg-white border-[#E5D6CD]">
             <CardContent className="p-4 flex items-center gap-3">
-              <div className="bg-[#CFB2A8] p-2 rounded-lg">
+              <div className="bg-[#E5D6CD] p-2 rounded-lg">
                 <step.icon className="h-5 w-5 text-[#3D2C2E]" />
               </div>
               <div className="flex-1">
@@ -309,7 +306,7 @@ function OnboardingScreen() {
         ))}
       </div>
 
-      <Button className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E] font-semibold">
+      <Button className="w-full bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white font-semibold">
         Começar a Criar Seu Perfil
       </Button>
     </div>
