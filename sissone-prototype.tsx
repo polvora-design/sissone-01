@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { Star, Calendar, Clock, MapPin, QrCode, ArrowLeft, User } from "lucide-react"
+import Image from "next/image"
 
 export default function SissonePrototype() {
   const [currentScreen, setCurrentScreen] = useState(0)
@@ -24,6 +25,10 @@ export default function SissonePrototype() {
     if (currentScreen > 0) {
       setCurrentScreen(currentScreen - 1)
     }
+  }
+
+  const goHome = () => {
+    setCurrentScreen(1)
   }
 
   const renderStars = (count: number, interactive = false) => {
@@ -45,36 +50,34 @@ export default function SissonePrototype() {
   const LoginScreen = () => (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-[#F5F0EB]">
       <div className="w-full max-w-sm space-y-6">
-        {/* Logo Placeholder */}
         <div className="text-center">
-          <div className="w-24 h-24 mx-auto bg-[#E5D6CD] rounded-full flex items-center justify-center mb-4">
-            <span className="text-[#3D2C2E] font-bold text-lg">LOGO</span>
+          <div className="mx-auto mb-4 flex items-center justify-center">
+            <Image src="/sissone-logo.svg" alt="Sissone" width={200} height={62} className="h-auto" />
           </div>
-          <h1 className="text-2xl font-bold text-[#3D2C2E]">Sissone</h1>
-          <p className="text-[#3D2C2E] opacity-70">Discover dance, connect with movement</p>
+          <p className="text-[#3D2C2E] opacity-70">Descubra dança, conecte-se com o movimento</p>
         </div>
 
         <div className="space-y-4">
           <div>
             <Label htmlFor="email" className="text-[#3D2C2E]">
-              Email
+              E-mail
             </Label>
-            <Input id="email" type="email" placeholder="your@email.com" className="bg-white border-[#E5D6CD]" />
+            <Input id="email" type="email" placeholder="seu@email.com" className="bg-white border-[#E5D6CD]" />
           </div>
           <div>
             <Label htmlFor="password" className="text-[#3D2C2E]">
-              Password
+              Senha
             </Label>
             <Input id="password" type="password" placeholder="••••••••" className="bg-white border-[#E5D6CD]" />
           </div>
-          <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]">
-            Sign In
+          <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+            Entrar
           </Button>
         </div>
 
         <div className="text-center">
           <a href="#" className="text-[#3D2C2E] opacity-70 text-sm underline">
-            Forgot password?
+            Esqueceu a senha?
           </a>
         </div>
       </div>
@@ -83,50 +86,49 @@ export default function SissonePrototype() {
 
   const DashboardScreen = () => (
     <div className="min-h-screen bg-[#F5F0EB]">
-      {/* Header */}
       <div className="bg-white border-b border-[#E5D6CD] p-4">
         <div className="flex items-center justify-between">
           <div className="w-8 h-8 bg-[#E5D6CD] rounded-full flex items-center justify-center">
-            <span className="text-[#3D2C2E] text-xs font-bold">L</span>
+            <span className="text-[#3D2C2E] text-xs font-bold">S</span>
           </div>
-          <h1 className="text-lg font-bold text-[#3D2C2E]">Sissone</h1>
+          <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={37} className="h-auto" />
           <User className="w-6 h-6 text-[#3D2C2E]" />
         </div>
       </div>
 
       <div className="p-4 space-y-6">
         <div>
-          <h2 className="text-xl font-bold text-[#3D2C2E] mb-1">Welcome back, Sarah!</h2>
-          <p className="text-[#3D2C2E] opacity-70">Ready to dance today?</p>
+          <h2 className="text-xl font-bold text-[#3D2C2E] mb-1">Bem-vinda, Sarah!</h2>
+          <p className="text-[#3D2C2E] opacity-70">Pronta para dançar hoje?</p>
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold text-[#3D2C2E] mb-3">Upcoming Classes</h3>
+          <h3 className="text-lg font-semibold text-[#3D2C2E] mb-3">Próximas Aulas</h3>
 
           <Card className="bg-white border-[#E5D6CD] mb-3">
             <CardContent className="p-4">
               <div className="flex justify-between items-start mb-3">
                 <div>
-                  <h4 className="font-semibold text-[#3D2C2E]">Contemporary Flow</h4>
-                  <p className="text-[#3D2C2E] opacity-70 text-sm">Movement Studio</p>
+                  <h4 className="font-semibold text-[#3D2C2E]">Fluxo Contemporâneo</h4>
+                  <p className="text-[#3D2C2E] opacity-70 text-sm">Estúdio Movement</p>
                 </div>
                 <div className="text-right text-sm text-[#3D2C2E] opacity-70">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
-                    Today
+                    Hoje
                   </div>
                   <div className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
-                    6:00 PM
+                    18:00
                   </div>
                 </div>
               </div>
               <div className="flex items-center gap-1 mb-3">
                 <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
-                <span className="text-sm text-[#3D2C2E] opacity-70">Downtown Studio A</span>
+                <span className="text-sm text-[#3D2C2E] opacity-70">Centro - Sala A</span>
               </div>
-              <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]">
-                Check In
+              <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+                Fazer Check-in
               </Button>
             </CardContent>
           </Card>
@@ -135,26 +137,26 @@ export default function SissonePrototype() {
             <CardContent className="p-4">
               <div className="flex justify-between items-start mb-3">
                 <div>
-                  <h4 className="font-semibold text-[#3D2C2E]">Jazz Fundamentals</h4>
-                  <p className="text-[#3D2C2E] opacity-70 text-sm">Rhythm Dance Academy</p>
+                  <h4 className="font-semibold text-[#3D2C2E]">Fundamentos de Jazz</h4>
+                  <p className="text-[#3D2C2E] opacity-70 text-sm">Academia Rhythm Dance</p>
                 </div>
                 <div className="text-right text-sm text-[#3D2C2E] opacity-70">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
-                    Tomorrow
+                    Amanhã
                   </div>
                   <div className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
-                    7:30 PM
+                    19:30
                   </div>
                 </div>
               </div>
               <div className="flex items-center gap-1 mb-3">
                 <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
-                <span className="text-sm text-[#3D2C2E] opacity-70">Uptown Studio B</span>
+                <span className="text-sm text-[#3D2C2E] opacity-70">Zona Norte - Sala B</span>
               </div>
               <Button variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-transparent">
-                View Details
+                Ver Detalhes
               </Button>
             </CardContent>
           </Card>
@@ -165,21 +167,20 @@ export default function SissonePrototype() {
 
   const CheckInScreen = () => (
     <div className="min-h-screen bg-[#F5F0EB]">
-      {/* Header */}
       <div className="bg-white border-b border-[#E5D6CD] p-4">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="sm" onClick={prevScreen} className="text-[#3D2C2E]">
             <ArrowLeft className="w-4 h-4" />
           </Button>
-          <h1 className="text-lg font-bold text-[#3D2C2E]">Check In</h1>
+          <h1 className="text-lg font-bold text-[#3D2C2E]">Check-in</h1>
         </div>
       </div>
 
       <div className="p-6 text-center space-y-6">
         <div>
-          <h2 className="text-xl font-bold text-[#3D2C2E] mb-2">Contemporary Flow</h2>
-          <p className="text-[#3D2C2E] opacity-70">Movement Studio</p>
-          <p className="text-[#3D2C2E] opacity-70 text-sm">Today • 6:00 PM • Studio A</p>
+          <h2 className="text-xl font-bold text-[#3D2C2E] mb-2">Fluxo Contemporâneo</h2>
+          <p className="text-[#3D2C2E] opacity-70">Estúdio Movement</p>
+          <p className="text-[#3D2C2E] opacity-70 text-sm">Hoje • 18:00 • Sala A</p>
         </div>
 
         <div className="bg-white rounded-lg p-8 border border-[#E5D6CD]">
@@ -187,16 +188,16 @@ export default function SissonePrototype() {
             <QrCode className="w-16 h-16 text-[#3D2C2E]" />
           </div>
           <p className="text-[#3D2C2E] opacity-70 text-sm">
-            Show this QR code to your instructor or tap the button below
+            Mostre este QR code ao seu instrutor ou toque no botão abaixo
           </p>
         </div>
 
         <div className="space-y-3">
-          <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]">
-            Confirm Check-In
+          <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+            Confirmar Check-in
           </Button>
           <Button variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-transparent">
-            Need Help?
+            Precisa de ajuda?
           </Button>
         </div>
       </div>
@@ -205,36 +206,35 @@ export default function SissonePrototype() {
 
   const FeedbackScreen = () => (
     <div className="min-h-screen bg-[#F5F0EB]">
-      {/* Header */}
       <div className="bg-white border-b border-[#E5D6CD] p-4">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="sm" onClick={prevScreen} className="text-[#3D2C2E]">
             <ArrowLeft className="w-4 h-4" />
           </Button>
-          <h1 className="text-lg font-bold text-[#3D2C2E]">How was your class?</h1>
+          <h1 className="text-lg font-bold text-[#3D2C2E]">Como foi sua aula?</h1>
         </div>
       </div>
 
       <div className="p-6 space-y-6">
         <div className="text-center">
-          <h2 className="text-xl font-bold text-[#3D2C2E] mb-2">Contemporary Flow</h2>
-          <p className="text-[#3D2C2E] opacity-70">Movement Studio</p>
+          <h2 className="text-xl font-bold text-[#3D2C2E] mb-2">Fluxo Contemporâneo</h2>
+          <p className="text-[#3D2C2E] opacity-70">Estúdio Movement</p>
         </div>
 
         <Card className="bg-white border-[#E5D6CD]">
           <CardContent className="p-6 space-y-4">
             <div>
-              <Label className="text-[#3D2C2E] font-medium">Rate your experience</Label>
+              <Label className="text-[#3D2C2E] font-medium">Avalie sua experiência</Label>
               <div className="mt-2">{renderStars(rating, true)}</div>
             </div>
 
             <div>
               <Label htmlFor="review" className="text-[#3D2C2E] font-medium">
-                Share your thoughts (optional)
+                Compartilhe seus pensamentos (opcional)
               </Label>
               <Textarea
                 id="review"
-                placeholder="How was the class? What did you enjoy most?"
+                placeholder="Como foi a aula? O que você mais gostou?"
                 className="mt-2 bg-white border-[#E5D6CD] min-h-[100px]"
               />
             </div>
@@ -242,11 +242,11 @@ export default function SissonePrototype() {
         </Card>
 
         <div className="space-y-3">
-          <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]">
-            Submit Review
+          <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+            Enviar Avaliação
           </Button>
           <Button variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-transparent">
-            Skip for Now
+            Pular por Enquanto
           </Button>
         </div>
       </div>
@@ -255,13 +255,12 @@ export default function SissonePrototype() {
 
   const ReviewsScreen = () => (
     <div className="min-h-screen bg-[#F5F0EB]">
-      {/* Header */}
       <div className="bg-white border-b border-[#E5D6CD] p-4">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="sm" onClick={prevScreen} className="text-[#3D2C2E]">
             <ArrowLeft className="w-4 h-4" />
           </Button>
-          <h1 className="text-lg font-bold text-[#3D2C2E]">Class Reviews</h1>
+          <h1 className="text-lg font-bold text-[#3D2C2E]">Avaliações da Aula</h1>
         </div>
       </div>
 
@@ -269,11 +268,11 @@ export default function SissonePrototype() {
         <Card className="bg-white border-[#E5D6CD]">
           <CardHeader className="pb-3">
             <div className="text-center">
-              <h2 className="text-xl font-bold text-[#3D2C2E]">Contemporary Flow</h2>
-              <p className="text-[#3D2C2E] opacity-70">Movement Studio</p>
+              <h2 className="text-xl font-bold text-[#3D2C2E]">Fluxo Contemporâneo</h2>
+              <p className="text-[#3D2C2E] opacity-70">Estúdio Movement</p>
               <div className="flex items-center justify-center gap-2 mt-2">
                 {renderStars(4)}
-                <span className="text-[#3D2C2E] opacity-70 text-sm">(24 reviews)</span>
+                <span className="text-[#3D2C2E] opacity-70 text-sm">(24 avaliações)</span>
               </div>
             </div>
           </CardHeader>
@@ -292,10 +291,10 @@ export default function SissonePrototype() {
                     {renderStars(5)}
                   </div>
                   <p className="text-[#3D2C2E] opacity-70 text-sm">
-                    "Amazing class! The instructor was so encouraging and the flow was perfect for my level. Definitely
-                    coming back!"
+                    "Aula incrível! A instrutora foi muito encorajadora e o fluxo foi perfeito para o meu nível.
+                    Definitivamente voltarei!"
                   </p>
-                  <p className="text-[#3D2C2E] opacity-50 text-xs mt-2">2 days ago</p>
+                  <p className="text-[#3D2C2E] opacity-50 text-xs mt-2">há 2 dias</p>
                 </div>
               </div>
             </CardContent>
@@ -313,9 +312,10 @@ export default function SissonePrototype() {
                     {renderStars(4)}
                   </div>
                   <p className="text-[#3D2C2E] opacity-70 text-sm">
-                    "Great studio space and wonderful energy. The movements felt really natural and flowing."
+                    "Ótimo espaço do estúdio e energia maravilhosa. Os movimentos pareceram realmente naturais e
+                    fluidos."
                   </p>
-                  <p className="text-[#3D2C2E] opacity-50 text-xs mt-2">1 week ago</p>
+                  <p className="text-[#3D2C2E] opacity-50 text-xs mt-2">há 1 semana</p>
                 </div>
               </div>
             </CardContent>
@@ -333,14 +333,19 @@ export default function SissonePrototype() {
                     {renderStars(3)}
                   </div>
                   <p className="text-[#3D2C2E] opacity-70 text-sm">
-                    "Good class overall. Could use a bit more structure but the creative elements were nice."
+                    "Aula boa no geral. Poderia ter um pouco mais de estrutura, mas os elementos criativos foram
+                    legais."
                   </p>
-                  <p className="text-[#3D2C2E] opacity-50 text-xs mt-2">2 weeks ago</p>
+                  <p className="text-[#3D2C2E] opacity-50 text-xs mt-2">há 2 semanas</p>
                 </div>
               </div>
             </CardContent>
           </Card>
         </div>
+
+        <Button onClick={goHome} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white mt-4">
+          Concluir
+        </Button>
       </div>
     </div>
   )
@@ -363,13 +368,17 @@ export default function SissonePrototype() {
   }
 
   return (
-    <div className="max-w-sm mx-auto bg-white shadow-lg">
-      {/* Screen Navigation */}
-      <div className="bg-[#3D2C2E] text-white p-2 text-center text-sm">
-        Screen {currentScreen + 1}/5: {screens[currentScreen]}
-      </div>
+    <div className="min-h-screen bg-[#F5F0EB] flex items-center justify-center">
+      <div className="w-full max-w-[1440px] mx-auto">
+        <div className="max-w-sm mx-auto bg-white shadow-lg">
+          {/* Screen Navigation */}
+          <div className="bg-[#3D2C2E] text-white p-2 text-center text-sm">
+            Tela {currentScreen + 1}/5: {screens[currentScreen]}
+          </div>
 
-      {renderScreen()}
+          {renderScreen()}
+        </div>
+      </div>
     </div>
   )
 }
