@@ -268,21 +268,28 @@ export default function SissoneResponsivePrototype() {
   }
 
   const renderUnitFilter = () => (
-    <div className="flex gap-2 mb-4 items-center flex-row">
-      <Filter className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-      <Select value={selectedUnit} onValueChange={setSelectedUnit}>
-        <SelectTrigger className="w-48" style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-          <SelectItem value="all">Todas as Unidades</SelectItem>
-          {mockUnits.map((unit) => (
-            <SelectItem key={unit.id} value={unit.id}>
-              {unit.name}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+    <div className="flex gap-2 mb-4 items-center flex-wrap">
+      <Filter className="w-4 h-4 flex-shrink-0" style={{ color: "#3D2C2E" }} />
+      <div className="flex-1 min-w-[200px]">
+        <Select value={selectedUnit} onValueChange={setSelectedUnit}>
+          <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+            <SelectValue>
+              <span className="text-sm">
+                <strong>Unidade:</strong>{" "}
+                {selectedUnit === "all" ? "Todas" : mockUnits.find((u) => u.id === selectedUnit)?.name}
+              </span>
+            </SelectValue>
+          </SelectTrigger>
+          <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+            <SelectItem value="all">Todas as Unidades</SelectItem>
+            {mockUnits.map((unit) => (
+              <SelectItem key={unit.id} value={unit.id}>
+                {unit.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
     </div>
   )
 
@@ -430,7 +437,7 @@ export default function SissoneResponsivePrototype() {
     const stats = getFilteredStats()
 
     return (
-      <div className="p-4 lg:p-6">
+      <div className="p-4 lg:p-6 pb-24 lg:pb-6">
         <div className="hidden lg:block mb-8">
           <h2 className="text-xl font-semibold mb-2" style={{ color: "#3D2C2E" }}>
             Bem-vindo de volta, Gestor!
@@ -444,7 +451,7 @@ export default function SissoneResponsivePrototype() {
           <h2 className="text-base font-semibold mb-4" style={{ color: "#3D2C2E" }}>
             Unidades
           </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {mockUnits
               .sort((a, b) => b.rating - a.rating)
               .map((unit, index) => (
@@ -456,7 +463,7 @@ export default function SissoneResponsivePrototype() {
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3 mb-3">
                       <div
-                        className="flex items-center justify-center w-8 h-8 rounded-full"
+                        className="flex items-center justify-center w-8 h-8 rounded-full flex-shrink-0"
                         style={{ backgroundColor: index === 0 ? "#CFB2A8" : "#F5F0EB" }}
                       >
                         {index === 0 ? (
@@ -467,11 +474,11 @@ export default function SissoneResponsivePrototype() {
                           </span>
                         )}
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-sm font-medium truncate" style={{ color: "#3D2C2E" }}>
                           {unit.name}
                         </h3>
-                        <p className="text-xs" style={{ color: "#3D2C2E" }}>
+                        <p className="text-xs truncate" style={{ color: "#3D2C2E" }}>
                           {unit.address}
                         </p>
                       </div>
@@ -712,7 +719,7 @@ export default function SissoneResponsivePrototype() {
   }
 
   const renderSchoolUnits = () => (
-    <div className="p-4 lg:p-6">
+    <div className="p-4 lg:p-6 pb-24 lg:pb-6">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* School Profile Section */}
         <div>
@@ -769,13 +776,14 @@ export default function SissoneResponsivePrototype() {
 
         {/* Units Section */}
         <div>
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-4 gap-2">
             <h2 className="text-lg lg:text-xl font-semibold" style={{ color: "#3D2C2E" }}>
               Unidades
             </h2>
-            <Button style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
+            <Button className="flex-shrink-0" style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
               <Plus className="w-4 h-4 mr-2" />
-              Criar Unidade
+              <span className="hidden sm:inline">Criar Unidade</span>
+              <span className="sm:hidden">Criar</span>
             </Button>
           </div>
 
@@ -877,20 +885,25 @@ export default function SissoneResponsivePrototype() {
   )
 
   const renderClasses = () => (
-    <div className="p-4 lg:p-6">
+    <div className="p-4 lg:p-6 pb-24 lg:pb-6">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-6 gap-2">
           <h2 className="text-lg lg:text-xl font-semibold" style={{ color: "#3D2C2E" }}>
             Gerenciar Aulas
           </h2>
-          <Button style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }} onClick={() => navigateTo("create-class")}>
+          <Button
+            className="flex-shrink-0"
+            style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+            onClick={() => navigateTo("create-class")}
+          >
             <Plus className="w-4 h-4 mr-2" />
-            Criar Aula
+            <span className="hidden sm:inline">Criar Aula</span>
+            <span className="sm:hidden">Criar</span>
           </Button>
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <Card style={{ backgroundColor: "#E5D6CD" }}>
             <CardContent className="p-4 text-center">
               <div className="flex items-center justify-center gap-2 mb-1">
@@ -940,7 +953,7 @@ export default function SissoneResponsivePrototype() {
         </div>
 
         {/* Filters and Search */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <div className="relative">
             <Search
               className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4"
@@ -957,7 +970,9 @@ export default function SissoneResponsivePrototype() {
 
           <Select defaultValue="all">
             <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectValue placeholder="Unidade" />
+              <SelectValue>
+                <span className="text-sm">Unidade: Todas</span>
+              </SelectValue>
             </SelectTrigger>
             <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
               <SelectItem value="all">Todas as Unidades</SelectItem>
@@ -971,7 +986,9 @@ export default function SissoneResponsivePrototype() {
 
           <Select defaultValue="all">
             <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectValue placeholder="Frequência" />
+              <SelectValue>
+                <span className="text-sm">Frequência: Todas</span>
+              </SelectValue>
             </SelectTrigger>
             <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
               <SelectItem value="all">Todas</SelectItem>
@@ -982,7 +999,9 @@ export default function SissoneResponsivePrototype() {
 
           <Select defaultValue="all">
             <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectValue placeholder="Rentabilidade" />
+              <SelectValue>
+                <span className="text-sm">Rentabilidade: Todas</span>
+              </SelectValue>
             </SelectTrigger>
             <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
               <SelectItem value="all">Todas</SelectItem>
@@ -1072,7 +1091,7 @@ export default function SissoneResponsivePrototype() {
   )
 
   const renderPricing = () => (
-    <div className="p-4 lg:p-6">
+    <div className="p-4 lg:p-6 pb-24 lg:pb-6">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-lg lg:text-xl font-semibold mb-6" style={{ color: "#3D2C2E" }}>
           Gerenciar Precificação
@@ -1198,20 +1217,26 @@ export default function SissoneResponsivePrototype() {
   )
 
   const renderStudents = () => (
-    <div className="p-4 lg:p-6">
+    <div className="p-4 lg:p-6 pb-24 lg:pb-6">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-6 gap-2 flex-wrap">
           <h2 className="text-lg lg:text-xl font-semibold" style={{ color: "#3D2C2E" }}>
             Gerenciar Alunos
           </h2>
-          <div className="flex gap-2">
-            <Button style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
+          <div className="flex gap-2 flex-wrap">
+            <Button className="flex-shrink-0" style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
               <UserPlus className="w-4 h-4 mr-2" />
-              Novo Aluno
+              <span className="hidden sm:inline">Novo Aluno</span>
+              <span className="sm:hidden">Novo</span>
             </Button>
-            <Button variant="outline" style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}>
+            <Button
+              variant="outline"
+              className="flex-shrink-0 bg-transparent"
+              style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+            >
               <FileDown className="w-4 h-4 mr-2" />
-              Importar Lista
+              <span className="hidden sm:inline">Importar Lista</span>
+              <span className="sm:hidden">Importar</span>
             </Button>
           </div>
         </div>
@@ -1264,7 +1289,7 @@ export default function SissoneResponsivePrototype() {
         </div>
 
         {/* Filters and Search */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
           <div className="relative">
             <Search
               className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4"
@@ -1281,7 +1306,9 @@ export default function SissoneResponsivePrototype() {
 
           <Select defaultValue="all">
             <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectValue placeholder="Unidade" />
+              <SelectValue>
+                <span className="text-sm">Unidade: Todas</span>
+              </SelectValue>
             </SelectTrigger>
             <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
               <SelectItem value="all">Todas</SelectItem>
@@ -1295,7 +1322,9 @@ export default function SissoneResponsivePrototype() {
 
           <Select defaultValue="all">
             <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectValue placeholder="Aula" />
+              <SelectValue>
+                <span className="text-sm">Aula: Todas</span>
+              </SelectValue>
             </SelectTrigger>
             <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
               <SelectItem value="all">Todas</SelectItem>
@@ -1309,7 +1338,9 @@ export default function SissoneResponsivePrototype() {
 
           <Select defaultValue="all">
             <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectValue placeholder="Faixa Etária" />
+              <SelectValue>
+                <span className="text-sm">Idade: Todas</span>
+              </SelectValue>
             </SelectTrigger>
             <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
               <SelectItem value="all">Todas</SelectItem>
@@ -1321,7 +1352,9 @@ export default function SissoneResponsivePrototype() {
 
           <Select defaultValue="all">
             <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectValue placeholder="Frequência" />
+              <SelectValue>
+                <span className="text-sm">Freq.: Todas</span>
+              </SelectValue>
             </SelectTrigger>
             <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
               <SelectItem value="all">Todas</SelectItem>
@@ -1336,7 +1369,7 @@ export default function SissoneResponsivePrototype() {
         <Card style={{ backgroundColor: "#E5D6CD" }}>
           <CardContent className="p-0">
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full min-w-[600px]">
                 <thead className="border-b" style={{ borderColor: "#CFB2A8" }}>
                   <tr>
                     <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
@@ -1441,7 +1474,7 @@ export default function SissoneResponsivePrototype() {
   )
 
   const renderCreateClass = () => (
-    <div className="p-4 lg:p-6">
+    <div className="p-4 lg:p-6 pb-24 lg:pb-6">
       <div className="max-w-4xl mx-auto">
         <div className="space-y-4 lg:space-y-6">
           <div>
@@ -1453,7 +1486,13 @@ export default function SissoneResponsivePrototype() {
                 className="mt-1 h-10 lg:h-12"
                 style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
               >
-                <SelectValue placeholder="Selecione a unidade" />
+                <SelectValue>
+                  {classData.unit ? (
+                    <span className="text-sm">{mockUnits.find((u) => u.id === classData.unit)?.name}</span>
+                  ) : (
+                    <span className="text-sm text-gray-500">Selecione a unidade</span>
+                  )}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
                 {mockUnits.map((unit) => (
@@ -1690,7 +1729,7 @@ export default function SissoneResponsivePrototype() {
   )
 
   const renderClassPreview = () => (
-    <div className="p-4 lg:p-6">
+    <div className="p-4 lg:p-6 pb-24 lg:pb-6">
       <div className="max-w-4xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
           <div className="space-y-4">
@@ -1852,11 +1891,11 @@ export default function SissoneResponsivePrototype() {
   )
 
   return (
-    <div className="min-h-screen flex" style={{ backgroundColor: "#F5F0EB" }}>
+    <div className="min-h-screen flex overflow-x-hidden" style={{ backgroundColor: "#F5F0EB" }}>
       <div className="hidden lg:block">{renderSidebar()}</div>
       <div className="lg:hidden">{renderSidebar()}</div>
 
-      <div className="flex-1 flex flex-col min-h-screen lg:ml-0">
+      <div className="flex-1 flex flex-col min-h-screen lg:ml-0 min-w-0">
         {currentScreen === "dashboard" && renderHeader("Painel", false)}
         {currentScreen === "school-units" && renderHeader("Escola & Unidades")}
         {currentScreen === "classes" && renderHeader("Aulas")}
@@ -1877,17 +1916,43 @@ export default function SissoneResponsivePrototype() {
       </div>
 
       <div
-        className="lg:hidden fixed bottom-0 left-0 right-0 flex justify-around p-4 border-t"
+        className="lg:hidden fixed bottom-0 left-0 right-0 flex justify-around items-center px-2 py-3 border-t z-30 shadow-lg"
         style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
       >
-        {navigationItems.slice(0, 4).map((item) => {
+        {navigationItems.map((item) => {
           const Icon = item.icon
           return (
-            <Button key={item.id} variant="ghost" size="sm" onClick={() => navigateTo(item.id as Screen)}>
-              <Icon className="w-5 h-5" style={{ color: currentScreen === item.id ? "#CFB2A8" : "#3D2C2E" }} />
+            <Button
+              key={item.id}
+              variant="ghost"
+              size="sm"
+              onClick={() => navigateTo(item.id as Screen)}
+              className="flex flex-col items-center gap-1 h-auto py-2 px-1 min-w-0"
+            >
+              <Icon
+                className="w-5 h-5 flex-shrink-0"
+                style={{ color: currentScreen === item.id ? "#CFB2A8" : "#3D2C2E" }}
+              />
+              <span
+                className="text-[10px] leading-tight text-center"
+                style={{ color: currentScreen === item.id ? "#CFB2A8" : "#3D2C2E" }}
+              >
+                {item.label.split(" ")[0]}
+              </span>
             </Button>
           )
         })}
+        <Button variant="ghost" size="sm" className="flex flex-col items-center gap-1 h-auto py-2 px-1 min-w-0">
+          <div
+            className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center"
+            style={{ backgroundColor: "#CFB2A8" }}
+          >
+            <User className="w-3 h-3" style={{ color: "#3D2C2E" }} />
+          </div>
+          <span className="text-[10px] leading-tight text-center" style={{ color: "#3D2C2E" }}>
+            Perfil
+          </span>
+        </Button>
       </div>
     </div>
   )
