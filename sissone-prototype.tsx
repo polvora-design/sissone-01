@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { ArrowRight, Star, Users, BarChart3, Calendar, CheckCircle, ArrowLeft } from "lucide-react"
 
-const screens = ["landing", "benefits", "examples", "registration", "onboarding"] as const
+const screens = ["landing", "registration", "onboarding"] as const
 
 type Screen = (typeof screens)[number]
 
@@ -32,7 +32,7 @@ export default function SissonePrototype() {
   }
 
   return (
-    <div className="max-w-sm mx-auto bg-[#F5F0EB] min-h-screen">
+    <div className="max-w-sm md:max-w-2xl lg:max-w-4xl mx-auto bg-[#F5F0EB] min-h-screen">
       {/* Navigation dots */}
       <div className="flex justify-center gap-2 p-4">
         {screens.map((screen, index) => (
@@ -47,188 +47,202 @@ export default function SissonePrototype() {
       </div>
 
       {/* Screen Content */}
-      <div className="px-4 pb-4">
+      <div className="px-4 pb-8 md:px-8 lg:px-12">
         {currentScreen === "landing" && <LandingScreen onNext={nextScreen} />}
-        {currentScreen === "benefits" && <BenefitsScreen onNext={nextScreen} onPrev={prevScreen} />}
-        {currentScreen === "examples" && <ExamplesScreen onNext={nextScreen} onPrev={prevScreen} />}
         {currentScreen === "registration" && <RegistrationScreen onNext={nextScreen} onPrev={prevScreen} />}
-        {currentScreen === "onboarding" && <OnboardingScreen onPrev={prevScreen} />}
+        {currentScreen === "onboarding" && <OnboardingScreen />}
       </div>
     </div>
   )
 }
 
 function LandingScreen({ onNext }: { onNext: () => void }) {
-  return (
-    <div className="text-center space-y-6">
-      {/* Logo placeholder */}
-      <div className="h-12 bg-[#E5D6CD] rounded-lg flex items-center justify-center">
-        <span className="text-[#3D2C2E] font-semibold">SISSONE LOGO</span>
-      </div>
-
-      {/* Hero section */}
-      <div className="space-y-4">
-        <h1 className="text-2xl font-bold text-[#3D2C2E]">Share Your Dance Classes</h1>
-        <p className="text-[#3D2C2E] opacity-80">For those who want to learn, teach, and live dance.</p>
-
-        {/* Hero image placeholder */}
-        <div className="h-48 bg-[#E5D6CD] rounded-lg flex items-center justify-center">
-          <span className="text-[#3D2C2E]">Dance Instructor Image</span>
-        </div>
-      </div>
-
-      {/* CTA */}
-      <div className="space-y-4">
-        <p className="text-[#3D2C2E]">Connect with students and grow your dance community</p>
-        <Button onClick={onNext} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E] font-semibold">
-          Get Started
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
-      </div>
-    </div>
-  )
-}
-
-function BenefitsScreen({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) {
   const benefits = [
     {
       icon: Users,
-      title: "Reach More Students",
-      description: "Connect with dancers in your area looking for classes",
+      title: "Alcance Mais Alunos",
+      description: "Conecte-se com dançarinos da sua região procurando aulas",
     },
     {
       icon: BarChart3,
-      title: "Smart Dashboard",
-      description: "Track bookings, payments, and student engagement",
+      title: "Painel Inteligente",
+      description: "Acompanhe reservas, pagamentos e engajamento dos alunos",
     },
     {
       icon: Calendar,
-      title: "Easy Class Publishing",
-      description: "Create and manage your class schedule effortlessly",
+      title: "Publicação Fácil de Aulas",
+      description: "Crie e gerencie sua agenda de aulas sem esforço",
     },
   ]
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-2">
-        <Button variant="ghost" size="sm" onClick={onPrev} className="p-1">
-          <ArrowLeft className="h-4 w-4" />
-        </Button>
-        <h2 className="text-xl font-bold text-[#3D2C2E]">Why Join Sissone?</h2>
+    <div className="space-y-12 md:space-y-16">
+      {/* Logo */}
+      <div className="flex justify-center">
+        <img src="/sissone-dance-platform-logo.jpg" alt="Sissone" className="h-12 md:h-16" />
       </div>
 
-      <div className="space-y-4">
-        {benefits.map((benefit, index) => (
-          <Card key={index} className="bg-white border-[#E5D6CD]">
-            <CardContent className="p-4 flex items-start gap-3">
-              <div className="bg-[#CFB2A8] p-2 rounded-lg">
-                <benefit.icon className="h-5 w-5 text-[#3D2C2E]" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-[#3D2C2E]">{benefit.title}</h3>
-                <p className="text-sm text-[#3D2C2E] opacity-80">{benefit.description}</p>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+      {/* Hero section */}
+      <div className="text-center space-y-6 md:space-y-8">
+        <div className="space-y-4">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#3D2C2E]">Compartilhe Suas Aulas de Dança</h1>
+          <p className="text-lg md:text-xl text-[#3D2C2E] opacity-80">
+            Para quem quer aprender, ensinar e viver a dança.
+          </p>
+        </div>
+
+        {/* Hero image */}
+        <div className="h-64 md:h-80 lg:h-96 bg-[#E5D6CD] rounded-lg flex items-center justify-center overflow-hidden">
+          <img
+            src="/dance-instructor-teaching-a-class-with-students.jpg"
+            alt="Instrutor de dança ensinando alunos"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        <p className="text-lg md:text-xl text-[#3D2C2E]">Conecte-se com alunos e expanda sua comunidade de dança</p>
       </div>
 
-      <Button onClick={onNext} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E] font-semibold">
-        See Examples
-        <ArrowRight className="ml-2 h-4 w-4" />
-      </Button>
-    </div>
-  )
-}
+      {/* Benefits section */}
+      <div className="space-y-6 md:space-y-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-[#3D2C2E] text-center">Por Que Entrar na Sissone?</h2>
 
-function ExamplesScreen({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) {
-  return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-2">
-        <Button variant="ghost" size="sm" onClick={onPrev} className="p-1">
-          <ArrowLeft className="h-4 w-4" />
-        </Button>
-        <h2 className="text-xl font-bold text-[#3D2C2E]">Your Profile Preview</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+          {benefits.map((benefit, index) => (
+            <Card key={index} className="bg-white border-[#E5D6CD]">
+              <CardContent className="p-6 flex flex-col items-center text-center space-y-3">
+                <div className="bg-[#CFB2A8] p-3 rounded-lg">
+                  <benefit.icon className="h-6 w-6 text-[#3D2C2E]" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-[#3D2C2E] text-lg">{benefit.title}</h3>
+                  <p className="text-sm text-[#3D2C2E] opacity-80 mt-2">{benefit.description}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
 
-      {/* Profile mockup */}
-      <Card className="bg-white border-[#E5D6CD]">
-        <CardHeader className="pb-2">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-[#E5D6CD] rounded-full flex items-center justify-center">
-              <span className="text-xs text-[#3D2C2E]">PHOTO</span>
-            </div>
-            <div>
-              <h3 className="font-semibold text-[#3D2C2E]">[Your School Name]</h3>
-              <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
-                ))}
-                <span className="text-xs text-[#3D2C2E] ml-1">4.8 (24 reviews)</span>
-              </div>
-            </div>
+      {/* Examples section */}
+      <div className="space-y-6 md:space-y-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-[#3D2C2E] text-center">Veja Como Seu Perfil Ficará</h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {/* Profile mockup */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-[#3D2C2E] text-lg">Seu Perfil</h3>
+            <Card className="bg-white border-[#E5D6CD]">
+              <CardHeader className="pb-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-16 h-16 bg-[#E5D6CD] rounded-full flex items-center justify-center overflow-hidden">
+                    <img src="/dance-instructor-profile-photo.jpg" alt="Foto" className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-[#3D2C2E]">[Nome da Sua Escola]</h4>
+                    <div className="flex items-center gap-1 mt-1">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <Star key={star} className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
+                      ))}
+                      <span className="text-xs text-[#3D2C2E] ml-1">4.8 (24 avaliações)</span>
+                    </div>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-[#3D2C2E] opacity-80">
+                  Professora especializada em ballet clássico e contemporâneo com 10 anos de experiência.
+                </p>
+              </CardContent>
+            </Card>
           </div>
-        </CardHeader>
-      </Card>
 
-      {/* Class listing mockup */}
-      <div className="space-y-3">
-        <h3 className="font-semibold text-[#3D2C2E]">Your Classes</h3>
-        <Card className="bg-white border-[#E5D6CD]">
-          <CardContent className="p-4">
-            <div className="flex gap-3">
-              <div className="w-16 h-16 bg-[#E5D6CD] rounded-lg flex items-center justify-center">
-                <span className="text-xs text-[#3D2C2E]">CLASS IMAGE</span>
-              </div>
-              <div className="flex-1">
-                <h4 className="font-semibold text-[#3D2C2E]">[Class Name]</h4>
-                <p className="text-sm text-[#3D2C2E] opacity-80">Beginner • 60 min</p>
-                <p className="text-sm font-semibold text-[#3D2C2E]">$25/class</p>
-              </div>
-              <Button size="sm" className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]">
-                Book
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+          {/* Class listing mockup */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-[#3D2C2E] text-lg">Suas Aulas</h3>
+            <Card className="bg-white border-[#E5D6CD]">
+              <CardContent className="p-4">
+                <div className="flex gap-3">
+                  <div className="w-20 h-20 bg-[#E5D6CD] rounded-lg flex items-center justify-center overflow-hidden">
+                    <img src="/ballet-dance-class.png" alt="Aula" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-[#3D2C2E]">[Nome da Aula]</h4>
+                    <p className="text-sm text-[#3D2C2E] opacity-80">Iniciante • 60 min</p>
+                    <p className="text-sm font-semibold text-[#3D2C2E] mt-1">R$ 50/aula</p>
+                  </div>
+                  <Button size="sm" className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]">
+                    Reservar
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white border-[#E5D6CD]">
+              <CardContent className="p-4">
+                <div className="flex gap-3">
+                  <div className="w-20 h-20 bg-[#E5D6CD] rounded-lg flex items-center justify-center overflow-hidden">
+                    <img src="/contemporary-dance-class.png" alt="Aula" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-[#3D2C2E]">[Nome da Aula]</h4>
+                    <p className="text-sm text-[#3D2C2E] opacity-80">Avançado • 90 min</p>
+                    <p className="text-sm font-semibold text-[#3D2C2E] mt-1">R$ 75/aula</p>
+                  </div>
+                  <Button size="sm" className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]">
+                    Reservar
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
 
-      <Button onClick={onNext} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E] font-semibold">
-        Join Now
-        <ArrowRight className="ml-2 h-4 w-4" />
-      </Button>
+      {/* CTA section */}
+      <div className="text-center space-y-6 py-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-[#3D2C2E]">Pronto Para Começar?</h2>
+        <p className="text-lg text-[#3D2C2E] opacity-80">Junte-se a centenas de instrutores que já estão na Sissone</p>
+        <Button
+          onClick={onNext}
+          className="w-full md:w-auto md:px-12 bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E] font-semibold text-lg py-6"
+        >
+          Começar Agora
+          <ArrowRight className="ml-2 h-5 w-5" />
+        </Button>
+      </div>
     </div>
   )
 }
 
 function RegistrationScreen({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) {
   return (
-    <div className="space-y-6">
+    <div className="max-w-md mx-auto space-y-6 md:space-y-8">
       <div className="flex items-center gap-2">
         <Button variant="ghost" size="sm" onClick={onPrev} className="p-1">
           <ArrowLeft className="h-4 w-4" />
         </Button>
-        <h2 className="text-xl font-bold text-[#3D2C2E]">Create Your Account</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-[#3D2C2E]">Crie Sua Conta</h2>
       </div>
 
       <div className="space-y-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-[#3D2C2E]">Full Name</label>
-          <Input placeholder="Enter your full name" className="border-[#E5D6CD] focus:border-[#CFB2A8]" />
+          <label className="text-sm font-medium text-[#3D2C2E]">Nome Completo</label>
+          <Input placeholder="Digite seu nome completo" className="border-[#E5D6CD] focus:border-[#CFB2A8]" />
         </div>
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-[#3D2C2E]">Email</label>
-          <Input type="email" placeholder="Enter your email" className="border-[#E5D6CD] focus:border-[#CFB2A8]" />
+          <Input type="email" placeholder="Digite seu email" className="border-[#E5D6CD] focus:border-[#CFB2A8]" />
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-[#3D2C2E]">Password</label>
-          <Input type="password" placeholder="Create a password" className="border-[#E5D6CD] focus:border-[#CFB2A8]" />
+          <label className="text-sm font-medium text-[#3D2C2E]">Senha</label>
+          <Input type="password" placeholder="Crie uma senha" className="border-[#E5D6CD] focus:border-[#CFB2A8]" />
         </div>
 
         <Button onClick={onNext} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E] font-semibold">
-          Create Account
+          Criar Conta
         </Button>
 
         <div className="relative">
@@ -236,51 +250,46 @@ function RegistrationScreen({ onNext, onPrev }: { onNext: () => void; onPrev: ()
             <div className="w-full border-t border-[#E5D6CD]" />
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="bg-[#F5F0EB] px-2 text-[#3D2C2E] opacity-80">or</span>
+            <span className="bg-[#F5F0EB] px-2 text-[#3D2C2E] opacity-80">ou</span>
           </div>
         </div>
 
         <Button variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] hover:bg-[#E5D6CD] bg-transparent">
-          Continue with Google
+          Continuar com Google
         </Button>
       </div>
     </div>
   )
 }
 
-function OnboardingScreen({ onPrev }: { onPrev: () => void }) {
+function OnboardingScreen() {
   const steps = [
     {
       icon: Users,
-      title: "Create Your Profile",
-      description: "Add your photo, bio, and teaching experience",
+      title: "Crie Seu Perfil",
+      description: "Adicione sua foto, biografia e experiência como professor",
     },
     {
       icon: Calendar,
-      title: "Publish Your First Class",
-      description: "Set up your schedule and class details",
+      title: "Publique Sua Primeira Aula",
+      description: "Configure sua agenda e detalhes das aulas",
     },
     {
       icon: BarChart3,
-      title: "Track Your Engagement",
-      description: "Monitor bookings and student feedback",
+      title: "Acompanhe Seu Engajamento",
+      description: "Monitore reservas e feedback dos alunos",
     },
   ]
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-2">
-        <Button variant="ghost" size="sm" onClick={onPrev} className="p-1">
-          <ArrowLeft className="h-4 w-4" />
-        </Button>
-        <h2 className="text-xl font-bold text-[#3D2C2E]">Welcome to Sissone!</h2>
-      </div>
+    <div className="max-w-md mx-auto space-y-6 md:space-y-8">
+      <h2 className="text-xl md:text-2xl font-bold text-[#3D2C2E] text-center">Bem-vindo à Sissone!</h2>
 
       <div className="text-center">
         <div className="w-16 h-16 bg-[#CFB2A8] rounded-full flex items-center justify-center mx-auto mb-4">
           <CheckCircle className="h-8 w-8 text-[#3D2C2E]" />
         </div>
-        <p className="text-[#3D2C2E] opacity-80">You're all set! Here's what to do next:</p>
+        <p className="text-[#3D2C2E] opacity-80">Você está pronto! Veja o que fazer a seguir:</p>
       </div>
 
       <div className="space-y-4">
@@ -301,7 +310,7 @@ function OnboardingScreen({ onPrev }: { onPrev: () => void }) {
       </div>
 
       <Button className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E] font-semibold">
-        Start Building Your Profile
+        Começar a Criar Seu Perfil
       </Button>
     </div>
   )
