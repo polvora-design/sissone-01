@@ -61,7 +61,11 @@ const SissonePrototype = () => {
       days: ["Segunda-feira", "Quarta-feira"],
       location: "Centro",
       image: "/contemporary-dance-class-studio.jpg",
-      images: ["/contemporary-dance-class-studio-interior.jpg", "/contemporary-dance-students-practicing.jpg", "/contemporary-dance-instructor-teaching.jpg"],
+      images: [
+        "/contemporary-dance-class-studio-interior.jpg",
+        "/contemporary-dance-students-practicing.jpg",
+        "/contemporary-dance-instructor-teaching.jpg",
+      ],
       tag: "Popular",
       tagColor: "bg-orange-100 text-orange-800",
       reviews: [
@@ -98,7 +102,11 @@ const SissonePrototype = () => {
       days: ["Terça-feira", "Quinta-feira"],
       location: "Zona Sul",
       image: "/hip-hop-dance-class-urban.jpg",
-      images: ["/hip-hop-dance-studio-with-students.jpg", "/hip-hop-dancers-performing-moves.jpg", "/urban-dance-class-group.jpg"],
+      images: [
+        "/hip-hop-dance-studio-with-students.jpg",
+        "/hip-hop-dancers-performing-moves.jpg",
+        "/urban-dance-class-group.jpg",
+      ],
       tag: "Preferido dos Alunos",
       tagColor: "bg-purple-100 text-purple-800",
       reviews: [
@@ -279,56 +287,58 @@ const SissonePrototype = () => {
 
   const renderHomeScreen = () => (
     <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
-      {/* Header */}
-      <div className="bg-white p-4 shadow-sm flex-shrink-0">
-        <div className="text-center">
-          <div className="flex justify-center mb-2">
-            <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={40} className="h-10 w-auto" />
+      <div className="mx-auto w-full max-w-[1040px]">
+        {/* Header */}
+        <div className="bg-white p-4 shadow-sm flex-shrink-0">
+          <div className="text-center">
+            <div className="flex justify-center mb-2">
+              <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={40} className="h-10 w-auto" />
+            </div>
+            <p className="text-sm text-[#3D2C2E] opacity-70">Para quem quer aprender, ensinar e viver a dança</p>
           </div>
-          <p className="text-sm text-[#3D2C2E] opacity-70">Para quem quer aprender, ensinar e viver a dança</p>
         </div>
-      </div>
 
-      {/* Search Button */}
-      <div className="p-4 bg-white border-b flex-shrink-0">
-        <Button
-          variant="outline"
-          className="w-full h-12 border-[#CFB2A8] text-[#3D2C2E] bg-white justify-start px-4 hover:bg-[#F5F0EB]"
-          onClick={() => setShowSearchModal(true)}
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-[#CFB2A8] rounded-full flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
+        {/* Search Button */}
+        <div className="p-4 bg-white border-b flex-shrink-0">
+          <Button
+            variant="outline"
+            className="w-full h-12 border-[#CFB2A8] text-[#3D2C2E] bg-white justify-start px-4 hover:bg-[#F5F0EB]"
+            onClick={() => setShowSearchModal(true)}
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-[#CFB2A8] rounded-full flex items-center justify-center">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+              <div className="text-left">
+                <div className="font-medium text-sm">{"Iniciar busca"} </div>
+                <div className="text-xs text-gray-500">{"Lugar • Data • Modalidade"}</div>
+              </div>
             </div>
-            <div className="text-left">
-              <div className="font-medium text-sm">{"Iniciar busca"} </div>
-              <div className="text-xs text-gray-500">{"Lugar • Data • Modalidade"}</div>
-            </div>
+          </Button>
+        </div>
+
+        {/* Quick Filters */}
+        <div className="p-4 bg-white border-b flex-shrink-0">
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide">
+            {["Ballet", "Jazz", "Forró", "Ao ar livre", "Profissionais", "Dança de salão", "Aula Particular"].map(
+              (filter) => (
+                <Button
+                  key={filter}
+                  variant="outline"
+                  className="flex-shrink-0 h-10 px-4 border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#CFB2A8] hover:text-white transition-colors"
+                >
+                  <span className="text-sm font-medium whitespace-nowrap">{filter}</span>
+                </Button>
+              ),
+            )}
           </div>
-        </Button>
-      </div>
-
-      {/* Quick Filters */}
-      <div className="p-4 bg-white border-b flex-shrink-0">
-        <div className="flex gap-3 overflow-x-auto scrollbar-hide">
-          {["Ballet", "Jazz", "Forró", "Ao ar livre", "Profissionais", "Dança de salão", "Aula Particular"].map(
-            (filter) => (
-              <Button
-                key={filter}
-                variant="outline"
-                className="flex-shrink-0 h-10 px-4 border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#CFB2A8] hover:text-white transition-colors"
-              >
-                <span className="text-sm font-medium whitespace-nowrap">{filter}</span>
-              </Button>
-            ),
-          )}
         </div>
       </div>
 
@@ -703,267 +713,275 @@ const SissonePrototype = () => {
 
       {/* Classes Feed */}
       <div className="flex-1 overflow-y-auto space-y-6 pb-6">
-        {/* Faça uma aula ainda hoje */}
-        <div>
-          <div className="px-4 mb-3 mt-3">
-            <h2 className="text-lg font-semibold text-[#3D2C2E]">Faça uma aula ainda hoje</h2>
+        <div className="mx-auto w-full max-w-[1040px]">
+          {/* Faça uma aula ainda hoje */}
+          <div>
+            <div className="px-4 mb-3 mt-3">
+              <h2 className="text-lg font-semibold text-[#3D2C2E]">Faça uma aula ainda hoje</h2>
+            </div>
+            <div className="flex gap-3 px-4 overflow-x-auto scrollbar-hide">
+              {classes.slice(0, 3).map((classItem) => (
+                <div
+                  key={classItem.id}
+                  className="flex-shrink-0 w-64 cursor-pointer"
+                  onClick={() => {
+                    setSelectedClass(classItem)
+                    setCurrentScreen("detail")
+                  }}
+                >
+                  <Card className="bg-white border-[#E5D6CD] hover:shadow-lg transition-shadow">
+                    <CardContent className="p-0">
+                      {/* Foto com overlay de tag e like */}
+                      <div className="relative">
+                        <Image
+                          src={classItem.image || "/placeholder.svg"}
+                          alt={classItem.name}
+                          width={256}
+                          height={160}
+                          className="w-full h-40 object-cover rounded-t-lg"
+                        />
+
+                        {/* Tag no canto superior esquerdo */}
+                        <div className="absolute top-2 left-2 z-10">
+                          <Badge className={`${classItem.tagColor} text-xs font-medium shadow-sm pointer-events-none`}>
+                            {classItem.tag}
+                          </Badge>
+                        </div>
+
+                        {/* Botão de like no canto superior direito */}
+                        <div className="absolute top-2 right-2 z-10">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              toggleFavorite(classItem.id)
+                            }}
+                            className="p-1.5 rounded-full shadow-sm bg-white/90 hover:bg-white transition-colors"
+                          >
+                            <Heart
+                              className={`h-4 w-4 transition-colors ${
+                                favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                              }`}
+                            />
+                          </Button>
+                        </div>
+                      </div>
+
+                      {/* Informações abaixo da foto */}
+                      <div className="p-3 space-y-2">
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight">{classItem.name}</h3>
+                            <p className="text-xs text-[#3D2C2E] opacity-70">{classItem.school}</p>
+                          </div>
+                          <div className="flex items-center gap-1 ml-2 pointer-events-none">
+                            <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
+                            <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70 pointer-events-none">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="h-3 w-3" />
+                            <span>{classItem.days[0]}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            <span>{classItem.time}</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-1 pointer-events-none">
+                            <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70" />
+                            <span className="text-xs text-[#3D2C2E] opacity-70">{classItem.location}</span>
+                          </div>
+                          <div className="text-right pointer-events-none">
+                            <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
+                            <span className="text-xs text-[#3D2C2E] opacity-70"> /aula</span>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="flex gap-3 px-4 overflow-x-auto scrollbar-hide">
-            {classes.slice(0, 3).map((classItem) => (
-              <div
-                key={classItem.id}
-                className="flex-shrink-0 w-64 cursor-pointer"
-                onClick={() => {
-                  setSelectedClass(classItem)
-                  setCurrentScreen("detail")
-                }}
-              >
-                <Card className="bg-white border-[#E5D6CD] hover:shadow-lg transition-shadow">
-                  <CardContent className="p-0">
-                    {/* Foto com overlay de tag e like */}
-                    <div className="relative">
-                      <img
-                        src={classItem.image || "/placeholder.svg"}
-                        alt={classItem.name}
-                        className="w-full h-40 object-cover rounded-t-lg"
-                      />
 
-                      {/* Tag no canto superior esquerdo */}
-                      <div className="absolute top-2 left-2 z-10">
-                        <Badge className={`${classItem.tagColor} text-xs font-medium shadow-sm pointer-events-none`}>
-                          {classItem.tag}
-                        </Badge>
-                      </div>
-
-                      {/* Botão de like no canto superior direito */}
-                      <div className="absolute top-2 right-2 z-10">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            toggleFavorite(classItem.id)
-                          }}
-                          className="p-1.5 rounded-full shadow-sm bg-white/90 hover:bg-white transition-colors"
-                        >
-                          <Heart
-                            className={`h-4 w-4 transition-colors ${
-                              favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                            }`}
-                          />
-                        </Button>
-                      </div>
-                    </div>
-
-                    {/* Informações abaixo da foto */}
-                    <div className="p-3 space-y-2">
-                      <div className="flex justify-between items-start">
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight">{classItem.name}</h3>
-                          <p className="text-xs text-[#3D2C2E] opacity-70">{classItem.school}</p>
+          {/* Próximos eventos */}
+          <div>
+            <div className="px-4 mb-3">
+              <h2 className="text-lg font-semibold text-[#3D2C2E]">Próximos eventos</h2>
+            </div>
+            <div className="flex gap-3 px-4 overflow-x-auto scrollbar-hide">
+              {classes.map((classItem) => (
+                <div
+                  key={`event-${classItem.id}`}
+                  className="flex-shrink-0 w-64 cursor-pointer"
+                  onClick={() => {
+                    setSelectedClass(classItem)
+                    setCurrentScreen("detail")
+                  }}
+                >
+                  <Card className="bg-white border-[#E5D6CD] hover:shadow-lg transition-shadow">
+                    <CardContent className="p-0">
+                      <div className="relative">
+                        <Image
+                          src={classItem.image || "/placeholder.svg"}
+                          alt={classItem.name}
+                          width={256}
+                          height={160}
+                          className="w-full h-40 object-cover rounded-t-lg"
+                        />
+                        <div className="absolute top-2 left-2 z-10">
+                          <Badge className="bg-blue-100 text-blue-800 text-xs font-medium shadow-sm pointer-events-none">
+                            Evento
+                          </Badge>
                         </div>
-                        <div className="flex items-center gap-1 ml-2 pointer-events-none">
-                          <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
-                          <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
+                        <div className="absolute top-2 right-2 z-10">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              toggleFavorite(classItem.id)
+                            }}
+                            className="p-1.5 rounded-full shadow-sm bg-white/90 hover:bg-white transition-colors"
+                          >
+                            <Heart
+                              className={`h-4 w-4 transition-colors ${
+                                favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                              }`}
+                            />
+                          </Button>
                         </div>
                       </div>
-
-                      <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70 pointer-events-none">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="h-3 w-3" />
-                          <span>{classItem.days[0]}</span>
+                      <div className="p-3 space-y-2">
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight">{classItem.name}</h3>
+                            <p className="text-xs text-[#3D2C2E] opacity-70">{classItem.school}</p>
+                          </div>
+                          <div className="flex items-center gap-1 ml-2 pointer-events-none">
+                            <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
+                            <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="h-3 w-3" />
-                          <span>{classItem.time}</span>
+                        <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70 pointer-events-none">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="h-3 w-3" />
+                            <span>{classItem.days[0]}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            <span>{classItem.time}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-1 pointer-events-none">
+                            <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70" />
+                            <span className="text-xs text-[#3D2C2E] opacity-70">{classItem.location}</span>
+                          </div>
+                          <div className="text-right pointer-events-none">
+                            <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
+                            <span className="text-xs text-[#3D2C2E] opacity-70"> /aula</span>
+                          </div>
                         </div>
                       </div>
-
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1 pointer-events-none">
-                          <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70" />
-                          <span className="text-xs text-[#3D2C2E] opacity-70">{classItem.location}</span>
-                        </div>
-                        <div className="text-right pointer-events-none">
-                          <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
-                          <span className="text-xs text-[#3D2C2E] opacity-70"> /aula</span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            ))}
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Próximos eventos */}
-        <div>
-          <div className="px-4 mb-3">
-            <h2 className="text-lg font-semibold text-[#3D2C2E]">Próximos eventos</h2>
-          </div>
-          <div className="flex gap-3 px-4 overflow-x-auto scrollbar-hide">
-            {classes.map((classItem) => (
-              <div
-                key={`event-${classItem.id}`}
-                className="flex-shrink-0 w-64 cursor-pointer"
-                onClick={() => {
-                  setSelectedClass(classItem)
-                  setCurrentScreen("detail")
-                }}
-              >
-                <Card className="bg-white border-[#E5D6CD] hover:shadow-lg transition-shadow">
-                  <CardContent className="p-0">
-                    <div className="relative">
-                      <img
-                        src={classItem.image || "/placeholder.svg"}
-                        alt={classItem.name}
-                        className="w-full h-40 object-cover rounded-t-lg"
-                      />
-                      <div className="absolute top-2 left-2 z-10">
-                        <Badge className="bg-blue-100 text-blue-800 text-xs font-medium shadow-sm pointer-events-none">
-                          Evento
-                        </Badge>
-                      </div>
-                      <div className="absolute top-2 right-2 z-10">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            toggleFavorite(classItem.id)
-                          }}
-                          className="p-1.5 rounded-full shadow-sm bg-white/90 hover:bg-white transition-colors"
-                        >
-                          <Heart
-                            className={`h-4 w-4 transition-colors ${
-                              favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                            }`}
-                          />
-                        </Button>
-                      </div>
-                    </div>
-                    <div className="p-3 space-y-2">
-                      <div className="flex justify-between items-start">
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight">{classItem.name}</h3>
-                          <p className="text-xs text-[#3D2C2E] opacity-70">{classItem.school}</p>
+          {/* Mais populares */}
+          <div>
+            <div className="px-4 mb-3">
+              <h2 className="text-lg font-semibold text-[#3D2C2E]">Mais populares</h2>
+            </div>
+            <div className="flex gap-3 px-4 overflow-x-auto scrollbar-hide">
+              {[...classes].reverse().map((classItem) => (
+                <div
+                  key={`popular-${classItem.id}`}
+                  className="flex-shrink-0 w-64 cursor-pointer"
+                  onClick={() => {
+                    setSelectedClass(classItem)
+                    setCurrentScreen("detail")
+                  }}
+                >
+                  <Card className="bg-white border-[#E5D6CD] hover:shadow-lg transition-shadow">
+                    <CardContent className="p-0">
+                      <div className="relative">
+                        <Image
+                          src={classItem.image || "/placeholder.svg"}
+                          alt={classItem.name}
+                          width={256}
+                          height={160}
+                          className="w-full h-40 object-cover rounded-t-lg"
+                        />
+                        <div className="absolute top-2 left-2 z-10">
+                          <Badge className={`${classItem.tagColor} text-xs font-medium shadow-sm pointer-events-none`}>
+                            {classItem.tag}
+                          </Badge>
                         </div>
-                        <div className="flex items-center gap-1 ml-2 pointer-events-none">
-                          <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
-                          <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
+                        <div className="absolute top-2 right-2 z-10">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              toggleFavorite(classItem.id)
+                            }}
+                            className="p-1.5 rounded-full shadow-sm bg-white/90 hover:bg-white transition-colors"
+                          >
+                            <Heart
+                              className={`h-4 w-4 transition-colors ${
+                                favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                              }`}
+                            />
+                          </Button>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70 pointer-events-none">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="h-3 w-3" />
-                          <span>{classItem.days[0]}</span>
+                      <div className="p-3 space-y-2">
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight">{classItem.name}</h3>
+                            <p className="text-xs text-[#3D2C2E] opacity-70">{classItem.school}</p>
+                          </div>
+                          <div className="flex items-center gap-1 ml-2 pointer-events-none">
+                            <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
+                            <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="h-3 w-3" />
-                          <span>{classItem.time}</span>
+                        <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70 pointer-events-none">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="h-3 w-3" />
+                            <span>{classItem.days[0]}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            <span>{classItem.time}</span>
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1 pointer-events-none">
-                          <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70" />
-                          <span className="text-xs text-[#3D2C2E] opacity-70">{classItem.location}</span>
-                        </div>
-                        <div className="text-right pointer-events-none">
-                          <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
-                          <span className="text-xs text-[#3D2C2E] opacity-70"> /aula</span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Mais populares */}
-        <div>
-          <div className="px-4 mb-3">
-            <h2 className="text-lg font-semibold text-[#3D2C2E]">Mais populares</h2>
-          </div>
-          <div className="flex gap-3 px-4 overflow-x-auto scrollbar-hide">
-            {[...classes].reverse().map((classItem) => (
-              <div
-                key={`popular-${classItem.id}`}
-                className="flex-shrink-0 w-64 cursor-pointer"
-                onClick={() => {
-                  setSelectedClass(classItem)
-                  setCurrentScreen("detail")
-                }}
-              >
-                <Card className="bg-white border-[#E5D6CD] hover:shadow-lg transition-shadow">
-                  <CardContent className="p-0">
-                    <div className="relative">
-                      <img
-                        src={classItem.image || "/placeholder.svg"}
-                        alt={classItem.name}
-                        className="w-full h-40 object-cover rounded-t-lg"
-                      />
-                      <div className="absolute top-2 left-2 z-10">
-                        <Badge className={`${classItem.tagColor} text-xs font-medium shadow-sm pointer-events-none`}>
-                          {classItem.tag}
-                        </Badge>
-                      </div>
-                      <div className="absolute top-2 right-2 z-10">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            toggleFavorite(classItem.id)
-                          }}
-                          className="p-1.5 rounded-full shadow-sm bg-white/90 hover:bg-white transition-colors"
-                        >
-                          <Heart
-                            className={`h-4 w-4 transition-colors ${
-                              favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                            }`}
-                          />
-                        </Button>
-                      </div>
-                    </div>
-                    <div className="p-3 space-y-2">
-                      <div className="flex justify-between items-start">
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight">{classItem.name}</h3>
-                          <p className="text-xs text-[#3D2C2E] opacity-70">{classItem.school}</p>
-                        </div>
-                        <div className="flex items-center gap-1 ml-2 pointer-events-none">
-                          <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
-                          <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-1 pointer-events-none">
+                            <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70" />
+                            <span className="text-xs text-[#3D2C2E] opacity-70">{classItem.location}</span>
+                          </div>
+                          <div className="text-right pointer-events-none">
+                            <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
+                            <span className="text-xs text-[#3D2C2E] opacity-70"> /aula</span>
+                          </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70 pointer-events-none">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="h-3 w-3" />
-                          <span>{classItem.days[0]}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="h-3 w-3" />
-                          <span>{classItem.time}</span>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1 pointer-events-none">
-                          <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70" />
-                          <span className="text-xs text-[#3D2C2E] opacity-70">{classItem.location}</span>
-                        </div>
-                        <div className="text-right pointer-events-none">
-                          <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
-                          <span className="text-xs text-[#3D2C2E] opacity-70"> /aula</span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            ))}
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -972,42 +990,44 @@ const SissonePrototype = () => {
 
   const renderSearchResultsScreen = () => (
     <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
-      {/* Header */}
-      <div className="bg-white p-4 shadow-sm flex-shrink-0">
-        <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-[#F5F0EB]">
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
+      <div className="mx-auto w-full max-w-[1040px]">
+        {/* Header */}
+        <div className="bg-white p-4 shadow-sm flex-shrink-0">
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-[#F5F0EB]">
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
 
-          <Button
-            variant="ghost"
-            className="flex-1 justify-start px-3 py-2 h-auto min-h-[40px] hover:bg-[#F5F0EB]"
-            onClick={() => setShowSearchModal(true)}
-          >
-            <div className="flex items-center gap-2">
-              <Edit3 className="h-4 w-4 text-[#3D2C2E] opacity-70" />
-              <div className="text-left">
-                <div className="text-sm font-medium text-[#3D2C2E] truncate">{getSearchSummary()}</div>
-                <div className="text-xs text-[#3D2C2E] opacity-70">Toque para editar</div>
+            <Button
+              variant="ghost"
+              className="flex-1 justify-start px-3 py-2 h-auto min-h-[40px] hover:bg-[#F5F0EB]"
+              onClick={() => setShowSearchModal(true)}
+            >
+              <div className="flex items-center gap-2">
+                <Edit3 className="h-4 w-4 text-[#3D2C2E] opacity-70" />
+                <div className="text-left">
+                  <div className="text-sm font-medium text-[#3D2C2E] truncate">{getSearchSummary()}</div>
+                  <div className="text-xs text-[#3D2C2E] opacity-70">Toque para editar</div>
+                </div>
               </div>
-            </div>
-          </Button>
+            </Button>
 
-          <Button
-            variant="outline"
-            size="sm"
-            className="border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#CFB2A8] hover:text-white transition-colors"
-            onClick={() => setShowSearchFiltersModal(true)}
-          >
-            <Filter className="h-4 w-4 mr-1" />
-            Filtros
-          </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#CFB2A8] hover:text-white transition-colors"
+              onClick={() => setShowSearchFiltersModal(true)}
+            >
+              <Filter className="h-4 w-4 mr-1" />
+              Filtros
+            </Button>
+          </div>
         </div>
-      </div>
 
-      {/* Results Count */}
-      <div className="px-4 py-2 bg-white border-b flex-shrink-0">
-        <p className="text-sm text-[#3D2C2E] opacity-70">{classes.length} aulas encontradas</p>
+        {/* Results Count */}
+        <div className="px-4 py-2 bg-white border-b flex-shrink-0">
+          <p className="text-sm text-[#3D2C2E] opacity-70">{classes.length} aulas encontradas</p>
+        </div>
       </div>
 
       <div className="bg-white border-b flex-shrink-0">
@@ -1056,91 +1076,95 @@ const SissonePrototype = () => {
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
-        {classes.map((classItem) => (
-          <Card
-            key={classItem.id}
-            className="bg-white border-[#E5D6CD] cursor-pointer hover:shadow-lg transition-shadow"
-            onClick={() => {
-              setSelectedClass(classItem)
-              setCurrentScreen("detail")
-            }}
-          >
-            <CardContent className="p-3">
-              <div className="flex gap-3">
-                <div className="relative w-28 h-28 flex-shrink-0">
-                  <img
-                    src={classItem.image || "/placeholder.svg"}
-                    alt={classItem.name}
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                </div>
-
-                <div className="flex-1 min-w-0 flex flex-col justify-between">
-                  {/* Top section */}
-                  <div className="space-y-1">
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight line-clamp-1">
-                        {classItem.name}
-                      </h3>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleFavorite(classItem.id)
-                        }}
-                        className="p-0.5 h-auto flex-shrink-0 hover:bg-transparent"
-                      >
-                        <Heart
-                          className={`h-4 w-4 transition-colors ${
-                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                          }`}
-                        />
-                      </Button>
-                    </div>
-
-                    <div className="flex items-center justify-between gap-2">
-                      <p className="text-xs text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
-                      <div className="flex items-center gap-1 flex-shrink-0 pointer-events-none">
-                        <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
-                      </div>
-                    </div>
-
-                    <Badge className={`${classItem.tagColor} text-xs font-medium inline-block pointer-events-none`}>
-                      {classItem.tag}
-                    </Badge>
+        <div className="mx-auto w-full max-w-[1040px] space-y-3">
+          {classes.map((classItem) => (
+            <Card
+              key={classItem.id}
+              className="bg-white border-[#E5D6CD] cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => {
+                setSelectedClass(classItem)
+                setCurrentScreen("detail")
+              }}
+            >
+              <CardContent className="p-3">
+                <div className="flex gap-3">
+                  <div className="relative w-28 h-28 flex-shrink-0">
+                    <Image
+                      src={classItem.image || "/placeholder.svg"}
+                      alt={classItem.name}
+                      width={112}
+                      height={112}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
                   </div>
 
-                  {/* Bottom section */}
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70 pointer-events-none">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3 flex-shrink-0" />
-                        <span className="line-clamp-1">{classItem.days[0]}</span>
+                  <div className="flex-1 min-w-0 flex flex-col justify-between">
+                    {/* Top section */}
+                    <div className="space-y-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight line-clamp-1">
+                          {classItem.name}
+                        </h3>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            toggleFavorite(classItem.id)
+                          }}
+                          className="p-0.5 h-auto flex-shrink-0 hover:bg-transparent"
+                        >
+                          <Heart
+                            className={`h-4 w-4 transition-colors ${
+                              favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            }`}
+                          />
+                        </Button>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <Clock className="h-3 w-3 flex-shrink-0" />
-                        <span>{classItem.time}</span>
+
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-xs text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                        <div className="flex items-center gap-1 flex-shrink-0 pointer-events-none">
+                          <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
+                          <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
+                        </div>
                       </div>
+
+                      <Badge className={`${classItem.tagColor} text-xs font-medium inline-block pointer-events-none`}>
+                        {classItem.tag}
+                      </Badge>
                     </div>
 
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-1 min-w-0 pointer-events-none">
-                        <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70 flex-shrink-0" />
-                        <span className="text-xs text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.location}</span>
+                    {/* Bottom section */}
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70 pointer-events-none">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3 flex-shrink-0" />
+                          <span className="line-clamp-1">{classItem.days[0]}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-3 w-3 flex-shrink-0" />
+                          <span>{classItem.time}</span>
+                        </div>
                       </div>
-                      <div className="text-right flex-shrink-0 pointer-events-none">
-                        <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
-                        <span className="text-xs text-[#3D2C2E] opacity-70">/aula</span>
+
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-1 min-w-0 pointer-events-none">
+                          <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70 flex-shrink-0" />
+                          <span className="text-xs text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.location}</span>
+                        </div>
+                        <div className="text-right flex-shrink-0 pointer-events-none">
+                          <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
+                          <span className="text-xs text-[#3D2C2E] opacity-70">/aula</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
 
       {/* Search Filters Modal */}
@@ -1598,197 +1622,212 @@ const SissonePrototype = () => {
 
   const renderDetailScreen = () => (
     <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
-      {/* Header */}
-      <div className="bg-white p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
-        <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-[#F5F0EB]">
-          <ArrowLeft className="h-4 w-4" />
-        </Button>
-        <h1 className="text-lg font-semibold text-[#3D2C2E]">Detalhes da Aula</h1>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => toggleFavorite(selectedClass?.id)}
-          className="ml-auto hover:bg-[#F5F0EB]"
-        >
-          <Heart
-            className={`h-5 w-5 ${
-              favorites.includes(selectedClass?.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-            }`}
-          />
-        </Button>
+      <div className="mx-auto w-full max-w-[1040px]">
+        {/* Header */}
+        <div className="bg-white p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
+          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-[#F5F0EB]">
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
+          <h1 className="text-lg font-semibold text-[#3D2C2E]">Detalhes da Aula</h1>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => toggleFavorite(selectedClass?.id)}
+            className="ml-auto hover:bg-[#F5F0EB]"
+          >
+            <Heart
+              className={`h-5 w-5 ${
+                favorites.includes(selectedClass?.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+              }`}
+            />
+          </Button>
+        </div>
       </div>
 
       {selectedClass && (
         <div className="flex-1 overflow-y-auto p-4 space-y-6">
-          {/* Carrossel de Imagens */}
-          <div className="relative">
-            <div className="w-full h-56 rounded-lg overflow-hidden">
-              <img
-                src={selectedClass.images[currentImageIndex] || "/placeholder.svg"}
-                alt={`${selectedClass.name} ${currentImageIndex + 1}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Indicadores do carrossel */}
-            <div className="flex justify-center gap-2 mt-3">
-              {selectedClass.images.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    index === currentImageIndex ? "bg-[#CFB2A8]" : "bg-[#E5D6CD]"
-                  }`}
+          <div className="mx-auto w-full max-w-[1040px] space-y-6">
+            {/* Carrossel de Imagens */}
+            <div className="relative">
+              <div className="w-full h-56 rounded-lg overflow-hidden">
+                <Image
+                  src={selectedClass.images[currentImageIndex] || "/placeholder.svg"}
+                  alt={`${selectedClass.name} ${currentImageIndex + 1}`}
+                  width={1040}
+                  height={448}
+                  className="w-full h-full object-cover"
                 />
-              ))}
-            </div>
-
-            {/* Botões de navegação */}
-            <button
-              onClick={() => setCurrentImageIndex((prev) => (prev === 0 ? selectedClass.images.length - 1 : prev - 1))}
-              className="absolute left-2 top-28 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4" />
-            </button>
-            <button
-              onClick={() => setCurrentImageIndex((prev) => (prev === selectedClass.images.length - 1 ? 0 : prev + 1))}
-              className="absolute right-2 top-28 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4 rotate-180" />
-            </button>
-          </div>
-
-          {/* Class Info */}
-          <div>
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <h2 className="text-2xl font-bold text-[#3D2C2E]">{selectedClass.name}</h2>
-                <p className="text-lg text-[#3D2C2E] opacity-70">{selectedClass.school}</p>
               </div>
-              <Badge className={`${selectedClass.tagColor} font-medium pointer-events-none`}>{selectedClass.tag}</Badge>
-            </div>
 
-            <div className="flex items-center gap-4 mt-3 mb-3 pointer-events-none">
-              <div className="flex items-center gap-1">
-                <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                <span className="text-[#3D2C2E]">{selectedClass.rating}</span>
-              </div>
-              <Badge className="bg-[#CFB2A8] text-[#3D2C2E]">{selectedClass.price}</Badge>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {selectedClass.reviews.slice(0, 4).map((review: any, idx: number) => (
-                  <div
-                    key={idx}
-                    className={`w-8 h-8 rounded-full border-2 border-white flex items-center justify-center ${
-                      review.hasPhoto ? "" : idx % 2 === 0 ? "bg-[#CFB2A8]" : "bg-[#E5D6CD]"
+              {/* Indicadores do carrossel */}
+              <div className="flex justify-center gap-2 mt-3">
+                {selectedClass.images.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      index === currentImageIndex ? "bg-[#CFB2A8]" : "bg-[#E5D6CD]"
                     }`}
-                  >
-                    {review.hasPhoto ? (
-                      <img
-                        src={review.avatar || "/placeholder.svg"}
-                        alt={review.name}
-                        className="w-full h-full rounded-full object-cover"
-                      />
-                    ) : (
-                      <span className={`text-xs font-medium ${idx % 2 === 0 ? "text-white" : "text-[#3D2C2E]"}`}>
-                        {review.avatar}
-                      </span>
-                    )}
-                  </div>
+                  />
                 ))}
-                <div className="w-8 h-8 bg-[#CFB2A8] rounded-full border-2 border-white flex items-center justify-center">
-                  <span className="text-xs text-white font-medium">+3</span>
-                </div>
               </div>
-              <span className="text-sm text-[#3D2C2E] opacity-70">Participantes</span>
+
+              {/* Botões de navegação */}
+              <button
+                onClick={() =>
+                  setCurrentImageIndex((prev) => (prev === 0 ? selectedClass.images.length - 1 : prev - 1))
+                }
+                className="absolute left-2 top-28 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 transition-colors"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </button>
+              <button
+                onClick={() =>
+                  setCurrentImageIndex((prev) => (prev === selectedClass.images.length - 1 ? 0 : prev + 1))
+                }
+                className="absolute right-2 top-28 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 transition-colors"
+              >
+                <ArrowLeft className="h-4 w-4 rotate-180" />
+              </button>
             </div>
-          </div>
 
-          {/* Schedule Info */}
-          <Card className="bg-white border-[#E5D6CD]">
-            <CardHeader>
-              <h3 className="font-semibold text-[#3D2C2E]">Horários</h3>
-            </CardHeader>
-            <CardContent className="space-y-2 pointer-events-none">
-              <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-[#3D2C2E]" />
-                <span className="text-[#3D2C2E]">{selectedClass.days.join(" e ")}</span>
+            {/* Class Info */}
+            <div>
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <h2 className="text-2xl font-bold text-[#3D2C2E]">{selectedClass.name}</h2>
+                  <p className="text-lg text-[#3D2C2E] opacity-70">{selectedClass.school}</p>
+                </div>
+                <Badge className={`${selectedClass.tagColor} font-medium pointer-events-none`}>
+                  {selectedClass.tag}
+                </Badge>
               </div>
-              <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-[#3D2C2E]" />
-                <span className="text-[#3D2C2E]">{selectedClass.time}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-[#3D2C2E]" />
-                <span className="text-[#3D2C2E]">{selectedClass.location}</span>
-              </div>
-            </CardContent>
-          </Card>
 
-          {/* Carrossel de Depoimentos */}
-          <Card className="bg-white border-[#E5D6CD]">
-            <CardHeader>
-              <h3 className="font-semibold text-[#3D2C2E]">Depoimentos</h3>
-            </CardHeader>
-            <CardContent>
-              <div className="relative">
-                <div className="text-center space-y-3">
-                  <div className="flex justify-center pointer-events-none">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`h-4 w-4 ${
-                          i < selectedClass.reviews[currentReviewIndex].rating
-                            ? "fill-[#CFB2A8] text-[#CFB2A8]"
-                            : "text-gray-300"
+              <div className="flex items-center gap-4 mt-3 mb-3 pointer-events-none">
+                <div className="flex items-center gap-1">
+                  <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                  <span className="text-[#3D2C2E]">{selectedClass.rating}</span>
+                </div>
+                <Badge className="bg-[#CFB2A8] text-[#3D2C2E]">{selectedClass.price}</Badge>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="flex -space-x-2">
+                  {selectedClass.reviews.slice(0, 4).map((review: any, idx: number) => (
+                    <div
+                      key={idx}
+                      className={`w-8 h-8 rounded-full border-2 border-white flex items-center justify-center overflow-hidden ${
+                        review.hasPhoto ? "" : idx % 2 === 0 ? "bg-[#CFB2A8]" : "bg-[#E5D6CD]"
+                      }`}
+                    >
+                      {review.hasPhoto ? (
+                        /* Using real avatar images */
+                        <Image
+                          src={review.avatar || "/placeholder.svg"}
+                          alt={review.name}
+                          width={32}
+                          height={32}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <span className={`text-xs font-medium ${idx % 2 === 0 ? "text-white" : "text-[#3D2C2E]"}`}>
+                          {review.avatar}
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                  <div className="w-8 h-8 bg-[#CFB2A8] rounded-full border-2 border-white flex items-center justify-center">
+                    <span className="text-xs text-white font-medium">+3</span>
+                  </div>
+                </div>
+                <span className="text-sm text-[#3D2C2E] opacity-70">Participantes</span>
+              </div>
+            </div>
+
+            {/* Schedule Info */}
+            <Card className="bg-white border-[#E5D6CD]">
+              <CardHeader>
+                <h3 className="font-semibold text-[#3D2C2E]">Horários</h3>
+              </CardHeader>
+              <CardContent className="space-y-2 pointer-events-none">
+                <div className="flex items-center gap-2">
+                  <Calendar className="h-4 w-4 text-[#3D2C2E]" />
+                  <span className="text-[#3D2C2E]">{selectedClass.days.join(" e ")}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-[#3D2C2E]" />
+                  <span className="text-[#3D2C2E]">{selectedClass.time}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-[#3D2C2E]" />
+                  <span className="text-[#3D2C2E]">{selectedClass.location}</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Carrossel de Depoimentos */}
+            <Card className="bg-white border-[#E5D6CD]">
+              <CardHeader>
+                <h3 className="font-semibold text-[#3D2C2E]">Depoimentos</h3>
+              </CardHeader>
+              <CardContent>
+                <div className="relative">
+                  <div className="text-center space-y-3">
+                    <div className="flex justify-center pointer-events-none">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`h-4 w-4 ${
+                            i < selectedClass.reviews[currentReviewIndex].rating
+                              ? "fill-[#CFB2A8] text-[#CFB2A8]"
+                              : "text-gray-300"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <p className="text-[#3D2C2E] italic">"{selectedClass.reviews[currentReviewIndex].comment}"</p>
+                    <p className="text-sm text-[#3D2C2E] opacity-70 font-medium">
+                      - {selectedClass.reviews[currentReviewIndex].name}
+                    </p>
+                  </div>
+
+                  {/* Indicadores dos depoimentos */}
+                  <div className="flex justify-center gap-2 mt-4">
+                    {selectedClass.reviews.map((_: any, index: number) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentReviewIndex(index)}
+                        className={`w-2 h-2 rounded-full transition-colors ${
+                          index === currentReviewIndex ? "bg-[#CFB2A8]" : "bg-[#E5D6CD]"
                         }`}
                       />
                     ))}
                   </div>
-                  <p className="text-[#3D2C2E] italic">"{selectedClass.reviews[currentReviewIndex].comment}"</p>
-                  <p className="text-sm text-[#3D2C2E] opacity-70 font-medium">
-                    - {selectedClass.reviews[currentReviewIndex].name}
-                  </p>
                 </div>
+              </CardContent>
+            </Card>
 
-                {/* Indicadores dos depoimentos */}
-                <div className="flex justify-center gap-2 mt-4">
-                  {selectedClass.reviews.map((_: any, index: number) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentReviewIndex(index)}
-                      className={`w-2 h-2 rounded-full transition-colors ${
-                        index === currentReviewIndex ? "bg-[#CFB2A8]" : "bg-[#E5D6CD]"
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+            {/* Description */}
+            <Card className="bg-white border-[#E5D6CD]">
+              <CardHeader>
+                <h3 className="font-semibold text-[#3D2C2E]">Sobre Esta Aula</h3>
+              </CardHeader>
+              <CardContent>
+                <p className="text-[#3D2C2E] opacity-80">
+                  Perfeita para iniciantes e dançarinos intermediários que buscam explorar movimento e expressão. Esta
+                  aula foca no desenvolvimento de força, flexibilidade e interpretação artística através de técnicas de
+                  dança contemporânea.
+                </p>
+              </CardContent>
+            </Card>
 
-          {/* Description */}
-          <Card className="bg-white border-[#E5D6CD]">
-            <CardHeader>
-              <h3 className="font-semibold text-[#3D2C2E]">Sobre Esta Aula</h3>
-            </CardHeader>
-            <CardContent>
-              <p className="text-[#3D2C2E] opacity-80">
-                Perfeita para iniciantes e dançarinos intermediários que buscam explorar movimento e expressão. Esta
-                aula foca no desenvolvimento de força, flexibilidade e interpretação artística através de técnicas de
-                dança contemporânea.
-              </p>
-            </CardContent>
-          </Card>
-
-          <Button
-            className="w-full bg-[#8B7355] hover:bg-[#735F46] text-white py-6 text-lg transition-colors shadow-md"
-            onClick={() => setCurrentScreen("schedule")}
-          >
-            Agendar Aula Experimental
-          </Button>
+            <Button
+              className="w-full bg-[#8B7355] hover:bg-[#735F46] text-white py-6 text-lg transition-colors shadow-md"
+              onClick={() => setCurrentScreen("schedule")}
+            >
+              Agendar Aula Experimental
+            </Button>
+          </div>
         </div>
       )}
     </div>
@@ -1796,129 +1835,137 @@ const SissonePrototype = () => {
 
   const renderScheduleScreenContent = () => (
     <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
-      {/* Header */}
-      <div className="bg-white p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
-        <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("detail")} className="hover:bg-[#F5F0EB]">
-          <ArrowLeft className="h-4 w-4" />
-        </Button>
-        <h1 className="text-lg font-semibold text-[#3D2C2E]">Agendar Experimental</h1>
+      <div className="mx-auto w-full max-w-[1040px]">
+        {/* Header */}
+        <div className="bg-white p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
+          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("detail")} className="hover:bg-[#F5F0EB]">
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
+          <h1 className="text-lg font-semibold text-[#3D2C2E]">Agendar Experimental</h1>
+        </div>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-6">
-        {/* Class Summary */}
-        <Card className="bg-white border-[#E5D6CD]">
-          <CardContent className="p-4">
-            <h3 className="font-semibold text-[#3D2C2E]">{selectedClass?.name}</h3>
-            <p className="text-sm text-[#3D2C2E] opacity-70">{selectedClass?.school}</p>
-            <div className="flex items-center gap-3 mt-2 text-sm text-[#3D2C2E] opacity-70">
-              <span>{selectedClass?.days.join(" e ")}</span>
-              <span>{selectedClass?.time}</span>
-              <span>{selectedClass?.price}</span>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Sign Up Form */}
-        <Card className="bg-white border-[#E5D6CD]">
-          <CardHeader>
-            <h3 className="font-semibold text-[#3D2C2E]">Cadastro Rápido</h3>
-            <p className="text-sm text-[#3D2C2E] opacity-70">Apenas alguns detalhes para começar</p>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-[#3D2C2E]">Nome Completo</label>
-              <Input placeholder="Digite seu nome completo" className="border-[#CFB2A8]" />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-[#3D2C2E]">Email</label>
-              <Input type="email" placeholder="Digite seu email" className="border-[#CFB2A8]" />
-            </div>
-
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-[#E5D6CD]" />
+        <div className="mx-auto w-full max-w-[1040px] space-y-6">
+          {/* Class Summary */}
+          <Card className="bg-white border-[#E5D6CD]">
+            <CardContent className="p-4">
+              <h3 className="font-semibold text-[#3D2C2E]">{selectedClass?.name}</h3>
+              <p className="text-sm text-[#3D2C2E] opacity-70">{selectedClass?.school}</p>
+              <div className="flex items-center gap-3 mt-2 text-sm text-[#3D2C2E] opacity-70">
+                <span>{selectedClass?.days.join(" e ")}</span>
+                <span>{selectedClass?.time}</span>
+                <span>{selectedClass?.price}</span>
               </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white px-2 text-[#3D2C2E] opacity-70">Or</span>
+            </CardContent>
+          </Card>
+
+          {/* Sign Up Form */}
+          <Card className="bg-white border-[#E5D6CD]">
+            <CardHeader>
+              <h3 className="font-semibold text-[#3D2C2E]">Cadastro Rápido</h3>
+              <p className="text-sm text-[#3D2C2E] opacity-70">Apenas alguns detalhes para começar</p>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-[#3D2C2E]">Nome Completo</label>
+                <Input placeholder="Digite seu nome completo" className="border-[#CFB2A8]" />
               </div>
-            </div>
 
-            <Button variant="outline" className="w-full border-[#CFB2A8] text-[#3D2C2E] bg-transparent">
-              <User className="h-4 w-4 mr-2" />
-              Continuar com Google
-            </Button>
-          </CardContent>
-        </Card>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-[#3D2C2E]">Email</label>
+                <Input type="email" placeholder="Digite seu email" className="border-[#CFB2A8]" />
+              </div>
 
-        {/* Terms */}
-        <p className="text-xs text-[#3D2C2E] opacity-70 text-center">
-          By scheduling, you agree to our Terms of Service and Privacy Policy. Your trial class is free and no payment
-          is required today.
-        </p>
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-[#E5D6CD]" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-white px-2 text-[#3D2C2E] opacity-70">Or</span>
+                </div>
+              </div>
 
-        <Button
-          className="w-full bg-[#8B7355] hover:bg-[#735F46] text-white py-6 text-lg transition-colors shadow-md"
-          onClick={() => setCurrentScreen("confirmation")}
-        >
-          Agendar Minha Aula Experimental
-        </Button>
+              <Button variant="outline" className="w-full border-[#CFB2A8] text-[#3D2C2E] bg-transparent">
+                <User className="h-4 w-4 mr-2" />
+                Continuar com Google
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Terms */}
+          <p className="text-xs text-[#3D2C2E] opacity-70 text-center">
+            By scheduling, you agree to our Terms of Service and Privacy Policy. Your trial class is free and no payment
+            is required today.
+          </p>
+
+          <Button
+            className="w-full bg-[#8B7355] hover:bg-[#735F46] text-white py-6 text-lg transition-colors shadow-md"
+            onClick={() => setCurrentScreen("confirmation")}
+          >
+            Agendar Minha Aula Experimental
+          </Button>
+        </div>
       </div>
     </div>
   )
 
   const renderConfirmationScreen = () => (
     <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
-      {/* Header */}
-      <div className="bg-white p-4 shadow-sm flex-shrink-0">
-        <h1 className="text-lg font-semibold text-[#3D2C2E] text-center">Confirmação</h1>
+      <div className="mx-auto w-full max-w-[1040px]">
+        {/* Header */}
+        <div className="bg-white p-4 shadow-sm flex-shrink-0">
+          <h1 className="text-lg font-semibold text-[#3D2C2E] text-center">Confirmação</h1>
+        </div>
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center p-4 space-y-6 overflow-y-auto">
-        {/* Success Icon */}
-        <div className="w-20 h-20 bg-[#CFB2A8] rounded-full flex items-center justify-center">
-          <Check className="h-10 w-10 text-white" />
-        </div>
+        <div className="mx-auto w-full max-w-[520px] flex flex-col items-center space-y-6">
+          {/* Success Icon */}
+          <div className="w-20 h-20 bg-[#CFB2A8] rounded-full flex items-center justify-center">
+            <Check className="h-10 w-10 text-white" />
+          </div>
 
-        {/* Success Message */}
-        <div className="text-center space-y-2">
-          <h2 className="text-2xl font-bold text-[#3D2C2E]">Tudo Pronto!</h2>
-          <p className="text-[#3D2C2E] opacity-70">Sua aula experimental foi agendada com sucesso.</p>
-        </div>
+          {/* Success Message */}
+          <div className="text-center space-y-2">
+            <h2 className="text-2xl font-bold text-[#3D2C2E]">Tudo Pronto!</h2>
+            <p className="text-[#3D2C2E] opacity-70">Sua aula experimental foi agendada com sucesso.</p>
+          </div>
 
-        {/* Class Details */}
-        <Card className="bg-white border-[#E5D6CD] w-full max-w-sm">
-          <CardContent className="p-4 text-center space-y-2">
-            <h3 className="font-semibold text-[#3D2C2E]">{selectedClass?.name}</h3>
-            <p className="text-sm text-[#3D2C2E] opacity-70">{selectedClass?.school}</p>
-            <div className="text-sm text-[#3D2C2E] opacity-70">
-              <p>
-                {selectedClass?.days.join(" e ")} às {selectedClass?.time}
-              </p>
-              <p>{selectedClass?.location}</p>
-            </div>
-          </CardContent>
-        </Card>
+          {/* Class Details */}
+          <Card className="bg-white border-[#E5D6CD] w-full max-w-sm">
+            <CardContent className="p-4 text-center space-y-2">
+              <h3 className="font-semibold text-[#3D2C2E]">{selectedClass?.name}</h3>
+              <p className="text-sm text-[#3D2C2E] opacity-70">{selectedClass?.school}</p>
+              <div className="text-sm text-[#3D2C2E] opacity-70">
+                <p>
+                  {selectedClass?.days.join(" e ")} às {selectedClass?.time}
+                </p>
+                <p>{selectedClass?.location}</p>
+              </div>
+            </CardContent>
+          </Card>
 
-        {/* Next Steps */}
-        <div className="text-center space-y-2">
-          <p className="text-sm text-[#3D2C2E] opacity-70">Enviamos um email de confirmação com todos os detalhes.</p>
-          <p className="text-sm text-[#3D2C2E] opacity-70">Chegue 15 minutos antes da sua primeira aula.</p>
-        </div>
+          {/* Next Steps */}
+          <div className="text-center space-y-2">
+            <p className="text-sm text-[#3D2C2E] opacity-70">Enviamos um email de confirmação com todos os detalhes.</p>
+            <p className="text-sm text-[#3D2C2E] opacity-70">Chegue 15 minutos antes da sua primeira aula.</p>
+          </div>
 
-        <div className="space-y-3 w-full max-w-sm">
-          <Button
-            className="w-full bg-[#8B7355] hover:bg-[#735F46] text-white transition-colors shadow-md"
-            onClick={() => setCurrentScreen("home")}
-          >
-            Explorar Mais Aulas
-          </Button>
-          <Button
-            variant="outline"
-            className="w-full border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#F5F0EB] transition-colors"
-          >
-            Adicionar ao Calendário
-          </Button>
+          <div className="space-y-3 w-full max-w-sm">
+            <Button
+              className="w-full bg-[#8B7355] hover:bg-[#735F46] text-white transition-colors shadow-md"
+              onClick={() => setCurrentScreen("home")}
+            >
+              Explorar Mais Aulas
+            </Button>
+            <Button
+              variant="outline"
+              className="w-full border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#F5F0EB] transition-colors"
+            >
+              Adicionar ao Calendário
+            </Button>
+          </div>
         </div>
       </div>
     </div>
