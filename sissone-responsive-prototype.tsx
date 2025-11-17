@@ -8,40 +8,28 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
-import {
-  Home,
-  User,
-  Plus,
-  Eye,
-  Users,
-  Calendar,
-  ArrowLeft,
-  Star,
-  Clock,
-  MapPin,
-  DollarSign,
-  Menu,
-  X,
-  Filter,
-  Building2,
-  Upload,
-  ChevronLeft,
-  ChevronRight,
-  Trophy,
-  Edit,
-  Trash2,
-  Search,
-  UserPlus,
-  FileDown,
-  LucideTag as PriceTag,
-  Shield,
-  ShieldCheck,
-  AlertCircle,
-  TrendingUp,
-  TrendingDown,
-} from "lucide-react"
+import { Home, User, Plus, Eye, Users, Calendar, ArrowLeft, Star, Clock, MapPin, DollarSign, Menu, X, Filter, Building2, Upload, ChevronLeft, ChevronRight, Trophy, Edit, Trash2, Search, UserPlus, FileDown, LucideTag as PriceTag, Shield, ShieldCheck, AlertCircle, TrendingUp, TrendingDown, Copy, Mail, Check } from 'lucide-react'
 
-type Screen = "dashboard" | "school-units" | "classes" | "create-class" | "class-preview" | "pricing" | "students"
+type ToastType = "success" | "error" | "info"
+type Toast = {
+  message: string
+  type: ToastType
+  id: number
+}
+
+type Screen =
+  | "dashboard"
+  | "school-units"
+  | "classes"
+  | "create-class"
+  | "class-preview"
+  | "pricing"
+  | "students"
+  | "create-plan"
+  | "edit-plan"
+  | "create-combo"
+  | "edit-combo"
+  | "invite-student"
 
 type Unit = {
   id: string
@@ -80,6 +68,19 @@ type Student = {
   acquisitionType: "invite" | "platform"
   paymentStatus: "current" | "overdue"
   avatar?: string
+}
+
+type Plan = {
+  id: string
+  name: string
+  discount: number
+}
+
+type Combo = {
+  id: string
+  name: string
+  classes: string[]
+  price: number
 }
 
 const mockUnits: Unit[] = [
@@ -158,6 +159,57 @@ const mockClasses: Class[] = [
     isRecurring: true,
     frequency: "Sábado",
   },
+  {
+    id: "4",
+    title: "Contemporâneo Intermediário",
+    unitId: "3",
+    unitName: "Unidade Norte",
+    date: "2024-03-16",
+    time: "20:00",
+    capacity: 18,
+    enrolled: 15,
+    price: 90,
+    isRecurring: true,
+    frequency: "Terça, Quinta",
+  },
+  {
+    id: "5",
+    title: "Sapateado Avançado",
+    unitId: "2",
+    unitName: "Unidade Zona Sul",
+    date: "2024-03-17",
+    time: "17:00",
+    capacity: 12,
+    enrolled: 10,
+    price: 110,
+    isRecurring: false,
+  },
+  {
+    id: "6",
+    title: "Dança de Salão Iniciante",
+    unitId: "3",
+    unitName: "Unidade Norte",
+    date: "2024-03-18",
+    time: "19:30",
+    capacity: 20,
+    enrolled: 16,
+    price: 75,
+    isRecurring: true,
+    frequency: "Segunda, Quarta",
+  },
+  {
+    id: "7",
+    title: "Zumba Fitness",
+    unitId: "1",
+    unitName: "Unidade Centro",
+    date: "2024-03-19",
+    time: "18:30",
+    capacity: 30,
+    enrolled: 25,
+    price: 60,
+    isRecurring: true,
+    frequency: "Segunda, Quarta, Sexta",
+  },
 ]
 
 const mockStudents: Student[] = [
@@ -194,6 +246,413 @@ const mockStudents: Student[] = [
     acquisitionType: "platform",
     paymentStatus: "overdue",
   },
+  {
+    id: "4",
+    name: "Pedro Oliveira",
+    phone: "(11) 99999-4444",
+    email: "pedro@email.com",
+    unitId: "3",
+    classes: ["Contemporâneo Intermediário"],
+    frequency: 88,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "5",
+    name: "Juliana Alves",
+    phone: "(11) 99999-5555",
+    email: "juliana@email.com",
+    unitId: "2",
+    classes: ["Sapateado Avançado", "Jazz Avançado"],
+    frequency: 92,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "6",
+    name: "Carlos Mendes",
+    phone: "(11) 99999-6666",
+    email: "carlos@email.com",
+    unitId: "1",
+    classes: ["Hip Hop Kids"],
+    frequency: 67,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "7",
+    name: "Fernanda Lima",
+    phone: "(11) 99999-7777",
+    email: "fernanda@email.com",
+    unitId: "3",
+    classes: ["Dança de Salão Iniciante"],
+    frequency: 81,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "8",
+    name: "Ricardo Souza",
+    phone: "(11) 99999-8888",
+    email: "ricardo@email.com",
+    unitId: "2",
+    classes: ["Zumba Fitness"],
+    frequency: 73,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "9",
+    name: "Patrícia Rodrigues",
+    phone: "(11) 99999-9999",
+    email: "patricia@email.com",
+    unitId: "1",
+    classes: ["Ballet Iniciante", "Zumba Fitness"],
+    frequency: 90,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "10",
+    name: "Bruno Ferreira",
+    phone: "(11) 99999-0000",
+    email: "bruno@email.com",
+    unitId: "2",
+    classes: ["Jazz Avançado", "Sapateado Avançado"],
+    frequency: 85,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "11",
+    name: "Camila Martins",
+    phone: "(11) 98888-1111",
+    email: "camila@email.com",
+    unitId: "3",
+    classes: ["Contemporâneo Intermediário"],
+    frequency: 76,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "12",
+    name: "Lucas Pereira",
+    phone: "(11) 98888-2222",
+    email: "lucas@email.com",
+    unitId: "1",
+    classes: ["Hip Hop Kids"],
+    frequency: 82,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "13",
+    name: "Mariana Cardoso",
+    phone: "(11) 98888-3333",
+    email: "mariana@email.com",
+    unitId: "2",
+    classes: ["Jazz Avançado"],
+    frequency: 94,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "14",
+    name: "Rafael Barbosa",
+    phone: "(11) 98888-4444",
+    email: "rafael@email.com",
+    unitId: "3",
+    classes: ["Dança de Salão Iniciante"],
+    frequency: 69,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "15",
+    name: "Amanda Nunes",
+    phone: "(11) 98888-5555",
+    email: "amanda@email.com",
+    unitId: "1",
+    classes: ["Ballet Iniciante", "Zumba Fitness"],
+    frequency: 87,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "16",
+    name: "Gabriel Costa",
+    phone: "(11) 98888-6666",
+    email: "gabriel@email.com",
+    unitId: "2",
+    classes: ["Sapateado Avançado"],
+    frequency: 91,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "17",
+    name: "Larissa Santos",
+    phone: "(11) 98888-7777",
+    email: "larissa@email.com",
+    unitId: "3",
+    classes: ["Contemporâneo Intermediário"],
+    frequency: 79,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "18",
+    name: "Thiago Almeida",
+    phone: "(11) 98888-8888",
+    email: "thiago@email.com",
+    unitId: "1",
+    classes: ["Hip Hop Kids", "Zumba Fitness"],
+    frequency: 83,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "19",
+    name: "Beatriz Rocha",
+    phone: "(11) 98888-9999",
+    email: "beatriz@email.com",
+    unitId: "2",
+    classes: ["Jazz Avançado"],
+    frequency: 96,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "20",
+    name: "Diego Lima",
+    phone: "(11) 98888-0000",
+    email: "diego@email.com",
+    unitId: "3",
+    classes: ["Dança de Salão Iniciante"],
+    frequency: 72,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "21",
+    name: "Gabriela Freitas",
+    phone: "(11) 97777-1111",
+    email: "gabriela@email.com",
+    unitId: "1",
+    classes: ["Ballet Iniciante"],
+    frequency: 89,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "22",
+    name: "Rodrigo Dias",
+    phone: "(11) 97777-2222",
+    email: "rodrigo@email.com",
+    unitId: "2",
+    classes: ["Sapateado Avançado", "Jazz Avançado"],
+    frequency: 84,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "23",
+    name: "Isabela Carvalho",
+    phone: "(11) 97777-3333",
+    email: "isabela@email.com",
+    unitId: "3",
+    classes: ["Contemporâneo Intermediário"],
+    frequency: 77,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "24",
+    name: "Vinicius Gomes",
+    phone: "(11) 97777-4444",
+    email: "vinicius@email.com",
+    unitId: "1",
+    classes: ["Hip Hop Kids"],
+    frequency: 80,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "25",
+    name: "Letícia Moreira",
+    phone: "(11) 97777-5555",
+    email: "leticia@email.com",
+    unitId: "2",
+    classes: ["Jazz Avançado", "Zumba Fitness"],
+    frequency: 93,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "26",
+    name: "Henrique Batista",
+    phone: "(11) 97777-6666",
+    email: "henrique@email.com",
+    unitId: "3",
+    classes: ["Dança de Salão Iniciante"],
+    frequency: 71,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "27",
+    name: "Carolina Ribeiro",
+    phone: "(11) 97777-7777",
+    email: "carolina@email.com",
+    unitId: "1",
+    classes: ["Ballet Iniciante"],
+    frequency: 86,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "28",
+    name: "Felipe Teixeira",
+    phone: "(11) 97777-8888",
+    email: "felipe@email.com",
+    unitId: "2",
+    classes: ["Sapateado Avançado"],
+    frequency: 88,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "29",
+    name: "Natália Araújo",
+    phone: "(11) 97777-9999",
+    email: "natalia@email.com",
+    unitId: "3",
+    classes: ["Contemporâneo Intermediário"],
+    frequency: 75,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "30",
+    name: "Matheus Castro",
+    phone: "(11) 97777-0000",
+    email: "matheus@email.com",
+    unitId: "1",
+    classes: ["Hip Hop Kids", "Zumba Fitness"],
+    frequency: 81,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "31",
+    name: "Aline Pinto",
+    phone: "(11) 96666-1111",
+    email: "aline@email.com",
+    unitId: "2",
+    classes: ["Jazz Avançado"],
+    frequency: 97,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "32",
+    name: "Eduardo Monteiro",
+    phone: "(11) 96666-2222",
+    email: "eduardo@email.com",
+    unitId: "3",
+    classes: ["Dança de Salão Iniciante"],
+    frequency: 68,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "33",
+    name: "Bianca Cunha",
+    phone: "(11) 96666-3333",
+    email: "bianca@email.com",
+    unitId: "1",
+    classes: ["Ballet Iniciante"],
+    frequency: 90,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "34",
+    name: "Gustavo Ramos",
+    phone: "(11) 96666-4444",
+    email: "gustavo@email.com",
+    unitId: "2",
+    classes: ["Sapateado Avançado", "Jazz Avançado"],
+    frequency: 85,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "35",
+    name: "Priscila Correia",
+    phone: "(11) 96666-5555",
+    email: "priscila@email.com",
+    unitId: "3",
+    classes: ["Contemporâneo Intermediário"],
+    frequency: 78,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "36",
+    name: "Leandro Farias",
+    phone: "(11) 96666-6666",
+    email: "leandro@email.com",
+    unitId: "1",
+    classes: ["Hip Hop Kids"],
+    frequency: 82,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "37",
+    name: "Vanessa Duarte",
+    phone: "(11) 96666-7777",
+    email: "vanessa@email.com",
+    unitId: "2",
+    classes: ["Jazz Avançado", "Zumba Fitness"],
+    frequency: 94,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "38",
+    name: "Marcelo Vieira",
+    phone: "(11) 96666-8888",
+    email: "marcelo@email.com",
+    unitId: "3",
+    classes: ["Dança de Salão Iniciante"],
+    frequency: 70,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
+  {
+    id: "39",
+    name: "Renata Sousa",
+    phone: "(11) 96666-9999",
+    email: "renata@email.com",
+    unitId: "1",
+    classes: ["Ballet Iniciante"],
+    frequency: 87,
+    acquisitionType: "platform",
+    paymentStatus: "current",
+  },
+  {
+    id: "40",
+    name: "Fabio Andrade",
+    phone: "(11) 96666-0000",
+    email: "fabio@email.com",
+    unitId: "2",
+    classes: ["Sapateado Avançado"],
+    frequency: 91,
+    acquisitionType: "invite",
+    paymentStatus: "current",
+  },
 ]
 
 export default function SissoneResponsivePrototype() {
@@ -202,6 +661,34 @@ export default function SissoneResponsivePrototype() {
   const [selectedUnit, setSelectedUnit] = useState<string>("all")
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [searchTerm, setSearchTerm] = useState("")
+
+  const [toasts, setToasts] = useState<Toast[]>([])
+
+  const [classUnitFilter, setClassUnitFilter] = useState<string>("all")
+  const [classFrequencyFilter, setClassFrequencyFilter] = useState<string>("all")
+  const [classRentabilityFilter, setClassRentabilityFilter] = useState<string>("all")
+
+  const [plans, setPlans] = useState<Plan[]>([
+    { id: "1", name: "Trimestral", discount: 10 },
+    { id: "2", name: "Semestral", discount: 15 },
+    { id: "3", name: "Anual", discount: 20 },
+  ])
+  const [combos, setCombos] = useState<Combo[]>([
+    { id: "1", name: "Combo Ballet + Jazz", classes: ["Ballet Iniciante", "Jazz Avançado"], price: 150 },
+    { id: "2", name: "Pacote Família", classes: ["Hip Hop Kids", "Zumba Fitness", "Ballet Iniciante"], price: 210 },
+  ])
+  const [editingPlan, setEditingPlan] = useState<Plan | null>(null)
+  const [editingCombo, setEditingCombo] = useState<Combo | null>(null)
+  const [newPlan, setNewPlan] = useState<{ name: string; discount: string }>({ name: "", discount: "" })
+  const [newCombo, setNewCombo] = useState<{ name: string; classes: string[]; price: string }>({
+    name: "",
+    classes: [],
+    price: "",
+  })
+
+  const [inviteLink] = useState("https://sissone.com.br/invite/abc123")
+  const [linkCopied, setLinkCopied] = useState(false)
+
   const [userProfile] = useState<{ name: string; role: "admin" | "manager" }>({
     name: "Gestor Principal",
     role: "admin",
@@ -217,8 +704,17 @@ export default function SissoneResponsivePrototype() {
     isRecurring: false,
     recurringDays: [] as string[],
     endDate: "",
+    hasEndDate: false,
     images: [] as string[],
   })
+
+  const showToast = (message: string, type: ToastType = "success") => {
+    const id = Date.now()
+    setToasts((prev) => [...prev, { message, type, id }])
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((toast) => toast.id !== id))
+    }, 3000)
+  }
 
   const navigateTo = (screen: Screen) => {
     setCurrentScreen(screen)
@@ -250,7 +746,7 @@ export default function SissoneResponsivePrototype() {
       students: mockUnits.reduce((sum, unit) => sum + unit.students, 0),
       rating: (mockUnits.reduce((sum, unit) => sum + unit.rating, 0) / mockUnits.length).toFixed(1),
       revenue: mockUnits.reduce((sum, unit) => sum + unit.revenue, 0),
-      classes: 12,
+      classes: mockClasses.length,
     }
   }
 
@@ -259,12 +755,41 @@ export default function SissoneResponsivePrototype() {
       return getTotalStats()
     }
     const unit = mockUnits.find((u) => u.id === selectedUnit)
+    const unitClasses = mockClasses.filter((c) => c.unitId === selectedUnit)
     return {
       students: unit?.students || 0,
       rating: unit?.rating.toFixed(1) || "0.0",
       revenue: unit?.revenue || 0,
-      classes: selectedUnit === "1" ? 5 : selectedUnit === "2" ? 4 : 3,
+      classes: unitClasses.length,
     }
+  }
+
+  const getFilteredClasses = () => {
+    return mockClasses.filter((classItem) => {
+      const matchesSearch = classItem.title.toLowerCase().includes(searchTerm.toLowerCase())
+      const matchesUnit = classUnitFilter === "all" || classItem.unitId === classUnitFilter
+      const matchesFrequency =
+        classFrequencyFilter === "all" ||
+        (classFrequencyFilter === "recurring" && classItem.isRecurring) ||
+        (classFrequencyFilter === "single" && !classItem.isRecurring)
+
+      let matchesRentability = true
+      if (classRentabilityFilter !== "all") {
+        const profitability = (classItem.enrolled / classItem.capacity) * 100
+        if (classRentabilityFilter === "high") matchesRentability = profitability >= 80
+        else if (classRentabilityFilter === "medium") matchesRentability = profitability >= 50 && profitability < 80
+        else if (classRentabilityFilter === "low") matchesRentability = profitability < 50
+      }
+
+      return matchesSearch && matchesUnit && matchesFrequency && matchesRentability
+    })
+  }
+
+  const copyInviteLink = () => {
+    navigator.clipboard.writeText(inviteLink)
+    setLinkCopied(true)
+    showToast("Link copiado para a área de transferência!")
+    setTimeout(() => setLinkCopied(false), 2000)
   }
 
   const renderUnitFilter = () => (
@@ -311,14 +836,7 @@ export default function SissoneResponsivePrototype() {
           <div className="p-6 border-b" style={{ borderColor: "#E5D6CD" }}>
             <div className="flex items-center justify-between">
               <div>
-                <div className="w-32 h-8 rounded mb-2" style={{ backgroundColor: "#E5D6CD" }}>
-                  <div
-                    className="flex items-center justify-center h-full text-sm font-bold"
-                    style={{ color: "#3D2C2E" }}
-                  >
-                    SISSONE
-                  </div>
-                </div>
+                <img src="/sissone-logo.png" alt="Sissone" className="h-8 mb-2" />
                 <p className="text-xs" style={{ color: "#3D2C2E" }}>
                   Para quem quer aprender, ensinar e viver a dança
                 </p>
@@ -664,7 +1182,7 @@ export default function SissoneResponsivePrototype() {
               <Button
                 variant="outline"
                 className="h-16 lg:h-20 flex flex-col gap-1 bg-transparent hover:shadow-md transition-all"
-                onClick={() => navigateTo("students")}
+                onClick={() => navigateTo("invite-student")}
                 style={{ borderColor: "#CFB2A8", backgroundColor: "#F5F0EB" }}
               >
                 <UserPlus className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: "#3D2C2E" }} />
@@ -680,20 +1198,24 @@ export default function SissoneResponsivePrototype() {
               Aulas Recentes
             </h2>
             <div className="space-y-3 lg:space-y-4">
-              {[1, 2, 3].map((i) => (
-                <Card key={i} style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-shadow">
+              {mockClasses.slice(0, 3).map((classItem) => (
+                <Card
+                  key={classItem.id}
+                  style={{ backgroundColor: "#E5D6CD" }}
+                  className="hover:shadow-md transition-shadow"
+                >
                   <CardContent className="p-3 lg:p-4">
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
                         <h3 className="text-sm lg:text-base font-medium" style={{ color: "#3D2C2E" }}>
-                          Aula de Ballet Iniciante {i}
+                          {classItem.title}
                         </h3>
                         <div className="flex flex-col lg:flex-row lg:items-center lg:gap-4 mt-1">
                           <p className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-                            {selectedUnit === "all" ? mockUnits[i - 1]?.name : "Hoje, 18:00"}
+                            {selectedUnit === "all" ? classItem.unitName : `${classItem.time}`}
                           </p>
                           <p className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-                            8 alunos inscritos
+                            {classItem.enrolled} alunos inscritos
                           </p>
                         </div>
                       </div>
@@ -884,319 +1406,167 @@ export default function SissoneResponsivePrototype() {
     </div>
   )
 
-  const renderClasses = () => (
-    <div className="p-4 lg:p-6 pb-24 lg:pb-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-between mb-6 gap-2">
-          <h2 className="text-lg lg:text-xl font-semibold" style={{ color: "#3D2C2E" }}>
-            Gerenciar Aulas
-          </h2>
-          <Button
-            className="flex-shrink-0"
-            style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
-            onClick={() => navigateTo("create-class")}
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            <span className="hidden sm:inline">Criar Aula</span>
-            <span className="sm:hidden">Criar</span>
-          </Button>
-        </div>
+  const renderClasses = () => {
+    const filteredClasses = getFilteredClasses()
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
-            <CardContent className="p-4 text-center">
-              <div className="flex items-center justify-center gap-2 mb-1">
-                <TrendingUp className="w-4 h-4" style={{ color: "#CFB2A8" }} />
-                <span className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
-                  Jazz Avançado
-                </span>
-              </div>
-              <div className="text-xs" style={{ color: "#3D2C2E" }}>
-                Aula Mais Cheia
-              </div>
-            </CardContent>
-          </Card>
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
-            <CardContent className="p-4 text-center">
-              <div className="flex items-center justify-center gap-2 mb-1">
-                <TrendingDown className="w-4 h-4" style={{ color: "#CFB2A8" }} />
-                <span className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
-                  Hip Hop Kids
-                </span>
-              </div>
-              <div className="text-xs" style={{ color: "#3D2C2E" }}>
-                Aula Mais Vazia
-              </div>
-            </CardContent>
-          </Card>
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
-            <CardContent className="p-4 text-center">
-              <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
-                Ballet Iniciante
-              </div>
-              <div className="text-xs" style={{ color: "#3D2C2E" }}>
-                Próxima Aula
-              </div>
-            </CardContent>
-          </Card>
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
-            <CardContent className="p-4 text-center">
-              <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
-                Jazz Avançado
-              </div>
-              <div className="text-xs" style={{ color: "#3D2C2E" }}>
-                Última Aula
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Filters and Search */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <div className="relative">
-            <Search
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4"
-              style={{ color: "#3D2C2E" }}
-            />
-            <Input
-              placeholder="Buscar aulas..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
-              style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
-            />
+    return (
+      <div className="p-4 lg:p-6 pb-24 lg:pb-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-6 gap-2">
+            <h2 className="text-lg lg:text-xl font-semibold" style={{ color: "#3D2C2E" }}>
+              Gerenciar Aulas
+            </h2>
+            <Button
+              className="flex-shrink-0"
+              style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+              onClick={() => navigateTo("create-class")}
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              <span className="hidden sm:inline">Criar Aula</span>
+              <span className="sm:hidden">Criar</span>
+            </Button>
           </div>
 
-          <Select defaultValue="all">
-            <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectValue>
-                <span className="text-sm">Unidade: Todas</span>
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectItem value="all">Todas as Unidades</SelectItem>
-              {mockUnits.map((unit) => (
-                <SelectItem key={unit.id} value={unit.id}>
-                  {unit.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          <Select defaultValue="all">
-            <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectValue>
-                <span className="text-sm">Frequência: Todas</span>
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectItem value="all">Todas</SelectItem>
-              <SelectItem value="recurring">Recorrentes</SelectItem>
-              <SelectItem value="single">Únicas</SelectItem>
-            </SelectContent>
-          </Select>
-
-          <Select defaultValue="all">
-            <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectValue>
-                <span className="text-sm">Rentabilidade: Todas</span>
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectItem value="all">Todas</SelectItem>
-              <SelectItem value="high">Alta</SelectItem>
-              <SelectItem value="medium">Média</SelectItem>
-              <SelectItem value="low">Baixa</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Classes Grid - Netflix style */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {mockClasses.map((classItem) => (
-            <Card
-              key={classItem.id}
-              style={{ backgroundColor: "#E5D6CD" }}
-              className="hover:shadow-lg transition-all hover:scale-[1.02]"
-            >
-              <CardContent className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-lg font-semibold mb-1" style={{ color: "#3D2C2E" }}>
-                      {classItem.title}
-                    </h3>
-                    <p className="text-sm mb-2" style={{ color: "#CFB2A8" }}>
-                      {classItem.unitName}
-                    </p>
-                    {classItem.isRecurring && (
-                      <span
-                        className="text-xs px-2 py-1 rounded"
-                        style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
-                      >
-                        Recorrente: {classItem.frequency}
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex gap-2">
-                    <Button size="sm" variant="ghost" className="hover:bg-white/50">
-                      <Edit className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-                    </Button>
-                    <Button size="sm" variant="ghost" className="hover:bg-white/50">
-                      <Trash2 className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-                    </Button>
-                  </div>
+          {/* Quick Stats */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <Card style={{ backgroundColor: "#E5D6CD" }}>
+              <CardContent className="p-4 text-center">
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <TrendingUp className="w-4 h-4" style={{ color: "#CFB2A8" }} />
+                  <span className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                    Jazz Avançado
+                  </span>
                 </div>
-
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4" style={{ color: "#CFB2A8" }} />
-                    <span className="text-sm" style={{ color: "#3D2C2E" }}>
-                      {classItem.time}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <DollarSign className="w-4 h-4" style={{ color: "#CFB2A8" }} />
-                    <span className="text-sm" style={{ color: "#3D2C2E" }}>
-                      R$ {classItem.price},00
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex justify-between items-center pt-3 border-t" style={{ borderColor: "#CFB2A8" }}>
-                  <div>
-                    <span className="text-sm font-semibold" style={{ color: "#3D2C2E" }}>
-                      {classItem.enrolled}/{classItem.capacity}
-                    </span>
-                    <span className="text-xs ml-1" style={{ color: "#3D2C2E" }}>
-                      alunos
-                    </span>
-                  </div>
-                  <div className="w-24 h-2 rounded-full overflow-hidden" style={{ backgroundColor: "#F5F0EB" }}>
-                    <div
-                      className="h-full"
-                      style={{
-                        width: `${(classItem.enrolled / classItem.capacity) * 100}%`,
-                        backgroundColor: "#CFB2A8",
-                      }}
-                    />
-                  </div>
+                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                  Aula Mais Cheia
                 </div>
               </CardContent>
             </Card>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
+            <Card style={{ backgroundColor: "#E5D6CD" }}>
+              <CardContent className="p-4 text-center">
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <TrendingDown className="w-4 h-4" style={{ color: "#CFB2A8" }} />
+                  <span className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                    Hip Hop Kids
+                  </span>
+                </div>
+                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                  Aula Mais Vazia
+                </div>
+              </CardContent>
+            </Card>
+            <Card style={{ backgroundColor: "#E5D6CD" }}>
+              <CardContent className="p-4 text-center">
+                <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                  Ballet Iniciante
+                </div>
+                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                  Próxima Aula
+                </div>
+              </CardContent>
+            </Card>
+            <Card style={{ backgroundColor: "#E5D6CD" }}>
+              <CardContent className="p-4 text-center">
+                <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                  Jazz Avançado
+                </div>
+                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                  Última Aula
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
-  const renderPricing = () => (
-    <div className="p-4 lg:p-6 pb-24 lg:pb-6">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-lg lg:text-xl font-semibold mb-6" style={{ color: "#3D2C2E" }}>
-          Gerenciar Precificação
-        </h2>
-
-        {/* Base Price */}
-        <Card style={{ backgroundColor: "#E5D6CD" }} className="mb-6">
-          <CardHeader>
-            <CardTitle style={{ color: "#3D2C2E" }}>Preço Base das Aulas</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <div>
-                <Label style={{ color: "#3D2C2E" }}>Ballet</Label>
-                <Input placeholder="R$ 80,00" style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }} />
-              </div>
-              <div>
-                <Label style={{ color: "#3D2C2E" }}>Jazz</Label>
-                <Input placeholder="R$ 90,00" style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }} />
-              </div>
-              <div>
-                <Label style={{ color: "#3D2C2E" }}>Hip Hop</Label>
-                <Input placeholder="R$ 70,00" style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }} />
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div className="relative">
+              <Search
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4"
+                style={{ color: "#3D2C2E" }}
+              />
+              <Input
+                placeholder="Buscar aulas..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10"
+                style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+              />
             </div>
-          </CardContent>
-        </Card>
 
-        {/* Subscription Plans */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-base font-semibold" style={{ color: "#3D2C2E" }}>
-              Planos de Assinatura
-            </h3>
-            <Button style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
-              <Plus className="w-4 h-4 mr-2" />
-              Novo Plano
-            </Button>
+            <Select value={classUnitFilter} onValueChange={setClassUnitFilter}>
+              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectValue>
+                  <span className="text-sm">
+                    Unidade: {classUnitFilter === "all" ? "Todas" : mockUnits.find((u) => u.id === classUnitFilter)?.name}
+                  </span>
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectItem value="all">Todas as Unidades</SelectItem>
+                {mockUnits.map((unit) => (
+                  <SelectItem key={unit.id} value={unit.id}>
+                    {unit.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <Select value={classFrequencyFilter} onValueChange={setClassFrequencyFilter}>
+              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectValue>
+                  <span className="text-sm">
+                    Frequência: {classFrequencyFilter === "all" ? "Todas" : classFrequencyFilter === "recurring" ? "Recorrentes" : "Únicas"}
+                  </span>
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectItem value="all">Todas</SelectItem>
+                <SelectItem value="recurring">Recorrentes</SelectItem>
+                <SelectItem value="single">Únicas</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select value={classRentabilityFilter} onValueChange={setClassRentabilityFilter}>
+              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectValue>
+                  <span className="text-sm">
+                    Rentabilidade: {classRentabilityFilter === "all" ? "Todas" : classRentabilityFilter === "high" ? "Alta" : classRentabilityFilter === "medium" ? "Média" : "Baixa"}
+                  </span>
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectItem value="all">Todas</SelectItem>
+                <SelectItem value="high">Alta</SelectItem>
+                <SelectItem value="medium">Média</SelectItem>
+                <SelectItem value="low">Baixa</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {[
-              { period: "Trimestral", discount: "10%", price: "R$ 648,00" },
-              { period: "Semestral", discount: "15%", price: "R$ 1.224,00" },
-              { period: "Anual", discount: "20%", price: "R$ 2.304,00" },
-            ].map((plan) => (
-              <Card key={plan.period} style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-all">
-                <CardContent className="p-6 text-center">
-                  <h4 className="text-lg font-bold mb-2" style={{ color: "#3D2C2E" }}>
-                    {plan.period}
-                  </h4>
-                  <div className="text-2xl font-bold mb-1" style={{ color: "#CFB2A8" }}>
-                    {plan.price}
-                  </div>
-                  <div className="text-sm mb-4" style={{ color: "#3D2C2E" }}>
-                    {plan.discount} de desconto
-                  </div>
-                  <div className="flex gap-2 justify-center">
-                    <Button size="sm" variant="ghost" className="hover:bg-white/50">
-                      <Edit className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-                    </Button>
-                    <Button size="sm" variant="ghost" className="hover:bg-white/50">
-                      <Trash2 className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Promotional Combos */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-base font-semibold" style={{ color: "#3D2C2E" }}>
-              Combos Promocionais
-            </h3>
-            <Button style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
-              <Plus className="w-4 h-4 mr-2" />
-              Novo Combo
-            </Button>
-          </div>
-
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
-            <CardContent className="p-6">
-              <div className="space-y-4">
-                {[
-                  { name: "Combo Ballet + Jazz", classes: "Ballet Iniciante, Jazz Avançado", price: "R$ 150,00" },
-                  { name: "Pacote Família", classes: "3 aulas à escolha", price: "R$ 210,00" },
-                ].map((combo, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between p-4 rounded"
-                    style={{ backgroundColor: "#F5F0EB" }}
-                  >
+          {/* Classes Grid - Netflix style */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {filteredClasses.map((classItem) => (
+              <Card
+                key={classItem.id}
+                style={{ backgroundColor: "#E5D6CD" }}
+                className="hover:shadow-lg transition-all hover:scale-[1.02]"
+              >
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h4 className="font-semibold" style={{ color: "#3D2C2E" }}>
-                        {combo.name}
-                      </h4>
-                      <p className="text-sm" style={{ color: "#3D2C2E" }}>
-                        {combo.classes}
+                      <h3 className="text-lg font-semibold mb-1" style={{ color: "#3D2C2E" }}>
+                        {classItem.title}
+                      </h3>
+                      <p className="text-sm mb-2" style={{ color: "#CFB2A8" }}>
+                        {classItem.unitName}
                       </p>
-                      <p className="text-lg font-bold" style={{ color: "#CFB2A8" }}>
-                        {combo.price}
-                      </p>
+                      {classItem.isRecurring && (
+                        <span
+                          className="text-xs px-2 py-1 rounded"
+                          style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                        >
+                          Recorrente: {classItem.frequency}
+                        </span>
+                      )}
                     </div>
                     <div className="flex gap-2">
                       <Button size="sm" variant="ghost" className="hover:bg-white/50">
@@ -1207,14 +1577,436 @@ export default function SissoneResponsivePrototype() {
                       </Button>
                     </div>
                   </div>
-                ))}
+
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4" style={{ color: "#CFB2A8" }} />
+                      <span className="text-sm" style={{ color: "#3D2C2E" }}>
+                        {classItem.time}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <DollarSign className="w-4 h-4" style={{ color: "#CFB2A8" }} />
+                      <span className="text-sm" style={{ color: "#3D2C2E" }}>
+                        R$ {classItem.price},00
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center pt-3 border-t" style={{ borderColor: "#CFB2A8" }}>
+                    <div>
+                      <span className="text-sm font-semibold" style={{ color: "#3D2C2E" }}>
+                        {classItem.enrolled}/{classItem.capacity}
+                      </span>
+                      <span className="text-xs ml-1" style={{ color: "#3D2C2E" }}>
+                        alunos
+                      </span>
+                    </div>
+                    <div className="w-24 h-2 rounded-full overflow-hidden" style={{ backgroundColor: "#F5F0EB" }}>
+                      <div
+                        className="h-full"
+                        style={{
+                          width: `${(classItem.enrolled / classItem.capacity) * 100}%`,
+                          backgroundColor: "#CFB2A8",
+                        }}
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {filteredClasses.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-lg" style={{ color: "#3D2C2E" }}>
+                Nenhuma aula encontrada com os filtros selecionados.
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  const renderPricing = () => {
+    if (currentScreen === "create-plan" || currentScreen === "edit-plan") {
+      return (
+        <div className="p-4 lg:p-6 pb-24 lg:pb-6">
+          <div className="max-w-2xl mx-auto">
+            <Card style={{ backgroundColor: "#E5D6CD" }}>
+              <CardHeader>
+                <CardTitle style={{ color: "#3D2C2E" }}>
+                  {currentScreen === "create-plan" ? "Novo Plano" : "Editar Plano"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label htmlFor="plan-name" style={{ color: "#3D2C2E" }}>
+                    Nome do Plano
+                  </Label>
+                  <Input
+                    id="plan-name"
+                    placeholder="ex: Trimestral"
+                    value={currentScreen === "edit-plan" && editingPlan ? editingPlan.name : newPlan.name}
+                    onChange={(e) => {
+                      if (currentScreen === "edit-plan" && editingPlan) {
+                        setEditingPlan({ ...editingPlan, name: e.target.value })
+                      } else {
+                        setNewPlan({ ...newPlan, name: e.target.value })
+                      }
+                    }}
+                    className="mt-1"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="plan-discount" style={{ color: "#3D2C2E" }}>
+                    Porcentagem de Desconto (%)
+                  </Label>
+                  <Input
+                    id="plan-discount"
+                    placeholder="ex: 10"
+                    type="number"
+                    value={currentScreen === "edit-plan" && editingPlan ? editingPlan.discount : newPlan.discount}
+                    onChange={(e) => {
+                      if (currentScreen === "edit-plan" && editingPlan) {
+                        setEditingPlan({ ...editingPlan, discount: Number(e.target.value) })
+                      } else {
+                        setNewPlan({ ...newPlan, discount: e.target.value })
+                      }
+                    }}
+                    className="mt-1"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                  />
+                </div>
+
+                <div className="flex gap-3 pt-4">
+                  <Button
+                    variant="outline"
+                    className="flex-1 bg-transparent"
+                    onClick={() => {
+                      setCurrentScreen("pricing")
+                      setNewPlan({ name: "", discount: "" })
+                      setEditingPlan(null)
+                    }}
+                    style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                  >
+                    Cancelar
+                  </Button>
+                  <Button
+                    className="flex-1"
+                    onClick={() => {
+                      if (currentScreen === "edit-plan" && editingPlan) {
+                        setPlans(plans.map((p) => (p.id === editingPlan.id ? editingPlan : p)))
+                        showToast("Plano editado com sucesso!")
+                      } else if (newPlan.name && newPlan.discount) {
+                        setPlans([...plans, { id: String(plans.length + 1), name: newPlan.name, discount: Number(newPlan.discount) }])
+                        showToast("Plano criado com sucesso!")
+                      }
+                      setCurrentScreen("pricing")
+                      setNewPlan({ name: "", discount: "" })
+                      setEditingPlan(null)
+                    }}
+                    style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                  >
+                    Salvar
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      )
+    }
+
+    if (currentScreen === "create-combo" || currentScreen === "edit-combo") {
+      return (
+        <div className="p-4 lg:p-6 pb-24 lg:pb-6">
+          <div className="max-w-2xl mx-auto">
+            <Card style={{ backgroundColor: "#E5D6CD" }}>
+              <CardHeader>
+                <CardTitle style={{ color: "#3D2C2E" }}>
+                  {currentScreen === "create-combo" ? "Novo Combo" : "Editar Combo"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label htmlFor="combo-name" style={{ color: "#3D2C2E" }}>
+                    Nome do Combo
+                  </Label>
+                  <Input
+                    id="combo-name"
+                    placeholder="ex: Combo Ballet + Jazz"
+                    value={currentScreen === "edit-combo" && editingCombo ? editingCombo.name : newCombo.name}
+                    onChange={(e) => {
+                      if (currentScreen === "edit-combo" && editingCombo) {
+                        setEditingCombo({ ...editingCombo, name: e.target.value })
+                      } else {
+                        setNewCombo({ ...newCombo, name: e.target.value })
+                      }
+                    }}
+                    className="mt-1"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                  />
+                </div>
+
+                <div>
+                  <Label style={{ color: "#3D2C2E" }}>Aulas Incluídas</Label>
+                  <div className="space-y-2 mt-2">
+                    {mockClasses.map((classItem) => (
+                      <div key={classItem.id} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={`combo-class-${classItem.id}`}
+                          checked={
+                            currentScreen === "edit-combo" && editingCombo
+                              ? editingCombo.classes.includes(classItem.title)
+                              : newCombo.classes.includes(classItem.title)
+                          }
+                          onCheckedChange={(checked) => {
+                            if (currentScreen === "edit-combo" && editingCombo) {
+                              setEditingCombo({
+                                ...editingCombo,
+                                classes: checked
+                                  ? [...editingCombo.classes, classItem.title]
+                                  : editingCombo.classes.filter((c) => c !== classItem.title),
+                              })
+                            } else {
+                              setNewCombo({
+                                ...newCombo,
+                                classes: checked
+                                  ? [...newCombo.classes, classItem.title]
+                                  : newCombo.classes.filter((c) => c !== classItem.title),
+                              })
+                            }
+                          }}
+                        />
+                        <Label htmlFor={`combo-class-${classItem.id}`} className="text-sm" style={{ color: "#3D2C2E" }}>
+                          {classItem.title} - R$ {classItem.price}
+                        </Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="combo-price" style={{ color: "#3D2C2E" }}>
+                    Valor do Combo (R$)
+                  </Label>
+                  <Input
+                    id="combo-price"
+                    placeholder="ex: 150"
+                    type="number"
+                    value={currentScreen === "edit-combo" && editingCombo ? editingCombo.price : newCombo.price}
+                    onChange={(e) => {
+                      if (currentScreen === "edit-combo" && editingCombo) {
+                        setEditingCombo({ ...editingCombo, price: Number(e.target.value) })
+                      } else {
+                        setNewCombo({ ...newCombo, price: e.target.value })
+                      }
+                    }}
+                    className="mt-1"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                  />
+                </div>
+
+                <div className="flex gap-3 pt-4">
+                  <Button
+                    variant="outline"
+                    className="flex-1 bg-transparent"
+                    onClick={() => {
+                      setCurrentScreen("pricing")
+                      setNewCombo({ name: "", classes: [], price: "" })
+                      setEditingCombo(null)
+                    }}
+                    style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                  >
+                    Cancelar
+                  </Button>
+                  <Button
+                    className="flex-1"
+                    onClick={() => {
+                      if (currentScreen === "edit-combo" && editingCombo) {
+                        setCombos(combos.map((c) => (c.id === editingCombo.id ? editingCombo : c)))
+                        showToast("Combo editado com sucesso!")
+                      } else if (newCombo.name && newCombo.classes.length > 0 && newCombo.price) {
+                        setCombos([
+                          ...combos,
+                          { id: String(combos.length + 1), name: newCombo.name, classes: newCombo.classes, price: Number(newCombo.price) },
+                        ])
+                        showToast("Combo criado com sucesso!")
+                      }
+                      setCurrentScreen("pricing")
+                      setNewCombo({ name: "", classes: [], price: "" })
+                      setEditingCombo(null)
+                    }}
+                    style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                  >
+                    Salvar
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <div className="p-4 lg:p-6 pb-24 lg:pb-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-lg lg:text-xl font-semibold mb-6" style={{ color: "#3D2C2E" }}>
+            Gerenciar Precificação
+          </h2>
+
+          {/* Base Price */}
+          <Card style={{ backgroundColor: "#E5D6CD" }} className="mb-6">
+            <CardHeader>
+              <CardTitle style={{ color: "#3D2C2E" }}>Preço Base das Aulas</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <div>
+                  <Label style={{ color: "#3D2C2E" }}>Ballet</Label>
+                  <Input placeholder="R$ 80,00" style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }} />
+                </div>
+                <div>
+                  <Label style={{ color: "#3D2C2E" }}>Jazz</Label>
+                  <Input placeholder="R$ 90,00" style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }} />
+                </div>
+                <div>
+                  <Label style={{ color: "#3D2C2E" }}>Hip Hop</Label>
+                  <Input placeholder="R$ 70,00" style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }} />
+                </div>
               </div>
             </CardContent>
           </Card>
+
+          {/* Subscription Plans */}
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-base font-semibold" style={{ color: "#3D2C2E" }}>
+                Planos de Assinatura
+              </h3>
+              <Button
+                style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                onClick={() => setCurrentScreen("create-plan")}
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Novo Plano
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {plans.map((plan) => (
+                <Card key={plan.id} style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-all">
+                  <CardContent className="p-6 text-center">
+                    <h4 className="text-lg font-bold mb-2" style={{ color: "#3D2C2E" }}>
+                      {plan.name}
+                    </h4>
+                    <div className="text-2xl font-bold mb-4" style={{ color: "#CFB2A8" }}>
+                      {plan.discount}% OFF
+                    </div>
+                    <div className="flex gap-2 justify-center">
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="hover:bg-white/50"
+                        onClick={() => {
+                          setEditingPlan(plan)
+                          setCurrentScreen("edit-plan")
+                        }}
+                      >
+                        <Edit className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="hover:bg-white/50"
+                        onClick={() => {
+                          setPlans(plans.filter((p) => p.id !== plan.id))
+                          showToast("Plano excluído com sucesso!")
+                        }}
+                      >
+                        <Trash2 className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Promotional Combos */}
+          <div>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-base font-semibold" style={{ color: "#3D2C2E" }}>
+                Combos Promocionais
+              </h3>
+              <Button
+                style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                onClick={() => setCurrentScreen("create-combo")}
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Novo Combo
+              </Button>
+            </div>
+
+            <Card style={{ backgroundColor: "#E5D6CD" }}>
+              <CardContent className="p-6">
+                <div className="space-y-4">
+                  {combos.map((combo) => (
+                    <div
+                      key={combo.id}
+                      className="flex items-center justify-between p-4 rounded"
+                      style={{ backgroundColor: "#F5F0EB" }}
+                    >
+                      <div>
+                        <h4 className="font-semibold" style={{ color: "#3D2C2E" }}>
+                          {combo.name}
+                        </h4>
+                        <p className="text-sm" style={{ color: "#3D2C2E" }}>
+                          {combo.classes.join(", ")}
+                        </p>
+                        <p className="text-lg font-bold" style={{ color: "#CFB2A8" }}>
+                          R$ {combo.price},00
+                        </p>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          className="hover:bg-white/50"
+                          onClick={() => {
+                            setEditingCombo(combo)
+                            setCurrentScreen("edit-combo")
+                          }}
+                        >
+                          <Edit className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          className="hover:bg-white/50"
+                          onClick={() => {
+                            setCombos(combos.filter((c) => c.id !== combo.id))
+                            showToast("Combo excluído com sucesso!")
+                          }}
+                        >
+                          <Trash2 className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 
   const renderStudents = () => (
     <div className="p-4 lg:p-6 pb-24 lg:pb-6">
@@ -1224,7 +2016,11 @@ export default function SissoneResponsivePrototype() {
             Gerenciar Alunos
           </h2>
           <div className="flex gap-2 flex-wrap">
-            <Button className="flex-shrink-0" style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
+            <Button
+              className="flex-shrink-0"
+              style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+              onClick={() => navigateTo("invite-student")}
+            >
               <UserPlus className="w-4 h-4 mr-2" />
               <span className="hidden sm:inline">Novo Aluno</span>
               <span className="sm:hidden">Novo</span>
@@ -1473,6 +2269,77 @@ export default function SissoneResponsivePrototype() {
     </div>
   )
 
+  const renderInviteStudent = () => (
+    <div className="p-4 lg:p-6 pb-24 lg:pb-6">
+      <div className="max-w-2xl mx-auto">
+        <Card style={{ backgroundColor: "#E5D6CD" }}>
+          <CardHeader>
+            <CardTitle style={{ color: "#3D2C2E" }}>Convidar Novo Aluno</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div>
+              <p className="text-sm mb-4" style={{ color: "#3D2C2E" }}>
+                Compartilhe o link abaixo com o aluno para que ele possa se cadastrar:
+              </p>
+              <div
+                className="flex items-center gap-2 p-3 rounded"
+                style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD", border: "1px solid" }}
+              >
+                <Input
+                  value={inviteLink}
+                  readOnly
+                  className="flex-1 border-0 bg-transparent"
+                  style={{ color: "#3D2C2E" }}
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <Button
+                className="w-full"
+                onClick={copyInviteLink}
+                style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+              >
+                {linkCopied ? (
+                  <>
+                    <Check className="w-4 h-4 mr-2" />
+                    Link Copiado!
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4 mr-2" />
+                    Copiar Link
+                  </>
+                )}
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full bg-transparent"
+                onClick={() => {
+                  window.location.href = `mailto:?subject=Convite Sissone&body=Olá! Você foi convidado para se juntar à nossa escola de dança. Acesse: ${inviteLink}`
+                  showToast("Cliente de email aberto!")
+                }}
+                style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+              >
+                <Mail className="w-4 h-4 mr-2" />
+                Enviar por Email
+              </Button>
+            </div>
+
+            <Button
+              variant="outline"
+              className="w-full bg-transparent"
+              onClick={() => navigateTo("students")}
+              style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+            >
+              Voltar
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  )
+
   const renderCreateClass = () => (
     <div className="p-4 lg:p-6 pb-24 lg:pb-6">
       <div className="max-w-4xl mx-auto">
@@ -1581,32 +2448,41 @@ export default function SissoneResponsivePrototype() {
                     style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
                   />
                 </div>
-                <div>
-                  <Label htmlFor="end-date" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                    Data de Término
-                  </Label>
-                  <Input
-                    id="end-date"
-                    type="date"
-                    value={classData.endDate}
-                    onChange={(e) => setClassData({ ...classData, endDate: e.target.value })}
-                    className="mt-1 h-10 lg:h-12"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
-                  />
+                <div className="lg:col-span-2">
+                  <div className="flex items-center space-x-2 mb-2">
+                    <Checkbox
+                      id="has-end-date"
+                      checked={classData.hasEndDate}
+                      onCheckedChange={(checked) => setClassData({ ...classData, hasEndDate: !!checked })}
+                    />
+                    <Label htmlFor="has-end-date" className="text-sm" style={{ color: "#3D2C2E" }}>
+                      Adicionar data de término
+                    </Label>
+                  </div>
+                  {classData.hasEndDate && (
+                    <Input
+                      id="end-date"
+                      type="date"
+                      value={classData.endDate}
+                      onChange={(e) => setClassData({ ...classData, endDate: e.target.value })}
+                      className="h-10 lg:h-12"
+                      style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    />
+                  )}
                 </div>
-                <div>
-                  <Label htmlFor="time" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                    Horário
-                  </Label>
-                  <Input
-                    id="time"
-                    type="time"
-                    value={classData.time}
-                    onChange={(e) => setClassData({ ...classData, time: e.target.value })}
-                    className="mt-1 h-10 lg:h-12"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
-                  />
-                </div>
+              </div>
+              <div>
+                <Label htmlFor="time" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                  Horário
+                </Label>
+                <Input
+                  id="time"
+                  type="time"
+                  value={classData.time}
+                  onChange={(e) => setClassData({ ...classData, time: e.target.value })}
+                  className="mt-1 h-10 lg:h-12"
+                  style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                />
               </div>
             </div>
           ) : (
@@ -1719,7 +2595,11 @@ export default function SissoneResponsivePrototype() {
             >
               Visualizar
             </Button>
-            <Button className="lg:flex-1 h-10 lg:h-12" style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
+            <Button
+              className="lg:flex-1 h-10 lg:h-12"
+              onClick={() => showToast("Rascunho salvo com sucesso!")}
+              style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+            >
               Salvar Rascunho
             </Button>
           </div>
@@ -1819,7 +2699,8 @@ export default function SissoneResponsivePrototype() {
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
                     <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                      {classData.date || "Data de início"} até {classData.endDate || "Data de término"}
+                      {classData.date || "Data de início"}
+                      {classData.hasEndDate && classData.endDate ? ` até ${classData.endDate}` : " (Sem data de término)"}
                     </span>
                   </div>
                 </>
@@ -1862,7 +2743,11 @@ export default function SissoneResponsivePrototype() {
             </div>
 
             <div className="space-y-3 lg:space-y-4">
-              <Button className="w-full h-10 lg:h-12" style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
+              <Button
+                className="w-full h-10 lg:h-12"
+                onClick={() => showToast("Aula byla publiée com sucesso!")}
+                style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+              >
                 Publicar Aula
               </Button>
               <Button
@@ -1892,6 +2777,24 @@ export default function SissoneResponsivePrototype() {
 
   return (
     <div className="min-h-screen flex overflow-x-hidden" style={{ backgroundColor: "#F5F0EB" }}>
+      <div className="fixed top-4 right-4 z-50 space-y-2">
+        {toasts.map((toast) => (
+          <div
+            key={toast.id}
+            className="flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg animate-in slide-in-from-right"
+            style={{
+              backgroundColor: toast.type === "success" ? "#CFB2A8" : "#F5F0EB",
+              border: `1px solid ${toast.type === "success" ? "#CFB2A8" : "#E5D6CD"}`,
+            }}
+          >
+            <Check className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+            <span className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+              {toast.message}
+            </span>
+          </div>
+        ))}
+      </div>
+
       <div className="hidden lg:block">{renderSidebar()}</div>
       <div className="lg:hidden">{renderSidebar()}</div>
 
@@ -1902,7 +2805,12 @@ export default function SissoneResponsivePrototype() {
         {currentScreen === "create-class" && renderHeader("Criar Aula")}
         {currentScreen === "class-preview" && renderHeader("Visualizar Aula")}
         {currentScreen === "pricing" && renderHeader("Precificação")}
+        {currentScreen === "create-plan" && renderHeader("Novo Plano")}
+        {currentScreen === "edit-plan" && renderHeader("Editar Plano")}
+        {currentScreen === "create-combo" && renderHeader("Novo Combo")}
+        {currentScreen === "edit-combo" && renderHeader("Editar Combo")}
         {currentScreen === "students" && renderHeader("Alunos")}
+        {currentScreen === "invite-student" && renderHeader("Convidar Aluno")}
 
         <div className="flex-1 overflow-auto">
           {currentScreen === "dashboard" && renderDashboard()}
@@ -1910,8 +2818,9 @@ export default function SissoneResponsivePrototype() {
           {currentScreen === "classes" && renderClasses()}
           {currentScreen === "create-class" && renderCreateClass()}
           {currentScreen === "class-preview" && renderClassPreview()}
-          {currentScreen === "pricing" && renderPricing()}
+          {(currentScreen === "pricing" || currentScreen === "create-plan" || currentScreen === "edit-plan" || currentScreen === "create-combo" || currentScreen === "edit-combo") && renderPricing()}
           {currentScreen === "students" && renderStudents()}
+          {currentScreen === "invite-student" && renderInviteStudent()}
         </div>
       </div>
 
