@@ -3090,8 +3090,13 @@ const SissonePrototype = () => {
         <div className="flex-1 overflow-y-auto p-4 space-y-6">
           <div className="mx-auto w-full max-w-[1040px] space-y-6">
             {/* Carrossel de Imagens */}
-            <div className="relative w-full h-80 rounded-xl overflow-hidden">
-              <Image src={selectedClass.images[currentImageIndex] || "/placeholder.svg"} alt={selectedClass.name} fill className="object-cover" />
+            <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden bg-gray-200">
+              <Image 
+                src={selectedClass.images[currentImageIndex] || "/placeholder.svg"} 
+                alt={selectedClass.name} 
+                fill 
+                className="object-cover" 
+              />
               
               {selectedClass.images.length > 1 && (
                 <>
