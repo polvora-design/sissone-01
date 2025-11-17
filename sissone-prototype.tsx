@@ -6,14 +6,14 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
-import { Star, Calendar, Clock, MapPin, QrCode, ArrowLeft, User } from "lucide-react"
+import { Star, Calendar, Clock, MapPin, QrCode, ArrowLeft, User, Mail, Phone } from 'lucide-react'
 import Image from "next/image"
 
 export default function SissonePrototype() {
   const [currentScreen, setCurrentScreen] = useState(0)
   const [rating, setRating] = useState(0)
 
-  const screens = ["Login", "Dashboard", "Check-in", "Feedback", "Reviews"]
+  const screens = ["Login", "Dashboard", "Detalhes", "Check-in", "Feedback", "Reviews", "Perfil"]
 
   const nextScreen = () => {
     if (currentScreen < screens.length - 1) {
@@ -29,6 +29,14 @@ export default function SissonePrototype() {
 
   const goHome = () => {
     setCurrentScreen(1)
+  }
+
+  const goToDetails = () => {
+    setCurrentScreen(2)
+  }
+
+  const goToProfile = () => {
+    setCurrentScreen(6)
   }
 
   const renderStars = (count: number, interactive = false) => {
@@ -73,6 +81,41 @@ export default function SissonePrototype() {
           <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
             Entrar
           </Button>
+
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-[#E5D6CD]" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-[#F5F0EB] px-2 text-[#3D2C2E] opacity-70">ou</span>
+            </div>
+          </div>
+
+          <Button
+            variant="outline"
+            onClick={nextScreen}
+            className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white hover:bg-white/90"
+          >
+            <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+              />
+              <path
+                fill="currentColor"
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+              />
+              <path
+                fill="currentColor"
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+              />
+              <path
+                fill="currentColor"
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+              />
+            </svg>
+            Continuar com Google
+          </Button>
         </div>
 
         <div className="text-center">
@@ -88,11 +131,10 @@ export default function SissonePrototype() {
     <div className="min-h-screen bg-[#F5F0EB]">
       <div className="bg-white border-b border-[#E5D6CD] p-4">
         <div className="flex items-center justify-between">
-          <div className="w-8 h-8 bg-[#E5D6CD] rounded-full flex items-center justify-center">
-            <span className="text-[#3D2C2E] text-xs font-bold">S</span>
-          </div>
           <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={37} className="h-auto" />
-          <User className="w-6 h-6 text-[#3D2C2E]" />
+          <Button variant="ghost" size="sm" onClick={goToProfile} className="text-[#3D2C2E] p-1">
+            <User className="w-6 h-6" />
+          </Button>
         </div>
       </div>
 
@@ -127,9 +169,14 @@ export default function SissonePrototype() {
                 <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
                 <span className="text-sm text-[#3D2C2E] opacity-70">Centro - Sala A</span>
               </div>
-              <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
-                Fazer Check-in
-              </Button>
+              <div className="grid grid-cols-2 gap-2">
+                <Button onClick={goToDetails} variant="outline" className="border-[#E5D6CD] text-[#3D2C2E] bg-white">
+                  Ver Detalhes
+                </Button>
+                <Button onClick={() => setCurrentScreen(3)} className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+                  Check-in
+                </Button>
+              </div>
             </CardContent>
           </Card>
 
@@ -155,11 +202,163 @@ export default function SissonePrototype() {
                 <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
                 <span className="text-sm text-[#3D2C2E] opacity-70">Zona Norte - Sala B</span>
               </div>
-              <Button variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-transparent">
+              <Button onClick={goToDetails} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
                 Ver Detalhes
               </Button>
             </CardContent>
           </Card>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-semibold text-[#3D2C2E] mb-3">Aulas Anteriores</h3>
+
+          <Card className="bg-white border-[#E5D6CD] mb-3">
+            <CardContent className="p-4">
+              <div className="flex justify-between items-start mb-3">
+                <div>
+                  <h4 className="font-semibold text-[#3D2C2E]">Ballet Clássico</h4>
+                  <p className="text-[#3D2C2E] opacity-70 text-sm">Estúdio Elegance</p>
+                  <div className="flex items-center gap-2 mt-1">{renderStars(5)}</div>
+                </div>
+                <div className="text-right text-sm text-[#3D2C2E] opacity-70">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    15 Jan
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Clock className="w-4 h-4" />
+                    17:00
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-1 mb-3">
+                <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
+                <span className="text-sm text-[#3D2C2E] opacity-70">Centro - Sala Principal</span>
+              </div>
+              <Button onClick={goToDetails} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+                Ver Detalhes
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white border-[#E5D6CD]">
+            <CardContent className="p-4">
+              <div className="flex justify-between items-start mb-3">
+                <div>
+                  <h4 className="font-semibold text-[#3D2C2E]">Hip Hop Iniciante</h4>
+                  <p className="text-[#3D2C2E] opacity-70 text-sm">Urban Move Studio</p>
+                  <p className="text-[#3D2C2E] opacity-50 text-xs mt-1">Ainda não avaliado</p>
+                </div>
+                <div className="text-right text-sm text-[#3D2C2E] opacity-70">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    12 Jan
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Clock className="w-4 h-4" />
+                    20:00
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-1 mb-3">
+                <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
+                <span className="text-sm text-[#3D2C2E] opacity-70">Zona Sul - Sala 2</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <Button onClick={goToDetails} variant="outline" className="border-[#E5D6CD] text-[#3D2C2E] bg-white">
+                  Ver Detalhes
+                </Button>
+                <Button onClick={() => setCurrentScreen(4)} className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+                  Avaliar
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  )
+
+  const DetailsScreen = () => (
+    <div className="min-h-screen bg-[#F5F0EB]">
+      <div className="bg-white border-b border-[#E5D6CD] p-4">
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="sm" onClick={prevScreen} className="text-[#3D2C2E]">
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+          <h1 className="text-lg font-bold text-[#3D2C2E]">Detalhes da Aula</h1>
+        </div>
+      </div>
+
+      <div className="p-4 space-y-4">
+        <Card className="bg-white border-[#E5D6CD]">
+          <CardContent className="p-6 space-y-4">
+            <div>
+              <h2 className="text-2xl font-bold text-[#3D2C2E] mb-2">Fluxo Contemporâneo</h2>
+              <p className="text-[#3D2C2E] opacity-70 font-medium">Estúdio Movement</p>
+              <div className="flex items-center gap-2 mt-2">
+                {renderStars(4)}
+                <span className="text-[#3D2C2E] opacity-70 text-sm">(24 avaliações)</span>
+              </div>
+            </div>
+
+            <div className="space-y-2 pt-2 border-t border-[#E5D6CD]">
+              <div className="flex items-center gap-3">
+                <Calendar className="w-5 h-5 text-[#3D2C2E] opacity-70" />
+                <div>
+                  <p className="text-[#3D2C2E] font-medium">Hoje, 16 de Janeiro</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <Clock className="w-5 h-5 text-[#3D2C2E] opacity-70" />
+                <div>
+                  <p className="text-[#3D2C2E] font-medium">18:00 - 19:30</p>
+                  <p className="text-[#3D2C2E] opacity-60 text-sm">Duração: 90 minutos</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <MapPin className="w-5 h-5 text-[#3D2C2E] opacity-70" />
+                <div>
+                  <p className="text-[#3D2C2E] font-medium">Centro - Sala A</p>
+                  <p className="text-[#3D2C2E] opacity-60 text-sm">Rua das Flores, 123</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-2 border-t border-[#E5D6CD]">
+              <h3 className="font-semibold text-[#3D2C2E] mb-2">Sobre a Aula</h3>
+              <p className="text-[#3D2C2E] opacity-70 text-sm leading-relaxed">
+                Uma experiência de dança contemporânea que explora movimentos fluidos e expressivos. Adequado para todos
+                os níveis. Traga roupas confortáveis e uma garrafa de água.
+              </p>
+            </div>
+
+            <div className="pt-2 border-t border-[#E5D6CD]">
+              <h3 className="font-semibold text-[#3D2C2E] mb-2">Instrutor</h3>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#E5D6CD] rounded-full flex items-center justify-center">
+                  <span className="text-[#3D2C2E] text-sm font-bold">CM</span>
+                </div>
+                <div>
+                  <p className="text-[#3D2C2E] font-medium">Carolina Matos</p>
+                  <p className="text-[#3D2C2E] opacity-60 text-sm">10 anos de experiência</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <div className="space-y-2">
+          <Button onClick={() => setCurrentScreen(3)} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+            Fazer Check-in
+          </Button>
+          <Button
+            onClick={() => setCurrentScreen(5)}
+            variant="outline"
+            className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white"
+          >
+            Ver Avaliações
+          </Button>
         </div>
       </div>
     </div>
@@ -193,7 +392,7 @@ export default function SissonePrototype() {
         </div>
 
         <div className="space-y-3">
-          <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+          <Button onClick={goHome} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
             Confirmar Check-in
           </Button>
           <Button variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-transparent">
@@ -217,8 +416,8 @@ export default function SissonePrototype() {
 
       <div className="p-6 space-y-6">
         <div className="text-center">
-          <h2 className="text-xl font-bold text-[#3D2C2E] mb-2">Fluxo Contemporâneo</h2>
-          <p className="text-[#3D2C2E] opacity-70">Estúdio Movement</p>
+          <h2 className="text-xl font-bold text-[#3D2C2E] mb-2">Hip Hop Iniciante</h2>
+          <p className="text-[#3D2C2E] opacity-70">Urban Move Studio</p>
         </div>
 
         <Card className="bg-white border-[#E5D6CD]">
@@ -245,7 +444,11 @@ export default function SissonePrototype() {
           <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
             Enviar Avaliação
           </Button>
-          <Button variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-transparent">
+          <Button
+            onClick={nextScreen}
+            variant="outline"
+            className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-transparent"
+          >
             Pular por Enquanto
           </Button>
         </div>
@@ -350,6 +553,111 @@ export default function SissonePrototype() {
     </div>
   )
 
+  const ProfileScreen = () => (
+    <div className="min-h-screen bg-[#F5F0EB]">
+      <div className="bg-white border-b border-[#E5D6CD] p-4">
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="sm" onClick={goHome} className="text-[#3D2C2E]">
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+          <h1 className="text-lg font-bold text-[#3D2C2E]">Perfil e Configurações</h1>
+        </div>
+      </div>
+
+      <div className="p-4 space-y-6">
+        <div className="text-center py-6">
+          <div className="w-24 h-24 bg-[#E5D6CD] rounded-full flex items-center justify-center mx-auto mb-3">
+            <span className="text-[#3D2C2E] text-3xl font-bold">S</span>
+          </div>
+          <h2 className="text-xl font-bold text-[#3D2C2E]">Sarah Oliveira</h2>
+          <p className="text-[#3D2C2E] opacity-70 text-sm">Membro desde Jan 2024</p>
+        </div>
+
+        <Card className="bg-white border-[#E5D6CD]">
+          <CardContent className="p-6 space-y-4">
+            <h3 className="font-semibold text-[#3D2C2E] mb-3">Informações Pessoais</h3>
+
+            <div>
+              <Label htmlFor="name" className="text-[#3D2C2E]">
+                Nome Completo
+              </Label>
+              <Input
+                id="name"
+                type="text"
+                defaultValue="Sarah Oliveira"
+                className="mt-1 bg-white border-[#E5D6CD]"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="email-profile" className="text-[#3D2C2E]">
+                E-mail
+              </Label>
+              <div className="relative mt-1">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#3D2C2E] opacity-50" />
+                <Input
+                  id="email-profile"
+                  type="email"
+                  defaultValue="sarah.oliveira@email.com"
+                  className="pl-10 bg-white border-[#E5D6CD]"
+                />
+              </div>
+            </div>
+
+            <div>
+              <Label htmlFor="phone" className="text-[#3D2C2E]">
+                Telefone
+              </Label>
+              <div className="relative mt-1">
+                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#3D2C2E] opacity-50" />
+                <Input
+                  id="phone"
+                  type="tel"
+                  defaultValue="(11) 98765-4321"
+                  className="pl-10 bg-white border-[#E5D6CD]"
+                />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-white border-[#E5D6CD]">
+          <CardContent className="p-6 space-y-4">
+            <h3 className="font-semibold text-[#3D2C2E] mb-3">Preferências de Dança</h3>
+
+            <div>
+              <Label className="text-[#3D2C2E]">Estilos Favoritos</Label>
+              <div className="flex flex-wrap gap-2 mt-2">
+                <span className="px-3 py-1 bg-[#E5D6CD] text-[#3D2C2E] rounded-full text-sm">Contemporâneo</span>
+                <span className="px-3 py-1 bg-[#E5D6CD] text-[#3D2C2E] rounded-full text-sm">Jazz</span>
+                <span className="px-3 py-1 bg-[#E5D6CD] text-[#3D2C2E] rounded-full text-sm">Ballet</span>
+              </div>
+            </div>
+
+            <div>
+              <Label className="text-[#3D2C2E]">Nível de Experiência</Label>
+              <div className="flex gap-2 mt-2">
+                <Button variant="outline" className="flex-1 border-[#CFB2A8] text-[#3D2C2E] bg-[#CFB2A8]/10">
+                  Intermediário
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <div className="space-y-2">
+          <Button className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">Salvar Alterações</Button>
+          <Button variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white">
+            Alterar Senha
+          </Button>
+          <Button variant="outline" className="w-full border-red-300 text-red-600 bg-white hover:bg-red-50">
+            Sair da Conta
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+
   const renderScreen = () => {
     switch (currentScreen) {
       case 0:
@@ -357,11 +665,15 @@ export default function SissonePrototype() {
       case 1:
         return <DashboardScreen />
       case 2:
-        return <CheckInScreen />
+        return <DetailsScreen />
       case 3:
-        return <FeedbackScreen />
+        return <CheckInScreen />
       case 4:
+        return <FeedbackScreen />
+      case 5:
         return <ReviewsScreen />
+      case 6:
+        return <ProfileScreen />
       default:
         return <LoginScreen />
     }
@@ -373,7 +685,7 @@ export default function SissonePrototype() {
         <div className="max-w-sm mx-auto bg-white shadow-lg">
           {/* Screen Navigation */}
           <div className="bg-[#3D2C2E] text-white p-2 text-center text-sm">
-            Tela {currentScreen + 1}/5: {screens[currentScreen]}
+            Tela {currentScreen + 1}/7: {screens[currentScreen]}
           </div>
 
           {renderScreen()}
