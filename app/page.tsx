@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Heart, MapPin, Star, Clock, Calendar, User, Check, Filter, Edit3 } from "lucide-react"
+import { ArrowLeft, Heart, MapPin, Star, Clock, Calendar, User, Check, Filter, Edit3, ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from "next/image"
 
 type Screen = "home" | "filters" | "detail" | "schedule" | "confirmation" | "search-results"
@@ -25,6 +25,10 @@ const SissonePrototype = () => {
   const [showCalendarModal, setShowCalendarModal] = useState(false)
   const [selectedDate, setSelectedDate] = useState("")
   const [selectedTime, setSelectedTime] = useState("")
+  const [showToast, setShowToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userEmail, setUserEmail] = useState("")
 
   const [mapPosition, setMapPosition] = useState({ x: 0, y: 0 })
   const [isDragging, setIsDragging] = useState(false)
@@ -45,6 +49,24 @@ const SissonePrototype = () => {
     priceMax: "",
     rating: "",
   })
+
+  const [categoryScrollPositions, setCategoryScrollPositions] = useState<Record<string, number>>({})
+
+  const showToastNotification = (message: string) => {
+    setToastMessage(message)
+    setShowToast(true)
+    setTimeout(() => setShowToast(false), 3000)
+  }
+
+  const handleGoogleLogin = () => {
+    setIsLoggedIn(true)
+    setUserEmail("usuario@exemplo.com")
+    showToastNotification("Login realizado com sucesso!")
+  }
+
+  const handleAddToCalendar = () => {
+    showToastNotification("Aula adicionada ao calendário com sucesso!")
+  }
 
   const toggleFavorite = (id: number) => {
     setFavorites((prev) => (prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]))
@@ -68,6 +90,7 @@ const SissonePrototype = () => {
       ],
       tag: "Popular",
       tagColor: "bg-orange-100 text-orange-800",
+      category: "contemporary",
       reviews: [
         {
           name: "Ana Silva",
@@ -109,6 +132,7 @@ const SissonePrototype = () => {
       ],
       tag: "Preferido dos Alunos",
       tagColor: "bg-purple-100 text-purple-800",
+      category: "hip-hop",
       reviews: [
         {
           name: "João Pedro",
@@ -146,6 +170,7 @@ const SissonePrototype = () => {
       images: ["/classical-ballet-studio-interior.jpg", "/ballet-dancers-at-barre.jpg", "/ballet-class-instructor.jpg"],
       tag: "Novo",
       tagColor: "bg-green-100 text-green-800",
+      category: "ballet",
       reviews: [
         {
           name: "Isabella Ferreira",
@@ -179,18 +204,19 @@ const SissonePrototype = () => {
       time: "20:00",
       days: ["Quinta-feira", "Sábado"],
       location: "Centro",
-      image: "/salsa-dance-class-latin.jpg",
+      image: "/salsa-dance-class-couple.jpg",
       images: [
-        "/placeholder.svg?height=300&width=400",
-        "/placeholder.svg?height=300&width=400",
-        "/placeholder.svg?height=300&width=400",
+        "/salsa-studio-interior.jpg",
+        "/salsa-dancers-performance.jpg",
+        "/salsa-dance-class-couple.jpg",
       ],
       tag: "Quente",
       tagColor: "bg-red-100 text-red-800",
+      category: "salsa",
       reviews: [
         {
           name: "Pedro Oliveira",
-          avatar: "/placeholder.svg?height=40&width=40",
+          avatar: "/instructor-profile.jpg",
           hasPhoto: true,
           rating: 5,
           comment: "Ambiente descontraído e professores incríveis!",
@@ -204,7 +230,7 @@ const SissonePrototype = () => {
         },
         {
           name: "Roberto Silva",
-          avatar: "/placeholder.svg?height=40&width=40",
+          avatar: "/male-dancer-avatar.jpg",
           hasPhoto: true,
           rating: 5,
           comment: "Melhor escola de salsa da cidade!",
@@ -220,14 +246,15 @@ const SissonePrototype = () => {
       time: "19:30",
       days: ["Segunda-feira", "Quarta-feira"],
       location: "Zona Sul",
-      image: "/placeholder.svg?height=240&width=400",
-      images: ["/placeholder.svg?height=300&width=400", "/placeholder.svg?height=300&width=400"],
+      image: "/jazz-dance-class-modern.jpg",
+      images: ["/jazz-studio-rehearsal.jpg", "/jazz-dancers-choreography.jpg", "/jazz-dance-class-modern.jpg"],
       tag: "Trending",
       tagColor: "bg-yellow-100 text-yellow-800",
+      category: "jazz",
       reviews: [
         {
           name: "Marina Santos",
-          avatar: "/placeholder.svg?height=40&width=40",
+          avatar: "/female-dancer-avatar.jpg",
           hasPhoto: true,
           rating: 5,
           comment: "Técnica excelente e coreografias incríveis!",
@@ -241,20 +268,389 @@ const SissonePrototype = () => {
         },
         {
           name: "Amanda Costa",
-          avatar: "/placeholder.svg?height=40&width=40",
+          avatar: "/instructor-profile.jpg",
           hasPhoto: true,
           rating: 4,
           comment: "Aulas dinâmicas e muito divertidas.",
         },
       ],
     },
+    {
+      id: 6,
+      name: "Contemporary Intensive",
+      school: "Espaço Dança",
+      rating: 4.9,
+      price: "R$ 48",
+      time: "20:30",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Centro",
+      image: "/contemporary-dance-students-practicing.jpg",
+      images: ["/contemporary-dance-class-studio.jpg", "/contemporary-dance-instructor-teaching.jpg"],
+      tag: "Intensivo",
+      tagColor: "bg-blue-100 text-blue-800",
+      category: "contemporary",
+      reviews: [
+        {
+          name: "Fernanda Lima",
+          avatar: "FL",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Desafia os limites! Ótima para quem já tem experiência.",
+        },
+      ],
+    },
+    {
+      id: 7,
+      name: "Hip Hop Advanced",
+      school: "Street Style Academy",
+      rating: 4.8,
+      price: "R$ 42",
+      time: "21:00",
+      days: ["Segunda-feira", "Quarta-feira"],
+      location: "Zona Sul",
+      image: "/hip-hop-dancers-performing-moves.jpg",
+      images: ["/hip-hop-dance-class-urban.jpg", "/urban-dance-class-group.jpg"],
+      tag: "Avançado",
+      tagColor: "bg-indigo-100 text-indigo-800",
+      category: "hip-hop",
+      reviews: [
+        {
+          name: "Diego Santos",
+          avatar: "DS",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Coreografias desafiadoras e muito criativas!",
+        },
+      ],
+    },
+    {
+      id: 8,
+      name: "Ballet Clássico",
+      school: "Academia de Ballet Real",
+      rating: 4.9,
+      price: "R$ 60",
+      time: "16:00",
+      days: ["Terça-feira", "Quinta-feira", "Sábado"],
+      location: "Zona Norte",
+      image: "/ballet-dancers-at-barre.jpg",
+      images: ["/classical-ballet-studio-interior.jpg", "/ballet-class-instructor.jpg"],
+      tag: "Premium",
+      tagColor: "bg-pink-100 text-pink-800",
+      category: "ballet",
+      reviews: [
+        {
+          name: "Valentina Costa",
+          avatar: "VC",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Ensino de altíssimo nível, vale cada centavo!",
+        },
+      ],
+    },
+    {
+      id: 9,
+      name: "Salsa Avançada",
+      school: "Clube Latino",
+      rating: 4.7,
+      price: "R$ 45",
+      time: "21:30",
+      days: ["Sexta-feira", "Sábado"],
+      location: "Centro",
+      image: "/salsa-dancers-performance.jpg",
+      images: ["/salsa-dance-class-couple.jpg", "/salsa-studio-interior.jpg"],
+      tag: "Noturno",
+      tagColor: "bg-violet-100 text-violet-800",
+      category: "salsa",
+      reviews: [
+        {
+          name: "Ricardo Alves",
+          avatar: "RA",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Ambiente animado e muita prática!",
+        },
+      ],
+    },
+    {
+      id: 10,
+      name: "Jazz Funk",
+      school: "Fusion Dance Studio",
+      rating: 4.8,
+      price: "R$ 52",
+      time: "18:00",
+      days: ["Quarta-feira", "Sexta-feira"],
+      location: "Zona Sul",
+      image: "/jazz-dancers-choreography.jpg",
+      images: ["/jazz-dance-class-modern.jpg", "/jazz-studio-rehearsal.jpg"],
+      tag: "Fusion",
+      tagColor: "bg-teal-100 text-teal-800",
+      category: "jazz",
+      reviews: [
+        {
+          name: "Camila Rocha",
+          avatar: "CR",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Mistura perfeita de estilos, super dinâmica!",
+        },
+      ],
+    },
+    {
+      id: 11,
+      name: "Forró Pé de Serra",
+      school: "Arraiá do Nordeste",
+      rating: 4.7,
+      price: "R$ 38",
+      time: "19:00",
+      days: ["Quinta-feira", "Sexta-feira"],
+      location: "Centro",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg"],
+      tag: "Tradicional",
+      tagColor: "bg-amber-100 text-amber-800",
+      category: "forro",
+      reviews: [
+        {
+          name: "João Mendes",
+          avatar: "JM",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Melhor forró da cidade!",
+        },
+      ],
+    },
+    {
+      id: 12,
+      name: "Forró Universitário",
+      school: "Pé de Valsa",
+      rating: 4.6,
+      price: "R$ 35",
+      time: "20:30",
+      days: ["Terça-feira", "Sábado"],
+      location: "Zona Sul",
+      image: "/salsa-dancers-performance.jpg",
+      images: ["/salsa-dance-class-couple.jpg"],
+      tag: "Jovem",
+      tagColor: "bg-lime-100 text-lime-800",
+      category: "forro",
+      reviews: [
+        {
+          name: "Paula Santos",
+          avatar: "PS",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Ambiente descontraído e muita diversão!",
+        },
+      ],
+    },
+    {
+      id: 13,
+      name: "Dança de Salão Iniciante",
+      school: "Centro de Dança Social",
+      rating: 4.8,
+      price: "R$ 50",
+      time: "19:30",
+      days: ["Segunda-feira", "Quarta-feira"],
+      location: "Centro",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg", "/salsa-dancers-performance.jpg"],
+      tag: "Completo",
+      tagColor: "bg-cyan-100 text-cyan-800",
+      category: "ballroom",
+      reviews: [
+        {
+          name: "Marcos Silva",
+          avatar: "MS",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Aprendi vários estilos de uma vez!",
+        },
+      ],
+    },
+    {
+      id: 14,
+      name: "Valsa e Tango",
+      school: "Academia de Dança Elegante",
+      rating: 4.9,
+      price: "R$ 65",
+      time: "18:00",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Zona Norte",
+      image: "/salsa-dancers-performance.jpg",
+      images: ["/salsa-dance-class-couple.jpg"],
+      tag: "Elegante",
+      tagColor: "bg-rose-100 text-rose-800",
+      category: "ballroom",
+      reviews: [
+        {
+          name: "Patricia Lima",
+          avatar: "PL",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Elegância pura, professores impecáveis!",
+        },
+      ],
+    },
+    {
+      id: 15,
+      name: "Samba no Pé",
+      school: "Escola de Samba Unidos",
+      rating: 4.7,
+      price: "R$ 40",
+      time: "20:00",
+      days: ["Quarta-feira", "Sexta-feira"],
+      location: "Zona Sul",
+      image: "/salsa-studio-interior.jpg",
+      images: ["/salsa-dancers-performance.jpg"],
+      tag: "Carnaval",
+      tagColor: "bg-yellow-100 text-yellow-800",
+      category: "samba",
+      reviews: [
+        {
+          name: "Juliana Costa",
+          avatar: "JC",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Preparação perfeita para o carnaval!",
+        },
+      ],
+    },
+    {
+      id: 16,
+      name: "Samba de Gafieira",
+      school: "Gafieira Carioca",
+      rating: 4.8,
+      price: "R$ 45",
+      time: "21:00",
+      days: ["Quinta-feira", "Sábado"],
+      location: "Centro",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg"],
+      tag: "Carioca",
+      tagColor: "bg-emerald-100 text-emerald-800",
+      category: "samba",
+      reviews: [
+        {
+          name: "Roberto Souza",
+          avatar: "RS",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Tradição e qualidade!",
+        },
+      ],
+    },
+    {
+      id: 17,
+      name: "Zouk Brasileiro",
+      school: "Studio Zouk Brasil",
+      rating: 4.9,
+      price: "R$ 55",
+      time: "19:00",
+      days: ["Segunda-feira", "Quarta-feira"],
+      location: "Zona Sul",
+      image: "/salsa-dancers-performance.jpg",
+      images: ["/salsa-dance-class-couple.jpg"],
+      tag: "Sensual",
+      tagColor: "bg-fuchsia-100 text-fuchsia-800",
+      category: "zouk",
+      reviews: [
+        {
+          name: "Larissa Oliveira",
+          avatar: "LO",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Conexão e técnica perfeitas!",
+        },
+      ],
+    },
+    {
+      id: 18,
+      name: "Zouk Avançado",
+      school: "Escola de Zouk Pro",
+      rating: 4.8,
+      price: "R$ 60",
+      time: "20:30",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Centro",
+      image: "/salsa-studio-interior.jpg",
+      images: ["/salsa-dancers-performance.jpg"],
+      tag: "Pro",
+      tagColor: "bg-purple-100 text-purple-800",
+      category: "zouk",
+      reviews: [
+        {
+          name: "André Martins",
+          avatar: "AM",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Nível avançado de verdade!",
+        },
+      ],
+    },
+    {
+      id: 19,
+      name: "Bachata Sensual",
+      school: "Ritmo Latino Dance",
+      rating: 4.7,
+      price: "R$ 42",
+      time: "19:30",
+      days: ["Quarta-feira", "Sexta-feira"],
+      location: "Zona Sul",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg"],
+      tag: "Romântico",
+      tagColor: "bg-red-100 text-red-800",
+      category: "bachata",
+      reviews: [
+        {
+          name: "Renata Silva",
+          avatar: "RS2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Aprendi a me conectar com a música!",
+        },
+      ],
+    },
+    {
+      id: 20,
+      name: "Bachata Dominicana",
+      school: "Caribe Dance School",
+      rating: 4.8,
+      price: "R$ 48",
+      time: "21:00",
+      days: ["Sexta-feira", "Sábado"],
+      location: "Centro",
+      image: "/salsa-dancers-performance.jpg",
+      images: ["/salsa-dance-class-couple.jpg"],
+      tag: "Autêntico",
+      tagColor: "bg-orange-100 text-orange-800",
+      category: "bachata",
+      reviews: [
+        {
+          name: "Felipe Costa",
+          avatar: "FC",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Bachata raiz, como deve ser!",
+        },
+      ],
+    },
   ]
 
-  const mapMarkers = [
-    { id: 1, x: "20%", y: "30%", count: 3, classIds: [1, 4] }, // Centro
-    { id: 2, x: "70%", y: "40%", count: 2, classIds: [2, 5] }, // Zona Sul
-    { id: 3, x: "40%", y: "70%", count: 1, classIds: [3] }, // Zona Norte
-  ]
+  const getClassesByCategory = (category: string) => {
+    return classes.filter(c => c.category === category)
+  }
+
+  const scrollCategory = (categoryId: string, direction: 'left' | 'right') => {
+    const container = document.getElementById(`category-${categoryId}`)
+    if (container) {
+      const scrollAmount = 320 // Card width + gap
+      container.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      })
+    }
+  }
 
   const getSearchSummary = () => {
     const parts = []
@@ -285,11 +681,16 @@ const SissonePrototype = () => {
     setIsDragging(false)
   }
 
+  const navigateToSearchResults = (filter: string) => {
+    setSearchModality([filter])
+    setCurrentScreen("search-results")
+  }
+
   const renderHomeScreen = () => (
     <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
-        <div className="bg-white p-4 shadow-sm flex-shrink-0">
+        <div className="bg-[#F5F0EB] p-4 shadow-sm flex-shrink-0">
           <div className="text-center">
             <div className="flex justify-center mb-2">
               <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={40} className="h-10 w-auto" />
@@ -299,10 +700,10 @@ const SissonePrototype = () => {
         </div>
 
         {/* Search Button */}
-        <div className="p-4 bg-white border-b flex-shrink-0">
+        <div className="p-4 bg-[#F5F0EB] border-b flex-shrink-0">
           <Button
             variant="outline"
-            className="w-full h-12 border-[#CFB2A8] text-[#3D2C2E] bg-white justify-start px-4 hover:bg-[#F5F0EB]"
+            className="w-full h-12 border-[#CFB2A8] text-[#3D2C2E] bg-white justify-start px-4 hover:bg-[#E5D6CD]"
             onClick={() => setShowSearchModal(true)}
           >
             <div className="flex items-center gap-3">
@@ -325,14 +726,15 @@ const SissonePrototype = () => {
         </div>
 
         {/* Quick Filters */}
-        <div className="p-4 bg-white border-b flex-shrink-0">
+        <div className="p-4 bg-[#F5F0EB] border-b flex-shrink-0">
           <div className="flex gap-3 overflow-x-auto scrollbar-hide">
             {["Ballet", "Jazz", "Forró", "Ao ar livre", "Profissionais", "Dança de salão", "Aula Particular"].map(
               (filter) => (
                 <Button
                   key={filter}
                   variant="outline"
-                  className="flex-shrink-0 h-10 px-4 border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#CFB2A8] hover:text-white transition-colors"
+                  className="flex-shrink-0 h-10 px-4 border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#8B7355] hover:text-white transition-colors"
+                  onClick={() => navigateToSearchResults(filter)}
                 >
                   <span className="text-sm font-medium whitespace-nowrap">{filter}</span>
                 </Button>
@@ -342,363 +744,849 @@ const SissonePrototype = () => {
         </div>
       </div>
 
+      {/* Scrollable Content */}
+      <div className="flex-1 overflow-y-auto bg-[#F5F0EB]">
+        <div className="mx-auto w-full max-w-[1040px]">
+          
+          {/* Faça uma aula ainda hoje */}
+          <div className="py-8">
+            <div className="px-4 mb-4 flex items-center justify-between">
+              <button 
+                onClick={() => navigateToSearchResults("Hoje")}
+                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+              >
+                Faça uma aula ainda hoje
+              </button>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('today', 'left')}
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('today', 'right')}
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+            <div id="category-today" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
+              {classes.slice(0, 8).map((classItem) => (
+                <Card
+                  key={classItem.id}
+                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                  onClick={() => {
+                    setSelectedClass(classItem)
+                    setCurrentScreen("detail")
+                  }}
+                >
+                  <div className="relative h-48 w-full">
+                    <Image
+                      src={classItem.image || "/placeholder.svg"}
+                      alt={classItem.name}
+                      fill
+                      className="object-cover"
+                    />
+                    <button
+                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        toggleFavorite(classItem.id)
+                      }}
+                    >
+                      <Heart
+                        className={`h-4 w-4 ${
+                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                        }`}
+                      />
+                    </button>
+                    <div className="absolute top-2 left-2">
+                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                        {classItem.tag}
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                    <div className="flex items-center gap-1 my-2">
+                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                    </div>
+                    <div className="flex items-center justify-between mt-3">
+                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
+                        Ver detalhes
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Contemporary */}
+          <div className="py-8">
+            <div className="px-4 mb-4 flex items-center justify-between">
+              <button 
+                onClick={() => navigateToSearchResults("Contemporary")}
+                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+              >
+                Contemporary
+              </button>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('contemporary', 'left')}
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('contemporary', 'right')}
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+            <div id="category-contemporary" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
+              {getClassesByCategory('contemporary').map((classItem) => (
+                <Card
+                  key={classItem.id}
+                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                  onClick={() => {
+                    setSelectedClass(classItem)
+                    setCurrentScreen("detail")
+                  }}
+                >
+                  <div className="relative h-48 w-full">
+                    <Image
+                      src={classItem.image || "/placeholder.svg"}
+                      alt={classItem.name}
+                      fill
+                      className="object-cover"
+                    />
+                    <button
+                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        toggleFavorite(classItem.id)
+                      }}
+                    >
+                      <Heart
+                        className={`h-4 w-4 ${
+                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                        }`}
+                      />
+                    </button>
+                    <div className="absolute top-2 left-2">
+                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                        {classItem.tag}
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                    <div className="flex items-center gap-1 my-2">
+                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                    </div>
+                    <div className="flex items-center justify-between mt-3">
+                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
+                        Ver detalhes
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Hip Hop */}
+          <div className="py-8">
+            <div className="px-4 mb-4 flex items-center justify-between">
+              <button 
+                onClick={() => navigateToSearchResults("Hip Hop")}
+                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+              >
+                Hip Hop
+              </button>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('hip-hop', 'left')}
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('hip-hop', 'right')}
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+            <div id="category-hip-hop" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
+              {getClassesByCategory('hip-hop').map((classItem) => (
+                <Card
+                  key={classItem.id}
+                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                  onClick={() => {
+                    setSelectedClass(classItem)
+                    setCurrentScreen("detail")
+                  }}
+                >
+                  <div className="relative h-48 w-full">
+                    <Image
+                      src={classItem.image || "/placeholder.svg"}
+                      alt={classItem.name}
+                      fill
+                      className="object-cover"
+                    />
+                    <button
+                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        toggleFavorite(classItem.id)
+                      }}
+                    >
+                      <Heart
+                        className={`h-4 w-4 ${
+                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                        }`}
+                      />
+                    </button>
+                    <div className="absolute top-2 left-2">
+                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                        {classItem.tag}
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                    <div className="flex items-center gap-1 my-2">
+                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                    </div>
+                    <div className="flex items-center justify-between mt-3">
+                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
+                        Ver detalhes
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Ballet */}
+          <div className="py-8">
+            <div className="px-4 mb-4 flex items-center justify-between">
+              <button 
+                onClick={() => navigateToSearchResults("Ballet")}
+                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+              >
+                Ballet
+              </button>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('ballet', 'left')}
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('ballet', 'right')}
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+            <div id="category-ballet" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
+              {getClassesByCategory('ballet').map((classItem) => (
+                <Card
+                  key={classItem.id}
+                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                  onClick={() => {
+                    setSelectedClass(classItem)
+                    setCurrentScreen("detail")
+                  }}
+                >
+                  <div className="relative h-48 w-full">
+                    <Image
+                      src={classItem.image || "/placeholder.svg"}
+                      alt={classItem.name}
+                      fill
+                      className="object-cover"
+                    />
+                    <button
+                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        toggleFavorite(classItem.id)
+                      }}
+                    >
+                      <Heart
+                        className={`h-4 w-4 ${
+                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                        }`}
+                      />
+                    </button>
+                    <div className="absolute top-2 left-2">
+                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                        {classItem.tag}
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                    <div className="flex items-center gap-1 my-2">
+                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                    </div>
+                    <div className="flex items-center justify-between mt-3">
+                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
+                        Ver detalhes
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          <div className="py-8">
+            <div className="px-4 mb-4 flex items-center justify-between">
+              <button 
+                onClick={() => navigateToSearchResults("Forró")}
+                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+              >
+                Forró
+              </button>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('forro', 'left')}
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('forro', 'right')}
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+            <div id="category-forro" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
+              {getClassesByCategory('forro').map((classItem) => (
+                <Card
+                  key={classItem.id}
+                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                  onClick={() => {
+                    setSelectedClass(classItem)
+                    setCurrentScreen("detail")
+                  }}
+                >
+                  <div className="relative h-48 w-full">
+                    <Image
+                      src={classItem.image || "/placeholder.svg"}
+                      alt={classItem.name}
+                      fill
+                      className="object-cover"
+                    />
+                    <button
+                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        toggleFavorite(classItem.id)
+                      }}
+                    >
+                      <Heart
+                        className={`h-4 w-4 ${
+                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                        }`}
+                      />
+                    </button>
+                    <div className="absolute top-2 left-2">
+                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                        {classItem.tag}
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                    <div className="flex items-center gap-1 my-2">
+                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                    </div>
+                    <div className="flex items-center justify-between mt-3">
+                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
+                        Ver detalhes
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          <div className="py-8">
+            <div className="px-4 mb-4 flex items-center justify-between">
+              <button 
+                onClick={() => navigateToSearchResults("Dança de salão")}
+                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+              >
+                Dança de Salão
+              </button>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('ballroom', 'left')}
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('ballroom', 'right')}
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+            <div id="category-ballroom" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
+              {getClassesByCategory('ballroom').map((classItem) => (
+                <Card
+                  key={classItem.id}
+                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                  onClick={() => {
+                    setSelectedClass(classItem)
+                    setCurrentScreen("detail")
+                  }}
+                >
+                  <div className="relative h-48 w-full">
+                    <Image
+                      src={classItem.image || "/placeholder.svg"}
+                      alt={classItem.name}
+                      fill
+                      className="object-cover"
+                    />
+                    <button
+                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        toggleFavorite(classItem.id)
+                      }}
+                    >
+                      <Heart
+                        className={`h-4 w-4 ${
+                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                        }`}
+                      />
+                    </button>
+                    <div className="absolute top-2 left-2">
+                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                        {classItem.tag}
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                    <div className="flex items-center gap-1 my-2">
+                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                    </div>
+                    <div className="flex items-center justify-between mt-3">
+                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
+                        Ver detalhes
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          <div className="py-8">
+            <div className="px-4 mb-4 flex items-center justify-between">
+              <button 
+                onClick={() => navigateToSearchResults("Samba")}
+                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+              >
+                Samba
+              </button>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('samba', 'left')}
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('samba', 'right')}
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+            <div id="category-samba" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
+              {getClassesByCategory('samba').map((classItem) => (
+                <Card
+                  key={classItem.id}
+                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                  onClick={() => {
+                    setSelectedClass(classItem)
+                    setCurrentScreen("detail")
+                  }}
+                >
+                  <div className="relative h-48 w-full">
+                    <Image
+                      src={classItem.image || "/placeholder.svg"}
+                      alt={classItem.name}
+                      fill
+                      className="object-cover"
+                    />
+                    <button
+                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        toggleFavorite(classItem.id)
+                      }}
+                    >
+                      <Heart
+                        className={`h-4 w-4 ${
+                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                        }`}
+                      />
+                    </button>
+                    <div className="absolute top-2 left-2">
+                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                        {classItem.tag}
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                    <div className="flex items-center gap-1 my-2">
+                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                    </div>
+                    <div className="flex items-center justify-between mt-3">
+                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
+                        Ver detalhes
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          <div className="py-8">
+            <div className="px-4 mb-4 flex items-center justify-between">
+              <button 
+                onClick={() => navigateToSearchResults("Zouk")}
+                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+              >
+                Zouk
+              </button>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('zouk', 'left')}
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('zouk', 'right')}
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+            <div id="category-zouk" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
+              {getClassesByCategory('zouk').map((classItem) => (
+                <Card
+                  key={classItem.id}
+                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                  onClick={() => {
+                    setSelectedClass(classItem)
+                    setCurrentScreen("detail")
+                  }}
+                >
+                  <div className="relative h-48 w-full">
+                    <Image
+                      src={classItem.image || "/placeholder.svg"}
+                      alt={classItem.name}
+                      fill
+                      className="object-cover"
+                    />
+                    <button
+                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        toggleFavorite(classItem.id)
+                      }}
+                    >
+                      <Heart
+                        className={`h-4 w-4 ${
+                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                        }`}
+                      />
+                    </button>
+                    <div className="absolute top-2 left-2">
+                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                        {classItem.tag}
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                    <div className="flex items-center gap-1 my-2">
+                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                    </div>
+                    <div className="flex items-center justify-between mt-3">
+                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
+                        Ver detalhes
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          <div className="py-8 mb-8">
+            <div className="px-4 mb-4 flex items-center justify-between">
+              <button 
+                onClick={() => navigateToSearchResults("Bachata")}
+                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+              >
+                Bachata
+              </button>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('bachata', 'left')}
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-[#E5D6CD]"
+                  onClick={() => scrollCategory('bachata', 'right')}
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+            <div id="category-bachata" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
+              {getClassesByCategory('bachata').map((classItem) => (
+                <Card
+                  key={classItem.id}
+                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                  onClick={() => {
+                    setSelectedClass(classItem)
+                    setCurrentScreen("detail")
+                  }}
+                >
+                  <div className="relative h-48 w-full">
+                    <Image
+                      src={classItem.image || "/placeholder.svg"}
+                      alt={classItem.name}
+                      fill
+                      className="object-cover"
+                    />
+                    <button
+                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        toggleFavorite(classItem.id)
+                      }}
+                    >
+                      <Heart
+                        className={`h-4 w-4 ${
+                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                        }`}
+                      />
+                    </button>
+                    <div className="absolute top-2 left-2">
+                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                        {classItem.tag}
+                      </Badge>
+                    </div>
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                    <div className="flex items-center gap-1 my-2">
+                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                    </div>
+                    <div className="flex items-center justify-between mt-3">
+                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
+                        Ver detalhes
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Search Modal */}
       {showSearchModal && (
-        <div className="fixed inset-0 bg-white z-50 flex flex-col">
-          {/* Modal Header */}
-          <div className="flex items-center justify-between p-4 border-b">
-            <Button variant="ghost" size="icon" onClick={() => setShowSearchModal(false)}>
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-            <h2 className="text-lg font-semibold text-[#3D2C2E]">Buscar</h2>
-            <div className="w-10" />
-          </div>
-
-          {/* Modal Content */}
-          <div className="flex-1 overflow-y-auto">
-            {/* ONDE Section */}
-            <div className="p-4 border-b">
-              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Onde</h3>
-              <Input
-                placeholder="Buscar destinos"
-                className="w-full h-12 border-[#CFB2A8] mb-4"
-                value={searchLocation}
-                onChange={(e) => setSearchLocation(e.target.value)}
-              />
-              <Button
-                variant="ghost"
-                className="w-full justify-start p-3 h-auto"
-                onClick={() => setSearchLocation("Perto de mim")}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#E5D6CD] rounded-full flex items-center justify-center">
-                    <MapPin className="h-5 w-5 text-[#3D2C2E]" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-medium text-[#3D2C2E]">Perto de mim</div>
-                    <div className="text-sm text-gray-500">Encontrar aulas próximas</div>
-                  </div>
-                </div>
-              </Button>
-            </div>
-
-            {/* QUANDO Section */}
-            <div className="p-4 border-b">
-              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Quando</h3>
-              <div className="space-y-3">
-                <Button
-                  variant={searchWhen === "specific" ? "default" : "outline"}
-                  className={`w-full justify-start p-3 h-auto ${
-                    searchWhen === "specific"
-                      ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                      : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                  }`}
-                  onClick={() => {
-                    setSearchWhen("specific")
-                    setShowCalendarModal(true)
-                  }}
-                >
-                  <div className="flex items-center gap-3">
-                    <Calendar className="h-5 w-5" />
-                    <div className="text-left">
-                      <div className="font-medium">Data específica</div>
-                      <div className="text-sm opacity-70">
-                        {selectedDate && selectedTime
-                          ? `${selectedDate} às ${selectedTime}`
-                          : "Escolher data e horário"}
-                      </div>
-                    </div>
-                  </div>
-                </Button>
-
-                <Button
-                  variant={searchWhen === "weekly" ? "default" : "outline"}
-                  className={`w-full justify-start p-3 h-auto ${
-                    searchWhen === "weekly"
-                      ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                      : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                  }`}
-                  onClick={() => {
-                    setSearchWhen("weekly")
-                    setShowWeeklyModal(true)
-                  }}
-                >
-                  <div className="flex items-center gap-3">
-                    <Clock className="h-5 w-5" />
-                    <div className="text-left">
-                      <div className="font-medium">Dias da semana</div>
-                      <div className="text-sm opacity-70">
-                        {selectedDays.length > 0 && selectedShifts.length > 0
-                          ? `${selectedDays.join(" e ")} - ${selectedShifts.join(", ")}`
-                          : "Escolher dias e turnos"}
-                      </div>
-                    </div>
-                  </div>
-                </Button>
-
-                <Button
-                  variant={searchWhen === "today" ? "default" : "outline"}
-                  className={`w-full justify-start p-3 h-auto ${
-                    searchWhen === "today"
-                      ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                      : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                  }`}
-                  onClick={() => setSearchWhen("today")}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-5 h-5 bg-[#CFB2A8] rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-white rounded-full" />
-                    </div>
-                    <div className="text-left">
-                      <div className="font-medium">Hoje</div>
-                      <div className="text-sm opacity-70">Aulas disponíveis hoje</div>
-                    </div>
-                  </div>
+        <div className="fixed inset-0 bg-black/50 flex items-end z-50">
+          <div className="bg-white w-full rounded-t-3xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 space-y-6">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-[#3D2C2E]">Buscar Aulas</h2>
+                <Button variant="ghost" size="icon" onClick={() => setShowSearchModal(false)}>
+                  <ArrowLeft className="h-5 w-5" />
                 </Button>
               </div>
-            </div>
 
-            {/* MODALIDADE Section */}
-            <div className="p-4">
-              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Modalidade</h3>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { name: "Ballet", icon: "🩰" },
-                  { name: "Hip Hop", icon: "🎤" },
-                  { name: "Contemporary", icon: "💃" },
-                  { name: "Jazz", icon: "🎷" },
-                  { name: "Salsa", icon: "💃🏻" },
-                  { name: "Tango", icon: "🌹" },
-                ].map((modality) => (
-                  <Button
-                    key={modality.name}
-                    variant={searchModality.includes(modality.name) ? "default" : "outline"}
-                    className={`h-16 ${
-                      searchModality.includes(modality.name)
-                        ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                        : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                    }`}
-                    onClick={() => {
-                      if (searchModality.includes(modality.name)) {
-                        setSearchModality(searchModality.filter((m) => m !== modality.name))
-                      } else {
-                        setSearchModality([...searchModality, modality.name])
+              <div className="space-y-4">
+                <div>
+                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Onde?</label>
+                  <Input
+                    placeholder="Digite o local"
+                    value={searchLocation}
+                    onChange={(e) => setSearchLocation(e.target.value)}
+                    className="border-[#CFB2A8]"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Quando?</label>
+                  <div className="flex gap-2">
+                    <Button
+                      variant={searchWhen === "today" ? "default" : "outline"}
+                      className={
+                        searchWhen === "today"
+                          ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#8B7355] hover:text-white"
                       }
-                    }}
-                  >
-                    <div className="flex flex-col items-center gap-1">
-                      <span className="text-xl">{modality.icon}</span>
-                      <span className="text-xs font-medium">{modality.name}</span>
-                    </div>
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Calendar Modal */}
-          {showCalendarModal && (
-            <div className="fixed inset-0 bg-white z-60 flex flex-col">
-              {/* Calendar Header */}
-              <div className="flex items-center justify-between p-4 border-b">
-                <Button variant="ghost" size="icon" onClick={() => setShowCalendarModal(false)}>
-                  <ArrowLeft className="h-5 w-5" />
-                </Button>
-                <h2 className="text-lg font-semibold text-[#3D2C2E]">Selecionar Data</h2>
-                <div className="w-10" />
-              </div>
-
-              {/* Calendar Content */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-6">
-                {/* Date Selection */}
-                <div>
-                  <h3 className="text-base font-semibold text-[#3D2C2E] mb-3">Data</h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    {["Hoje", "Amanhã", "Esta semana", "Próxima semana"].map((dateOption) => (
-                      <Button
-                        key={dateOption}
-                        variant={selectedDate === dateOption ? "default" : "outline"}
-                        className={`h-12 ${
-                          selectedDate === dateOption
-                            ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                            : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                        }`}
-                        onClick={() => setSelectedDate(dateOption)}
-                      >
-                        {dateOption}
-                      </Button>
-                    ))}
+                      onClick={() => setSearchWhen("today")}
+                    >
+                      Hoje
+                    </Button>
+                    <Button
+                      variant={searchWhen === "specific" ? "default" : "outline"}
+                      className={
+                        searchWhen === "specific"
+                          ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#8B7355] hover:text-white"
+                      }
+                      onClick={() => {
+                        setSearchWhen("specific")
+                        setShowCalendarModal(true)
+                      }}
+                    >
+                      Data Específica
+                    </Button>
+                    <Button
+                      variant={searchWhen === "weekly" ? "default" : "outline"}
+                      className={
+                        searchWhen === "weekly"
+                          ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#8B7355] hover:text-white"
+                      }
+                      onClick={() => {
+                        setSearchWhen("weekly")
+                        setShowWeeklyModal(true)
+                      }}
+                    >
+                      Semanalmente
+                    </Button>
                   </div>
                 </div>
 
-                {/* Time Selection */}
                 <div>
-                  <h3 className="text-base font-semibold text-[#3D2C2E] mb-3">Horário</h3>
-                  <div className="grid grid-cols-3 gap-2">
-                    {["08:00", "10:00", "14:00", "16:00", "18:00", "20:00"].map((timeOption) => (
+                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Modalidade</label>
+                  <div className="flex flex-wrap gap-2">
+                    {["Ballet", "Contemporary", "Hip Hop", "Jazz", "Salsa", "Forró"].map((mod) => (
                       <Button
-                        key={timeOption}
-                        variant={selectedTime === timeOption ? "default" : "outline"}
-                        className={`h-10 ${
-                          selectedTime === timeOption
-                            ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                            : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                        }`}
-                        onClick={() => setSelectedTime(timeOption)}
-                      >
-                        {timeOption}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Calendar Footer */}
-              <div className="p-4 border-t bg-white">
-                <div className="flex gap-3">
-                  <Button
-                    variant="outline"
-                    className="flex-1 border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                    onClick={() => {
-                      setSelectedDate("")
-                      setSelectedTime("")
-                    }}
-                  >
-                    Limpar
-                  </Button>
-                  <Button
-                    className="flex-1 bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]"
-                    onClick={() => {
-                      setShowCalendarModal(false)
-                    }}
-                    disabled={!selectedDate || !selectedTime}
-                  >
-                    Confirmar
-                  </Button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Weekly Selection Modal */}
-          {showWeeklyModal && (
-            <div className="fixed inset-0 bg-white z-60 flex flex-col">
-              {/* Weekly Header */}
-              <div className="flex items-center justify-between p-4 border-b">
-                <Button variant="ghost" size="icon" onClick={() => setShowWeeklyModal(false)}>
-                  <ArrowLeft className="h-5 w-5" />
-                </Button>
-                <h2 className="text-lg font-semibold text-[#3D2C2E]">Dias e Turnos</h2>
-                <div className="w-10" />
-              </div>
-
-              {/* Weekly Content */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-6">
-                {/* Days Selection */}
-                <div>
-                  <h3 className="text-base font-semibold text-[#3D2C2E] mb-3">Dias da Semana</h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    {["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"].map((day) => (
-                      <Button
-                        key={day}
-                        variant={selectedDays.includes(day) ? "default" : "outline"}
-                        className={`h-12 ${
-                          selectedDays.includes(day)
-                            ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                            : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                        }`}
+                        key={mod}
+                        variant={searchModality.includes(mod) ? "default" : "outline"}
+                        className={
+                          searchModality.includes(mod)
+                            ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                            : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#8B7355] hover:text-white"
+                        }
                         onClick={() => {
-                          if (selectedDays.includes(day)) {
-                            setSelectedDays(selectedDays.filter((d) => d !== day))
-                          } else {
-                            setSelectedDays([...selectedDays, day])
-                          }
+                          setSearchModality((prev) =>
+                            prev.includes(mod) ? prev.filter((m) => m !== mod) : [...prev, mod],
+                          )
                         }}
                       >
-                        {day}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Shifts Selection */}
-                <div>
-                  <h3 className="text-base font-semibold text-[#3D2C2E] mb-3">Turnos</h3>
-                  <div className="grid grid-cols-1 gap-2">
-                    {[
-                      { name: "Manhã", time: "06:00 - 12:00" },
-                      { name: "Tarde", time: "12:00 - 18:00" },
-                      { name: "Noite", time: "18:00 - 23:00" },
-                    ].map((shift) => (
-                      <Button
-                        key={shift.name}
-                        variant={selectedShifts.includes(shift.name) ? "default" : "outline"}
-                        className={`h-16 justify-start ${
-                          selectedShifts.includes(shift.name)
-                            ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                            : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                        }`}
-                        onClick={() => {
-                          if (selectedShifts.includes(shift.name)) {
-                            setSelectedShifts(selectedShifts.filter((s) => s !== shift.name))
-                          } else {
-                            setSelectedShifts([...selectedShifts, shift.name])
-                          }
-                        }}
-                      >
-                        <div className="text-left">
-                          <div className="font-medium">{shift.name}</div>
-                          <div className="text-sm opacity-70">{shift.time}</div>
-                        </div>
+                        {mod}
                       </Button>
                     ))}
                   </div>
                 </div>
               </div>
 
-              {/* Weekly Footer */}
-              <div className="p-4 border-t bg-white">
-                <div className="flex gap-3">
-                  <Button
-                    variant="outline"
-                    className="flex-1 border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                    onClick={() => {
-                      setSelectedDays([])
-                      setSelectedShifts([])
-                    }}
-                  >
-                    Limpar
-                  </Button>
-                  <Button
-                    className="flex-1 bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]"
-                    onClick={() => {
-                      setShowWeeklyModal(false)
-                    }}
-                    disabled={selectedDays.length === 0 || selectedShifts.length === 0}
-                  >
-                    Confirmar
-                  </Button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Modal Footer */}
-          <div className="p-4 border-t bg-white">
-            <div className="flex gap-3">
               <Button
-                variant="outline"
-                className="flex-1 border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                onClick={() => {
-                  setSearchLocation("")
-                  setSearchWhen("")
-                  setSearchModality([])
-                }}
-              >
-                Limpar tudo
-              </Button>
-              <Button
-                className="flex-1 bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]"
+                className="w-full bg-[#8B7355] hover:bg-[#6F5C46] text-white h-12"
                 onClick={() => {
                   setShowSearchModal(false)
                   setCurrentScreen("search-results")
@@ -711,280 +1599,122 @@ const SissonePrototype = () => {
         </div>
       )}
 
-      {/* Classes Feed */}
-      <div className="flex-1 overflow-y-auto space-y-6 pb-6">
-        <div className="mx-auto w-full max-w-[1040px]">
-          {/* Faça uma aula ainda hoje */}
-          <div>
-            <div className="px-4 mb-3 mt-3">
-              <h2 className="text-lg font-semibold text-[#3D2C2E]">Faça uma aula ainda hoje</h2>
-            </div>
-            <div className="flex gap-3 px-4 overflow-x-auto scrollbar-hide">
-              {classes.slice(0, 3).map((classItem) => (
-                <div
-                  key={classItem.id}
-                  className="flex-shrink-0 w-64 cursor-pointer"
+      {/* Calendar Modal */}
+      {showCalendarModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <Card className="w-96 bg-white">
+            <CardHeader>
+              <h3 className="text-lg font-semibold text-[#3D2C2E]">Selecione a Data</h3>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Input
+                type="date"
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
+                className="border-[#CFB2A8]"
+              />
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  className="flex-1 border-[#CFB2A8]"
                   onClick={() => {
-                    setSelectedClass(classItem)
-                    setCurrentScreen("detail")
+                    setShowCalendarModal(false)
+                    setSelectedDate("")
                   }}
                 >
-                  <Card className="bg-white border-[#E5D6CD] hover:shadow-lg transition-shadow">
-                    <CardContent className="p-0">
-                      {/* Foto com overlay de tag e like */}
-                      <div className="relative">
-                        <Image
-                          src={classItem.image || "/placeholder.svg"}
-                          alt={classItem.name}
-                          width={256}
-                          height={160}
-                          className="w-full h-40 object-cover rounded-t-lg"
-                        />
-
-                        {/* Tag no canto superior esquerdo */}
-                        <div className="absolute top-2 left-2 z-10">
-                          <Badge className={`${classItem.tagColor} text-xs font-medium shadow-sm pointer-events-none`}>
-                            {classItem.tag}
-                          </Badge>
-                        </div>
-
-                        {/* Botão de like no canto superior direito */}
-                        <div className="absolute top-2 right-2 z-10">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              toggleFavorite(classItem.id)
-                            }}
-                            className="p-1.5 rounded-full shadow-sm bg-white/90 hover:bg-white transition-colors"
-                          >
-                            <Heart
-                              className={`h-4 w-4 transition-colors ${
-                                favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                              }`}
-                            />
-                          </Button>
-                        </div>
-                      </div>
-
-                      {/* Informações abaixo da foto */}
-                      <div className="p-3 space-y-2">
-                        <div className="flex justify-between items-start">
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight">{classItem.name}</h3>
-                            <p className="text-xs text-[#3D2C2E] opacity-70">{classItem.school}</p>
-                          </div>
-                          <div className="flex items-center gap-1 ml-2 pointer-events-none">
-                            <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
-                            <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70 pointer-events-none">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3" />
-                            <span>{classItem.days[0]}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Clock className="h-3 w-3" />
-                            <span>{classItem.time}</span>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-1 pointer-events-none">
-                            <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70" />
-                            <span className="text-xs text-[#3D2C2E] opacity-70">{classItem.location}</span>
-                          </div>
-                          <div className="text-right pointer-events-none">
-                            <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
-                            <span className="text-xs text-[#3D2C2E] opacity-70"> /aula</span>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Próximos eventos */}
-          <div>
-            <div className="px-4 mb-3">
-              <h2 className="text-lg font-semibold text-[#3D2C2E]">Próximos eventos</h2>
-            </div>
-            <div className="flex gap-3 px-4 overflow-x-auto scrollbar-hide">
-              {classes.map((classItem) => (
-                <div
-                  key={`event-${classItem.id}`}
-                  className="flex-shrink-0 w-64 cursor-pointer"
-                  onClick={() => {
-                    setSelectedClass(classItem)
-                    setCurrentScreen("detail")
-                  }}
+                  Cancelar
+                </Button>
+                <Button
+                  className="flex-1 bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                  onClick={() => setShowCalendarModal(false)}
                 >
-                  <Card className="bg-white border-[#E5D6CD] hover:shadow-lg transition-shadow">
-                    <CardContent className="p-0">
-                      <div className="relative">
-                        <Image
-                          src={classItem.image || "/placeholder.svg"}
-                          alt={classItem.name}
-                          width={256}
-                          height={160}
-                          className="w-full h-40 object-cover rounded-t-lg"
-                        />
-                        <div className="absolute top-2 left-2 z-10">
-                          <Badge className="bg-blue-100 text-blue-800 text-xs font-medium shadow-sm pointer-events-none">
-                            Evento
-                          </Badge>
-                        </div>
-                        <div className="absolute top-2 right-2 z-10">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              toggleFavorite(classItem.id)
-                            }}
-                            className="p-1.5 rounded-full shadow-sm bg-white/90 hover:bg-white transition-colors"
-                          >
-                            <Heart
-                              className={`h-4 w-4 transition-colors ${
-                                favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                              }`}
-                            />
-                          </Button>
-                        </div>
-                      </div>
-                      <div className="p-3 space-y-2">
-                        <div className="flex justify-between items-start">
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight">{classItem.name}</h3>
-                            <p className="text-xs text-[#3D2C2E] opacity-70">{classItem.school}</p>
-                          </div>
-                          <div className="flex items-center gap-1 ml-2 pointer-events-none">
-                            <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
-                            <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70 pointer-events-none">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3" />
-                            <span>{classItem.days[0]}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Clock className="h-3 w-3" />
-                            <span>{classItem.time}</span>
-                          </div>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-1 pointer-events-none">
-                            <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70" />
-                            <span className="text-xs text-[#3D2C2E] opacity-70">{classItem.location}</span>
-                          </div>
-                          <div className="text-right pointer-events-none">
-                            <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
-                            <span className="text-xs text-[#3D2C2E] opacity-70"> /aula</span>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Mais populares */}
-          <div>
-            <div className="px-4 mb-3">
-              <h2 className="text-lg font-semibold text-[#3D2C2E]">Mais populares</h2>
-            </div>
-            <div className="flex gap-3 px-4 overflow-x-auto scrollbar-hide">
-              {[...classes].reverse().map((classItem) => (
-                <div
-                  key={`popular-${classItem.id}`}
-                  className="flex-shrink-0 w-64 cursor-pointer"
-                  onClick={() => {
-                    setSelectedClass(classItem)
-                    setCurrentScreen("detail")
-                  }}
-                >
-                  <Card className="bg-white border-[#E5D6CD] hover:shadow-lg transition-shadow">
-                    <CardContent className="p-0">
-                      <div className="relative">
-                        <Image
-                          src={classItem.image || "/placeholder.svg"}
-                          alt={classItem.name}
-                          width={256}
-                          height={160}
-                          className="w-full h-40 object-cover rounded-t-lg"
-                        />
-                        <div className="absolute top-2 left-2 z-10">
-                          <Badge className={`${classItem.tagColor} text-xs font-medium shadow-sm pointer-events-none`}>
-                            {classItem.tag}
-                          </Badge>
-                        </div>
-                        <div className="absolute top-2 right-2 z-10">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              toggleFavorite(classItem.id)
-                            }}
-                            className="p-1.5 rounded-full shadow-sm bg-white/90 hover:bg-white transition-colors"
-                          >
-                            <Heart
-                              className={`h-4 w-4 transition-colors ${
-                                favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                              }`}
-                            />
-                          </Button>
-                        </div>
-                      </div>
-                      <div className="p-3 space-y-2">
-                        <div className="flex justify-between items-start">
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight">{classItem.name}</h3>
-                            <p className="text-xs text-[#3D2C2E] opacity-70">{classItem.school}</p>
-                          </div>
-                          <div className="flex items-center gap-1 ml-2 pointer-events-none">
-                            <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
-                            <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70 pointer-events-none">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3" />
-                            <span>{classItem.days[0]}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Clock className="h-3 w-3" />
-                            <span>{classItem.time}</span>
-                          </div>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-1 pointer-events-none">
-                            <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70" />
-                            <span className="text-xs text-[#3D2C2E] opacity-70">{classItem.location}</span>
-                          </div>
-                          <div className="text-right pointer-events-none">
-                            <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
-                            <span className="text-xs text-[#3D2C2E] opacity-70"> /aula</span>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
-            </div>
-          </div>
+                  Confirmar
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
-      </div>
+      )}
+
+      {/* Weekly Modal */}
+      {showWeeklyModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <Card className="w-full max-w-md bg-white">
+            <CardHeader>
+              <h3 className="text-lg font-semibold text-[#3D2C2E]">Selecione Dias e Turnos</h3>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Dias da Semana</label>
+                <div className="grid grid-cols-2 gap-2">
+                  {["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"].map((day) => (
+                    <Button
+                      key={day}
+                      variant={selectedDays.includes(day) ? "default" : "outline"}
+                      className={
+                        selectedDays.includes(day)
+                          ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          : "border-[#CFB2A8] text-[#3D2C2E]"
+                      }
+                      onClick={() => {
+                        setSelectedDays((prev) =>
+                          prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day],
+                        )
+                      }}
+                    >
+                      {day}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Turnos</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {["Manhã", "Tarde", "Noite"].map((shift) => (
+                    <Button
+                      key={shift}
+                      variant={selectedShifts.includes(shift) ? "default" : "outline"}
+                      className={
+                        selectedShifts.includes(shift)
+                          ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          : "border-[#CFB2A8] text-[#3D2C2E]"
+                      }
+                      onClick={() => {
+                        setSelectedShifts((prev) =>
+                          prev.includes(shift) ? prev.filter((s) => s !== shift) : [...prev, shift],
+                        )
+                      }}
+                    >
+                      {shift}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  className="flex-1 border-[#CFB2A8]"
+                  onClick={() => {
+                    setShowWeeklyModal(false)
+                    setSelectedDays([])
+                    setSelectedShifts([])
+                  }}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  className="flex-1 bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                  onClick={() => setShowWeeklyModal(false)}
+                >
+                  Confirmar
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   )
 
@@ -992,15 +1722,15 @@ const SissonePrototype = () => {
     <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
-        <div className="bg-white p-4 shadow-sm flex-shrink-0">
+        <div className="bg-[#F5F0EB] p-4 shadow-sm flex-shrink-0">
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-[#F5F0EB]">
+            <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-[#E5D6CD]">
               <ArrowLeft className="h-5 w-5" />
             </Button>
 
             <Button
               variant="ghost"
-              className="flex-1 justify-start px-3 py-2 h-auto min-h-[40px] hover:bg-[#F5F0EB]"
+              className="flex-1 justify-start px-3 py-2 h-auto min-h-[40px] hover:bg-[#E5D6CD]"
               onClick={() => setShowSearchModal(true)}
             >
               <div className="flex items-center gap-2">
@@ -1015,528 +1745,236 @@ const SissonePrototype = () => {
             <Button
               variant="outline"
               size="sm"
-              className="border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#CFB2A8] hover:text-white transition-colors"
+              className="border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#8B7355] hover:text-white transition-colors"
               onClick={() => setShowSearchFiltersModal(true)}
             >
-              <Filter className="h-4 w-4 mr-1" />
-              Filtros
+              <Filter className="h-4 w-4" />
             </Button>
           </div>
         </div>
-
-        {/* Results Count */}
-        <div className="px-4 py-2 bg-white border-b flex-shrink-0">
-          <p className="text-sm text-[#3D2C2E] opacity-70">{classes.length} aulas encontradas</p>
-        </div>
       </div>
 
-      <div className="bg-white border-b flex-shrink-0">
-        <div
-          className="h-48 bg-[#E5D6CD] relative overflow-hidden cursor-move select-none"
-          onMouseDown={handleMapMouseDown}
-          onMouseMove={handleMapMouseMove}
-          onMouseUp={handleMapMouseUp}
-          onMouseLeave={handleMapMouseUp}
-        >
-          {/* Map background with grid pattern */}
+      <div className="flex-1 overflow-hidden flex flex-col">
+        {/* Map Section */}
+        <div className="h-1/2 relative bg-gray-200 flex-shrink-0">
           <div
-            className="absolute inset-0 opacity-10"
+            className="absolute inset-0 cursor-move select-none"
+            onMouseDown={handleMapMouseDown}
+            onMouseMove={handleMapMouseMove}
+            onMouseUp={handleMapMouseUp}
+            onMouseLeave={handleMapMouseUp}
             style={{
-              backgroundImage:
-                "linear-gradient(#3D2C2E 1px, transparent 1px), linear-gradient(90deg, #3D2C2E 1px, transparent 1px)",
-              backgroundSize: "20px 20px",
-              transform: `translate(${mapPosition.x}px, ${mapPosition.y}px)`,
+              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23E5D6CD' width='100' height='100'/%3E%3Cpath d='M0 0L50 50M50 0L100 50M0 50L50 100M50 50L100 100' stroke='%23CFB2A8' strokeWidth='1'/%3E%3C/svg%3E")`,
+              backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
             }}
-          />
-
-          {/* Map markers */}
-          {mapMarkers.map((marker) => (
-            <div
-              key={marker.id}
-              className="absolute w-8 h-8 bg-[#CFB2A8] rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform z-10"
-              style={{
-                left: marker.x,
-                top: marker.y,
-                transform: `translate(${mapPosition.x}px, ${mapPosition.y}px) translate(-50%, -50%)`,
-              }}
-              onClick={(e) => {
-                e.stopPropagation()
-                // Filter classes by marker location
-              }}
-            >
-              <span className="text-xs text-white font-bold">{marker.count}</span>
-            </div>
-          ))}
-
-          {/* Map controls hint */}
-          <div className="absolute bottom-2 right-2 bg-white/90 px-3 py-1 rounded-full text-xs text-[#3D2C2E] pointer-events-none">
-            Arraste para explorar
+          >
+            {/* Map Markers */}
+            {classes.slice(0, 5).map((classItem, idx) => (
+              <div
+                key={classItem.id}
+                className="absolute w-10 h-10 bg-[#8B7355] rounded-full flex items-center justify-center text-white font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
+                style={{
+                  left: `${30 + idx * 15 + mapPosition.x * 0.1}%`,
+                  top: `${25 + (idx % 3) * 20 + mapPosition.y * 0.1}%`,
+                }}
+                onClick={() => {
+                  setSelectedClass(classItem)
+                  setCurrentScreen("detail")
+                }}
+              >
+                {classItem.price.replace("R$ ", "")}
+              </div>
+            ))}
+          </div>
+          
+          {/* Map hint */}
+          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-white/90 px-4 py-2 rounded-full text-sm text-[#3D2C2E] shadow-md pointer-events-none">
+            Arraste o mapa para explorar
           </div>
         </div>
-      </div>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
-        <div className="mx-auto w-full max-w-[1040px] space-y-3">
-          {classes.map((classItem) => (
-            <Card
-              key={classItem.id}
-              className="bg-white border-[#E5D6CD] cursor-pointer hover:shadow-lg transition-shadow"
-              onClick={() => {
-                setSelectedClass(classItem)
-                setCurrentScreen("detail")
-              }}
-            >
-              <CardContent className="p-3">
-                <div className="flex gap-3">
-                  <div className="relative w-28 h-28 flex-shrink-0">
-                    <Image
-                      src={classItem.image || "/placeholder.svg"}
-                      alt={classItem.name}
-                      width={112}
-                      height={112}
-                      className="w-full h-full object-cover rounded-lg"
-                    />
+        {/* Cards Section */}
+        <div className="flex-1 overflow-y-auto bg-[#F5F0EB]">
+          <div className="mx-auto w-full max-w-[1040px] p-4 space-y-4">
+            {classes.map((classItem) => (
+              <Card
+                key={classItem.id}
+                className="bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                onClick={() => {
+                  setSelectedClass(classItem)
+                  setCurrentScreen("detail")
+                }}
+              >
+                <div className="flex gap-4 p-4">
+                  {/* Image */}
+                  <div className="relative w-32 h-32 flex-shrink-0 rounded-lg overflow-hidden">
+                    <Image src={classItem.image || "/placeholder.svg"} alt={classItem.name} fill className="object-cover" />
+                    <button
+                      className="absolute top-2 right-2 w-7 h-7 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        toggleFavorite(classItem.id)
+                      }}
+                    >
+                      <Heart
+                        className={`h-3.5 w-3.5 ${
+                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                        }`}
+                      />
+                    </button>
                   </div>
 
+                  {/* Content */}
                   <div className="flex-1 min-w-0 flex flex-col justify-between">
-                    {/* Top section */}
+                    {/* Top section with tag */}
                     <div className="space-y-1">
                       <div className="flex items-start justify-between gap-2">
-                        <h3 className="font-semibold text-[#3D2C2E] text-sm leading-tight line-clamp-1">
-                          {classItem.name}
-                        </h3>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            toggleFavorite(classItem.id)
-                          }}
-                          className="p-0.5 h-auto flex-shrink-0 hover:bg-transparent"
-                        >
-                          <Heart
-                            className={`h-4 w-4 transition-colors ${
-                              favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                            }`}
-                          />
-                        </Button>
-                      </div>
-
-                      <div className="flex items-center justify-between gap-2">
-                        <p className="text-xs text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
-                        <div className="flex items-center gap-1 flex-shrink-0 pointer-events-none">
-                          <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
-                          <span className="text-xs text-[#3D2C2E] font-medium">{classItem.rating}</span>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-semibold text-[#3D2C2E] text-base line-clamp-1">{classItem.name}</h3>
+                          <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
                         </div>
+                        <Badge className={`${classItem.tagColor} border-0 text-xs flex-shrink-0 pointer-events-none`}>
+                          {classItem.tag}
+                        </Badge>
                       </div>
-
-                      <Badge className={`${classItem.tagColor} text-xs font-medium inline-block pointer-events-none`}>
-                        {classItem.tag}
-                      </Badge>
+                      
+                      <div className="flex items-center gap-1">
+                        <Star className="h-3.5 w-3.5 fill-[#CFB2A8] text-[#CFB2A8]" />
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                      </div>
                     </div>
 
-                    {/* Bottom section */}
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2 text-xs text-[#3D2C2E] opacity-70 pointer-events-none">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="h-3 w-3 flex-shrink-0" />
-                          <span className="line-clamp-1">{classItem.days[0]}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="h-3 w-3 flex-shrink-0" />
-                          <span>{classItem.time}</span>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-1 min-w-0 pointer-events-none">
-                          <MapPin className="h-3 w-3 text-[#3D2C2E] opacity-70 flex-shrink-0" />
-                          <span className="text-xs text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.location}</span>
-                        </div>
-                        <div className="text-right flex-shrink-0 pointer-events-none">
-                          <span className="text-sm font-semibold text-[#3D2C2E]">{classItem.price}</span>
-                          <span className="text-xs text-[#3D2C2E] opacity-70">/aula</span>
-                        </div>
-                      </div>
+                    {/* Bottom section with price and button */}
+                    <div className="flex items-center justify-between mt-2">
+                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
+                        Ver detalhes
+                      </Button>
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Search Filters Modal */}
       {showSearchFiltersModal && (
-        <div className="fixed inset-0 bg-white z-50 flex flex-col">
-          {/* Modal Header */}
-          <div className="flex items-center justify-between p-4 border-b">
-            <Button variant="ghost" size="icon" onClick={() => setShowSearchFiltersModal(false)}>
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-            <h2 className="text-lg font-semibold text-[#3D2C2E]">Filtros</h2>
-            <Button
-              variant="ghost"
-              className="text-sm text-[#3D2C2E]"
-              onClick={() => {
-                setSearchFilters({
-                  categories: [],
-                  days: [],
-                  shifts: [],
-                  priceMin: "",
-                  priceMax: "",
-                  rating: "",
-                })
-              }}
-            >
-              Limpar
-            </Button>
-          </div>
-
-          {/* Modal Content */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-6">
-            {/* Categories */}
-            <div>
-              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Categorias</h3>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { name: "Ballet", icon: "🩰" },
-                  { name: "Jazz", icon: "🎷" },
-                  { name: "Hip Hop", icon: "🎤" },
-                  { name: "Contemporary", icon: "💃" },
-                  { name: "Salsa", icon: "💃🏻" },
-                  { name: "Forró", icon: "🪗" },
-                ].map((category) => (
-                  <Button
-                    key={category.name}
-                    variant={searchFilters.categories.includes(category.name) ? "default" : "outline"}
-                    className={`h-16 ${
-                      searchFilters.categories.includes(category.name)
-                        ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                        : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                    }`}
-                    onClick={() => {
-                      const newCategories = searchFilters.categories.includes(category.name)
-                        ? searchFilters.categories.filter((c) => c !== category.name)
-                        : [...searchFilters.categories, category.name]
-                      setSearchFilters({ ...searchFilters, categories: newCategories })
-                    }}
-                  >
-                    <div className="flex flex-col items-center gap-1">
-                      <span className="text-xl">{category.icon}</span>
-                      <span className="text-xs font-medium">{category.name}</span>
-                    </div>
-                  </Button>
-                ))}
+        <div className="fixed inset-0 bg-black/50 flex items-end z-50">
+          <div className="bg-white w-full rounded-t-3xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 space-y-6">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-[#3D2C2E]">Filtros</h2>
+                <Button variant="ghost" size="icon" onClick={() => setShowSearchFiltersModal(false)}>
+                  <ArrowLeft className="h-5 w-5" />
+                </Button>
               </div>
-            </div>
 
-            {/* Days of Week */}
-            <div>
-              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Dias da Semana</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"].map((day) => (
-                  <Button
-                    key={day}
-                    variant={searchFilters.days.includes(day) ? "default" : "outline"}
-                    className={`h-12 ${
-                      searchFilters.days.includes(day)
-                        ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                        : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                    }`}
-                    onClick={() => {
-                      const newDays = searchFilters.days.includes(day)
-                        ? searchFilters.days.filter((d) => d !== day)
-                        : [...searchFilters.days, day]
-                      setSearchFilters({ ...searchFilters, days: newDays })
-                    }}
-                  >
-                    {day}
-                  </Button>
-                ))}
-              </div>
-            </div>
-
-            {/* Shifts */}
-            <div>
-              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Turnos</h3>
-              <div className="grid grid-cols-1 gap-2">
-                {[
-                  { name: "Manhã", time: "06:00 - 12:00" },
-                  { name: "Tarde", time: "12:00 - 18:00" },
-                  { name: "Noite", time: "18:00 - 23:00" },
-                ].map((shift) => (
-                  <Button
-                    key={shift.name}
-                    variant={searchFilters.shifts.includes(shift.name) ? "default" : "outline"}
-                    className={`h-16 justify-start ${
-                      searchFilters.shifts.includes(shift.name)
-                        ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                        : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                    }`}
-                    onClick={() => {
-                      const newShifts = searchFilters.shifts.includes(shift.name)
-                        ? searchFilters.shifts.filter((s) => s !== shift.name)
-                        : [...searchFilters.shifts, shift.name]
-                      setSearchFilters({ ...searchFilters, shifts: newShifts })
-                    }}
-                  >
-                    <div className="text-left">
-                      <div className="font-medium">{shift.name}</div>
-                      <div className="text-sm opacity-70">{shift.time}</div>
-                    </div>
-                  </Button>
-                ))}
-              </div>
-            </div>
-
-            {/* Price Range */}
-            <div>
-              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Faixa de Preço</h3>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-6">
                 <div>
-                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Mínimo</label>
-                  <Input
-                    placeholder="R$ 0"
-                    className="border-[#CFB2A8]"
-                    value={searchFilters.priceMin}
-                    onChange={(e) => setSearchFilters({ ...searchFilters, priceMin: e.target.value })}
-                  />
+                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Categorias</label>
+                  <div className="flex flex-wrap gap-2">
+                    {["Ballet", "Contemporary", "Hip Hop", "Jazz", "Salsa", "Forró"].map((cat) => (
+                      <Button
+                        key={cat}
+                        variant={searchFilters.categories.includes(cat) ? "default" : "outline"}
+                        className={
+                          searchFilters.categories.includes(cat)
+                            ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                            : "border-[#CFB2A8] text-[#3D2C2E]"
+                        }
+                        onClick={() => {
+                          setSearchFilters((prev) => ({
+                            ...prev,
+                            categories: prev.categories.includes(cat)
+                              ? prev.categories.filter((c) => c !== cat)
+                              : [...prev.categories, cat],
+                          }))
+                        }}
+                      >
+                        {cat}
+                      </Button>
+                    ))}
+                  </div>
                 </div>
+
                 <div>
-                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Máximo</label>
-                  <Input
-                    placeholder="R$ 100"
-                    className="border-[#CFB2A8]"
-                    value={searchFilters.priceMax}
-                    onChange={(e) => setSearchFilters({ ...searchFilters, priceMax: e.target.value })}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Rating */}
-            <div>
-              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Avaliação Mínima</h3>
-              <div className="flex gap-2">
-                {["4.0", "4.5", "4.8", "5.0"].map((rating) => (
-                  <Button
-                    key={rating}
-                    variant={searchFilters.rating === rating ? "default" : "outline"}
-                    className={`flex-1 ${
-                      searchFilters.rating === rating
-                        ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                        : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                    }`}
-                    onClick={() => {
-                      setSearchFilters({
-                        ...searchFilters,
-                        rating: searchFilters.rating === rating ? "" : rating,
-                      })
-                    }}
-                  >
-                    <div className="flex items-center gap-1">
-                      <Star className="h-4 w-4 fill-current" />
-                      <span>{rating}+</span>
-                    </div>
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Modal Footer */}
-          <div className="p-4 border-t bg-white">
-            <Button
-              className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]"
-              onClick={() => {
-                setShowSearchFiltersModal(false)
-                // Apply filters logic here
-              }}
-            >
-              Aplicar Filtros
-            </Button>
-          </div>
-        </div>
-      )}
-
-      {/* Search Modal (reused from home) */}
-      {showSearchModal && (
-        <div className="fixed inset-0 bg-white z-50 flex flex-col">
-          {/* Modal Header */}
-          <div className="flex items-center justify-between p-4 border-b">
-            <Button variant="ghost" size="icon" onClick={() => setShowSearchModal(false)}>
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-            <h2 className="text-lg font-semibold text-[#3D2C2E]">Editar Busca</h2>
-            <div className="w-10" />
-          </div>
-
-          {/* Modal Content - Same as home screen search modal */}
-          <div className="flex-1 overflow-y-auto">
-            {/* ONDE Section */}
-            <div className="p-4 border-b">
-              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Onde</h3>
-              <Input
-                placeholder="Buscar destinos"
-                className="w-full h-12 border-[#CFB2A8] mb-4"
-                value={searchLocation}
-                onChange={(e) => setSearchLocation(e.target.value)}
-              />
-              <Button
-                variant="ghost"
-                className="w-full justify-start p-3 h-auto"
-                onClick={() => setSearchLocation("Perto de mim")}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#E5D6CD] rounded-full flex items-center justify-center">
-                    <MapPin className="h-5 w-5 text-[#3D2C2E]" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-medium text-[#3D2C2E]">Perto de mim</div>
-                    <div className="text-sm text-gray-500">Encontrar aulas próximas</div>
+                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Dias da Semana</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"].map((day) => (
+                      <Button
+                        key={day}
+                        variant={searchFilters.days.includes(day) ? "default" : "outline"}
+                        className={
+                          searchFilters.days.includes(day)
+                            ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                            : "border-[#CFB2A8] text-[#3D2C2E]"
+                        }
+                        onClick={() => {
+                          setSearchFilters((prev) => ({
+                            ...prev,
+                            days: prev.days.includes(day) ? prev.days.filter((d) => d !== day) : [...prev.days, day],
+                          }))
+                        }}
+                      >
+                        {day}
+                      </Button>
+                    ))}
                   </div>
                 </div>
-              </Button>
-            </div>
 
-            {/* QUANDO Section */}
-            <div className="p-4 border-b">
-              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Quando</h3>
-              <div className="space-y-3">
-                <Button
-                  variant={searchWhen === "specific" ? "default" : "outline"}
-                  className={`w-full justify-start p-3 h-auto ${
-                    searchWhen === "specific"
-                      ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                      : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                  }`}
-                  onClick={() => {
-                    setSearchWhen("specific")
-                    setShowCalendarModal(true)
-                  }}
-                >
-                  <div className="flex items-center gap-3">
-                    <Calendar className="h-5 w-5" />
-                    <div className="text-left">
-                      <div className="font-medium">Data específica</div>
-                      <div className="text-sm opacity-70">
-                        {selectedDate && selectedTime
-                          ? `${selectedDate} às ${selectedTime}`
-                          : "Escolher data e horário"}
-                      </div>
-                    </div>
+                <div>
+                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Turnos</label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {["Manhã", "Tarde", "Noite"].map((shift) => (
+                      <Button
+                        key={shift}
+                        variant={searchFilters.shifts.includes(shift) ? "default" : "outline"}
+                        className={
+                          searchFilters.shifts.includes(shift)
+                            ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                            : "border-[#CFB2A8] text-[#3D2C2E]"
+                        }
+                        onClick={() => {
+                          setSearchFilters((prev) => ({
+                            ...prev,
+                            shifts: prev.shifts.includes(shift)
+                              ? prev.shifts.filter((s) => s !== shift)
+                              : [...prev.shifts, shift],
+                          }))
+                        }}
+                      >
+                        {shift}
+                      </Button>
+                    ))}
                   </div>
-                </Button>
+                </div>
 
-                <Button
-                  variant={searchWhen === "weekly" ? "default" : "outline"}
-                  className={`w-full justify-start p-3 h-auto ${
-                    searchWhen === "weekly"
-                      ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                      : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                  }`}
-                  onClick={() => {
-                    setSearchWhen("weekly")
-                    setShowWeeklyModal(true)
-                  }}
-                >
-                  <div className="flex items-center gap-3">
-                    <Clock className="h-5 w-5" />
-                    <div className="text-left">
-                      <div className="font-medium">Dias da semana</div>
-                      <div className="text-sm opacity-70">
-                        {selectedDays.length > 0 && selectedShifts.length > 0
-                          ? `${selectedDays.join(" e ")} - ${selectedShifts.join(", ")}`
-                          : "Escolher dias e turnos"}
-                      </div>
-                    </div>
+                <div>
+                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Faixa de Preço</label>
+                  <div className="flex gap-2">
+                    <Input
+                      placeholder="Mín"
+                      value={searchFilters.priceMin}
+                      onChange={(e) => setSearchFilters((prev) => ({ ...prev, priceMin: e.target.value }))}
+                      className="border-[#CFB2A8]"
+                    />
+                    <Input
+                      placeholder="Máx"
+                      value={searchFilters.priceMax}
+                      onChange={(e) => setSearchFilters((prev) => ({ ...prev, priceMax: e.target.value }))}
+                      className="border-[#CFB2A8]"
+                    />
                   </div>
-                </Button>
-
-                <Button
-                  variant={searchWhen === "today" ? "default" : "outline"}
-                  className={`w-full justify-start p-3 h-auto ${
-                    searchWhen === "today"
-                      ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                      : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                  }`}
-                  onClick={() => setSearchWhen("today")}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-5 h-5 bg-[#CFB2A8] rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-white rounded-full" />
-                    </div>
-                    <div className="text-left">
-                      <div className="font-medium">Hoje</div>
-                      <div className="text-sm opacity-70">Aulas disponíveis hoje</div>
-                    </div>
-                  </div>
-                </Button>
+                </div>
               </div>
-            </div>
 
-            {/* MODALIDADE Section */}
-            <div className="p-4">
-              <h3 className="text-lg font-semibold text-[#3D2C2E] mb-4">Modalidade</h3>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { name: "Ballet", icon: "🩰" },
-                  { name: "Hip Hop", icon: "🎤" },
-                  { name: "Contemporary", icon: "💃" },
-                  { name: "Jazz", icon: "🎷" },
-                  { name: "Salsa", icon: "💃🏻" },
-                  { name: "Tango", icon: "🌹" },
-                ].map((modality) => (
-                  <Button
-                    key={modality.name}
-                    variant={searchModality.includes(modality.name) ? "default" : "outline"}
-                    className={`h-16 ${
-                      searchModality.includes(modality.name)
-                        ? "bg-[#CFB2A8] text-[#3D2C2E]"
-                        : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                    }`}
-                    onClick={() => {
-                      if (searchModality.includes(modality.name)) {
-                        setSearchModality(searchModality.filter((m) => m !== modality.name))
-                      } else {
-                        setSearchModality([...searchModality, modality.name])
-                      }
-                    }}
-                  >
-                    <div className="flex flex-col items-center gap-1">
-                      <span className="text-xl">{modality.icon}</span>
-                      <span className="text-xs font-medium">{modality.name}</span>
-                    </div>
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Modal Footer */}
-          <div className="p-4 border-t bg-white">
-            <div className="flex gap-3">
               <Button
-                variant="outline"
-                className="flex-1 border-[#CFB2A8] text-[#3D2C2E] bg-transparent"
-                onClick={() => {
-                  setSearchLocation("")
-                  setSearchWhen("")
-                  setSearchModality([])
-                }}
+                className="w-full bg-[#8B7355] hover:bg-[#6F5C46] text-white h-12"
+                onClick={() => setShowSearchFiltersModal(false)}
               >
-                Limpar tudo
-              </Button>
-              <Button
-                className="flex-1 bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]"
-                onClick={() => {
-                  setShowSearchModal(false)
-                  // Stay on search results screen
-                }}
-              >
-                Atualizar
+                Aplicar Filtros
               </Button>
             </div>
           </div>
@@ -1548,7 +1986,7 @@ const SissonePrototype = () => {
   const renderFiltersScreen = () => (
     <div className="min-h-screen bg-[#F5F0EB]">
       {/* Header */}
-      <div className="bg-white p-4 shadow-sm flex items-center gap-3">
+      <div className="bg-[#F5F0EB] p-4 shadow-sm flex items-center gap-3">
         <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")}>
           <ArrowLeft className="h-4 w-4" />
         </Button>
@@ -1568,54 +2006,48 @@ const SissonePrototype = () => {
           </div>
         </div>
 
-        {/* Time */}
+        {/* Shifts */}
         <div>
-          <h3 className="font-medium text-[#3D2C2E] mb-3">Horário</h3>
-          <div className="grid grid-cols-2 gap-2">
-            {["Manhã", "Tarde", "Noite", "Madrugada"].map((time) => (
-              <Button key={time} variant="outline" className="border-[#CFB2A8] text-[#3D2C2E] bg-transparent">
-                {time}
+          <h3 className="font-medium text-[#3D2C2E] mb-3">Turno</h3>
+          <div className="grid grid-cols-3 gap-2">
+            {["Manhã", "Tarde", "Noite"].map((shift) => (
+              <Button key={shift} variant="outline" className="border-[#CFB2A8] text-[#3D2C2E] text-sm bg-transparent">
+                {shift}
               </Button>
             ))}
           </div>
-        </div>
-
-        {/* Location */}
-        <div>
-          <h3 className="font-medium text-[#3D2C2E] mb-3">Localização</h3>
-          <Input placeholder="Digite a localização ou CEP" className="border-[#CFB2A8]" />
         </div>
 
         {/* Price Range */}
         <div>
           <h3 className="font-medium text-[#3D2C2E] mb-3">Faixa de Preço</h3>
-          <div className="grid grid-cols-2 gap-2">
-            <Input placeholder="Mín" className="border-[#CFB2A8]" />
-            <Input placeholder="Máx" className="border-[#CFB2A8]" />
+          <div className="flex gap-2">
+            <Input placeholder="Mínimo" className="border-[#CFB2A8]" />
+            <Input placeholder="Máximo" className="border-[#CFB2A8]" />
           </div>
         </div>
 
-        {/* Rating */}
+        {/* Dance Styles */}
         <div>
-          <h3 className="font-medium text-[#3D2C2E] mb-3">Avaliação Mínima</h3>
-          <div className="flex gap-2">
-            {[4, 4.5, 5].map((rating) => (
-              <Button key={rating} variant="outline" className="border-[#CFB2A8] text-[#3D2C2E] bg-transparent">
-                {rating}+ ⭐
+          <h3 className="font-medium text-[#3D2C2E] mb-3">Modalidade</h3>
+          <div className="flex flex-wrap gap-2">
+            {["Ballet", "Contemporary", "Hip Hop", "Jazz", "Salsa", "Forró"].map((style) => (
+              <Button key={style} variant="outline" className="border-[#CFB2A8] text-[#3D2C2E] text-sm bg-transparent">
+                {style}
               </Button>
             ))}
           </div>
         </div>
+      </div>
 
-        {/* Apply Button */}
-        <div className="pt-4">
-          <Button
-            className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-[#3D2C2E]"
-            onClick={() => setCurrentScreen("home")}
-          >
-            Aplicar Filtros
-          </Button>
-        </div>
+      {/* Apply Button */}
+      <div className="p-4 mt-6">
+        <Button
+          className="w-full bg-[#8B7355] hover:bg-[#6F5C46] text-white h-12"
+          onClick={() => setCurrentScreen("search-results")}
+        >
+          Aplicar Filtros
+        </Button>
       </div>
     </div>
   )
@@ -1624,8 +2056,8 @@ const SissonePrototype = () => {
     <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
-        <div className="bg-white p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
-          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-[#F5F0EB]">
+        <div className="bg-[#F5F0EB] p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
+          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-[#E5D6CD]">
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <h1 className="text-lg font-semibold text-[#3D2C2E]">Detalhes da Aula</h1>
@@ -1633,7 +2065,7 @@ const SissonePrototype = () => {
             variant="ghost"
             size="icon"
             onClick={() => toggleFavorite(selectedClass?.id)}
-            className="ml-auto hover:bg-[#F5F0EB]"
+            className="ml-auto hover:bg-[#E5D6CD]"
           >
             <Heart
               className={`h-5 w-5 ${
@@ -1648,47 +2080,48 @@ const SissonePrototype = () => {
         <div className="flex-1 overflow-y-auto p-4 space-y-6">
           <div className="mx-auto w-full max-w-[1040px] space-y-6">
             {/* Carrossel de Imagens */}
-            <div className="relative">
-              <div className="w-full h-56 rounded-lg overflow-hidden">
-                <Image
-                  src={selectedClass.images[currentImageIndex] || "/placeholder.svg"}
-                  alt={`${selectedClass.name} ${currentImageIndex + 1}`}
-                  width={1040}
-                  height={448}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+            <div className="relative w-full h-80 rounded-xl overflow-hidden">
+              <Image src={selectedClass.images[currentImageIndex] || "/placeholder.svg"} alt={selectedClass.name} fill className="object-cover" />
+              
+              {selectedClass.images.length > 1 && (
+                <>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
+                    onClick={() =>
+                      setCurrentImageIndex((prev) =>
+                        prev === 0 ? selectedClass.images.length - 1 : prev - 1,
+                      )
+                    }
+                  >
+                    <ArrowLeft className="h-5 w-5" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
+                    onClick={() =>
+                      setCurrentImageIndex((prev) =>
+                        prev === selectedClass.images.length - 1 ? 0 : prev + 1,
+                      )
+                    }
+                  >
+                    <ArrowLeft className="h-5 w-5 rotate-180" />
+                  </Button>
+                </>
+              )}
 
-              {/* Indicadores do carrossel */}
-              <div className="flex justify-center gap-2 mt-3">
-                {selectedClass.images.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentImageIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      index === currentImageIndex ? "bg-[#CFB2A8]" : "bg-[#E5D6CD]"
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {selectedClass.images.map((_, idx) => (
+                  <div
+                    key={idx}
+                    className={`w-2 h-2 rounded-full ${
+                      idx === currentImageIndex ? "bg-white" : "bg-white/50"
                     }`}
                   />
                 ))}
               </div>
-
-              {/* Botões de navegação */}
-              <button
-                onClick={() =>
-                  setCurrentImageIndex((prev) => (prev === 0 ? selectedClass.images.length - 1 : prev - 1))
-                }
-                className="absolute left-2 top-28 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 transition-colors"
-              >
-                <ArrowLeft className="h-4 w-4" />
-              </button>
-              <button
-                onClick={() =>
-                  setCurrentImageIndex((prev) => (prev === selectedClass.images.length - 1 ? 0 : prev + 1))
-                }
-                className="absolute right-2 top-28 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-2 transition-colors"
-              >
-                <ArrowLeft className="h-4 w-4 rotate-180" />
-              </button>
             </div>
 
             {/* Class Info */}
@@ -1696,113 +2129,76 @@ const SissonePrototype = () => {
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <h2 className="text-2xl font-bold text-[#3D2C2E]">{selectedClass.name}</h2>
-                  <p className="text-lg text-[#3D2C2E] opacity-70">{selectedClass.school}</p>
+                  <p className="text-[#3D2C2E] opacity-70">{selectedClass.school}</p>
                 </div>
-                <Badge className={`${selectedClass.tagColor} font-medium pointer-events-none`}>
+                <Badge className={`${selectedClass.tagColor} border-0 pointer-events-none`}>
                   {selectedClass.tag}
                 </Badge>
               </div>
 
-              <div className="flex items-center gap-4 mt-3 mb-3 pointer-events-none">
-                <div className="flex items-center gap-1">
-                  <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                  <span className="text-[#3D2C2E]">{selectedClass.rating}</span>
-                </div>
-                <Badge className="bg-[#CFB2A8] text-[#3D2C2E]">{selectedClass.price}</Badge>
+              <div className="flex items-center gap-1 mt-2">
+                <Star className="h-5 w-5 fill-[#CFB2A8] text-[#CFB2A8]" />
+                <span className="font-medium text-[#3D2C2E] pointer-events-none">{selectedClass.rating}</span>
+                <span className="text-sm text-[#3D2C2E] opacity-70 ml-1 pointer-events-none">
+                  ({selectedClass.reviews.length} avaliações)
+                </span>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="mt-4 flex items-center gap-3">
                 <div className="flex -space-x-2">
                   {selectedClass.reviews.slice(0, 4).map((review: any, idx: number) => (
                     <div
                       key={idx}
-                      className={`w-8 h-8 rounded-full border-2 border-white flex items-center justify-center overflow-hidden ${
-                        review.hasPhoto ? "" : idx % 2 === 0 ? "bg-[#CFB2A8]" : "bg-[#E5D6CD]"
-                      }`}
+                      className="w-8 h-8 rounded-full bg-[#CFB2A8] border-2 border-white flex items-center justify-center overflow-hidden"
                     >
                       {review.hasPhoto ? (
-                        /* Using real avatar images */
-                        <Image
-                          src={review.avatar || "/placeholder.svg"}
-                          alt={review.name}
-                          width={32}
-                          height={32}
-                          className="w-full h-full object-cover"
-                        />
+                        <Image src={review.avatar || "/placeholder.svg"} alt={review.name} fill className="object-cover" />
                       ) : (
-                        <span className={`text-xs font-medium ${idx % 2 === 0 ? "text-white" : "text-[#3D2C2E]"}`}>
-                          {review.avatar}
-                        </span>
+                        <span className="text-xs font-medium text-white">{review.avatar}</span>
                       )}
                     </div>
                   ))}
-                  <div className="w-8 h-8 bg-[#CFB2A8] rounded-full border-2 border-white flex items-center justify-center">
-                    <span className="text-xs text-white font-medium">+3</span>
+                  <div className="w-8 h-8 rounded-full bg-[#8B7355] border-2 border-white flex items-center justify-center">
+                    <span className="text-xs font-medium text-white">+{Math.floor(Math.random() * 20) + 5}</span>
                   </div>
                 </div>
                 <span className="text-sm text-[#3D2C2E] opacity-70">Participantes</span>
               </div>
+
+              <div className="grid grid-cols-2 gap-4 mt-6">
+                <div className="flex items-center gap-2 text-[#3D2C2E]">
+                  <Clock className="h-5 w-5 opacity-70" />
+                  <span>{selectedClass.time}</span>
+                </div>
+                <div className="flex items-center gap-2 text-[#3D2C2E]">
+                  <Calendar className="h-5 w-5 opacity-70" />
+                  <span>{selectedClass.days.join(", ")}</span>
+                </div>
+                <div className="flex items-center gap-2 text-[#3D2C2E]">
+                  <MapPin className="h-5 w-5 opacity-70" />
+                  <span>{selectedClass.location}</span>
+                </div>
+                <div className="flex items-center gap-2 text-[#3D2C2E]">
+                  <User className="h-5 w-5 opacity-70" />
+                  <span>Todos os níveis</span>
+                </div>
+              </div>
             </div>
 
-            {/* Schedule Info */}
+            {/* Price and CTA */}
             <Card className="bg-white border-[#E5D6CD]">
-              <CardHeader>
-                <h3 className="font-semibold text-[#3D2C2E]">Horários</h3>
-              </CardHeader>
-              <CardContent className="space-y-2 pointer-events-none">
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4 text-[#3D2C2E]" />
-                  <span className="text-[#3D2C2E]">{selectedClass.days.join(" e ")}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-[#3D2C2E]" />
-                  <span className="text-[#3D2C2E]">{selectedClass.time}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-[#3D2C2E]" />
-                  <span className="text-[#3D2C2E]">{selectedClass.location}</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Carrossel de Depoimentos */}
-            <Card className="bg-white border-[#E5D6CD]">
-              <CardHeader>
-                <h3 className="font-semibold text-[#3D2C2E]">Depoimentos</h3>
-              </CardHeader>
-              <CardContent>
-                <div className="relative">
-                  <div className="text-center space-y-3">
-                    <div className="flex justify-center pointer-events-none">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-4 w-4 ${
-                            i < selectedClass.reviews[currentReviewIndex].rating
-                              ? "fill-[#CFB2A8] text-[#CFB2A8]"
-                              : "text-gray-300"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <p className="text-[#3D2C2E] italic">"{selectedClass.reviews[currentReviewIndex].comment}"</p>
-                    <p className="text-sm text-[#3D2C2E] opacity-70 font-medium">
-                      - {selectedClass.reviews[currentReviewIndex].name}
-                    </p>
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <p className="text-3xl font-bold text-[#3D2C2E] pointer-events-none">{selectedClass.price}</p>
+                    <p className="text-sm text-[#3D2C2E] opacity-70">por aula</p>
                   </div>
-
-                  {/* Indicadores dos depoimentos */}
-                  <div className="flex justify-center gap-2 mt-4">
-                    {selectedClass.reviews.map((_: any, index: number) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentReviewIndex(index)}
-                        className={`w-2 h-2 rounded-full transition-colors ${
-                          index === currentReviewIndex ? "bg-[#CFB2A8]" : "bg-[#E5D6CD]"
-                        }`}
-                      />
-                    ))}
-                  </div>
+                  <Button
+                    className="bg-[#8B7355] hover:bg-[#6F5C46] text-white px-8"
+                    onClick={() => setCurrentScreen("schedule")}
+                  >
+                    Agendar Experimental
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -1810,35 +2206,92 @@ const SissonePrototype = () => {
             {/* Description */}
             <Card className="bg-white border-[#E5D6CD]">
               <CardHeader>
-                <h3 className="font-semibold text-[#3D2C2E]">Sobre Esta Aula</h3>
+                <h3 className="text-lg font-semibold text-[#3D2C2E]">Sobre a Aula</h3>
               </CardHeader>
               <CardContent>
-                <p className="text-[#3D2C2E] opacity-80">
-                  Perfeita para iniciantes e dançarinos intermediários que buscam explorar movimento e expressão. Esta
-                  aula foca no desenvolvimento de força, flexibilidade e interpretação artística através de técnicas de
-                  dança contemporânea.
+                <p className="text-[#3D2C2E] opacity-70">
+                  Uma experiência transformadora de dança que combina técnica, expressão e criatividade. Perfeito para
+                  todos os níveis, desde iniciantes até avançados.
                 </p>
               </CardContent>
             </Card>
 
-            <Button
-              className="w-full bg-[#8B7355] hover:bg-[#735F46] text-white py-6 text-lg transition-colors shadow-md"
-              onClick={() => setCurrentScreen("schedule")}
-            >
-              Agendar Aula Experimental
-            </Button>
+            {/* Reviews */}
+            <Card className="bg-white border-[#E5D6CD]">
+              <CardHeader className="flex flex-row items-center justify-between">
+                <h3 className="text-lg font-semibold text-[#3D2C2E]">Avaliações</h3>
+                {selectedClass.reviews.length > 1 && (
+                  <div className="flex gap-2">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={() =>
+                        setCurrentReviewIndex((prev) =>
+                          prev === 0 ? selectedClass.reviews.length - 1 : prev - 1,
+                        )
+                      }
+                    >
+                      <ArrowLeft className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={() =>
+                        setCurrentReviewIndex((prev) =>
+                          prev === selectedClass.reviews.length - 1 ? 0 : prev + 1,
+                        )
+                      }
+                    >
+                      <ArrowLeft className="h-4 w-4 rotate-180" />
+                    </Button>
+                  </div>
+                )}
+              </CardHeader>
+              <CardContent>
+                <div className="flex gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#CFB2A8] flex items-center justify-center overflow-hidden flex-shrink-0">
+                    {selectedClass.reviews[currentReviewIndex].hasPhoto ? (
+                      <Image
+                        src={selectedClass.reviews[currentReviewIndex].avatar || "/placeholder.svg"}
+                        alt={selectedClass.reviews[currentReviewIndex].name}
+                        width={40}
+                        height={40}
+                        className="object-cover"
+                      />
+                    ) : (
+                      <span className="text-sm font-medium text-white">
+                        {selectedClass.reviews[currentReviewIndex].avatar}
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-medium text-[#3D2C2E]">{selectedClass.reviews[currentReviewIndex].name}</p>
+                    <div className="flex gap-1 my-1">
+                      {Array.from({ length: selectedClass.reviews[currentReviewIndex].rating }).map((_, i) => (
+                        <Star key={i} className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                      ))}
+                    </div>
+                    <p className="text-sm text-[#3D2C2E] opacity-70">{selectedClass.reviews[currentReviewIndex].comment}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       )}
     </div>
   )
 
+  const renderScheduleScreen = () => renderScheduleScreenContent()
+
   const renderScheduleScreenContent = () => (
     <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
-        <div className="bg-white p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
-          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("detail")} className="hover:bg-[#F5F0EB]">
+        <div className="bg-[#F5F0EB] p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
+          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("detail")} className="hover:bg-[#E5D6CD]">
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <h1 className="text-lg font-semibold text-[#3D2C2E]">Agendar Experimental</h1>
@@ -1867,44 +2320,107 @@ const SissonePrototype = () => {
               <p className="text-sm text-[#3D2C2E] opacity-70">Apenas alguns detalhes para começar</p>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-[#3D2C2E]">Nome Completo</label>
-                <Input placeholder="Digite seu nome completo" className="border-[#CFB2A8]" />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-[#3D2C2E]">Email</label>
-                <Input type="email" placeholder="Digite seu email" className="border-[#CFB2A8]" />
-              </div>
-
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t border-[#E5D6CD]" />
+              {isLoggedIn ? (
+                <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <div className="flex items-center gap-2">
+                    <Check className="h-5 w-5 text-green-600" />
+                    <div>
+                      <p className="text-sm font-medium text-green-800">Conectado como</p>
+                      <p className="text-sm text-green-700">{userEmail}</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-white px-2 text-[#3D2C2E] opacity-70">Or</span>
-                </div>
-              </div>
+              ) : (
+                <>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-[#3D2C2E]">Nome Completo</label>
+                    <Input placeholder="Digite seu nome completo" className="border-[#CFB2A8]" />
+                  </div>
 
-              <Button variant="outline" className="w-full border-[#CFB2A8] text-[#3D2C2E] bg-transparent">
-                <User className="h-4 w-4 mr-2" />
-                Continuar com Google
-              </Button>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-[#3D2C2E]">E-mail</label>
+                    <Input type="email" placeholder="seu@email.com" className="border-[#CFB2A8]" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-[#3D2C2E]">Telefone</label>
+                    <Input type="tel" placeholder="(00) 00000-0000" className="border-[#CFB2A8]" />
+                  </div>
+
+                  <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                      <span className="w-full border-t border-[#E5D6CD]" />
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                      <span className="bg-white px-2 text-[#3D2C2E] opacity-70">ou</span>
+                    </div>
+                  </div>
+
+                  <Button
+                    variant="outline"
+                    className="w-full border-[#CFB2A8] text-[#3D2C2E] bg-white hover:bg-[#F5F0EB]"
+                    onClick={handleGoogleLogin}
+                  >
+                    <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
+                      <path
+                        fill="currentColor"
+                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                      />
+                      <path
+                        fill="currentColor"
+                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                      />
+                      <path
+                        fill="currentColor"
+                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                      />
+                      <path
+                        fill="currentColor"
+                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                      />
+                    </svg>
+                    Continuar com Google
+                  </Button>
+                </>
+              )}
             </CardContent>
           </Card>
 
-          {/* Terms */}
-          <p className="text-xs text-[#3D2C2E] opacity-70 text-center">
-            By scheduling, you agree to our Terms of Service and Privacy Policy. Your trial class is free and no payment
-            is required today.
-          </p>
+          {/* Date Selection */}
+          <Card className="bg-white border-[#E5D6CD]">
+            <CardHeader>
+              <h3 className="font-semibold text-[#3D2C2E]">Escolha o Dia</h3>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {selectedClass?.days.map((day: string) => (
+                <Button
+                  key={day}
+                  variant="outline"
+                  className="w-full justify-start border-[#CFB2A8] text-[#3D2C2E] hover:bg-[#F5F0EB]"
+                >
+                  <Calendar className="h-4 w-4 mr-2" />
+                  {day} - {selectedClass.time}
+                </Button>
+              ))}
+            </CardContent>
+          </Card>
 
-          <Button
-            className="w-full bg-[#8B7355] hover:bg-[#735F46] text-white py-6 text-lg transition-colors shadow-md"
-            onClick={() => setCurrentScreen("confirmation")}
-          >
-            Agendar Minha Aula Experimental
-          </Button>
+          {/* Confirm Button */}
+          <div className="flex gap-3">
+            <Button
+              className="flex-1 bg-[#8B7355] hover:bg-[#6F5C46] text-white h-12"
+              onClick={() => setCurrentScreen("confirmation")}
+            >
+              Confirmar Agendamento
+            </Button>
+            <Button
+              variant="outline"
+              className="px-6 border-[#CFB2A8] text-[#3D2C2E] bg-white hover:bg-[#F5F0EB] h-12"
+              onClick={handleAddToCalendar}
+            >
+              <Calendar className="h-5 w-5" />
+            </Button>
+          </div>
         </div>
       </div>
     </div>
@@ -1914,7 +2430,7 @@ const SissonePrototype = () => {
     <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
-        <div className="bg-white p-4 shadow-sm flex-shrink-0">
+        <div className="bg-[#F5F0EB] p-4 shadow-sm flex-shrink-0">
           <h1 className="text-lg font-semibold text-[#3D2C2E] text-center">Confirmação</h1>
         </div>
       </div>
@@ -1946,23 +2462,17 @@ const SissonePrototype = () => {
             </CardContent>
           </Card>
 
-          {/* Next Steps */}
-          <div className="text-center space-y-2">
-            <p className="text-sm text-[#3D2C2E] opacity-70">Enviamos um email de confirmação com todos os detalhes.</p>
-            <p className="text-sm text-[#3D2C2E] opacity-70">Chegue 15 minutos antes da sua primeira aula.</p>
-          </div>
-
-          <div className="space-y-3 w-full max-w-sm">
-            <Button
-              className="w-full bg-[#8B7355] hover:bg-[#735F46] text-white transition-colors shadow-md"
-              onClick={() => setCurrentScreen("home")}
-            >
-              Explorar Mais Aulas
+          {/* Actions */}
+          <div className="w-full max-w-sm space-y-3">
+            <Button className="w-full bg-[#8B7355] hover:bg-[#6F5C46] text-white" onClick={() => setCurrentScreen("home")}>
+              Voltar ao Início
             </Button>
             <Button
               variant="outline"
-              className="w-full border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#F5F0EB] transition-colors"
+              className="w-full border-[#CFB2A8] text-[#3D2C2E] bg-white hover:bg-[#F5F0EB]"
+              onClick={handleAddToCalendar}
             >
+              <Calendar className="h-4 w-4 mr-2" />
               Adicionar ao Calendário
             </Button>
           </div>
@@ -1970,8 +2480,6 @@ const SissonePrototype = () => {
       </div>
     </div>
   )
-
-  const renderScheduleScreen = () => renderScheduleScreenContent()
 
   const renderCurrentScreen = () => {
     switch (currentScreen) {
@@ -2005,7 +2513,18 @@ const SissonePrototype = () => {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: scrollbarHideStyle }} />
-      <div className="w-full h-screen mx-auto bg-white shadow-xl overflow-hidden">{renderCurrentScreen()}</div>
+      <div className="w-full h-screen mx-auto bg-[#F5F0EB] shadow-xl overflow-hidden">
+        {renderCurrentScreen()}
+        
+        {showToast && (
+          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-white border-2 border-green-500 px-6 py-3 rounded-full shadow-lg z-50 animate-in slide-in-from-bottom-5">
+            <div className="flex items-center gap-2">
+              <Check className="h-5 w-5 text-green-600" />
+              <p className="text-sm font-medium text-[#3D2C2E]">{toastMessage}</p>
+            </div>
+          </div>
+        )}
+      </div>
     </>
   )
 }
