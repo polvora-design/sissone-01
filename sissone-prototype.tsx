@@ -6,12 +6,15 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
-import { Star, Calendar, Clock, MapPin, QrCode, ArrowLeft, User, Mail, Phone } from 'lucide-react'
+import { Star, Calendar, Clock, MapPin, QrCode, ArrowLeft, User, Mail, Phone, Edit2 } from 'lucide-react'
 import Image from "next/image"
+
+type ClassStatus = 'today' | 'future' | 'past-not-reviewed' | 'past-reviewed'
 
 export default function SissonePrototype() {
   const [currentScreen, setCurrentScreen] = useState(0)
   const [rating, setRating] = useState(0)
+  const [currentClassStatus, setCurrentClassStatus] = useState<ClassStatus>('today')
 
   const screens = ["Login", "Dashboard", "Detalhes", "Check-in", "Feedback", "Reviews", "Perfil"]
 
@@ -31,7 +34,8 @@ export default function SissonePrototype() {
     setCurrentScreen(1)
   }
 
-  const goToDetails = () => {
+  const goToDetails = (status: ClassStatus) => {
+    setCurrentClassStatus(status)
     setCurrentScreen(2)
   }
 
@@ -132,8 +136,10 @@ export default function SissonePrototype() {
       <div className="bg-white border-b border-[#E5D6CD] p-4">
         <div className="flex items-center justify-between">
           <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={37} className="h-auto" />
-          <Button variant="ghost" size="sm" onClick={goToProfile} className="text-[#3D2C2E] p-1">
-            <User className="w-6 h-6" />
+          <Button variant="ghost" size="sm" onClick={goToProfile} className="p-0 h-auto">
+            <div className="w-10 h-10 bg-[#CFB2A8] rounded-full flex items-center justify-center">
+              <span className="text-white text-sm font-bold">S</span>
+            </div>
           </Button>
         </div>
       </div>
@@ -170,10 +176,10 @@ export default function SissonePrototype() {
                 <span className="text-sm text-[#3D2C2E] opacity-70">Centro - Sala A</span>
               </div>
               <div className="grid grid-cols-2 gap-2">
-                <Button onClick={goToDetails} variant="outline" className="border-[#E5D6CD] text-[#3D2C2E] bg-white">
+                <Button onClick={() => goToDetails('today')} variant="outline" className="border-[#E5D6CD] text-[#3D2C2E] bg-white">
                   Ver Detalhes
                 </Button>
-                <Button onClick={() => setCurrentScreen(3)} className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+                <Button onClick={() => { goToDetails('today'); setTimeout(() => setCurrentScreen(3), 100) }} className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
                   Check-in
                 </Button>
               </div>
@@ -202,7 +208,7 @@ export default function SissonePrototype() {
                 <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
                 <span className="text-sm text-[#3D2C2E] opacity-70">Zona Norte - Sala B</span>
               </div>
-              <Button onClick={goToDetails} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+              <Button onClick={() => goToDetails('future')} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
                 Ver Detalhes
               </Button>
             </CardContent>
@@ -218,7 +224,10 @@ export default function SissonePrototype() {
                 <div>
                   <h4 className="font-semibold text-[#3D2C2E]">Ballet Clássico</h4>
                   <p className="text-[#3D2C2E] opacity-70 text-sm">Estúdio Elegance</p>
-                  <div className="flex items-center gap-2 mt-1">{renderStars(5)}</div>
+                  <div className="flex items-center gap-2 mt-1">
+                    {renderStars(5)}
+                    <span className="text-[#CFB2A8] text-xs font-medium">Sua avaliação</span>
+                  </div>
                 </div>
                 <div className="text-right text-sm text-[#3D2C2E] opacity-70">
                   <div className="flex items-center gap-1">
@@ -235,9 +244,15 @@ export default function SissonePrototype() {
                 <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
                 <span className="text-sm text-[#3D2C2E] opacity-70">Centro - Sala Principal</span>
               </div>
-              <Button onClick={goToDetails} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
-                Ver Detalhes
-              </Button>
+              <div className="grid grid-cols-2 gap-2">
+                <Button onClick={() => goToDetails('past-reviewed')} variant="outline" className="border-[#E5D6CD] text-[#3D2C2E] bg-white">
+                  Ver Detalhes
+                </Button>
+                <Button onClick={() => { goToDetails('past-reviewed'); setTimeout(() => setCurrentScreen(4), 100) }} className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+                  <Edit2 className="w-4 h-4 mr-1" />
+                  Editar Avaliação
+                </Button>
+              </div>
             </CardContent>
           </Card>
 
@@ -247,7 +262,7 @@ export default function SissonePrototype() {
                 <div>
                   <h4 className="font-semibold text-[#3D2C2E]">Hip Hop Iniciante</h4>
                   <p className="text-[#3D2C2E] opacity-70 text-sm">Urban Move Studio</p>
-                  <p className="text-[#3D2C2E] opacity-50 text-xs mt-1">Ainda não avaliado</p>
+                  <p className="text-[#CFB2A8] text-xs mt-1 font-medium">Aguardando avaliação</p>
                 </div>
                 <div className="text-right text-sm text-[#3D2C2E] opacity-70">
                   <div className="flex items-center gap-1">
@@ -265,10 +280,10 @@ export default function SissonePrototype() {
                 <span className="text-sm text-[#3D2C2E] opacity-70">Zona Sul - Sala 2</span>
               </div>
               <div className="grid grid-cols-2 gap-2">
-                <Button onClick={goToDetails} variant="outline" className="border-[#E5D6CD] text-[#3D2C2E] bg-white">
+                <Button onClick={() => goToDetails('past-not-reviewed')} variant="outline" className="border-[#E5D6CD] text-[#3D2C2E] bg-white">
                   Ver Detalhes
                 </Button>
-                <Button onClick={() => setCurrentScreen(4)} className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+                <Button onClick={() => { goToDetails('past-not-reviewed'); setTimeout(() => setCurrentScreen(4), 100) }} className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
                   Avaliar
                 </Button>
               </div>
@@ -279,90 +294,135 @@ export default function SissonePrototype() {
     </div>
   )
 
-  const DetailsScreen = () => (
-    <div className="min-h-screen bg-[#F5F0EB]">
-      <div className="bg-white border-b border-[#E5D6CD] p-4">
-        <div className="flex items-center gap-3">
-          <Button variant="ghost" size="sm" onClick={prevScreen} className="text-[#3D2C2E]">
-            <ArrowLeft className="w-4 h-4" />
-          </Button>
-          <h1 className="text-lg font-bold text-[#3D2C2E]">Detalhes da Aula</h1>
+  const DetailsScreen = () => {
+    const getTitleAndClass = () => {
+      switch (currentClassStatus) {
+        case 'today':
+          return { title: 'Fluxo Contemporâneo', studio: 'Estúdio Movement', date: 'Hoje, 16 de Janeiro', time: '18:00 - 19:30', hasUserReview: false }
+        case 'future':
+          return { title: 'Fundamentos de Jazz', studio: 'Academia Rhythm Dance', date: 'Amanhã, 17 de Janeiro', time: '19:30 - 21:00', hasUserReview: false }
+        case 'past-reviewed':
+          return { title: 'Ballet Clássico', studio: 'Estúdio Elegance', date: '15 de Janeiro', time: '17:00 - 18:30', hasUserReview: true, userRating: 5 }
+        case 'past-not-reviewed':
+          return { title: 'Hip Hop Iniciante', studio: 'Urban Move Studio', date: '12 de Janeiro', time: '20:00 - 21:30', hasUserReview: false }
+      }
+    }
+
+    const classInfo = getTitleAndClass()
+
+    return (
+      <div className="min-h-screen bg-[#F5F0EB]">
+        <div className="bg-white border-b border-[#E5D6CD] p-4">
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" size="sm" onClick={prevScreen} className="text-[#3D2C2E]">
+              <ArrowLeft className="w-4 h-4" />
+            </Button>
+            <h1 className="text-lg font-bold text-[#3D2C2E]">Detalhes da Aula</h1>
+          </div>
+        </div>
+
+        <div className="p-4 space-y-4">
+          <Card className="bg-white border-[#E5D6CD]">
+            <CardContent className="p-6 space-y-4">
+              <div>
+                <h2 className="text-2xl font-bold text-[#3D2C2E] mb-2">{classInfo.title}</h2>
+                <p className="text-[#3D2C2E] opacity-70 font-medium">{classInfo.studio}</p>
+                
+                {classInfo.hasUserReview && (
+                  <div className="mt-3 p-3 bg-[#CFB2A8]/10 border border-[#CFB2A8]/30 rounded-lg">
+                    <p className="text-[#3D2C2E] text-xs font-medium mb-1">Sua Avaliação</p>
+                    <div className="flex items-center gap-2">
+                      {renderStars(classInfo.userRating!)}
+                    </div>
+                  </div>
+                )}
+                
+                <div className="flex items-center gap-2 mt-3 pt-3 border-t border-[#E5D6CD]">
+                  <div className="flex items-center gap-1">
+                    {renderStars(4)}
+                    <span className="text-[#3D2C2E] opacity-70 text-sm">(24 avaliações)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-2 pt-2 border-t border-[#E5D6CD]">
+                <div className="flex items-center gap-3">
+                  <Calendar className="w-5 h-5 text-[#3D2C2E] opacity-70" />
+                  <div>
+                    <p className="text-[#3D2C2E] font-medium">{classInfo.date}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Clock className="w-5 h-5 text-[#3D2C2E] opacity-70" />
+                  <div>
+                    <p className="text-[#3D2C2E] font-medium">{classInfo.time}</p>
+                    <p className="text-[#3D2C2E] opacity-60 text-sm">Duração: 90 minutos</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <MapPin className="w-5 h-5 text-[#3D2C2E] opacity-70" />
+                  <div>
+                    <p className="text-[#3D2C2E] font-medium">Centro - Sala A</p>
+                    <p className="text-[#3D2C2E] opacity-60 text-sm">Rua das Flores, 123</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2 border-t border-[#E5D6CD]">
+                <h3 className="font-semibold text-[#3D2C2E] mb-2">Sobre a Aula</h3>
+                <p className="text-[#3D2C2E] opacity-70 text-sm leading-relaxed">
+                  Uma experiência de dança contemporânea que explora movimentos fluidos e expressivos. Adequado para todos
+                  os níveis. Traga roupas confortáveis e uma garrafa de água.
+                </p>
+              </div>
+
+              <div className="pt-2 border-t border-[#E5D6CD]">
+                <h3 className="font-semibold text-[#3D2C2E] mb-2">Instrutor</h3>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-[#E5D6CD] rounded-full flex items-center justify-center">
+                    <span className="text-[#3D2C2E] text-sm font-bold">CM</span>
+                  </div>
+                  <div>
+                    <p className="text-[#3D2C2E] font-medium">Carolina Matos</p>
+                    <p className="text-[#3D2C2E] opacity-60 text-sm">10 anos de experiência</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="space-y-2">
+            {currentClassStatus === 'today' && (
+              <Button onClick={() => setCurrentScreen(3)} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+                Fazer Check-in
+              </Button>
+            )}
+            
+            {(currentClassStatus === 'past-not-reviewed') && (
+              <Button onClick={() => setCurrentScreen(4)} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+                Avaliar Aula
+              </Button>
+            )}
+            
+            {currentClassStatus === 'past-reviewed' && (
+              <Button onClick={() => setCurrentScreen(4)} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+                <Edit2 className="w-4 h-4 mr-2" />
+                Editar Avaliação
+              </Button>
+            )}
+            
+            <Button
+              onClick={() => setCurrentScreen(5)}
+              variant="outline"
+              className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white"
+            >
+              Ver Avaliações da Comunidade
+            </Button>
+          </div>
         </div>
       </div>
-
-      <div className="p-4 space-y-4">
-        <Card className="bg-white border-[#E5D6CD]">
-          <CardContent className="p-6 space-y-4">
-            <div>
-              <h2 className="text-2xl font-bold text-[#3D2C2E] mb-2">Fluxo Contemporâneo</h2>
-              <p className="text-[#3D2C2E] opacity-70 font-medium">Estúdio Movement</p>
-              <div className="flex items-center gap-2 mt-2">
-                {renderStars(4)}
-                <span className="text-[#3D2C2E] opacity-70 text-sm">(24 avaliações)</span>
-              </div>
-            </div>
-
-            <div className="space-y-2 pt-2 border-t border-[#E5D6CD]">
-              <div className="flex items-center gap-3">
-                <Calendar className="w-5 h-5 text-[#3D2C2E] opacity-70" />
-                <div>
-                  <p className="text-[#3D2C2E] font-medium">Hoje, 16 de Janeiro</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <Clock className="w-5 h-5 text-[#3D2C2E] opacity-70" />
-                <div>
-                  <p className="text-[#3D2C2E] font-medium">18:00 - 19:30</p>
-                  <p className="text-[#3D2C2E] opacity-60 text-sm">Duração: 90 minutos</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-[#3D2C2E] opacity-70" />
-                <div>
-                  <p className="text-[#3D2C2E] font-medium">Centro - Sala A</p>
-                  <p className="text-[#3D2C2E] opacity-60 text-sm">Rua das Flores, 123</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-2 border-t border-[#E5D6CD]">
-              <h3 className="font-semibold text-[#3D2C2E] mb-2">Sobre a Aula</h3>
-              <p className="text-[#3D2C2E] opacity-70 text-sm leading-relaxed">
-                Uma experiência de dança contemporânea que explora movimentos fluidos e expressivos. Adequado para todos
-                os níveis. Traga roupas confortáveis e uma garrafa de água.
-              </p>
-            </div>
-
-            <div className="pt-2 border-t border-[#E5D6CD]">
-              <h3 className="font-semibold text-[#3D2C2E] mb-2">Instrutor</h3>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[#E5D6CD] rounded-full flex items-center justify-center">
-                  <span className="text-[#3D2C2E] text-sm font-bold">CM</span>
-                </div>
-                <div>
-                  <p className="text-[#3D2C2E] font-medium">Carolina Matos</p>
-                  <p className="text-[#3D2C2E] opacity-60 text-sm">10 anos de experiência</p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <div className="space-y-2">
-          <Button onClick={() => setCurrentScreen(3)} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
-            Fazer Check-in
-          </Button>
-          <Button
-            onClick={() => setCurrentScreen(5)}
-            variant="outline"
-            className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white"
-          >
-            Ver Avaliações
-          </Button>
-        </div>
-      </div>
-    </div>
-  )
+    )
+  }
 
   const CheckInScreen = () => (
     <div className="min-h-screen bg-[#F5F0EB]">
@@ -403,58 +463,70 @@ export default function SissonePrototype() {
     </div>
   )
 
-  const FeedbackScreen = () => (
-    <div className="min-h-screen bg-[#F5F0EB]">
-      <div className="bg-white border-b border-[#E5D6CD] p-4">
-        <div className="flex items-center gap-3">
-          <Button variant="ghost" size="sm" onClick={prevScreen} className="text-[#3D2C2E]">
-            <ArrowLeft className="w-4 h-4" />
-          </Button>
-          <h1 className="text-lg font-bold text-[#3D2C2E]">Como foi sua aula?</h1>
+  const FeedbackScreen = () => {
+    const isEditing = currentClassStatus === 'past-reviewed'
+    const classInfo = currentClassStatus === 'past-reviewed' 
+      ? { title: 'Ballet Clássico', studio: 'Estúdio Elegance', currentRating: 5 }
+      : { title: 'Hip Hop Iniciante', studio: 'Urban Move Studio', currentRating: 0 }
+
+    return (
+      <div className="min-h-screen bg-[#F5F0EB]">
+        <div className="bg-white border-b border-[#E5D6CD] p-4">
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" size="sm" onClick={prevScreen} className="text-[#3D2C2E]">
+              <ArrowLeft className="w-4 h-4" />
+            </Button>
+            <h1 className="text-lg font-bold text-[#3D2C2E]">
+              {isEditing ? 'Editar Avaliação' : 'Como foi sua aula?'}
+            </h1>
+          </div>
+        </div>
+
+        <div className="p-6 space-y-6">
+          <div className="text-center">
+            <h2 className="text-xl font-bold text-[#3D2C2E] mb-2">{classInfo.title}</h2>
+            <p className="text-[#3D2C2E] opacity-70">{classInfo.studio}</p>
+          </div>
+
+          <Card className="bg-white border-[#E5D6CD]">
+            <CardContent className="p-6 space-y-4">
+              <div>
+                <Label className="text-[#3D2C2E] font-medium">Avalie sua experiência</Label>
+                <div className="mt-2">{renderStars(rating || classInfo.currentRating, true)}</div>
+              </div>
+
+              <div>
+                <Label htmlFor="review" className="text-[#3D2C2E] font-medium">
+                  Compartilhe seus pensamentos (opcional)
+                </Label>
+                <Textarea
+                  id="review"
+                  placeholder="Como foi a aula? O que você mais gostou?"
+                  defaultValue={isEditing ? "Aula maravilhosa! A professora é excelente e o ambiente é muito acolhedor." : ""}
+                  className="mt-2 bg-white border-[#E5D6CD] min-h-[100px]"
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="space-y-3">
+            <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+              {isEditing ? 'Salvar Alterações' : 'Enviar Avaliação'}
+            </Button>
+            {!isEditing && (
+              <Button
+                onClick={nextScreen}
+                variant="outline"
+                className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-transparent"
+              >
+                Pular por Enquanto
+              </Button>
+            )}
+          </div>
         </div>
       </div>
-
-      <div className="p-6 space-y-6">
-        <div className="text-center">
-          <h2 className="text-xl font-bold text-[#3D2C2E] mb-2">Hip Hop Iniciante</h2>
-          <p className="text-[#3D2C2E] opacity-70">Urban Move Studio</p>
-        </div>
-
-        <Card className="bg-white border-[#E5D6CD]">
-          <CardContent className="p-6 space-y-4">
-            <div>
-              <Label className="text-[#3D2C2E] font-medium">Avalie sua experiência</Label>
-              <div className="mt-2">{renderStars(rating, true)}</div>
-            </div>
-
-            <div>
-              <Label htmlFor="review" className="text-[#3D2C2E] font-medium">
-                Compartilhe seus pensamentos (opcional)
-              </Label>
-              <Textarea
-                id="review"
-                placeholder="Como foi a aula? O que você mais gostou?"
-                className="mt-2 bg-white border-[#E5D6CD] min-h-[100px]"
-              />
-            </div>
-          </CardContent>
-        </Card>
-
-        <div className="space-y-3">
-          <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
-            Enviar Avaliação
-          </Button>
-          <Button
-            onClick={nextScreen}
-            variant="outline"
-            className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-transparent"
-          >
-            Pular por Enquanto
-          </Button>
-        </div>
-      </div>
-    </div>
-  )
+    )
+  }
 
   const ReviewsScreen = () => (
     <div className="min-h-screen bg-[#F5F0EB]">
@@ -463,7 +535,7 @@ export default function SissonePrototype() {
           <Button variant="ghost" size="sm" onClick={prevScreen} className="text-[#3D2C2E]">
             <ArrowLeft className="w-4 h-4" />
           </Button>
-          <h1 className="text-lg font-bold text-[#3D2C2E]">Avaliações da Aula</h1>
+          <h1 className="text-lg font-bold text-[#3D2C2E]">Avaliações da Comunidade</h1>
         </div>
       </div>
 
@@ -473,9 +545,19 @@ export default function SissonePrototype() {
             <div className="text-center">
               <h2 className="text-xl font-bold text-[#3D2C2E]">Fluxo Contemporâneo</h2>
               <p className="text-[#3D2C2E] opacity-70">Estúdio Movement</p>
-              <div className="flex items-center justify-center gap-2 mt-2">
+              
+              {currentClassStatus === 'past-reviewed' && (
+                <div className="mt-3 p-3 bg-[#CFB2A8]/10 border border-[#CFB2A8]/30 rounded-lg">
+                  <p className="text-[#3D2C2E] text-xs font-medium mb-1">Sua Avaliação</p>
+                  <div className="flex items-center justify-center gap-2">
+                    {renderStars(5)}
+                  </div>
+                </div>
+              )}
+              
+              <div className="flex items-center justify-center gap-2 mt-3 pt-3 border-t border-[#E5D6CD]">
                 {renderStars(4)}
-                <span className="text-[#3D2C2E] opacity-70 text-sm">(24 avaliações)</span>
+                <span className="text-[#3D2C2E] opacity-70 text-sm">(24 avaliações da comunidade)</span>
               </div>
             </div>
           </CardHeader>
@@ -566,8 +648,8 @@ export default function SissonePrototype() {
 
       <div className="p-4 space-y-6">
         <div className="text-center py-6">
-          <div className="w-24 h-24 bg-[#E5D6CD] rounded-full flex items-center justify-center mx-auto mb-3">
-            <span className="text-[#3D2C2E] text-3xl font-bold">S</span>
+          <div className="w-24 h-24 bg-[#CFB2A8] rounded-full flex items-center justify-center mx-auto mb-3">
+            <span className="text-white text-3xl font-bold">S</span>
           </div>
           <h2 className="text-xl font-bold text-[#3D2C2E]">Sarah Oliveira</h2>
           <p className="text-[#3D2C2E] opacity-70 text-sm">Membro desde Jan 2024</p>
