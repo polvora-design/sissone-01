@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Heart, MapPin, Star, Clock, Calendar, User, Check, Filter, Edit3, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowLeft, Heart, MapPin, Star, Clock, Calendar, User, Check, Filter, Edit3, ChevronLeft, ChevronRight, X } from 'lucide-react'
 import Image from "next/image"
 
 type Screen = "home" | "filters" | "detail" | "schedule" | "confirmation" | "search-results"
@@ -285,7 +285,7 @@ const SissonePrototype = () => {
       days: ["Terça-feira", "Quinta-feira"],
       location: "Centro",
       image: "/contemporary-dance-students-practicing.jpg",
-      images: ["/contemporary-dance-class-studio.jpg", "/contemporary-dance-instructor-teaching.jpg"],
+      images: ["/contemporary-dance-class-studio.jpg", "/contemporary-dance-instructor-teaching.jpg", "/contemporary-dance-students-practicing.jpg"],
       tag: "Intensivo",
       tagColor: "bg-blue-100 text-blue-800",
       category: "contemporary",
@@ -309,7 +309,7 @@ const SissonePrototype = () => {
       days: ["Segunda-feira", "Quarta-feira"],
       location: "Zona Sul",
       image: "/hip-hop-dancers-performing-moves.jpg",
-      images: ["/hip-hop-dance-class-urban.jpg", "/urban-dance-class-group.jpg"],
+      images: ["/hip-hop-dance-class-urban.jpg", "/urban-dance-class-group.jpg", "/hip-hop-dancers-performing-moves.jpg"],
       tag: "Avançado",
       tagColor: "bg-indigo-100 text-indigo-800",
       category: "hip-hop",
@@ -333,7 +333,7 @@ const SissonePrototype = () => {
       days: ["Terça-feira", "Quinta-feira", "Sábado"],
       location: "Zona Norte",
       image: "/ballet-dancers-at-barre.jpg",
-      images: ["/classical-ballet-studio-interior.jpg", "/ballet-class-instructor.jpg"],
+      images: ["/classical-ballet-studio-interior.jpg", "/ballet-class-instructor.jpg", "/ballet-dancers-at-barre.jpg"],
       tag: "Premium",
       tagColor: "bg-pink-100 text-pink-800",
       category: "ballet",
@@ -357,7 +357,7 @@ const SissonePrototype = () => {
       days: ["Sexta-feira", "Sábado"],
       location: "Centro",
       image: "/salsa-dancers-performance.jpg",
-      images: ["/salsa-dance-class-couple.jpg", "/salsa-studio-interior.jpg"],
+      images: ["/salsa-dance-class-couple.jpg", "/salsa-studio-interior.jpg", "/salsa-dancers-performance.jpg"],
       tag: "Noturno",
       tagColor: "bg-violet-100 text-violet-800",
       category: "salsa",
@@ -381,7 +381,7 @@ const SissonePrototype = () => {
       days: ["Quarta-feira", "Sexta-feira"],
       location: "Zona Sul",
       image: "/jazz-dancers-choreography.jpg",
-      images: ["/jazz-dance-class-modern.jpg", "/jazz-studio-rehearsal.jpg"],
+      images: ["/jazz-dance-class-modern.jpg", "/jazz-studio-rehearsal.jpg", "/jazz-dancers-choreography.jpg"],
       tag: "Fusion",
       tagColor: "bg-teal-100 text-teal-800",
       category: "jazz",
@@ -405,7 +405,7 @@ const SissonePrototype = () => {
       days: ["Quinta-feira", "Sexta-feira"],
       location: "Centro",
       image: "/salsa-dance-class-couple.jpg",
-      images: ["/salsa-studio-interior.jpg"],
+      images: ["/salsa-studio-interior.jpg", "/salsa-dance-class-couple.jpg"],
       tag: "Tradicional",
       tagColor: "bg-amber-100 text-amber-800",
       category: "forro",
@@ -429,7 +429,7 @@ const SissonePrototype = () => {
       days: ["Terça-feira", "Sábado"],
       location: "Zona Sul",
       image: "/salsa-dancers-performance.jpg",
-      images: ["/salsa-dance-class-couple.jpg"],
+      images: ["/salsa-dance-class-couple.jpg", "/salsa-dancers-performance.jpg"],
       tag: "Jovem",
       tagColor: "bg-lime-100 text-lime-800",
       category: "forro",
@@ -453,7 +453,7 @@ const SissonePrototype = () => {
       days: ["Segunda-feira", "Quarta-feira"],
       location: "Centro",
       image: "/salsa-dance-class-couple.jpg",
-      images: ["/salsa-studio-interior.jpg", "/salsa-dancers-performance.jpg"],
+      images: ["/salsa-studio-interior.jpg", "/salsa-dancers-performance.jpg", "/salsa-dance-class-couple.jpg"],
       tag: "Completo",
       tagColor: "bg-cyan-100 text-cyan-800",
       category: "ballroom",
@@ -477,7 +477,7 @@ const SissonePrototype = () => {
       days: ["Terça-feira", "Quinta-feira"],
       location: "Zona Norte",
       image: "/salsa-dancers-performance.jpg",
-      images: ["/salsa-dance-class-couple.jpg"],
+      images: ["/salsa-dance-class-couple.jpg", "/salsa-dancers-performance.jpg"],
       tag: "Elegante",
       tagColor: "bg-rose-100 text-rose-800",
       category: "ballroom",
@@ -501,7 +501,7 @@ const SissonePrototype = () => {
       days: ["Quarta-feira", "Sexta-feira"],
       location: "Zona Sul",
       image: "/salsa-studio-interior.jpg",
-      images: ["/salsa-dancers-performance.jpg"],
+      images: ["/salsa-dancers-performance.jpg", "/salsa-studio-interior.jpg"],
       tag: "Carnaval",
       tagColor: "bg-yellow-100 text-yellow-800",
       category: "samba",
@@ -525,7 +525,7 @@ const SissonePrototype = () => {
       days: ["Quinta-feira", "Sábado"],
       location: "Centro",
       image: "/salsa-dance-class-couple.jpg",
-      images: ["/salsa-studio-interior.jpg"],
+      images: ["/salsa-studio-interior.jpg", "/salsa-dance-class-couple.jpg"],
       tag: "Carioca",
       tagColor: "bg-emerald-100 text-emerald-800",
       category: "samba",
@@ -549,7 +549,7 @@ const SissonePrototype = () => {
       days: ["Segunda-feira", "Quarta-feira"],
       location: "Zona Sul",
       image: "/salsa-dancers-performance.jpg",
-      images: ["/salsa-dance-class-couple.jpg"],
+      images: ["/salsa-dance-class-couple.jpg", "/salsa-dancers-performance.jpg"],
       tag: "Sensual",
       tagColor: "bg-fuchsia-100 text-fuchsia-800",
       category: "zouk",
@@ -573,7 +573,7 @@ const SissonePrototype = () => {
       days: ["Terça-feira", "Quinta-feira"],
       location: "Centro",
       image: "/salsa-studio-interior.jpg",
-      images: ["/salsa-dancers-performance.jpg"],
+      images: ["/salsa-dancers-performance.jpg", "/salsa-studio-interior.jpg"],
       tag: "Pro",
       tagColor: "bg-purple-100 text-purple-800",
       category: "zouk",
@@ -597,7 +597,7 @@ const SissonePrototype = () => {
       days: ["Quarta-feira", "Sexta-feira"],
       location: "Zona Sul",
       image: "/salsa-dance-class-couple.jpg",
-      images: ["/salsa-studio-interior.jpg"],
+      images: ["/salsa-studio-interior.jpg", "/salsa-dance-class-couple.jpg"],
       tag: "Romântico",
       tagColor: "bg-red-100 text-red-800",
       category: "bachata",
@@ -621,7 +621,7 @@ const SissonePrototype = () => {
       days: ["Sexta-feira", "Sábado"],
       location: "Centro",
       image: "/salsa-dancers-performance.jpg",
-      images: ["/salsa-dance-class-couple.jpg"],
+      images: ["/salsa-dance-class-couple.jpg", "/salsa-dancers-performance.jpg"],
       tag: "Autêntico",
       tagColor: "bg-orange-100 text-orange-800",
       category: "bachata",
@@ -635,10 +635,994 @@ const SissonePrototype = () => {
         },
       ],
     },
+    {
+      id: 21,
+      name: "Contemporary Flow Advanced",
+      school: "Arte em Movimento",
+      rating: 4.8,
+      price: "R$ 52",
+      time: "18:00",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Zona Sul",
+      image: "/contemporary-dance-instructor-teaching.jpg",
+      images: ["/contemporary-dance-class-studio-interior.jpg", "/contemporary-dance-students-practicing.jpg"],
+      tag: "Avançado",
+      tagColor: "bg-indigo-100 text-indigo-800",
+      category: "contemporary",
+      reviews: [
+        {
+          name: "Bruna Martins",
+          avatar: "BM",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Técnica avançada com professores inspiradores!",
+        },
+      ],
+    },
+    {
+      id: 22,
+      name: "Contemporary Workshop",
+      school: "Núcleo de Dança",
+      rating: 4.7,
+      price: "R$ 55",
+      time: "14:00",
+      days: ["Sábado"],
+      location: "Centro",
+      image: "/contemporary-dance-class-studio-interior.jpg",
+      images: ["/contemporary-dance-students-practicing.jpg", "/contemporary-dance-instructor-teaching.jpg"],
+      tag: "Workshop",
+      tagColor: "bg-purple-100 text-purple-800",
+      category: "contemporary",
+      reviews: [
+        {
+          name: "Gustavo Lima",
+          avatar: "GL",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Workshop incrível, aprendi muito em um dia!",
+        },
+      ],
+    },
+    {
+      id: 23,
+      name: "Contemporary Express",
+      school: "Dança Livre Studio",
+      rating: 4.6,
+      price: "R$ 40",
+      time: "12:00",
+      days: ["Quarta-feira"],
+      location: "Zona Norte",
+      image: "/contemporary-dance-students-practicing.jpg",
+      images: ["/contemporary-dance-class-studio.jpg"],
+      tag: "Express",
+      tagColor: "bg-green-100 text-green-800",
+      category: "contemporary",
+      reviews: [
+        {
+          name: "Tatiana Souza",
+          avatar: "TS",
+          hasPhoto: false,
+          rating: 4,
+          comment: "Perfeito para o horário de almoço!",
+        },
+      ],
+    },
+    {
+      id: 24,
+      name: "Contemporary Kids",
+      school: "Pequenos Bailarinos",
+      rating: 4.9,
+      price: "R$ 35",
+      time: "15:00",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Zona Sul",
+      image: "/contemporary-dance-class-studio.jpg",
+      images: ["/contemporary-dance-instructor-teaching.jpg"],
+      tag: "Infantil",
+      tagColor: "bg-pink-100 text-pink-800",
+      category: "contemporary",
+      reviews: [
+        {
+          name: "Adriana Mendes",
+          avatar: "AM2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Meu filho ama as aulas!",
+        },
+      ],
+    },
+    {
+      id: 25,
+      name: "Contemporary Open Class",
+      school: "Open Dance Studio",
+      rating: 4.7,
+      price: "R$ 30",
+      time: "10:00",
+      days: ["Domingo"],
+      location: "Centro",
+      image: "/contemporary-dance-instructor-teaching.jpg",
+      images: ["/contemporary-dance-class-studio-interior.jpg"],
+      tag: "Open",
+      tagColor: "bg-blue-100 text-blue-800",
+      category: "contemporary",
+      reviews: [
+        {
+          name: "Rodrigo Alves",
+          avatar: "RA2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Aula aberta com ótima energia!",
+        },
+      ],
+    },
+    {
+      id: 26,
+      name: "Hip Hop Kids",
+      school: "Urban Dance Kids",
+      rating: 4.8,
+      price: "R$ 32",
+      time: "16:00",
+      days: ["Quarta-feira", "Sexta-feira"],
+      location: "Centro",
+      image: "/hip-hop-dance-class-urban.jpg",
+      images: ["/hip-hop-dance-studio-with-students.jpg"],
+      tag: "Infantil",
+      tagColor: "bg-pink-100 text-pink-800",
+      category: "hip-hop",
+      reviews: [
+        {
+          name: "Mariana Costa",
+          avatar: "MC",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Perfeito para crianças começarem no hip hop!",
+        },
+      ],
+    },
+    {
+      id: 27,
+      name: "Hip Hop Freestyle",
+      school: "Free Style Collective",
+      rating: 4.9,
+      price: "R$ 38",
+      time: "20:00",
+      days: ["Sexta-feira"],
+      location: "Zona Sul",
+      image: "/urban-dance-class-group.jpg",
+      images: ["/hip-hop-dancers-performing-moves.jpg"],
+      tag: "Freestyle",
+      tagColor: "bg-yellow-100 text-yellow-800",
+      category: "hip-hop",
+      reviews: [
+        {
+          name: "André Silva",
+          avatar: "AS2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Ambiente livre e criativo!",
+        },
+      ],
+    },
+    {
+      id: 28,
+      name: "Hip Hop Coreografia",
+      school: "Coreografia Urbana",
+      rating: 4.7,
+      price: "R$ 40",
+      time: "19:00",
+      days: ["Segunda-feira", "Quarta-feira"],
+      location: "Centro",
+      image: "/hip-hop-dance-studio-with-students.jpg",
+      images: ["/hip-hop-dance-class-urban.jpg"],
+      tag: "Coreografia",
+      tagColor: "bg-teal-100 text-teal-800",
+      category: "hip-hop",
+      reviews: [
+        {
+          name: "Lucas Oliveira",
+          avatar: "LO2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Coreografias incríveis toda semana!",
+        },
+      ],
+    },
+    {
+      id: 29,
+      name: "Hip Hop Battle",
+      school: "Battle Ground Studio",
+      rating: 4.8,
+      price: "R$ 45",
+      time: "21:30",
+      days: ["Sábado"],
+      location: "Zona Sul",
+      image: "/hip-hop-dancers-performing-moves.jpg",
+      images: ["/urban-dance-class-group.jpg"],
+      tag: "Battle",
+      tagColor: "bg-red-100 text-red-800",
+      category: "hip-hop",
+      reviews: [
+        {
+          name: "Pedro Costa",
+          avatar: "PC",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Adrenalina pura!",
+        },
+      ],
+    },
+    {
+      id: 30,
+      name: "Ballet Infantil",
+      school: "Ballet para Crianças",
+      rating: 4.9,
+      price: "R$ 45",
+      time: "15:30",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Centro",
+      image: "/ballet-class-instructor.jpg",
+      images: ["/classical-ballet-studio-interior.jpg"],
+      tag: "Infantil",
+      tagColor: "bg-pink-100 text-pink-800",
+      category: "ballet",
+      reviews: [
+        {
+          name: "Juliana Santos",
+          avatar: "JS",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Minha filha está apaixonada pelo ballet!",
+        },
+      ],
+    },
+    {
+      id: 31,
+      name: "Ballet Adulto Iniciante",
+      school: "Nunca é Tarde",
+      rating: 4.7,
+      price: "R$ 50",
+      time: "20:00",
+      days: ["Segunda-feira", "Quarta-feira"],
+      location: "Zona Sul",
+      image: "/classical-ballet-studio-interior.jpg",
+      images: ["/ballet-dancers-at-barre.jpg"],
+      tag: "Adulto",
+      tagColor: "bg-purple-100 text-purple-800",
+      category: "ballet",
+      reviews: [
+        {
+          name: "Carla Rodrigues",
+          avatar: "CR2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Realizando o sonho de criança!",
+        },
+      ],
+    },
+    {
+      id: 32,
+      name: "Ballet Repertório",
+      school: "Companhia de Ballet",
+      rating: 4.8,
+      price: "R$ 70",
+      time: "18:30",
+      days: ["Terça-feira", "Quinta-feira", "Sábado"],
+      location: "Zona Norte",
+      image: "/ballet-dancers-at-barre.jpg",
+      images: ["/ballet-class-instructor.jpg"],
+      tag: "Avançado",
+      tagColor: "bg-indigo-100 text-indigo-800",
+      category: "ballet",
+      reviews: [
+        {
+          name: "Gabriela Alves",
+          avatar: "GA",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Repertório clássico impecável!",
+        },
+      ],
+    },
+    {
+      id: 33,
+      name: "Ballet Fitness",
+      school: "Barre Fitness Studio",
+      rating: 4.6,
+      price: "R$ 55",
+      time: "07:00",
+      days: ["Segunda-feira", "Quarta-feira", "Sexta-feira"],
+      location: "Centro",
+      image: "/classical-ballet-studio-interior.jpg",
+      images: ["/ballet-dancers-at-barre.jpg"],
+      tag: "Fitness",
+      tagColor: "bg-green-100 text-green-800",
+      category: "ballet",
+      reviews: [
+        {
+          name: "Renata Lima",
+          avatar: "RL",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Ótimo treino com elementos de ballet!",
+        },
+      ],
+    },
+    {
+      id: 34,
+      name: "Salsa Cubana",
+      school: "Cuba Dance Academy",
+      rating: 4.8,
+      price: "R$ 42",
+      time: "19:00",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Zona Sul",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg"],
+      tag: "Cubana",
+      tagColor: "bg-orange-100 text-orange-800",
+      category: "salsa",
+      reviews: [
+        {
+          name: "Miguel Santos",
+          avatar: "MS2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Salsa cubana autêntica!",
+        },
+      ],
+    },
+    {
+      id: 35,
+      name: "Salsa em Linha",
+      school: "LA Style Dance",
+      rating: 4.7,
+      price: "R$ 44",
+      time: "20:30",
+      days: ["Quarta-feira", "Sexta-feira"],
+      location: "Centro",
+      image: "/salsa-studio-interior.jpg",
+      images: ["/salsa-dancers-performance.jpg"],
+      tag: "LA Style",
+      tagColor: "bg-blue-100 text-blue-800",
+      category: "salsa",
+      reviews: [
+        {
+          name: "Laura Mendes",
+          avatar: "LM",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Estilo LA perfeito!",
+        },
+      ],
+    },
+    {
+      id: 36,
+      name: "Salsa Shine",
+      school: "Solo Salsa Studio",
+      rating: 4.6,
+      price: "R$ 38",
+      time: "18:00",
+      days: ["Segunda-feira"],
+      location: "Zona Norte",
+      image: "/salsa-dancers-performance.jpg",
+      images: ["/salsa-dance-class-couple.jpg"],
+      tag: "Solo",
+      tagColor: "bg-yellow-100 text-yellow-800",
+      category: "salsa",
+      reviews: [
+        {
+          name: "Rafael Costa",
+          avatar: "RC",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Melhorei muito meus shines!",
+        },
+      ],
+    },
+    {
+      id: 37,
+      name: "Salsa Social",
+      school: "Salsa Social Club",
+      rating: 4.9,
+      price: "R$ 35",
+      time: "22:00",
+      days: ["Sexta-feira", "Sábado"],
+      location: "Centro",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg"],
+      tag: "Social",
+      tagColor: "bg-purple-100 text-purple-800",
+      category: "salsa",
+      reviews: [
+        {
+          name: "Isabela Fernandes",
+          avatar: "IF2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Melhor lugar para dançar e socializar!",
+        },
+      ],
+    },
+    {
+      id: 38,
+      name: "Jazz Contemporâneo",
+      school: "Jazz Fusion Center",
+      rating: 4.8,
+      price: "R$ 48",
+      time: "19:00",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Zona Sul",
+      image: "/jazz-dance-class-modern.jpg",
+      images: ["/jazz-studio-rehearsal.jpg"],
+      tag: "Fusão",
+      tagColor: "bg-teal-100 text-teal-800",
+      category: "jazz",
+      reviews: [
+        {
+          name: "Bianca Silva",
+          avatar: "BS",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Mistura perfeita de jazz e contemporary!",
+        },
+      ],
+    },
+    {
+      id: 39,
+      name: "Jazz Broadway",
+      school: "Musical Theater Dance",
+      rating: 4.7,
+      price: "R$ 55",
+      time: "18:30",
+      days: ["Quarta-feira", "Sexta-feira"],
+      location: "Centro",
+      image: "/jazz-studio-rehearsal.jpg",
+      images: ["/jazz-dancers-choreography.jpg"],
+      tag: "Broadway",
+      tagColor: "bg-rose-100 text-rose-800",
+      category: "jazz",
+      reviews: [
+        {
+          name: "Thiago Oliveira",
+          avatar: "TO",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Estilo Broadway autêntico!",
+        },
+      ],
+    },
+    {
+      id: 40,
+      name: "Jazz Lírico",
+      school: "Expressão em Dança",
+      rating: 4.9,
+      price: "R$ 52",
+      time: "17:00",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Zona Norte",
+      image: "/jazz-dancers-choreography.jpg",
+      images: ["/jazz-dance-class-modern.jpg"],
+      tag: "Lírico",
+      tagColor: "bg-purple-100 text-purple-800",
+      category: "jazz",
+      reviews: [
+        {
+          name: "Sofia Martins",
+          avatar: "SM",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Emocionante e técnico!",
+        },
+      ],
+    },
+    {
+      id: 41,
+      name: "Jazz Kids",
+      school: "Kids Jazz Academy",
+      rating: 4.8,
+      price: "R$ 40",
+      time: "16:00",
+      days: ["Segunda-feira", "Quarta-feira"],
+      location: "Zona Sul",
+      image: "/jazz-dance-class-modern.jpg",
+      images: ["/jazz-studio-rehearsal.jpg"],
+      tag: "Infantil",
+      tagColor: "bg-pink-100 text-pink-800",
+      category: "jazz",
+      reviews: [
+        {
+          name: "Patricia Souza",
+          avatar: "PS2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Meus filhos adoram!",
+        },
+      ],
+    },
+    {
+      id: 42,
+      name: "Forró Roots",
+      school: "Forró Tradicional",
+      rating: 4.8,
+      price: "R$ 40",
+      time: "20:00",
+      days: ["Quarta-feira", "Sexta-feira"],
+      location: "Centro",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg"],
+      tag: "Raiz",
+      tagColor: "bg-amber-100 text-amber-800",
+      category: "forro",
+      reviews: [
+        {
+          name: "José Silva",
+          avatar: "JSi",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Forró raiz de verdade!",
+        },
+      ],
+    },
+    {
+      id: 43,
+      name: "Forró Estilizado",
+      school: "Estilo Nordeste",
+      rating: 4.7,
+      price: "R$ 42",
+      time: "21:00",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Zona Sul",
+      image: "/salsa-dancers-performance.jpg",
+      images: ["/salsa-dance-class-couple.jpg"],
+      tag: "Estilizado",
+      tagColor: "bg-lime-100 text-lime-800",
+      category: "forro",
+      reviews: [
+        {
+          name: "Fernanda Rocha",
+          avatar: "FR",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Movimentos lindos e técnicos!",
+        },
+      ],
+    },
+    {
+      id: 44,
+      name: "Forró Social",
+      school: "Forró da Praça",
+      rating: 4.6,
+      price: "R$ 30",
+      time: "19:30",
+      days: ["Sexta-feira"],
+      location: "Centro",
+      image: "/salsa-studio-interior.jpg",
+      images: ["/salsa-dancers-performance.jpg"],
+      tag: "Social",
+      tagColor: "bg-green-100 text-green-800",
+      category: "forro",
+      reviews: [
+        {
+          name: "Amanda Lima",
+          avatar: "AL",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Ambiente familiar e acolhedor!",
+        },
+      ],
+    },
+    {
+      id: 45,
+      name: "Forró Iniciante",
+      school: "Primeiros Passos no Forró",
+      rating: 4.7,
+      price: "R$ 35",
+      time: "18:00",
+      days: ["Segunda-feira", "Quarta-feira"],
+      location: "Zona Norte",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg"],
+      tag: "Iniciante",
+      tagColor: "bg-blue-100 text-blue-800",
+      category: "forro",
+      reviews: [
+        {
+          name: "Carlos Mendes",
+          avatar: "CM2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Perfeito para começar!",
+        },
+      ],
+    },
+    {
+      id: 46,
+      name: "Dança de Salão Completa",
+      school: "All Dance Academy",
+      rating: 4.9,
+      price: "R$ 55",
+      time: "19:00",
+      days: ["Terça-feira", "Quinta-feira", "Sábado"],
+      location: "Centro",
+      image: "/salsa-dancers-performance.jpg",
+      images: ["/salsa-dance-class-couple.jpg"],
+      tag: "Completo",
+      tagColor: "bg-cyan-100 text-cyan-800",
+      category: "ballroom",
+      reviews: [
+        {
+          name: "Vanessa Costa",
+          avatar: "VC2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Aprende-se tudo aqui!",
+        },
+      ],
+    },
+    {
+      id: 47,
+      name: "Bolero e Soltinho",
+      school: "Salão de Dança Clássico",
+      rating: 4.7,
+      price: "R$ 48",
+      time: "20:00",
+      days: ["Quarta-feira", "Sexta-feira"],
+      location: "Zona Sul",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg"],
+      tag: "Romântico",
+      tagColor: "bg-rose-100 text-rose-800",
+      category: "ballroom",
+      reviews: [
+        {
+          name: "Eduardo Silva",
+          avatar: "ES",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Danças românticas perfeitas!",
+        },
+      ],
+    },
+    {
+      id: 48,
+      name: "Dança de Salão Kids",
+      school: "Pequenos Dançarinos de Salão",
+      rating: 4.8,
+      price: "R$ 40",
+      time: "15:00",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Centro",
+      image: "/salsa-studio-interior.jpg",
+      images: ["/salsa-dance-class-couple.jpg"],
+      tag: "Infantil",
+      tagColor: "bg-pink-100 text-pink-800",
+      category: "ballroom",
+      reviews: [
+        {
+          name: "Monica Ferreira",
+          avatar: "MF",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Meus filhos estão aprendendo muito!",
+        },
+      ],
+    },
+    {
+      id: 49,
+      name: "Dança de Salão Avançado",
+      school: "Elite Ballroom",
+      rating: 4.9,
+      price: "R$ 70",
+      time: "20:30",
+      days: ["Segunda-feira", "Quarta-feira", "Sexta-feira"],
+      location: "Zona Norte",
+      image: "/salsa-dancers-performance.jpg",
+      images: ["/salsa-dance-class-couple.jpg"],
+      tag: "Avançado",
+      tagColor: "bg-indigo-100 text-indigo-800",
+      category: "ballroom",
+      reviews: [
+        {
+          name: "Ricardo Oliveira",
+          avatar: "RO",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Nível profissional!",
+        },
+      ],
+    },
+    {
+      id: 50,
+      name: "Samba Rock",
+      school: "Rock do Samba",
+      rating: 4.8,
+      price: "R$ 42",
+      time: "19:00",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Zona Sul",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg"],
+      tag: "Rock",
+      tagColor: "bg-yellow-100 text-yellow-800",
+      category: "samba",
+      reviews: [
+        {
+          name: "Daniela Santos",
+          avatar: "DS2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Samba rock autêntico!",
+        },
+      ],
+    },
+    {
+      id: 51,
+      name: "Samba de Roda",
+      school: "Roda de Samba Bahia",
+      rating: 4.7,
+      price: "R$ 38",
+      time: "18:30",
+      days: ["Quarta-feira"],
+      location: "Centro",
+      image: "/salsa-studio-interior.jpg",
+      images: ["/salsa-dancers-performance.jpg"],
+      tag: "Bahia",
+      tagColor: "bg-orange-100 text-orange-800",
+      category: "samba",
+      reviews: [
+        {
+          name: "Luciana Costa",
+          avatar: "LC",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Tradição baiana pura!",
+        },
+      ],
+    },
+    {
+      id: 52,
+      name: "Samba Fitness",
+      school: "Samba Workout",
+      rating: 4.6,
+      price: "R$ 45",
+      time: "07:30",
+      days: ["Segunda-feira", "Quarta-feira", "Sexta-feira"],
+      location: "Zona Sul",
+      image: "/salsa-dancers-performance.jpg",
+      images: ["/salsa-dance-class-couple.jpg"],
+      tag: "Fitness",
+      tagColor: "bg-green-100 text-green-800",
+      category: "samba",
+      reviews: [
+        {
+          name: "Aline Rodrigues",
+          avatar: "AR",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Treino completo dançando!",
+        },
+      ],
+    },
+    {
+      id: 53,
+      name: "Samba Avançado",
+      school: "Passistas Profissionais",
+      rating: 4.9,
+      price: "R$ 50",
+      time: "21:00",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Centro",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg"],
+      tag: "Pro",
+      tagColor: "bg-indigo-100 text-indigo-800",
+      category: "samba",
+      reviews: [
+        {
+          name: "Bruno Alves",
+          avatar: "BA",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Nível de passista!",
+        },
+      ],
+    },
+    {
+      id: 54,
+      name: "Zouk Flow",
+      school: "Flow Zouk Academy",
+      rating: 4.8,
+      price: "R$ 52",
+      time: "20:00",
+      days: ["Quarta-feira", "Sexta-feira"],
+      location: "Zona Sul",
+      image: "/salsa-dancers-performance.jpg",
+      images: ["/salsa-dance-class-couple.jpg"],
+      tag: "Flow",
+      tagColor: "bg-purple-100 text-purple-800",
+      category: "zouk",
+      reviews: [
+        {
+          name: "Camila Martins",
+          avatar: "CM3",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Fluidez e conexão incríveis!",
+        },
+      ],
+    },
+    {
+      id: 55,
+      name: "Zouk Lambada",
+      school: "Lambada Zouk Studio",
+      rating: 4.7,
+      price: "R$ 48",
+      time: "19:30",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Centro",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg"],
+      tag: "Lambada",
+      tagColor: "bg-yellow-100 text-yellow-800",
+      category: "zouk",
+      reviews: [
+        {
+          name: "Fabio Santos",
+          avatar: "FS",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Zouk com raízes na lambada!",
+        },
+      ],
+    },
+    {
+      id: 56,
+      name: "Zouk Iniciante",
+      school: "Primeiros Passos Zouk",
+      rating: 4.6,
+      price: "R$ 45",
+      time: "18:00",
+      days: ["Segunda-feira", "Quarta-feira"],
+      location: "Zona Norte",
+      image: "/salsa-studio-interior.jpg",
+      images: ["/salsa-dancers-performance.jpg"],
+      tag: "Iniciante",
+      tagColor: "bg-blue-100 text-blue-800",
+      category: "zouk",
+      reviews: [
+        {
+          name: "Priscila Lima",
+          avatar: "PL2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Ótimo para começar no zouk!",
+        },
+      ],
+    },
+    {
+      id: 57,
+      name: "Zouk Workshop",
+      school: "Master Zouk Workshop",
+      rating: 4.9,
+      price: "R$ 80",
+      time: "14:00",
+      days: ["Sábado"],
+      location: "Centro",
+      image: "/salsa-dancers-performance.jpg",
+      images: ["/salsa-dance-class-couple.jpg"],
+      tag: "Workshop",
+      tagColor: "bg-red-100 text-red-800",
+      category: "zouk",
+      reviews: [
+        {
+          name: "Marcelo Costa",
+          avatar: "MC2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Workshop intensivo excelente!",
+        },
+      ],
+    },
+    {
+      id: 58,
+      name: "Bachata Tradicional",
+      school: "Dominican Bachata School",
+      rating: 4.8,
+      price: "R$ 44",
+      time: "19:00",
+      days: ["Terça-feira", "Quinta-feira"],
+      location: "Zona Sul",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg"],
+      tag: "Tradicional",
+      tagColor: "bg-orange-100 text-orange-800",
+      category: "bachata",
+      reviews: [
+        {
+          name: "Gabriela Lima",
+          avatar: "GL2",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Bachata tradicional como deve ser!",
+        },
+      ],
+    },
+    {
+      id: 59,
+      name: "Bachata Moderna",
+      school: "Modern Bachata Fusion",
+      rating: 4.7,
+      price: "R$ 46",
+      time: "20:30",
+      days: ["Quarta-feira", "Sexta-feira"],
+      location: "Centro",
+      image: "/salsa-studio-interior.jpg",
+      images: ["/salsa-dancers-performance.jpg"],
+      tag: "Moderna",
+      tagColor: "bg-purple-100 text-purple-800",
+      category: "bachata",
+      reviews: [
+        {
+          name: "Leandro Souza",
+          avatar: "LS",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Bachata moderna com muita técnica!",
+        },
+      ],
+    },
+    {
+      id: 60,
+      name: "Bachata Styling",
+      school: "Style Bachata Academy",
+      rating: 4.6,
+      price: "R$ 40",
+      time: "18:30",
+      days: ["Segunda-feira"],
+      location: "Zona Norte",
+      image: "/salsa-dancers-performance.jpg",
+      images: ["/salsa-dance-class-couple.jpg"],
+      tag: "Styling",
+      tagColor: "bg-pink-100 text-pink-800",
+      category: "bachata",
+      reviews: [
+        {
+          name: "Natalia Rocha",
+          avatar: "NR",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Melhorei muito meu styling!",
+        },
+      ],
+    },
+    {
+      id: 61,
+      name: "Bachata Social",
+      school: "Social Dance Bachata",
+      rating: 4.9,
+      price: "R$ 35",
+      time: "21:30",
+      days: ["Sexta-feira", "Sábado"],
+      location: "Centro",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg"],
+      tag: "Social",
+      tagColor: "bg-cyan-100 text-cyan-800",
+      category: "bachata",
+      reviews: [
+        {
+          name: "Vinicius Alves",
+          avatar: "VA",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Melhor lugar para dançar bachata!",
+        },
+      ],
+    },
   ]
 
   const getClassesByCategory = (category: string) => {
-    return classes.filter(c => c.category === category)
+    return classes.filter(c => c.category === category).slice(0, 7)
   }
 
   const scrollCategory = (categoryId: string, direction: 'left' | 'right') => {
@@ -690,817 +1674,1065 @@ const SissonePrototype = () => {
     <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
-        <div className="bg-[#F5F0EB] p-4 shadow-sm flex-shrink-0">
-          <div className="text-center">
-            <div className="flex justify-center mb-2">
-              <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={40} className="h-10 w-auto" />
-            </div>
-            <p className="text-sm text-[#3D2C2E] opacity-70">Para quem quer aprender, ensinar e viver a dança</p>
-          </div>
-        </div>
-
-        {/* Search Button */}
-        <div className="p-4 bg-[#F5F0EB] border-b flex-shrink-0">
+        <div className="bg-[#F5F0EB] p-4 shadow-sm flex items-center justify-between flex-shrink-0">
+          <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={40} className="h-10 w-auto" />
           <Button
             variant="outline"
-            className="w-full h-12 border-[#CFB2A8] text-[#3D2C2E] bg-white justify-start px-4 hover:bg-[#E5D6CD]"
+            size="sm"
+            className="bg-[#8B7355] hover:bg-[#6F5C46] text-white border-[#8B7355]"
             onClick={() => setShowSearchModal(true)}
           >
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-[#CFB2A8] rounded-full flex items-center justify-center">
-                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </div>
-              <div className="text-left">
-                <div className="font-medium text-sm">{"Iniciar busca"} </div>
-                <div className="text-xs text-gray-500">{"Lugar • Data • Modalidade"}</div>
-              </div>
-            </div>
+            Buscar Aulas
           </Button>
         </div>
-
-        {/* Quick Filters */}
-        <div className="p-4 bg-[#F5F0EB] border-b flex-shrink-0">
-          <div className="flex gap-3 overflow-x-auto scrollbar-hide">
-            {["Ballet", "Jazz", "Forró", "Ao ar livre", "Profissionais", "Dança de salão", "Aula Particular"].map(
-              (filter) => (
-                <Button
-                  key={filter}
-                  variant="outline"
-                  className="flex-shrink-0 h-10 px-4 border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#8B7355] hover:text-white transition-colors"
-                  onClick={() => navigateToSearchResults(filter)}
-                >
-                  <span className="text-sm font-medium whitespace-nowrap">{filter}</span>
-                </Button>
-              ),
-            )}
-          </div>
-        </div>
       </div>
 
-      {/* Scrollable Content */}
-      <div className="flex-1 overflow-y-auto bg-[#F5F0EB]">
+      <div className="flex-1 overflow-y-auto">
         <div className="mx-auto w-full max-w-[1040px]">
-          
-          {/* Faça uma aula ainda hoje */}
-          <div className="py-8">
-            <div className="px-4 mb-4 flex items-center justify-between">
-              <button 
-                onClick={() => navigateToSearchResults("Hoje")}
-                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
-              >
-                Faça uma aula ainda hoje
-              </button>
-              <div className="flex gap-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('today', 'left')}
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('today', 'right')}
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </Button>
-              </div>
-            </div>
-            <div id="category-today" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
-              {classes.slice(0, 8).map((classItem) => (
-                <Card
-                  key={classItem.id}
-                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => {
-                    setSelectedClass(classItem)
-                    setCurrentScreen("detail")
-                  }}
-                >
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={classItem.image || "/placeholder.svg"}
-                      alt={classItem.name}
-                      fill
-                      className="object-cover"
-                    />
-                    <button
-                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleFavorite(classItem.id)
-                      }}
-                    >
-                      <Heart
-                        className={`h-4 w-4 ${
-                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                        }`}
-                      />
-                    </button>
-                    <div className="absolute top-2 left-2">
-                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                        {classItem.tag}
-                      </Badge>
-                    </div>
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
-                    <div className="flex items-center gap-1 my-2">
-                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
-                    </div>
-                    <div className="flex items-center justify-between mt-3">
-                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
-                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
-                        Ver detalhes
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+          {/* Hero Section */}
+          <div className="relative h-64 bg-gradient-to-r from-[#CFB2A8] to-[#E5D6CD] flex items-center justify-center mb-8">
+            <div className="text-center z-10 px-4">
+              <h1 className="text-4xl font-bold text-[#3D2C2E] mb-2">Encontre sua próxima aula</h1>
+              <p className="text-[#3D2C2E] opacity-80">Descubra aulas de dança perto de você</p>
             </div>
           </div>
 
-          {/* Contemporary */}
-          <div className="py-8">
-            <div className="px-4 mb-4 flex items-center justify-between">
-              <button 
-                onClick={() => navigateToSearchResults("Contemporary")}
-                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
-              >
-                Contemporary
-              </button>
-              <div className="flex gap-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('contemporary', 'left')}
+          {/* Categories */}
+          <div className="px-4 space-y-12">
+            {/* Faça uma aula ainda hoje */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <button
+                  onClick={() => setCurrentScreen("search-results")}
+                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
                 >
-                  <ChevronLeft className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('contemporary', 'right')}
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </Button>
+                  Faça uma aula ainda hoje
+                </button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('today', 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('today', 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div id="category-today" className="flex gap-4 overflow-x-auto scrollbar-hide">
+                {classes.slice(0, 7).map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    <div className="relative h-48 w-full">
+                      <Image
+                        src={classItem.image || "/placeholder.svg"}
+                        alt={classItem.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <button
+                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleFavorite(classItem.id)
+                        }}
+                      >
+                        <Heart
+                          className={`h-4 w-4 ${
+                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                          }`}
+                        />
+                      </button>
+                      <div className="absolute top-2 left-2">
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                          {classItem.tag}
+                        </Badge>
+                      </div>
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <div className="flex items-center gap-1 my-2">
+                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                      </div>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <Button
+                          size="sm"
+                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            setCurrentScreen("detail")
+                          }}
+                        >
+                          Ver detalhes
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
-            <div id="category-contemporary" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
-              {getClassesByCategory('contemporary').map((classItem) => (
-                <Card
-                  key={classItem.id}
-                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => {
-                    setSelectedClass(classItem)
-                    setCurrentScreen("detail")
-                  }}
-                >
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={classItem.image || "/placeholder.svg"}
-                      alt={classItem.name}
-                      fill
-                      className="object-cover"
-                    />
-                    <button
-                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleFavorite(classItem.id)
-                      }}
-                    >
-                      <Heart
-                        className={`h-4 w-4 ${
-                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                        }`}
-                      />
-                    </button>
-                    <div className="absolute top-2 left-2">
-                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                        {classItem.tag}
-                      </Badge>
-                    </div>
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
-                    <div className="flex items-center gap-1 my-2">
-                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
-                    </div>
-                    <div className="flex items-center justify-between mt-3">
-                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
-                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
-                        Ver detalhes
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
 
-          {/* Hip Hop */}
-          <div className="py-8">
-            <div className="px-4 mb-4 flex items-center justify-between">
-              <button 
-                onClick={() => navigateToSearchResults("Hip Hop")}
-                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
-              >
-                Hip Hop
-              </button>
-              <div className="flex gap-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('hip-hop', 'left')}
+            {/* Contemporary */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <button
+                  onClick={() => navigateToSearchResults("Contemporary")}
+                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
                 >
-                  <ChevronLeft className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('hip-hop', 'right')}
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </Button>
+                  Contemporary
+                </button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('contemporary', 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('contemporary', 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div id="category-contemporary" className="flex gap-4 overflow-x-auto scrollbar-hide">
+                {getClassesByCategory("contemporary").map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    <div className="relative h-48 w-full">
+                      <Image
+                        src={classItem.image || "/placeholder.svg"}
+                        alt={classItem.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <button
+                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleFavorite(classItem.id)
+                        }}
+                      >
+                        <Heart
+                          className={`h-4 w-4 ${
+                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                          }`}
+                        />
+                      </button>
+                      <div className="absolute top-2 left-2">
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                          {classItem.tag}
+                        </Badge>
+                      </div>
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <div className="flex items-center gap-1 my-2">
+                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                      </div>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <Button
+                          size="sm"
+                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            setCurrentScreen("detail")
+                          }}
+                        >
+                          Ver detalhes
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
-            <div id="category-hip-hop" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
-              {getClassesByCategory('hip-hop').map((classItem) => (
-                <Card
-                  key={classItem.id}
-                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => {
-                    setSelectedClass(classItem)
-                    setCurrentScreen("detail")
-                  }}
-                >
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={classItem.image || "/placeholder.svg"}
-                      alt={classItem.name}
-                      fill
-                      className="object-cover"
-                    />
-                    <button
-                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleFavorite(classItem.id)
-                      }}
-                    >
-                      <Heart
-                        className={`h-4 w-4 ${
-                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                        }`}
-                      />
-                    </button>
-                    <div className="absolute top-2 left-2">
-                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                        {classItem.tag}
-                      </Badge>
-                    </div>
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
-                    <div className="flex items-center gap-1 my-2">
-                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
-                    </div>
-                    <div className="flex items-center justify-between mt-3">
-                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
-                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
-                        Ver detalhes
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
 
-          {/* Ballet */}
-          <div className="py-8">
-            <div className="px-4 mb-4 flex items-center justify-between">
-              <button 
-                onClick={() => navigateToSearchResults("Ballet")}
-                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
-              >
-                Ballet
-              </button>
-              <div className="flex gap-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('ballet', 'left')}
+            {/* Hip Hop */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <button
+                  onClick={() => navigateToSearchResults("Hip Hop")}
+                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
                 >
-                  <ChevronLeft className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('ballet', 'right')}
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </Button>
+                  Hip Hop
+                </button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('hip-hop', 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('hip-hop', 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div id="category-hip-hop" className="flex gap-4 overflow-x-auto scrollbar-hide">
+                {getClassesByCategory("hip-hop").map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    <div className="relative h-48 w-full">
+                      <Image
+                        src={classItem.image || "/placeholder.svg"}
+                        alt={classItem.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <button
+                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleFavorite(classItem.id)
+                        }}
+                      >
+                        <Heart
+                          className={`h-4 w-4 ${
+                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                          }`}
+                        />
+                      </button>
+                      <div className="absolute top-2 left-2">
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                          {classItem.tag}
+                        </Badge>
+                      </div>
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <div className="flex items-center gap-1 my-2">
+                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                      </div>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <Button
+                          size="sm"
+                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            setCurrentScreen("detail")
+                          }}
+                        >
+                          Ver detalhes
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
-            <div id="category-ballet" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
-              {getClassesByCategory('ballet').map((classItem) => (
-                <Card
-                  key={classItem.id}
-                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => {
-                    setSelectedClass(classItem)
-                    setCurrentScreen("detail")
-                  }}
-                >
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={classItem.image || "/placeholder.svg"}
-                      alt={classItem.name}
-                      fill
-                      className="object-cover"
-                    />
-                    <button
-                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleFavorite(classItem.id)
-                      }}
-                    >
-                      <Heart
-                        className={`h-4 w-4 ${
-                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                        }`}
-                      />
-                    </button>
-                    <div className="absolute top-2 left-2">
-                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                        {classItem.tag}
-                      </Badge>
-                    </div>
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
-                    <div className="flex items-center gap-1 my-2">
-                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
-                    </div>
-                    <div className="flex items-center justify-between mt-3">
-                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
-                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
-                        Ver detalhes
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
 
-          <div className="py-8">
-            <div className="px-4 mb-4 flex items-center justify-between">
-              <button 
-                onClick={() => navigateToSearchResults("Forró")}
-                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
-              >
-                Forró
-              </button>
-              <div className="flex gap-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('forro', 'left')}
+            {/* Ballet */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <button
+                  onClick={() => navigateToSearchResults("Ballet")}
+                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
                 >
-                  <ChevronLeft className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('forro', 'right')}
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </Button>
+                  Ballet
+                </button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('ballet', 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('ballet', 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div id="category-ballet" className="flex gap-4 overflow-x-auto scrollbar-hide">
+                {getClassesByCategory("ballet").map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    <div className="relative h-48 w-full">
+                      <Image
+                        src={classItem.image || "/placeholder.svg"}
+                        alt={classItem.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <button
+                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleFavorite(classItem.id)
+                        }}
+                      >
+                        <Heart
+                          className={`h-4 w-4 ${
+                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                          }`}
+                        />
+                      </button>
+                      <div className="absolute top-2 left-2">
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                          {classItem.tag}
+                        </Badge>
+                      </div>
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <div className="flex items-center gap-1 my-2">
+                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                      </div>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <Button
+                          size="sm"
+                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            setCurrentScreen("detail")
+                          }}
+                        >
+                          Ver detalhes
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
-            <div id="category-forro" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
-              {getClassesByCategory('forro').map((classItem) => (
-                <Card
-                  key={classItem.id}
-                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => {
-                    setSelectedClass(classItem)
-                    setCurrentScreen("detail")
-                  }}
-                >
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={classItem.image || "/placeholder.svg"}
-                      alt={classItem.name}
-                      fill
-                      className="object-cover"
-                    />
-                    <button
-                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleFavorite(classItem.id)
-                      }}
-                    >
-                      <Heart
-                        className={`h-4 w-4 ${
-                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                        }`}
-                      />
-                    </button>
-                    <div className="absolute top-2 left-2">
-                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                        {classItem.tag}
-                      </Badge>
-                    </div>
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
-                    <div className="flex items-center gap-1 my-2">
-                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
-                    </div>
-                    <div className="flex items-center justify-between mt-3">
-                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
-                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
-                        Ver detalhes
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
 
-          <div className="py-8">
-            <div className="px-4 mb-4 flex items-center justify-between">
-              <button 
-                onClick={() => navigateToSearchResults("Dança de salão")}
-                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
-              >
-                Dança de Salão
-              </button>
-              <div className="flex gap-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('ballroom', 'left')}
+            {/* Salsa */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <button
+                  onClick={() => navigateToSearchResults("Salsa")}
+                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
                 >
-                  <ChevronLeft className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('ballroom', 'right')}
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </Button>
+                  Salsa
+                </button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('salsa', 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('salsa', 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div id="category-salsa" className="flex gap-4 overflow-x-auto scrollbar-hide">
+                {getClassesByCategory("salsa").map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    <div className="relative h-48 w-full">
+                      <Image
+                        src={classItem.image || "/placeholder.svg"}
+                        alt={classItem.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <button
+                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleFavorite(classItem.id)
+                        }}
+                      >
+                        <Heart
+                          className={`h-4 w-4 ${
+                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                          }`}
+                        />
+                      </button>
+                      <div className="absolute top-2 left-2">
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                          {classItem.tag}
+                        </Badge>
+                      </div>
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <div className="flex items-center gap-1 my-2">
+                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                      </div>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <Button
+                          size="sm"
+                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            setCurrentScreen("detail")
+                          }}
+                        >
+                          Ver detalhes
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
-            <div id="category-ballroom" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
-              {getClassesByCategory('ballroom').map((classItem) => (
-                <Card
-                  key={classItem.id}
-                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => {
-                    setSelectedClass(classItem)
-                    setCurrentScreen("detail")
-                  }}
-                >
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={classItem.image || "/placeholder.svg"}
-                      alt={classItem.name}
-                      fill
-                      className="object-cover"
-                    />
-                    <button
-                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleFavorite(classItem.id)
-                      }}
-                    >
-                      <Heart
-                        className={`h-4 w-4 ${
-                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                        }`}
-                      />
-                    </button>
-                    <div className="absolute top-2 left-2">
-                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                        {classItem.tag}
-                      </Badge>
-                    </div>
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
-                    <div className="flex items-center gap-1 my-2">
-                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
-                    </div>
-                    <div className="flex items-center justify-between mt-3">
-                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
-                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
-                        Ver detalhes
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
 
-          <div className="py-8">
-            <div className="px-4 mb-4 flex items-center justify-between">
-              <button 
-                onClick={() => navigateToSearchResults("Samba")}
-                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
-              >
-                Samba
-              </button>
-              <div className="flex gap-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('samba', 'left')}
+            {/* Jazz */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <button
+                  onClick={() => navigateToSearchResults("Jazz")}
+                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
                 >
-                  <ChevronLeft className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('samba', 'right')}
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </Button>
+                  Jazz
+                </button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('jazz', 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('jazz', 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div id="category-jazz" className="flex gap-4 overflow-x-auto scrollbar-hide">
+                {getClassesByCategory("jazz").map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    <div className="relative h-48 w-full">
+                      <Image
+                        src={classItem.image || "/placeholder.svg"}
+                        alt={classItem.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <button
+                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleFavorite(classItem.id)
+                        }}
+                      >
+                        <Heart
+                          className={`h-4 w-4 ${
+                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                          }`}
+                        />
+                      </button>
+                      <div className="absolute top-2 left-2">
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                          {classItem.tag}
+                        </Badge>
+                      </div>
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <div className="flex items-center gap-1 my-2">
+                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                      </div>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <Button
+                          size="sm"
+                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            setCurrentScreen("detail")
+                          }}
+                        >
+                          Ver detalhes
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
-            <div id="category-samba" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
-              {getClassesByCategory('samba').map((classItem) => (
-                <Card
-                  key={classItem.id}
-                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => {
-                    setSelectedClass(classItem)
-                    setCurrentScreen("detail")
-                  }}
-                >
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={classItem.image || "/placeholder.svg"}
-                      alt={classItem.name}
-                      fill
-                      className="object-cover"
-                    />
-                    <button
-                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleFavorite(classItem.id)
-                      }}
-                    >
-                      <Heart
-                        className={`h-4 w-4 ${
-                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                        }`}
-                      />
-                    </button>
-                    <div className="absolute top-2 left-2">
-                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                        {classItem.tag}
-                      </Badge>
-                    </div>
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
-                    <div className="flex items-center gap-1 my-2">
-                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
-                    </div>
-                    <div className="flex items-center justify-between mt-3">
-                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
-                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
-                        Ver detalhes
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
 
-          <div className="py-8">
-            <div className="px-4 mb-4 flex items-center justify-between">
-              <button 
-                onClick={() => navigateToSearchResults("Zouk")}
-                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
-              >
-                Zouk
-              </button>
-              <div className="flex gap-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('zouk', 'left')}
+            {/* Forró */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <button
+                  onClick={() => navigateToSearchResults("Forró")}
+                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
                 >
-                  <ChevronLeft className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('zouk', 'right')}
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </Button>
+                  Forró
+                </button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('forro', 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('forro', 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div id="category-forro" className="flex gap-4 overflow-x-auto scrollbar-hide">
+                {getClassesByCategory("forro").map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    <div className="relative h-48 w-full">
+                      <Image
+                        src={classItem.image || "/placeholder.svg"}
+                        alt={classItem.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <button
+                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleFavorite(classItem.id)
+                        }}
+                      >
+                        <Heart
+                          className={`h-4 w-4 ${
+                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                          }`}
+                        />
+                      </button>
+                      <div className="absolute top-2 left-2">
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                          {classItem.tag}
+                        </Badge>
+                      </div>
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <div className="flex items-center gap-1 my-2">
+                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                      </div>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <Button
+                          size="sm"
+                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            setCurrentScreen("detail")
+                          }}
+                        >
+                          Ver detalhes
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
-            <div id="category-zouk" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
-              {getClassesByCategory('zouk').map((classItem) => (
-                <Card
-                  key={classItem.id}
-                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => {
-                    setSelectedClass(classItem)
-                    setCurrentScreen("detail")
-                  }}
-                >
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={classItem.image || "/placeholder.svg"}
-                      alt={classItem.name}
-                      fill
-                      className="object-cover"
-                    />
-                    <button
-                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleFavorite(classItem.id)
-                      }}
-                    >
-                      <Heart
-                        className={`h-4 w-4 ${
-                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                        }`}
-                      />
-                    </button>
-                    <div className="absolute top-2 left-2">
-                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                        {classItem.tag}
-                      </Badge>
-                    </div>
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
-                    <div className="flex items-center gap-1 my-2">
-                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
-                    </div>
-                    <div className="flex items-center justify-between mt-3">
-                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
-                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
-                        Ver detalhes
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
 
-          <div className="py-8 mb-8">
-            <div className="px-4 mb-4 flex items-center justify-between">
-              <button 
-                onClick={() => navigateToSearchResults("Bachata")}
-                className="text-xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
-              >
-                Bachata
-              </button>
-              <div className="flex gap-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('bachata', 'left')}
+            {/* Dança de Salão */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <button
+                  onClick={() => navigateToSearchResults("Dança de Salão")}
+                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
                 >
-                  <ChevronLeft className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-[#E5D6CD]"
-                  onClick={() => scrollCategory('bachata', 'right')}
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </Button>
+                  Dança de Salão
+                </button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('ballroom', 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('ballroom', 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div id="category-ballroom" className="flex gap-4 overflow-x-auto scrollbar-hide">
+                {getClassesByCategory("ballroom").map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    <div className="relative h-48 w-full">
+                      <Image
+                        src={classItem.image || "/placeholder.svg"}
+                        alt={classItem.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <button
+                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleFavorite(classItem.id)
+                        }}
+                      >
+                        <Heart
+                          className={`h-4 w-4 ${
+                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                          }`}
+                        />
+                      </button>
+                      <div className="absolute top-2 left-2">
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                          {classItem.tag}
+                        </Badge>
+                      </div>
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <div className="flex items-center gap-1 my-2">
+                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                      </div>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <Button
+                          size="sm"
+                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            setCurrentScreen("detail")
+                          }}
+                        >
+                          Ver detalhes
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
-            <div id="category-bachata" className="flex gap-4 overflow-x-auto scrollbar-hide px-4">
-              {getClassesByCategory('bachata').map((classItem) => (
-                <Card
-                  key={classItem.id}
-                  className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => {
-                    setSelectedClass(classItem)
-                    setCurrentScreen("detail")
-                  }}
+
+            {/* Samba */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <button
+                  onClick={() => navigateToSearchResults("Samba")}
+                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
                 >
-                  <div className="relative h-48 w-full">
-                    <Image
-                      src={classItem.image || "/placeholder.svg"}
-                      alt={classItem.name}
-                      fill
-                      className="object-cover"
-                    />
-                    <button
-                      className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleFavorite(classItem.id)
-                      }}
-                    >
-                      <Heart
-                        className={`h-4 w-4 ${
-                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                        }`}
+                  Samba
+                </button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('samba', 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('samba', 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div id="category-samba" className="flex gap-4 overflow-x-auto scrollbar-hide">
+                {getClassesByCategory("samba").map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    <div className="relative h-48 w-full">
+                      <Image
+                        src={classItem.image || "/placeholder.svg"}
+                        alt={classItem.name}
+                        fill
+                        className="object-cover"
                       />
-                    </button>
-                    <div className="absolute top-2 left-2">
-                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                        {classItem.tag}
-                      </Badge>
+                      <button
+                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleFavorite(classItem.id)
+                        }}
+                      >
+                        <Heart
+                          className={`h-4 w-4 ${
+                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                          }`}
+                        />
+                      </button>
+                      <div className="absolute top-2 left-2">
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                          {classItem.tag}
+                        </Badge>
+                      </div>
                     </div>
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                    <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
-                    <div className="flex items-center gap-1 my-2">
-                      <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                      <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <div className="flex items-center gap-1 my-2">
+                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                      </div>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <Button
+                          size="sm"
+                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            setCurrentScreen("detail")
+                          }}
+                        >
+                          Ver detalhes
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            {/* Zouk */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <button
+                  onClick={() => navigateToSearchResults("Zouk")}
+                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+                >
+                  Zouk
+                </button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('zouk', 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('zouk', 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div id="category-zouk" className="flex gap-4 overflow-x-auto scrollbar-hide">
+                {getClassesByCategory("zouk").map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    <div className="relative h-48 w-full">
+                      <Image
+                        src={classItem.image || "/placeholder.svg"}
+                        alt={classItem.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <button
+                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleFavorite(classItem.id)
+                        }}
+                      >
+                        <Heart
+                          className={`h-4 w-4 ${
+                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                          }`}
+                        />
+                      </button>
+                      <div className="absolute top-2 left-2">
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                          {classItem.tag}
+                        </Badge>
+                      </div>
                     </div>
-                    <div className="flex items-center justify-between mt-3">
-                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
-                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
-                        Ver detalhes
-                      </Button>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <div className="flex items-center gap-1 my-2">
+                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                      </div>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <Button
+                          size="sm"
+                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            setCurrentScreen("detail")
+                          }}
+                        >
+                          Ver detalhes
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            {/* Bachata */}
+            <div className="pb-8">
+              <div className="flex items-center justify-between mb-4">
+                <button
+                  onClick={() => navigateToSearchResults("Bachata")}
+                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+                >
+                  Bachata
+                </button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('bachata', 'left')}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
+                    onClick={() => scrollCategory('bachata', 'right')}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div id="category-bachata" className="flex gap-4 overflow-x-auto scrollbar-hide">
+                {getClassesByCategory("bachata").map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    <div className="relative h-48 w-full">
+                      <Image
+                        src={classItem.image || "/placeholder.svg"}
+                        alt={classItem.name}
+                        fill
+                        className="object-cover"
+                      />
+                      <button
+                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleFavorite(classItem.id)
+                        }}
+                      >
+                        <Heart
+                          className={`h-4 w-4 ${
+                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                          }`}
+                        />
+                      </button>
+                      <div className="absolute top-2 left-2">
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
+                          {classItem.tag}
+                        </Badge>
+                      </div>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <div className="flex items-center gap-1 my-2">
+                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                      </div>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <Button
+                          size="sm"
+                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            setCurrentScreen("detail")
+                          }}
+                        >
+                          Ver detalhes
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Search Modal */}
       {showSearchModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-end z-50">
-          <div className="bg-white w-full rounded-t-3xl max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white w-full max-w-md rounded-3xl max-h-[85vh] overflow-y-auto">
             <div className="p-6 space-y-6">
               <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-bold text-[#3D2C2E]">Buscar Aulas</h2>
                 <Button variant="ghost" size="icon" onClick={() => setShowSearchModal(false)}>
-                  <ArrowLeft className="h-5 w-5" />
+                  <X className="h-5 w-5" />
                 </Button>
               </div>
 
@@ -1517,7 +2749,7 @@ const SissonePrototype = () => {
 
                 <div>
                   <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Quando?</label>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 flex-wrap">
                     <Button
                       variant={searchWhen === "today" ? "default" : "outline"}
                       className={
@@ -1563,7 +2795,7 @@ const SissonePrototype = () => {
                 <div>
                   <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Modalidade</label>
                   <div className="flex flex-wrap gap-2">
-                    {["Ballet", "Contemporary", "Hip Hop", "Jazz", "Salsa", "Forró"].map((mod) => (
+                    {["Ballet", "Contemporary", "Hip Hop", "Jazz", "Salsa", "Forró", "Samba", "Zouk", "Bachata"].map((mod) => (
                       <Button
                         key={mod}
                         variant={searchModality.includes(mod) ? "default" : "outline"}
@@ -1596,123 +2828,6 @@ const SissonePrototype = () => {
               </Button>
             </div>
           </div>
-        </div>
-      )}
-
-      {/* Calendar Modal */}
-      {showCalendarModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <Card className="w-96 bg-white">
-            <CardHeader>
-              <h3 className="text-lg font-semibold text-[#3D2C2E]">Selecione a Data</h3>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <Input
-                type="date"
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-                className="border-[#CFB2A8]"
-              />
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  className="flex-1 border-[#CFB2A8]"
-                  onClick={() => {
-                    setShowCalendarModal(false)
-                    setSelectedDate("")
-                  }}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  className="flex-1 bg-[#8B7355] hover:bg-[#6F5C46] text-white"
-                  onClick={() => setShowCalendarModal(false)}
-                >
-                  Confirmar
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
-
-      {/* Weekly Modal */}
-      {showWeeklyModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <Card className="w-full max-w-md bg-white">
-            <CardHeader>
-              <h3 className="text-lg font-semibold text-[#3D2C2E]">Selecione Dias e Turnos</h3>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Dias da Semana</label>
-                <div className="grid grid-cols-2 gap-2">
-                  {["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"].map((day) => (
-                    <Button
-                      key={day}
-                      variant={selectedDays.includes(day) ? "default" : "outline"}
-                      className={
-                        selectedDays.includes(day)
-                          ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
-                          : "border-[#CFB2A8] text-[#3D2C2E]"
-                      }
-                      onClick={() => {
-                        setSelectedDays((prev) =>
-                          prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day],
-                        )
-                      }}
-                    >
-                      {day}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Turnos</label>
-                <div className="grid grid-cols-3 gap-2">
-                  {["Manhã", "Tarde", "Noite"].map((shift) => (
-                    <Button
-                      key={shift}
-                      variant={selectedShifts.includes(shift) ? "default" : "outline"}
-                      className={
-                        selectedShifts.includes(shift)
-                          ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
-                          : "border-[#CFB2A8] text-[#3D2C2E]"
-                      }
-                      onClick={() => {
-                        setSelectedShifts((prev) =>
-                          prev.includes(shift) ? prev.filter((s) => s !== shift) : [...prev, shift],
-                        )
-                      }}
-                    >
-                      {shift}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  className="flex-1 border-[#CFB2A8]"
-                  onClick={() => {
-                    setShowWeeklyModal(false)
-                    setSelectedDays([])
-                    setSelectedShifts([])
-                  }}
-                >
-                  Cancelar
-                </Button>
-                <Button
-                  className="flex-1 bg-[#8B7355] hover:bg-[#6F5C46] text-white"
-                  onClick={() => setShowWeeklyModal(false)}
-                >
-                  Confirmar
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       )}
     </div>
@@ -1769,7 +2884,7 @@ const SissonePrototype = () => {
             }}
           >
             {/* Map Markers */}
-            {classes.slice(0, 5).map((classItem, idx) => (
+            {classes.slice(0, 8).map((classItem, idx) => (
               <div
                 key={classItem.id}
                 className="absolute w-10 h-10 bg-[#8B7355] rounded-full flex items-center justify-center text-white font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
@@ -1779,6 +2894,7 @@ const SissonePrototype = () => {
                 }}
                 onClick={() => {
                   setSelectedClass(classItem)
+                  setCurrentImageIndex(0)
                   setCurrentScreen("detail")
                 }}
               >
@@ -1802,52 +2918,68 @@ const SissonePrototype = () => {
                 className="bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                 onClick={() => {
                   setSelectedClass(classItem)
+                  setCurrentImageIndex(0)
                   setCurrentScreen("detail")
                 }}
               >
                 <div className="flex gap-4 p-4">
                   {/* Image */}
                   <div className="relative w-32 h-32 flex-shrink-0 rounded-lg overflow-hidden">
-                    <Image src={classItem.image || "/placeholder.svg"} alt={classItem.name} fill className="object-cover" />
-                    <button
-                      className="absolute top-2 right-2 w-7 h-7 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        toggleFavorite(classItem.id)
-                      }}
-                    >
-                      <Heart
-                        className={`h-3.5 w-3.5 ${
-                          favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
-                        }`}
-                      />
-                    </button>
+                    <Image
+                      src={classItem.image || "/placeholder.svg"}
+                      alt={classItem.name}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 min-w-0 flex flex-col justify-between">
-                    {/* Top section with tag */}
-                    <div className="space-y-1">
-                      <div className="flex items-start justify-between gap-2">
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-[#3D2C2E] text-base line-clamp-1">{classItem.name}</h3>
-                          <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
-                        </div>
-                        <Badge className={`${classItem.tagColor} border-0 text-xs flex-shrink-0 pointer-events-none`}>
-                          {classItem.tag}
-                        </Badge>
+                  <div className="flex-1 flex flex-col min-w-0">
+                    {/* Top Row */}
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
+                        <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
                       </div>
-                      
+                      <button
+                        className="flex-shrink-0 w-8 h-8 flex items-center justify-center hover:bg-[#F5F0EB] rounded-full transition-colors"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleFavorite(classItem.id)
+                        }}
+                      >
+                        <Heart
+                          className={`h-4 w-4 ${
+                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                          }`}
+                        />
+                      </button>
+                    </div>
+
+                    {/* Tag and Rating */}
+                    <div className="flex items-center gap-2 mb-2 flex-wrap">
+                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none text-xs`}>
+                        {classItem.tag}
+                      </Badge>
                       <div className="flex items-center gap-1">
-                        <Star className="h-3.5 w-3.5 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                        <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
+                        <span className="text-xs font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
                       </div>
                     </div>
 
-                    {/* Bottom section with price and button */}
-                    <div className="flex items-center justify-between mt-2">
+                    {/* Bottom Row */}
+                    <div className="flex items-center justify-between mt-auto pt-2">
                       <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
-                      <Button size="sm" className="bg-[#8B7355] hover:bg-[#6F5C46] text-white">
+                      <Button
+                        size="sm"
+                        className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setSelectedClass(classItem)
+                          setCurrentImageIndex(0)
+                          setCurrentScreen("detail")
+                        }}
+                      >
                         Ver detalhes
                       </Button>
                     </div>
@@ -1858,128 +2990,6 @@ const SissonePrototype = () => {
           </div>
         </div>
       </div>
-
-      {/* Search Filters Modal */}
-      {showSearchFiltersModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-end z-50">
-          <div className="bg-white w-full rounded-t-3xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 space-y-6">
-              <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-[#3D2C2E]">Filtros</h2>
-                <Button variant="ghost" size="icon" onClick={() => setShowSearchFiltersModal(false)}>
-                  <ArrowLeft className="h-5 w-5" />
-                </Button>
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Categorias</label>
-                  <div className="flex flex-wrap gap-2">
-                    {["Ballet", "Contemporary", "Hip Hop", "Jazz", "Salsa", "Forró"].map((cat) => (
-                      <Button
-                        key={cat}
-                        variant={searchFilters.categories.includes(cat) ? "default" : "outline"}
-                        className={
-                          searchFilters.categories.includes(cat)
-                            ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
-                            : "border-[#CFB2A8] text-[#3D2C2E]"
-                        }
-                        onClick={() => {
-                          setSearchFilters((prev) => ({
-                            ...prev,
-                            categories: prev.categories.includes(cat)
-                              ? prev.categories.filter((c) => c !== cat)
-                              : [...prev.categories, cat],
-                          }))
-                        }}
-                      >
-                        {cat}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Dias da Semana</label>
-                  <div className="grid grid-cols-2 gap-2">
-                    {["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"].map((day) => (
-                      <Button
-                        key={day}
-                        variant={searchFilters.days.includes(day) ? "default" : "outline"}
-                        className={
-                          searchFilters.days.includes(day)
-                            ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
-                            : "border-[#CFB2A8] text-[#3D2C2E]"
-                        }
-                        onClick={() => {
-                          setSearchFilters((prev) => ({
-                            ...prev,
-                            days: prev.days.includes(day) ? prev.days.filter((d) => d !== day) : [...prev.days, day],
-                          }))
-                        }}
-                      >
-                        {day}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Turnos</label>
-                  <div className="grid grid-cols-3 gap-2">
-                    {["Manhã", "Tarde", "Noite"].map((shift) => (
-                      <Button
-                        key={shift}
-                        variant={searchFilters.shifts.includes(shift) ? "default" : "outline"}
-                        className={
-                          searchFilters.shifts.includes(shift)
-                            ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
-                            : "border-[#CFB2A8] text-[#3D2C2E]"
-                        }
-                        onClick={() => {
-                          setSearchFilters((prev) => ({
-                            ...prev,
-                            shifts: prev.shifts.includes(shift)
-                              ? prev.shifts.filter((s) => s !== shift)
-                              : [...prev.shifts, shift],
-                          }))
-                        }}
-                      >
-                        {shift}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Faixa de Preço</label>
-                  <div className="flex gap-2">
-                    <Input
-                      placeholder="Mín"
-                      value={searchFilters.priceMin}
-                      onChange={(e) => setSearchFilters((prev) => ({ ...prev, priceMin: e.target.value }))}
-                      className="border-[#CFB2A8]"
-                    />
-                    <Input
-                      placeholder="Máx"
-                      value={searchFilters.priceMax}
-                      onChange={(e) => setSearchFilters((prev) => ({ ...prev, priceMax: e.target.value }))}
-                      className="border-[#CFB2A8]"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <Button
-                className="w-full bg-[#8B7355] hover:bg-[#6F5C46] text-white h-12"
-                onClick={() => setShowSearchFiltersModal(false)}
-              >
-                Aplicar Filtros
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 
@@ -2361,24 +3371,7 @@ const SissonePrototype = () => {
                     className="w-full border-[#CFB2A8] text-[#3D2C2E] bg-white hover:bg-[#F5F0EB]"
                     onClick={handleGoogleLogin}
                   >
-                    <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
-                      <path
-                        fill="currentColor"
-                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                      />
-                      <path
-                        fill="currentColor"
-                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                      />
-                      <path
-                        fill="currentColor"
-                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                      />
-                      <path
-                        fill="currentColor"
-                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                      />
-                    </svg>
+                    <Image src="/google-logo.png" alt="Google" width={20} height={20} className="mr-2" />
                     Continuar com Google
                   </Button>
                 </>
@@ -2430,52 +3423,68 @@ const SissonePrototype = () => {
     <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
-        <div className="bg-[#F5F0EB] p-4 shadow-sm flex-shrink-0">
-          <h1 className="text-lg font-semibold text-[#3D2C2E] text-center">Confirmação</h1>
+        <div className="bg-[#F5F0EB] p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
+          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-[#E5D6CD]">
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
+          <h1 className="text-lg font-semibold text-[#3D2C2E]">Confirmação</h1>
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col items-center justify-center p-4 space-y-6 overflow-y-auto">
-        <div className="mx-auto w-full max-w-[520px] flex flex-col items-center space-y-6">
-          {/* Success Icon */}
-          <div className="w-20 h-20 bg-[#CFB2A8] rounded-full flex items-center justify-center">
-            <Check className="h-10 w-10 text-white" />
-          </div>
-
-          {/* Success Message */}
-          <div className="text-center space-y-2">
-            <h2 className="text-2xl font-bold text-[#3D2C2E]">Tudo Pronto!</h2>
-            <p className="text-[#3D2C2E] opacity-70">Sua aula experimental foi agendada com sucesso.</p>
-          </div>
-
-          {/* Class Details */}
-          <Card className="bg-white border-[#E5D6CD] w-full max-w-sm">
-            <CardContent className="p-4 text-center space-y-2">
-              <h3 className="font-semibold text-[#3D2C2E]">{selectedClass?.name}</h3>
-              <p className="text-sm text-[#3D2C2E] opacity-70">{selectedClass?.school}</p>
-              <div className="text-sm text-[#3D2C2E] opacity-70">
-                <p>
-                  {selectedClass?.days.join(" e ")} às {selectedClass?.time}
+      <div className="flex-1 flex items-center justify-center p-4">
+        <div className="mx-auto w-full max-w-[1040px]">
+          <Card className="bg-white border-[#E5D6CD]">
+            <CardContent className="p-8 text-center space-y-6">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                <Check className="h-8 w-8 text-green-600" />
+              </div>
+              
+              <div className="space-y-2">
+                <h2 className="text-2xl font-bold text-[#3D2C2E]">Aula Agendada!</h2>
+                <p className="text-[#3D2C2E] opacity-70">
+                  Sua aula experimental foi agendada com sucesso
                 </p>
-                <p>{selectedClass?.location}</p>
+              </div>
+
+              {selectedClass && (
+                <div className="bg-[#F5F0EB] rounded-lg p-4 space-y-2 text-left">
+                  <div className="flex justify-between">
+                    <span className="text-sm font-medium text-[#3D2C2E]">Aula:</span>
+                    <span className="text-sm text-[#3D2C2E]">{selectedClass.name}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm font-medium text-[#3D2C2E]">Studio:</span>
+                    <span className="text-sm text-[#3D2C2E]">{selectedClass.school}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm font-medium text-[#3D2C2E]">Data:</span>
+                    <span className="text-sm text-[#3D2C2E]">{selectedDate}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm font-medium text-[#3D2C2E]">Horário:</span>
+                    <span className="text-sm text-[#3D2C2E]">{selectedTime}</span>
+                  </div>
+                </div>
+              )}
+
+              <div className="space-y-3">
+                <Button
+                  className="w-full bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                  onClick={handleAddToCalendar}
+                >
+                  <Calendar className="h-4 w-4 mr-2" />
+                  Adicionar ao Calendário
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full border-[#CFB2A8] text-[#3D2C2E] hover:bg-[#E5D6CD]"
+                  onClick={() => setCurrentScreen("home")}
+                >
+                  Voltar para Home
+                </Button>
               </div>
             </CardContent>
           </Card>
-
-          {/* Actions */}
-          <div className="w-full max-w-sm space-y-3">
-            <Button className="w-full bg-[#8B7355] hover:bg-[#6F5C46] text-white" onClick={() => setCurrentScreen("home")}>
-              Voltar ao Início
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full border-[#CFB2A8] text-[#3D2C2E] bg-white hover:bg-[#F5F0EB]"
-              onClick={handleAddToCalendar}
-            >
-              <Calendar className="h-4 w-4 mr-2" />
-              Adicionar ao Calendário
-            </Button>
-          </div>
         </div>
       </div>
     </div>
