@@ -661,6 +661,9 @@ export default function SissoneResponsivePrototype() {
   const [selectedUnit, setSelectedUnit] = useState<string>("all")
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [searchTerm, setSearchTerm] = useState("")
+  const [frequencyFilter, setFrequencyFilter] = useState("all") // Added for students section filter
+  const [unitFilter, setUnitFilter] = useState("all") // Added for students section filter
+  const [classFilter, setClassFilter] = useState("all") // Added for students section filter
 
   const [toasts, setToasts] = useState<Toast[]>([])
 
@@ -686,8 +689,19 @@ export default function SissoneResponsivePrototype() {
     price: "",
   })
 
+  const [showInviteModal, setShowInviteModal] = useState(false)
   const [inviteLink] = useState("https://sissone.com.br/invite/abc123")
   const [linkCopied, setLinkCopied] = useState(false)
+
+  const [showUnitModal, setShowUnitModal] = useState(false)
+  const [editingUnit, setEditingUnit] = useState<any>(null)
+  const [unitFormData, setUnitFormData] = useState({
+    name: "",
+    address: "",
+    phone: "",
+    email: "",
+    description: "",
+  })
 
   const [userProfile] = useState<{ name: string; role: "admin" | "manager" }>({
     name: "Gestor Principal",
@@ -790,6 +804,43 @@ export default function SissoneResponsivePrototype() {
     setLinkCopied(true)
     showToast("Link copiado para a área de transferência!")
     setTimeout(() => setLinkCopied(false), 2000)
+  }
+
+  const openUnitModal = (unit: any = null) => {
+    if (unit) {
+      setEditingUnit(unit)
+      setUnitFormData({
+        name: unit.name,
+        address: unit.address,
+        phone: unit.phone,
+        email: unit.email,
+        description: unit.description,
+      })
+    } else {
+      setEditingUnit(null)
+      setUnitFormData({
+        name: "",
+        address: "",
+        phone: "",
+        email: "",
+        description: "",
+      })
+    }
+    setShowUnitModal(true)
+  }
+
+  const closeUnitModal = () => {
+    setShowUnitModal(false)
+    setEditingUnit(null)
+  }
+
+  const saveUnit = () => {
+    if (editingUnit) {
+      showToast("Unidade atualizada com sucesso!")
+    } else {
+      showToast("Nova unidade criada com sucesso!")
+    }
+    closeUnitModal()
   }
 
   const renderUnitFilter = () => (
@@ -1302,7 +1353,11 @@ export default function SissoneResponsivePrototype() {
             <h2 className="text-lg lg:text-xl font-semibold" style={{ color: "#3D2C2E" }}>
               Unidades
             </h2>
-            <Button className="flex-shrink-0" style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
+            <Button
+              className="flex-shrink-0"
+              onClick={() => openUnitModal()}
+              style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+            >
               <Plus className="w-4 h-4 mr-2" />
               <span className="hidden sm:inline">Criar Unidade</span>
               <span className="sm:hidden">Criar</span>
@@ -1350,7 +1405,12 @@ export default function SissoneResponsivePrototype() {
                       </div>
                     </div>
                     <div className="flex gap-2">
-                      <Button size="sm" variant="ghost" className="hover:bg-white/50">
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="hover:bg-white/50"
+                        onClick={() => openUnitModal(unit)}
+                      >
                         <Edit className="w-4 h-4" style={{ color: "#3D2C2E" }} />
                       </Button>
                       <Button size="sm" variant="ghost" className="hover:bg-white/50">
@@ -1403,6 +1463,111 @@ export default function SissoneResponsivePrototype() {
           </div>
         </div>
       </div>
+
+      {showUnitModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto" style={{ backgroundColor: "#E5D6CD" }}>
+            <CardHeader>
+              <CardTitle style={{ color: "#3D2C2E" }}>
+                {editingUnit ? "Editar Unidade" : "Criar Nova Unidade"}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="unit-name" className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                  Nome da Unidade *
+                </Label>
+                <Input
+                  id="unit-name"
+                  placeholder="Ex: Unidade Centro"
+                  value={unitFormData.name}
+                  onChange={(e) => setUnitFormData({ ...unitFormData, name: e.target.value })}
+                  className="mt-1"
+                  style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="unit-address" className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                  Endereço *
+                </Label>
+                <Input
+                  id="unit-address"
+                  placeholder="Rua, número, bairro"
+                  value={unitFormData.address}
+                  onChange={(e) => setUnitFormData({ ...unitFormData, address: e.target.value })}
+                  className="mt-1"
+                  style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="unit-phone" className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                    Telefone *
+                  </Label>
+                  <Input
+                    id="unit-phone"
+                    placeholder="(11) 99999-9999"
+                    value={unitFormData.phone}
+                    onChange={(e) => setUnitFormData({ ...unitFormData, phone: e.target.value })}
+                    className="mt-1"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="unit-email" className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                    Email *
+                  </Label>
+                  <Input
+                    id="unit-email"
+                    placeholder="contato@unidade.com"
+                    type="email"
+                    value={unitFormData.email}
+                    onChange={(e) => setUnitFormData({ ...unitFormData, email: e.target.value })}
+                    className="mt-1"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="unit-description" className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                  Descrição
+                </Label>
+                <textarea
+                  id="unit-description"
+                  placeholder="Descrição da unidade..."
+                  value={unitFormData.description}
+                  onChange={(e) => setUnitFormData({ ...unitFormData, description: e.target.value })}
+                  className="mt-1 w-full min-h-[100px] p-3 rounded-md border text-sm"
+                  style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD", color: "#3D2C2E" }}
+                />
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <Button
+                  variant="outline"
+                  className="flex-1 bg-transparent"
+                  onClick={closeUnitModal}
+                  style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  className="flex-1"
+                  onClick={saveUnit}
+                  disabled={!unitFormData.name || !unitFormData.address || !unitFormData.phone || !unitFormData.email}
+                  style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                >
+                  {editingUnit ? "Salvar Alterações" : "Criar Unidade"}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   )
 
@@ -2008,266 +2173,327 @@ export default function SissoneResponsivePrototype() {
     )
   }
 
-  const renderStudents = () => (
-    <div className="p-4 lg:p-6 pb-24 lg:pb-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-between mb-6 gap-2 flex-wrap">
-          <h2 className="text-lg lg:text-xl font-semibold" style={{ color: "#3D2C2E" }}>
-            Gerenciar Alunos
-          </h2>
-          <div className="flex gap-2 flex-wrap">
+  const renderStudents = () => {
+    const filteredStudents = mockStudents.filter((student) => {
+      const matchesSearch =
+        student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        student.email.toLowerCase().includes(searchTerm.toLowerCase())
+      const matchesUnit = selectedUnit === "all" || student.unit === selectedUnit
+      const matchesFrequency =
+        frequencyFilter === "all" || student.frequency.toLowerCase() === frequencyFilter.toLowerCase()
+
+      return matchesSearch && matchesUnit && matchesFrequency
+    })
+
+    return (
+      <div className="p-4 lg:p-6 pb-24 lg:pb-6">
+        <div className="max-w-7xl mx-auto space-y-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <h1 className="text-2xl font-bold" style={{ color: "#3D2C2E" }}>
+              Alunos ({filteredStudents.length})
+            </h1>
             <Button
-              className="flex-shrink-0"
+              onClick={() => setShowInviteModal(true)}
               style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
-              onClick={() => navigateTo("invite-student")}
             >
               <UserPlus className="w-4 h-4 mr-2" />
-              <span className="hidden sm:inline">Novo Aluno</span>
-              <span className="sm:hidden">Novo</span>
-            </Button>
-            <Button
-              variant="outline"
-              className="flex-shrink-0 bg-transparent"
-              style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
-            >
-              <FileDown className="w-4 h-4 mr-2" />
-              <span className="hidden sm:inline">Importar Lista</span>
-              <span className="sm:hidden">Importar</span>
+              Novo Aluno
             </Button>
           </div>
-        </div>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
-            <CardContent className="p-4 text-center">
-              <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
-                Maria Silva
-              </div>
-              <div className="text-xs" style={{ color: "#3D2C2E" }}>
-                Mais Frequente (95%)
-              </div>
-            </CardContent>
-          </Card>
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
-            <CardContent className="p-4 text-center">
-              <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
-                Ana Costa
-              </div>
-              <div className="text-xs" style={{ color: "#3D2C2E" }}>
-                Menos Frequente (45%)
-              </div>
-            </CardContent>
-          </Card>
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
-            <CardContent className="p-4 text-center">
-              <div className="flex items-center justify-center gap-1">
-                <AlertCircle className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-                <span className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
-                  1
-                </span>
-              </div>
-              <div className="text-xs" style={{ color: "#3D2C2E" }}>
-                Inadimplente
-              </div>
-            </CardContent>
-          </Card>
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
-            <CardContent className="p-4 text-center">
-              <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
-                {mockStudents.length}
-              </div>
-              <div className="text-xs" style={{ color: "#3D2C2E" }}>
-                Total de Alunos
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Filters and Search */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
-          <div className="relative">
-            <Search
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4"
-              style={{ color: "#3D2C2E" }}
-            />
-            <Input
-              placeholder="Buscar alunos..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
-              style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
-            />
+          {/* Quick Stats */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <Card style={{ backgroundColor: "#E5D6CD" }}>
+              <CardContent className="p-4 text-center">
+                <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                  Maria Silva
+                </div>
+                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                  Mais Frequente (95%)
+                </div>
+              </CardContent>
+            </Card>
+            <Card style={{ backgroundColor: "#E5D6CD" }}>
+              <CardContent className="p-4 text-center">
+                <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                  Ana Costa
+                </div>
+                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                  Menos Frequente (45%)
+                </div>
+              </CardContent>
+            </Card>
+            <Card style={{ backgroundColor: "#E5D6CD" }}>
+              <CardContent className="p-4 text-center">
+                <div className="flex items-center justify-center gap-1">
+                  <AlertCircle className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+                  <span className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                    1
+                  </span>
+                </div>
+                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                  Inadimplente
+                </div>
+              </CardContent>
+            </Card>
+            <Card style={{ backgroundColor: "#E5D6CD" }}>
+              <CardContent className="p-4 text-center">
+                <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                  {mockStudents.length}
+                </div>
+                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                  Total de Alunos
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
-          <Select defaultValue="all">
-            <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectValue>
-                <span className="text-sm">Unidade: Todas</span>
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectItem value="all">Todas</SelectItem>
-              {mockUnits.map((unit) => (
-                <SelectItem key={unit.id} value={unit.id}>
-                  {unit.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          {/* Filters and Search */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="relative">
+              <Search
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4"
+                style={{ color: "#3D2C2E" }}
+              />
+              <Input
+                placeholder="Buscar alunos..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10"
+                style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+              />
+            </div>
 
-          <Select defaultValue="all">
-            <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectValue>
-                <span className="text-sm">Aula: Todas</span>
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectItem value="all">Todas</SelectItem>
-              {mockClasses.map((classItem) => (
-                <SelectItem key={classItem.id} value={classItem.id}>
-                  {classItem.title}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+            <Select defaultValue="all" onValueChange={setUnitFilter}>
+              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectValue>
+                  <span className="text-sm">
+                    Unidade: {unitFilter === "all" ? "Todas" : mockUnits.find((u) => u.id === unitFilter)?.name}
+                  </span>
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectItem value="all">Todas</SelectItem>
+                {mockUnits.map((unit) => (
+                  <SelectItem key={unit.id} value={unit.id}>
+                    {unit.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
 
-          <Select defaultValue="all">
-            <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectValue>
-                <span className="text-sm">Idade: Todas</span>
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectItem value="all">Todas</SelectItem>
-              <SelectItem value="kids">Kids (até 12)</SelectItem>
-              <SelectItem value="teen">Teen (13-17)</SelectItem>
-              <SelectItem value="adult">Adulto (18+)</SelectItem>
-            </SelectContent>
-          </Select>
+            <Select defaultValue="all" onValueChange={setClassFilter}>
+              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectValue>
+                  <span className="text-sm">
+                    Aula: {classFilter === "all" ? "Todas" : mockClasses.find((c) => c.id === classFilter)?.title}
+                  </span>
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectItem value="all">Todas</SelectItem>
+                {mockClasses.map((classItem) => (
+                  <SelectItem key={classItem.id} value={classItem.id}>
+                    {classItem.title}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
 
-          <Select defaultValue="all">
-            <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectValue>
-                <span className="text-sm">Freq.: Todas</span>
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-              <SelectItem value="all">Todas</SelectItem>
-              <SelectItem value="high">Alta (&gt;80%)</SelectItem>
-              <SelectItem value="medium">Média (50-80%)</SelectItem>
-              <SelectItem value="low">Baixa (&lt;50%)</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+            <Select defaultValue="all">
+              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectValue>
+                  <span className="text-sm">Idade: Todas</span>
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectItem value="all">Todas</SelectItem>
+                <SelectItem value="kids">Kids (até 12)</SelectItem>
+                <SelectItem value="teen">Teen (13-17)</SelectItem>
+                <SelectItem value="adult">Adulto (18+)</SelectItem>
+              </SelectContent>
+            </Select>
 
-        {/* Students List */}
-        <Card style={{ backgroundColor: "#E5D6CD" }}>
-          <CardContent className="p-0">
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[600px]">
-                <thead className="border-b" style={{ borderColor: "#CFB2A8" }}>
-                  <tr>
-                    <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
-                      Aluno
-                    </th>
-                    <th
-                      className="text-left p-4 text-sm font-semibold hidden lg:table-cell"
-                      style={{ color: "#3D2C2E" }}
-                    >
-                      Telefone
-                    </th>
-                    <th
-                      className="text-left p-4 text-sm font-semibold hidden lg:table-cell"
-                      style={{ color: "#3D2C2E" }}
-                    >
-                      Origem
-                    </th>
-                    <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
-                      Aulas
-                    </th>
-                    <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
-                      Frequência
-                    </th>
-                    <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
-                      Situação
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {mockStudents.map((student) => (
-                    <tr key={student.id} className="border-b hover:bg-white/30" style={{ borderColor: "#CFB2A8" }}>
-                      <td className="p-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full" style={{ backgroundColor: "#CFB2A8" }}>
-                            <div className="flex items-center justify-center h-full">
-                              <User className="w-5 h-5" style={{ color: "#3D2C2E" }} />
+            <Select defaultValue="all" onValueChange={setFrequencyFilter}>
+              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectValue>
+                  <span className="text-sm">Freq.: {frequencyFilter === "all" ? "Todas" : frequencyFilter === "high" ? "Alta" : frequencyFilter === "medium" ? "Média" : "Baixa"}</span>
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectItem value="all">Todas</SelectItem>
+                <SelectItem value="high">Alta (&gt;80%)</SelectItem>
+                <SelectItem value="medium">Média (50-80%)</SelectItem>
+                <SelectItem value="low">Baixa (&lt;50%)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Students List */}
+          <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[600px]">
+                  <thead className="border-b" style={{ borderColor: "#CFB2A8" }}>
+                    <tr>
+                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
+                        Aluno
+                      </th>
+                      <th
+                        className="text-left p-4 text-sm font-semibold hidden lg:table-cell"
+                        style={{ color: "#3D2C2E" }}
+                      >
+                        Telefone
+                      </th>
+                      <th
+                        className="text-left p-4 text-sm font-semibold hidden lg:table-cell"
+                        style={{ color: "#3D2C2E" }}
+                      >
+                        Origem
+                      </th>
+                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
+                        Aulas
+                      </th>
+                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
+                        Frequência
+                      </th>
+                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
+                        Situação
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {mockStudents.map((student) => (
+                      <tr key={student.id} className="border-b hover:bg-white/30" style={{ borderColor: "#CFB2A8" }}>
+                        <td className="p-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full" style={{ backgroundColor: "#CFB2A8" }}>
+                              <div className="flex items-center justify-center h-full">
+                                <User className="w-5 h-5" style={{ color: "#3D2C2E" }} />
+                              </div>
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                                {student.name}
+                              </p>
+                              <p className="text-xs lg:hidden" style={{ color: "#3D2C2E" }}>
+                                {student.phone}
+                              </p>
                             </div>
                           </div>
-                          <div>
-                            <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
-                              {student.name}
-                            </p>
-                            <p className="text-xs lg:hidden" style={{ color: "#3D2C2E" }}>
-                              {student.phone}
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="p-4 text-sm hidden lg:table-cell" style={{ color: "#3D2C2E" }}>
-                        {student.phone}
-                      </td>
-                      <td className="p-4 hidden lg:table-cell">
-                        <span
-                          className="text-xs px-2 py-1 rounded"
-                          style={{
-                            backgroundColor: student.acquisitionType === "platform" ? "#CFB2A8" : "#F5F0EB",
-                            color: "#3D2C2E",
-                          }}
-                        >
-                          {student.acquisitionType === "platform" ? "Plataforma" : "Convite"}
-                        </span>
-                      </td>
-                      <td className="p-4 text-sm" style={{ color: "#3D2C2E" }}>
-                        {student.classes.join(", ")}
-                      </td>
-                      <td className="p-4">
-                        <div className="flex items-center gap-2">
-                          <div className="w-16 h-2 rounded-full overflow-hidden" style={{ backgroundColor: "#F5F0EB" }}>
-                            <div
-                              className="h-full"
-                              style={{
-                                width: `${student.frequency}%`,
-                                backgroundColor: "#CFB2A8",
-                              }}
-                            />
-                          </div>
-                          <span className="text-sm" style={{ color: "#3D2C2E" }}>
-                            {student.frequency}%
+                        </td>
+                        <td className="p-4 text-sm hidden lg:table-cell" style={{ color: "#3D2C2E" }}>
+                          {student.phone}
+                        </td>
+                        <td className="p-4 hidden lg:table-cell">
+                          <span
+                            className="text-xs px-2 py-1 rounded"
+                            style={{
+                              backgroundColor: student.acquisitionType === "platform" ? "#CFB2A8" : "#F5F0EB",
+                              color: "#3D2C2E",
+                            }}
+                          >
+                            {student.acquisitionType === "platform" ? "Plataforma" : "Convite"}
                           </span>
-                        </div>
-                      </td>
-                      <td className="p-4">
-                        <span
-                          className="text-xs px-2 py-1 rounded"
-                          style={{
-                            backgroundColor: student.paymentStatus === "current" ? "#CFB2A8" : "#F5F0EB",
-                            color: "#3D2C2E",
-                          }}
-                        >
-                          {student.paymentStatus === "current" ? "Em dia" : "Inadimplente"}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </CardContent>
-        </Card>
+                        </td>
+                        <td className="p-4 text-sm" style={{ color: "#3D2C2E" }}>
+                          {student.classes.join(", ")}
+                        </td>
+                        <td className="p-4">
+                          <div className="flex items-center gap-2">
+                            <div className="w-16 h-2 rounded-full overflow-hidden" style={{ backgroundColor: "#F5F0EB" }}>
+                              <div
+                                className="h-full"
+                                style={{
+                                  width: `${student.frequency}%`,
+                                  backgroundColor: "#CFB2A8",
+                                }}
+                              />
+                            </div>
+                            <span className="text-sm" style={{ color: "#3D2C2E" }}>
+                              {student.frequency}%
+                            </span>
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          <span
+                            className="text-xs px-2 py-1 rounded"
+                            style={{
+                              backgroundColor: student.paymentStatus === "current" ? "#CFB2A8" : "#F5F0EB",
+                              color: "#3D2C2E",
+                            }}
+                          >
+                            {student.paymentStatus === "current" ? "Em dia" : "Inadimplente"}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {showInviteModal && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <Card className="w-full max-w-md" style={{ backgroundColor: "#E5D6CD" }}>
+              <CardHeader>
+                <CardTitle style={{ color: "#3D2C2E" }}>Convidar Novo Aluno</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <p className="text-sm mb-4" style={{ color: "#3D2C2E" }}>
+                    Compartilhe o link abaixo com o aluno para que ele possa se cadastrar:
+                  </p>
+                  <div
+                    className="flex items-center gap-2 p-3 rounded"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD", border: "1px solid" }}
+                  >
+                    <Input
+                      value={inviteLink}
+                      readOnly
+                      className="flex-1 border-0 bg-transparent text-sm"
+                      style={{ color: "#3D2C2E" }}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <Button
+                    className="w-full"
+                    onClick={copyInviteLink}
+                    style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                  >
+                    {linkCopied ? (
+                      <>
+                        <Check className="w-4 h-4 mr-2" />
+                        Link Copiado!
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-4 h-4 mr-2" />
+                        Copiar Link
+                      </>
+                    )}
+                  </Button>
+
+                  <Button
+                    variant="outline"
+                    className="w-full bg-transparent"
+                    onClick={() => setShowInviteModal(false)}
+                    style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                  >
+                    Fechar
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
-    </div>
-  )
+    )
+  }
 
   const renderInviteStudent = () => (
     <div className="p-4 lg:p-6 pb-24 lg:pb-6">
@@ -2774,6 +3000,33 @@ export default function SissoneResponsivePrototype() {
       </div>
     </div>
   )
+
+  const renderContent = () => {
+    switch (currentScreen) {
+      case "dashboard":
+        return renderDashboard()
+      case "school-units":
+        return renderSchoolUnits()
+      case "classes":
+        return renderClasses()
+      case "create-class":
+        return renderCreateClass()
+      case "class-preview":
+        return renderClassPreview()
+      case "pricing":
+      case "create-plan":
+      case "edit-plan":
+      case "create-combo":
+      case "edit-combo":
+        return renderPricing()
+      case "students":
+        return renderStudents()
+      case "invite-student": // Removed this case as renderInviteStudent is removed
+        return null
+      default:
+        return renderDashboard()
+    }
+  }
 
   return (
     <div className="min-h-screen flex overflow-x-hidden" style={{ backgroundColor: "#F5F0EB" }}>
