@@ -3112,14 +3112,54 @@ const SissonePrototype = () => {
       {selectedClass && (
         <div className="flex-1 overflow-y-auto">
           <div className="mx-auto w-full max-w-[1040px] p-4 space-y-6">
-            {/* CHANGE: Removed carousel, using single image with fixed height */}
-            <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden bg-gray-200">
-              <Image
-                src={selectedClass.images[0] || "/placeholder.svg"}
-                alt={selectedClass.name}
-                fill
-                className="object-cover"
-              />
+            <div className="relative w-full h-64 md:h-80 flex-shrink-0">
+              <div className="relative w-full h-full rounded-xl overflow-hidden bg-gray-200">
+                <Image
+                  src={selectedClass.images[currentImageIndex] || "/placeholder.svg"}
+                  alt={selectedClass.name}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+              {/* Carousel Navigation */}
+              {selectedClass.images.length > 1 && (
+                <>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() =>
+                      setCurrentImageIndex((prev) => (prev === 0 ? selectedClass.images.length - 1 : prev - 1))
+                    }
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() =>
+                      setCurrentImageIndex((prev) => (prev === selectedClass.images.length - 1 ? 0 : prev + 1))
+                    }
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+
+                  {/* Dots Indicator */}
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                    {selectedClass.images.map((_: any, index: number) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`w-2 h-2 rounded-full transition-all ${
+                          index === currentImageIndex ? "bg-white w-4" : "bg-white/50"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Class Info */}
