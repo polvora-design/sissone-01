@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
-import { Star, Calendar, Clock, MapPin, QrCode, ArrowLeft, Mail, Phone, Edit2 } from "lucide-react"
+import { Star, Calendar, Clock, MapPin, QrCode, ArrowLeft, Mail, Phone, Edit2, Check, X } from "lucide-react"
 import Image from "next/image"
 
 type ClassStatus = "today" | "future" | "past-not-reviewed" | "past-reviewed"
@@ -15,6 +15,8 @@ export default function SissonePrototype() {
   const [currentScreen, setCurrentScreen] = useState(0)
   const [rating, setRating] = useState(0)
   const [currentClassStatus, setCurrentClassStatus] = useState<ClassStatus>("today")
+  const [isCheckedIn, setIsCheckedIn] = useState(false)
+  const [showCheckInNotification, setShowCheckInNotification] = useState(false)
 
   const screens = ["Login", "Dashboard", "Detalhes", "Check-in", "Feedback", "Reviews", "Perfil"]
 
@@ -57,6 +59,18 @@ export default function SissonePrototype() {
         ))}
       </div>
     )
+  }
+
+  const handleCheckIn = () => {
+    setIsCheckedIn(true)
+    setShowCheckInNotification(true)
+    setTimeout(() => setShowCheckInNotification(false), 3000)
+  }
+
+  const handleCancelCheckIn = () => {
+    setIsCheckedIn(false)
+    setShowCheckInNotification(true)
+    setTimeout(() => setShowCheckInNotification(false), 3000)
   }
 
   const LoginScreen = () => (
@@ -424,7 +438,7 @@ export default function SissonePrototype() {
                 {classInfo.hasUserReview && (
                   <div className="mt-3 p-3 bg-[#CFB2A8]/10 border border-[#CFB2A8]/30 rounded-lg">
                     <p className="text-[#3D2C2E] text-xs font-medium mb-1">Sua Avaliação</p>
-                    <div className="flex items-center gap-2">{renderStars(classInfo.userRating!)}</div>
+                    <div className="flex items-center justify-center gap-2">{renderStars(classInfo.userRating!)}</div>
                   </div>
                 )}
 
@@ -524,6 +538,19 @@ export default function SissonePrototype() {
 
   const CheckInScreen = () => (
     <div className="min-h-screen bg-[#F5F0EB]">
+      {showCheckInNotification && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
+          <div className="bg-[#3D2C2E] text-white rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
+            <div className="w-8 h-8 bg-[#CFB2A8] rounded-full flex items-center justify-center flex-shrink-0">
+              {isCheckedIn ? <Check className="w-5 h-5 text-white" /> : <X className="w-5 h-5 text-white" />}
+            </div>
+            <p className="text-sm font-medium">
+              {isCheckedIn ? "Check-in confirmado com sucesso!" : "Check-in cancelado"}
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="bg-white border-b border-[#E5D6CD] p-4">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="sm" onClick={prevScreen} className="text-[#3D2C2E]">
@@ -550,9 +577,19 @@ export default function SissonePrototype() {
         </div>
 
         <div className="space-y-3">
-          <Button onClick={goHome} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
-            Confirmar Check-in
-          </Button>
+          {!isCheckedIn ? (
+            <Button onClick={handleCheckIn} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+              Confirmar Check-in
+            </Button>
+          ) : (
+            <Button
+              onClick={handleCancelCheckIn}
+              variant="outline"
+              className="w-full border-[#CFB2A8] text-[#CFB2A8] bg-transparent hover:bg-[#CFB2A8]/10"
+            >
+              Cancelar Check-in
+            </Button>
+          )}
           <Button variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-transparent">
             Precisa de ajuda?
           </Button>
