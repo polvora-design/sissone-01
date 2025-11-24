@@ -6,15 +6,15 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
-import { Star, Calendar, Clock, MapPin, QrCode, ArrowLeft, User, Mail, Phone, Edit2 } from 'lucide-react'
+import { Star, Calendar, Clock, MapPin, QrCode, ArrowLeft, Mail, Phone, Edit2 } from "lucide-react"
 import Image from "next/image"
 
-type ClassStatus = 'today' | 'future' | 'past-not-reviewed' | 'past-reviewed'
+type ClassStatus = "today" | "future" | "past-not-reviewed" | "past-reviewed"
 
 export default function SissonePrototype() {
   const [currentScreen, setCurrentScreen] = useState(0)
   const [rating, setRating] = useState(0)
-  const [currentClassStatus, setCurrentClassStatus] = useState<ClassStatus>('today')
+  const [currentClassStatus, setCurrentClassStatus] = useState<ClassStatus>("today")
 
   const screens = ["Login", "Dashboard", "Detalhes", "Check-in", "Feedback", "Reviews", "Perfil"]
 
@@ -151,9 +151,9 @@ export default function SissonePrototype() {
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold text-[#3D2C2E] mb-3">Próximas Aulas</h3>
+          <h3 className="text-lg font-semibold text-[#3D2C2E] mb-3">Aulas de Hoje</h3>
 
-          <Card className="bg-white border-[#E5D6CD] mb-3">
+          <Card className="bg-white border-[#E5D6CD]">
             <CardContent className="p-4">
               <div className="flex justify-between items-start mb-3">
                 <div>
@@ -176,17 +176,31 @@ export default function SissonePrototype() {
                 <span className="text-sm text-[#3D2C2E] opacity-70">Centro - Sala A</span>
               </div>
               <div className="grid grid-cols-2 gap-2">
-                <Button onClick={() => goToDetails('today')} variant="outline" className="border-[#E5D6CD] text-[#3D2C2E] bg-white">
+                <Button
+                  onClick={() => goToDetails("today")}
+                  variant="outline"
+                  className="border-[#E5D6CD] text-[#3D2C2E] bg-white"
+                >
                   Ver Detalhes
                 </Button>
-                <Button onClick={() => { goToDetails('today'); setTimeout(() => setCurrentScreen(3), 100) }} className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+                <Button
+                  onClick={() => {
+                    goToDetails("today")
+                    setTimeout(() => setCurrentScreen(3), 100)
+                  }}
+                  className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+                >
                   Check-in
                 </Button>
               </div>
             </CardContent>
           </Card>
+        </div>
 
-          <Card className="bg-white border-[#E5D6CD]">
+        <div>
+          <h3 className="text-lg font-semibold text-[#3D2C2E] mb-3">Aulas da Semana</h3>
+
+          <Card className="bg-white border-[#E5D6CD] mb-3">
             <CardContent className="p-4">
               <div className="flex justify-between items-start mb-3">
                 <div>
@@ -196,7 +210,7 @@ export default function SissonePrototype() {
                 <div className="text-right text-sm text-[#3D2C2E] opacity-70">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
-                    Amanhã
+                    17 Jan
                   </div>
                   <div className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
@@ -208,7 +222,41 @@ export default function SissonePrototype() {
                 <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
                 <span className="text-sm text-[#3D2C2E] opacity-70">Zona Norte - Sala B</span>
               </div>
-              <Button onClick={() => goToDetails('future')} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+              <Button
+                onClick={() => goToDetails("future")}
+                className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+              >
+                Ver Detalhes
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white border-[#E5D6CD]">
+            <CardContent className="p-4">
+              <div className="flex justify-between items-start mb-3">
+                <div>
+                  <h4 className="font-semibold text-[#3D2C2E]">Dança de Salão</h4>
+                  <p className="text-[#3D2C2E] opacity-70 text-sm">Studio Dance Flow</p>
+                </div>
+                <div className="text-right text-sm text-[#3D2C2E] opacity-70">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    19 Jan
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Clock className="w-4 h-4" />
+                    16:00
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-1 mb-3">
+                <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
+                <span className="text-sm text-[#3D2C2E] opacity-70">Centro - Sala 3</span>
+              </div>
+              <Button
+                onClick={() => goToDetails("future")}
+                className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+              >
                 Ver Detalhes
               </Button>
             </CardContent>
@@ -245,10 +293,20 @@ export default function SissonePrototype() {
                 <span className="text-sm text-[#3D2C2E] opacity-70">Centro - Sala Principal</span>
               </div>
               <div className="grid grid-cols-2 gap-2">
-                <Button onClick={() => goToDetails('past-reviewed')} variant="outline" className="border-[#E5D6CD] text-[#3D2C2E] bg-white">
+                <Button
+                  onClick={() => goToDetails("past-reviewed")}
+                  variant="outline"
+                  className="border-[#E5D6CD] text-[#3D2C2E] bg-white"
+                >
                   Ver Detalhes
                 </Button>
-                <Button onClick={() => { goToDetails('past-reviewed'); setTimeout(() => setCurrentScreen(4), 100) }} className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+                <Button
+                  onClick={() => {
+                    goToDetails("past-reviewed")
+                    setTimeout(() => setCurrentScreen(4), 100)
+                  }}
+                  className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+                >
                   <Edit2 className="w-4 h-4 mr-1" />
                   Editar Avaliação
                 </Button>
@@ -280,10 +338,20 @@ export default function SissonePrototype() {
                 <span className="text-sm text-[#3D2C2E] opacity-70">Zona Sul - Sala 2</span>
               </div>
               <div className="grid grid-cols-2 gap-2">
-                <Button onClick={() => goToDetails('past-not-reviewed')} variant="outline" className="border-[#E5D6CD] text-[#3D2C2E] bg-white">
+                <Button
+                  onClick={() => goToDetails("past-not-reviewed")}
+                  variant="outline"
+                  className="border-[#E5D6CD] text-[#3D2C2E] bg-white"
+                >
                   Ver Detalhes
                 </Button>
-                <Button onClick={() => { goToDetails('past-not-reviewed'); setTimeout(() => setCurrentScreen(4), 100) }} className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+                <Button
+                  onClick={() => {
+                    goToDetails("past-not-reviewed")
+                    setTimeout(() => setCurrentScreen(4), 100)
+                  }}
+                  className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+                >
                   Avaliar
                 </Button>
               </div>
@@ -297,14 +365,39 @@ export default function SissonePrototype() {
   const DetailsScreen = () => {
     const getTitleAndClass = () => {
       switch (currentClassStatus) {
-        case 'today':
-          return { title: 'Fluxo Contemporâneo', studio: 'Estúdio Movement', date: 'Hoje, 16 de Janeiro', time: '18:00 - 19:30', hasUserReview: false }
-        case 'future':
-          return { title: 'Fundamentos de Jazz', studio: 'Academia Rhythm Dance', date: 'Amanhã, 17 de Janeiro', time: '19:30 - 21:00', hasUserReview: false }
-        case 'past-reviewed':
-          return { title: 'Ballet Clássico', studio: 'Estúdio Elegance', date: '15 de Janeiro', time: '17:00 - 18:30', hasUserReview: true, userRating: 5 }
-        case 'past-not-reviewed':
-          return { title: 'Hip Hop Iniciante', studio: 'Urban Move Studio', date: '12 de Janeiro', time: '20:00 - 21:30', hasUserReview: false }
+        case "today":
+          return {
+            title: "Fluxo Contemporâneo",
+            studio: "Estúdio Movement",
+            date: "Hoje, 16 de Janeiro",
+            time: "18:00 - 19:30",
+            hasUserReview: false,
+          }
+        case "future":
+          return {
+            title: "Fundamentos de Jazz",
+            studio: "Academia Rhythm Dance",
+            date: "Amanhã, 17 de Janeiro",
+            time: "19:30 - 21:00",
+            hasUserReview: false,
+          }
+        case "past-reviewed":
+          return {
+            title: "Ballet Clássico",
+            studio: "Estúdio Elegance",
+            date: "15 de Janeiro",
+            time: "17:00 - 18:30",
+            hasUserReview: true,
+            userRating: 5,
+          }
+        case "past-not-reviewed":
+          return {
+            title: "Hip Hop Iniciante",
+            studio: "Urban Move Studio",
+            date: "12 de Janeiro",
+            time: "20:00 - 21:30",
+            hasUserReview: false,
+          }
       }
     }
 
@@ -327,21 +420,17 @@ export default function SissonePrototype() {
               <div>
                 <h2 className="text-2xl font-bold text-[#3D2C2E] mb-2">{classInfo.title}</h2>
                 <p className="text-[#3D2C2E] opacity-70 font-medium">{classInfo.studio}</p>
-                
+
                 {classInfo.hasUserReview && (
                   <div className="mt-3 p-3 bg-[#CFB2A8]/10 border border-[#CFB2A8]/30 rounded-lg">
                     <p className="text-[#3D2C2E] text-xs font-medium mb-1">Sua Avaliação</p>
-                    <div className="flex items-center gap-2">
-                      {renderStars(classInfo.userRating!)}
-                    </div>
+                    <div className="flex items-center gap-2">{renderStars(classInfo.userRating!)}</div>
                   </div>
                 )}
-                
+
                 <div className="flex items-center gap-2 mt-3 pt-3 border-t border-[#E5D6CD]">
-                  <div className="flex items-center gap-1">
-                    {renderStars(4)}
-                    <span className="text-[#3D2C2E] opacity-70 text-sm">(24 avaliações)</span>
-                  </div>
+                  {renderStars(4)}
+                  <span className="text-[#3D2C2E] opacity-70 text-sm">(24 avaliações)</span>
                 </div>
               </div>
 
@@ -371,8 +460,8 @@ export default function SissonePrototype() {
               <div className="pt-2 border-t border-[#E5D6CD]">
                 <h3 className="font-semibold text-[#3D2C2E] mb-2">Sobre a Aula</h3>
                 <p className="text-[#3D2C2E] opacity-70 text-sm leading-relaxed">
-                  Uma experiência de dança contemporânea que explora movimentos fluidos e expressivos. Adequado para todos
-                  os níveis. Traga roupas confortáveis e uma garrafa de água.
+                  Uma experiência de dança contemporânea que explora movimentos fluidos e expressivos. Adequado para
+                  todos os níveis. Traga roupas confortáveis e uma garrafa de água.
                 </p>
               </div>
 
@@ -392,25 +481,34 @@ export default function SissonePrototype() {
           </Card>
 
           <div className="space-y-2">
-            {currentClassStatus === 'today' && (
-              <Button onClick={() => setCurrentScreen(3)} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+            {currentClassStatus === "today" && (
+              <Button
+                onClick={() => setCurrentScreen(3)}
+                className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+              >
                 Fazer Check-in
               </Button>
             )}
-            
-            {(currentClassStatus === 'past-not-reviewed') && (
-              <Button onClick={() => setCurrentScreen(4)} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+
+            {currentClassStatus === "past-not-reviewed" && (
+              <Button
+                onClick={() => setCurrentScreen(4)}
+                className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+              >
                 Avaliar Aula
               </Button>
             )}
-            
-            {currentClassStatus === 'past-reviewed' && (
-              <Button onClick={() => setCurrentScreen(4)} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+
+            {currentClassStatus === "past-reviewed" && (
+              <Button
+                onClick={() => setCurrentScreen(4)}
+                className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+              >
                 <Edit2 className="w-4 h-4 mr-2" />
                 Editar Avaliação
               </Button>
             )}
-            
+
             <Button
               onClick={() => setCurrentScreen(5)}
               variant="outline"
@@ -464,10 +562,11 @@ export default function SissonePrototype() {
   )
 
   const FeedbackScreen = () => {
-    const isEditing = currentClassStatus === 'past-reviewed'
-    const classInfo = currentClassStatus === 'past-reviewed' 
-      ? { title: 'Ballet Clássico', studio: 'Estúdio Elegance', currentRating: 5 }
-      : { title: 'Hip Hop Iniciante', studio: 'Urban Move Studio', currentRating: 0 }
+    const isEditing = currentClassStatus === "past-reviewed"
+    const classInfo =
+      currentClassStatus === "past-reviewed"
+        ? { title: "Ballet Clássico", studio: "Estúdio Elegance", currentRating: 5 }
+        : { title: "Hip Hop Iniciante", studio: "Urban Move Studio", currentRating: 0 }
 
     return (
       <div className="min-h-screen bg-[#F5F0EB]">
@@ -477,7 +576,7 @@ export default function SissonePrototype() {
               <ArrowLeft className="w-4 h-4" />
             </Button>
             <h1 className="text-lg font-bold text-[#3D2C2E]">
-              {isEditing ? 'Editar Avaliação' : 'Como foi sua aula?'}
+              {isEditing ? "Editar Avaliação" : "Como foi sua aula?"}
             </h1>
           </div>
         </div>
@@ -502,7 +601,9 @@ export default function SissonePrototype() {
                 <Textarea
                   id="review"
                   placeholder="Como foi a aula? O que você mais gostou?"
-                  defaultValue={isEditing ? "Aula maravilhosa! A professora é excelente e o ambiente é muito acolhedor." : ""}
+                  defaultValue={
+                    isEditing ? "Aula maravilhosa! A professora é excelente e o ambiente é muito acolhedor." : ""
+                  }
                   className="mt-2 bg-white border-[#E5D6CD] min-h-[100px]"
                 />
               </div>
@@ -511,7 +612,7 @@ export default function SissonePrototype() {
 
           <div className="space-y-3">
             <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
-              {isEditing ? 'Salvar Alterações' : 'Enviar Avaliação'}
+              {isEditing ? "Salvar Alterações" : "Enviar Avaliação"}
             </Button>
             {!isEditing && (
               <Button
@@ -545,16 +646,14 @@ export default function SissonePrototype() {
             <div className="text-center">
               <h2 className="text-xl font-bold text-[#3D2C2E]">Fluxo Contemporâneo</h2>
               <p className="text-[#3D2C2E] opacity-70">Estúdio Movement</p>
-              
-              {currentClassStatus === 'past-reviewed' && (
+
+              {currentClassStatus === "past-reviewed" && (
                 <div className="mt-3 p-3 bg-[#CFB2A8]/10 border border-[#CFB2A8]/30 rounded-lg">
                   <p className="text-[#3D2C2E] text-xs font-medium mb-1">Sua Avaliação</p>
-                  <div className="flex items-center justify-center gap-2">
-                    {renderStars(5)}
-                  </div>
+                  <div className="flex items-center justify-center gap-2">{renderStars(5)}</div>
                 </div>
               )}
-              
+
               <div className="flex items-center justify-center gap-2 mt-3 pt-3 border-t border-[#E5D6CD]">
                 {renderStars(4)}
                 <span className="text-[#3D2C2E] opacity-70 text-sm">(24 avaliações da comunidade)</span>
@@ -663,12 +762,7 @@ export default function SissonePrototype() {
               <Label htmlFor="name" className="text-[#3D2C2E]">
                 Nome Completo
               </Label>
-              <Input
-                id="name"
-                type="text"
-                defaultValue="Sarah Oliveira"
-                className="mt-1 bg-white border-[#E5D6CD]"
-              />
+              <Input id="name" type="text" defaultValue="Sarah Oliveira" className="mt-1 bg-white border-[#E5D6CD]" />
             </div>
 
             <div>
