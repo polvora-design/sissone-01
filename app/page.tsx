@@ -7,7 +7,21 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Heart, MapPin, Star, Clock, Calendar, User, Check, Filter, Edit3, ChevronLeft, ChevronRight, X } from 'lucide-react'
+import {
+  ArrowLeft,
+  Heart,
+  MapPin,
+  Star,
+  Clock,
+  Calendar,
+  User,
+  Check,
+  Filter,
+  Edit3,
+  ChevronLeft,
+  ChevronRight,
+  X,
+} from "lucide-react"
 import Image from "next/image"
 
 type Screen = "home" | "filters" | "detail" | "schedule" | "confirmation" | "search-results"
@@ -205,11 +219,7 @@ const SissonePrototype = () => {
       days: ["Quinta-feira", "Sábado"],
       location: "Centro",
       image: "/salsa-dance-class-couple.jpg",
-      images: [
-        "/salsa-studio-interior.jpg",
-        "/salsa-dancers-performance.jpg",
-        "/salsa-dance-class-couple.jpg",
-      ],
+      images: ["/salsa-studio-interior.jpg", "/salsa-dancers-performance.jpg", "/salsa-dance-class-couple.jpg"],
       tag: "Quente",
       tagColor: "bg-red-100 text-red-800",
       category: "salsa",
@@ -285,7 +295,11 @@ const SissonePrototype = () => {
       days: ["Terça-feira", "Quinta-feira"],
       location: "Centro",
       image: "/contemporary-dance-students-practicing.jpg",
-      images: ["/contemporary-dance-class-studio.jpg", "/contemporary-dance-instructor-teaching.jpg", "/contemporary-dance-students-practicing.jpg"],
+      images: [
+        "/contemporary-dance-class-studio.jpg",
+        "/contemporary-dance-instructor-teaching.jpg",
+        "/contemporary-dance-students-practicing.jpg",
+      ],
       tag: "Intensivo",
       tagColor: "bg-blue-100 text-blue-800",
       category: "contemporary",
@@ -309,7 +323,11 @@ const SissonePrototype = () => {
       days: ["Segunda-feira", "Quarta-feira"],
       location: "Zona Sul",
       image: "/hip-hop-dancers-performing-moves.jpg",
-      images: ["/hip-hop-dance-class-urban.jpg", "/urban-dance-class-group.jpg", "/hip-hop-dancers-performing-moves.jpg"],
+      images: [
+        "/hip-hop-dance-class-urban.jpg",
+        "/urban-dance-class-group.jpg",
+        "/hip-hop-dancers-performing-moves.jpg",
+      ],
       tag: "Avançado",
       tagColor: "bg-indigo-100 text-indigo-800",
       category: "hip-hop",
@@ -1622,16 +1640,16 @@ const SissonePrototype = () => {
   ]
 
   const getClassesByCategory = (category: string) => {
-    return classes.filter(c => c.category === category).slice(0, 7)
+    return classes.filter((c) => c.category === category).slice(0, 7)
   }
 
-  const scrollCategory = (categoryId: string, direction: 'left' | 'right') => {
+  const scrollCategory = (categoryId: string, direction: "left" | "right") => {
     const container = document.getElementById(`category-${categoryId}`)
     if (container) {
       const scrollAmount = 320 // Card width + gap
       container.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
       })
     }
   }
@@ -1712,16 +1730,16 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('today', 'left')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("today", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('today', 'right')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("today", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -1759,9 +1777,7 @@ const SissonePrototype = () => {
                         />
                       </button>
                       <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                          {classItem.tag}
-                        </Badge>
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
                       </div>
                     </div>
                     <CardContent className="p-4">
@@ -1769,7 +1785,9 @@ const SissonePrototype = () => {
                       <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
                         <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                          {classItem.rating}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
                         <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
@@ -1805,16 +1823,16 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('contemporary', 'left')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("contemporary", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('contemporary', 'right')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("contemporary", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -1852,9 +1870,7 @@ const SissonePrototype = () => {
                         />
                       </button>
                       <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                          {classItem.tag}
-                        </Badge>
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
                       </div>
                     </div>
                     <CardContent className="p-4">
@@ -1862,7 +1878,9 @@ const SissonePrototype = () => {
                       <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
                         <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                          {classItem.rating}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
                         <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
@@ -1898,16 +1916,16 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('hip-hop', 'left')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("hip-hop", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('hip-hop', 'right')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("hip-hop", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -1945,9 +1963,7 @@ const SissonePrototype = () => {
                         />
                       </button>
                       <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                          {classItem.tag}
-                        </Badge>
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
                       </div>
                     </div>
                     <CardContent className="p-4">
@@ -1955,7 +1971,9 @@ const SissonePrototype = () => {
                       <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
                         <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                          {classItem.rating}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
                         <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
@@ -1991,16 +2009,16 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('ballet', 'left')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("ballet", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('ballet', 'right')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("ballet", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -2038,9 +2056,7 @@ const SissonePrototype = () => {
                         />
                       </button>
                       <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                          {classItem.tag}
-                        </Badge>
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
                       </div>
                     </div>
                     <CardContent className="p-4">
@@ -2048,7 +2064,9 @@ const SissonePrototype = () => {
                       <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
                         <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                          {classItem.rating}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
                         <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
@@ -2084,16 +2102,16 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('salsa', 'left')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("salsa", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('salsa', 'right')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("salsa", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -2131,9 +2149,7 @@ const SissonePrototype = () => {
                         />
                       </button>
                       <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                          {classItem.tag}
-                        </Badge>
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
                       </div>
                     </div>
                     <CardContent className="p-4">
@@ -2141,7 +2157,9 @@ const SissonePrototype = () => {
                       <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
                         <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                          {classItem.rating}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
                         <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
@@ -2177,16 +2195,16 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('jazz', 'left')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("jazz", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('jazz', 'right')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("jazz", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -2224,9 +2242,7 @@ const SissonePrototype = () => {
                         />
                       </button>
                       <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                          {classItem.tag}
-                        </Badge>
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
                       </div>
                     </div>
                     <CardContent className="p-4">
@@ -2234,7 +2250,9 @@ const SissonePrototype = () => {
                       <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
                         <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                          {classItem.rating}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
                         <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
@@ -2270,16 +2288,16 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('forro', 'left')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("forro", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('forro', 'right')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("forro", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -2317,9 +2335,7 @@ const SissonePrototype = () => {
                         />
                       </button>
                       <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                          {classItem.tag}
-                        </Badge>
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
                       </div>
                     </div>
                     <CardContent className="p-4">
@@ -2327,7 +2343,9 @@ const SissonePrototype = () => {
                       <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
                         <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                          {classItem.rating}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
                         <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
@@ -2363,16 +2381,16 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('ballroom', 'left')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("ballroom", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('ballroom', 'right')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("ballroom", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -2410,9 +2428,7 @@ const SissonePrototype = () => {
                         />
                       </button>
                       <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                          {classItem.tag}
-                        </Badge>
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
                       </div>
                     </div>
                     <CardContent className="p-4">
@@ -2420,7 +2436,9 @@ const SissonePrototype = () => {
                       <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
                         <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                          {classItem.rating}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
                         <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
@@ -2456,16 +2474,16 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('samba', 'left')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("samba", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('samba', 'right')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("samba", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -2503,9 +2521,7 @@ const SissonePrototype = () => {
                         />
                       </button>
                       <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                          {classItem.tag}
-                        </Badge>
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
                       </div>
                     </div>
                     <CardContent className="p-4">
@@ -2513,7 +2529,9 @@ const SissonePrototype = () => {
                       <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
                         <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                          {classItem.rating}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
                         <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
@@ -2549,16 +2567,16 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('zouk', 'left')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("zouk", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('zouk', 'right')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("zouk", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -2596,9 +2614,7 @@ const SissonePrototype = () => {
                         />
                       </button>
                       <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                          {classItem.tag}
-                        </Badge>
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
                       </div>
                     </div>
                     <CardContent className="p-4">
@@ -2606,7 +2622,9 @@ const SissonePrototype = () => {
                       <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
                         <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                          {classItem.rating}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
                         <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
@@ -2642,16 +2660,16 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('bachata', 'left')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("bachata", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD]"
-                    onClick={() => scrollCategory('bachata', 'right')}
+                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    onClick={() => scrollCategory("bachata", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -2689,9 +2707,7 @@ const SissonePrototype = () => {
                         />
                       </button>
                       <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>
-                          {classItem.tag}
-                        </Badge>
+                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
                       </div>
                     </div>
                     <CardContent className="p-4">
@@ -2699,7 +2715,9 @@ const SissonePrototype = () => {
                       <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
                         <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                          {classItem.rating}
+                        </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
                         <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
@@ -2795,24 +2813,26 @@ const SissonePrototype = () => {
                 <div>
                   <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Modalidade</label>
                   <div className="flex flex-wrap gap-2">
-                    {["Ballet", "Contemporary", "Hip Hop", "Jazz", "Salsa", "Forró", "Samba", "Zouk", "Bachata"].map((mod) => (
-                      <Button
-                        key={mod}
-                        variant={searchModality.includes(mod) ? "default" : "outline"}
-                        className={
-                          searchModality.includes(mod)
-                            ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
-                            : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#8B7355] hover:text-white"
-                        }
-                        onClick={() => {
-                          setSearchModality((prev) =>
-                            prev.includes(mod) ? prev.filter((m) => m !== mod) : [...prev, mod],
-                          )
-                        }}
-                      >
-                        {mod}
-                      </Button>
-                    ))}
+                    {["Ballet", "Contemporary", "Hip Hop", "Jazz", "Salsa", "Forró", "Samba", "Zouk", "Bachata"].map(
+                      (mod) => (
+                        <Button
+                          key={mod}
+                          variant={searchModality.includes(mod) ? "default" : "outline"}
+                          className={
+                            searchModality.includes(mod)
+                              ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                              : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#8B7355] hover:text-white"
+                          }
+                          onClick={() => {
+                            setSearchModality((prev) =>
+                              prev.includes(mod) ? prev.filter((m) => m !== mod) : [...prev, mod],
+                            )
+                          }}
+                        >
+                          {mod}
+                        </Button>
+                      ),
+                    )}
                   </div>
                 </div>
               </div>
@@ -2902,7 +2922,7 @@ const SissonePrototype = () => {
               </div>
             ))}
           </div>
-          
+
           {/* Map hint */}
           <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-white/90 px-4 py-2 rounded-full text-sm text-[#3D2C2E] shadow-md pointer-events-none">
             Arraste o mapa para explorar
@@ -2963,7 +2983,9 @@ const SissonePrototype = () => {
                       </Badge>
                       <div className="flex items-center gap-1">
                         <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-xs font-medium text-[#3D2C2E] pointer-events-none">{classItem.rating}</span>
+                        <span className="text-xs font-medium text-[#3D2C2E] pointer-events-none">
+                          {classItem.rating}
+                        </span>
                       </div>
                     </div>
 
@@ -3063,10 +3085,10 @@ const SissonePrototype = () => {
   )
 
   const renderDetailScreen = () => (
-    <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
-      <div className="mx-auto w-full max-w-[1040px]">
-        {/* Header */}
-        <div className="bg-[#F5F0EB] p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
+    <div className="h-screen bg-[#F5F0EB] flex flex-col">
+      {/* Header - Fixed at top */}
+      <div className="flex-shrink-0 bg-[#F5F0EB] shadow-sm">
+        <div className="mx-auto w-full max-w-[1040px] p-4 flex items-center gap-3">
           <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-[#E5D6CD]">
             <ArrowLeft className="h-4 w-4" />
           </Button>
@@ -3086,18 +3108,19 @@ const SissonePrototype = () => {
         </div>
       </div>
 
+      {/* Scrollable Content */}
       {selectedClass && (
-        <div className="flex-1 overflow-y-auto p-4 space-y-6">
-          <div className="mx-auto w-full max-w-[1040px] space-y-6">
+        <div className="flex-1 overflow-y-auto">
+          <div className="mx-auto w-full max-w-[1040px] p-4 space-y-6">
             {/* Carrossel de Imagens */}
-            <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden bg-gray-200">
-              <Image 
-                src={selectedClass.images[currentImageIndex] || "/placeholder.svg"} 
-                alt={selectedClass.name} 
-                fill 
-                className="object-cover" 
+            <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden bg-gray-200 flex-shrink-0">
+              <Image
+                src={selectedClass.images[currentImageIndex] || "/placeholder.svg"}
+                alt={selectedClass.name}
+                fill
+                className="object-cover"
               />
-              
+
               {selectedClass.images.length > 1 && (
                 <>
                   <Button
@@ -3105,9 +3128,7 @@ const SissonePrototype = () => {
                     size="icon"
                     className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
                     onClick={() =>
-                      setCurrentImageIndex((prev) =>
-                        prev === 0 ? selectedClass.images.length - 1 : prev - 1,
-                      )
+                      setCurrentImageIndex((prev) => (prev === 0 ? selectedClass.images.length - 1 : prev - 1))
                     }
                   >
                     <ArrowLeft className="h-5 w-5" />
@@ -3117,9 +3138,7 @@ const SissonePrototype = () => {
                     size="icon"
                     className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
                     onClick={() =>
-                      setCurrentImageIndex((prev) =>
-                        prev === selectedClass.images.length - 1 ? 0 : prev + 1,
-                      )
+                      setCurrentImageIndex((prev) => (prev === selectedClass.images.length - 1 ? 0 : prev + 1))
                     }
                   >
                     <ArrowLeft className="h-5 w-5 rotate-180" />
@@ -3131,9 +3150,7 @@ const SissonePrototype = () => {
                 {selectedClass.images.map((_, idx) => (
                   <div
                     key={idx}
-                    className={`w-2 h-2 rounded-full ${
-                      idx === currentImageIndex ? "bg-white" : "bg-white/50"
-                    }`}
+                    className={`w-2 h-2 rounded-full ${idx === currentImageIndex ? "bg-white" : "bg-white/50"}`}
                   />
                 ))}
               </div>
@@ -3146,9 +3163,7 @@ const SissonePrototype = () => {
                   <h2 className="text-2xl font-bold text-[#3D2C2E]">{selectedClass.name}</h2>
                   <p className="text-[#3D2C2E] opacity-70">{selectedClass.school}</p>
                 </div>
-                <Badge className={`${selectedClass.tagColor} border-0 pointer-events-none`}>
-                  {selectedClass.tag}
-                </Badge>
+                <Badge className={`${selectedClass.tagColor} border-0 pointer-events-none`}>{selectedClass.tag}</Badge>
               </div>
 
               <div className="flex items-center gap-1 mt-2">
@@ -3167,7 +3182,12 @@ const SissonePrototype = () => {
                       className="w-8 h-8 rounded-full bg-[#CFB2A8] border-2 border-white flex items-center justify-center overflow-hidden"
                     >
                       {review.hasPhoto ? (
-                        <Image src={review.avatar || "/placeholder.svg"} alt={review.name} fill className="object-cover" />
+                        <Image
+                          src={review.avatar || "/placeholder.svg"}
+                          alt={review.name}
+                          fill
+                          className="object-cover"
+                        />
                       ) : (
                         <span className="text-xs font-medium text-white">{review.avatar}</span>
                       )}
@@ -3242,9 +3262,7 @@ const SissonePrototype = () => {
                       size="icon"
                       className="h-8 w-8"
                       onClick={() =>
-                        setCurrentReviewIndex((prev) =>
-                          prev === 0 ? selectedClass.reviews.length - 1 : prev - 1,
-                        )
+                        setCurrentReviewIndex((prev) => (prev === 0 ? selectedClass.reviews.length - 1 : prev - 1))
                       }
                     >
                       <ArrowLeft className="h-4 w-4" />
@@ -3254,9 +3272,7 @@ const SissonePrototype = () => {
                       size="icon"
                       className="h-8 w-8"
                       onClick={() =>
-                        setCurrentReviewIndex((prev) =>
-                          prev === selectedClass.reviews.length - 1 ? 0 : prev + 1,
-                        )
+                        setCurrentReviewIndex((prev) => (prev === selectedClass.reviews.length - 1 ? 0 : prev + 1))
                       }
                     >
                       <ArrowLeft className="h-4 w-4 rotate-180" />
@@ -3288,7 +3304,9 @@ const SissonePrototype = () => {
                         <Star key={i} className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
                       ))}
                     </div>
-                    <p className="text-sm text-[#3D2C2E] opacity-70">{selectedClass.reviews[currentReviewIndex].comment}</p>
+                    <p className="text-sm text-[#3D2C2E] opacity-70">
+                      {selectedClass.reviews[currentReviewIndex].comment}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -3394,7 +3412,7 @@ const SissonePrototype = () => {
                 <Button
                   key={day}
                   variant="outline"
-                  className="w-full justify-start border-[#CFB2A8] text-[#3D2C2E] hover:bg-[#F5F0EB]"
+                  className="w-full justify-start border-[#CFB2A8] text-[#3D2C2E] hover:bg-[#F5F0EB] bg-transparent"
                 >
                   <Calendar className="h-4 w-4 mr-2" />
                   {day} - {selectedClass.time}
@@ -3443,12 +3461,10 @@ const SissonePrototype = () => {
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
                 <Check className="h-8 w-8 text-green-600" />
               </div>
-              
+
               <div className="space-y-2">
                 <h2 className="text-2xl font-bold text-[#3D2C2E]">Aula Agendada!</h2>
-                <p className="text-[#3D2C2E] opacity-70">
-                  Sua aula experimental foi agendada com sucesso
-                </p>
+                <p className="text-[#3D2C2E] opacity-70">Sua aula experimental foi agendada com sucesso</p>
               </div>
 
               {selectedClass && (
@@ -3473,16 +3489,13 @@ const SissonePrototype = () => {
               )}
 
               <div className="space-y-3">
-                <Button
-                  className="w-full bg-[#8B7355] hover:bg-[#6F5C46] text-white"
-                  onClick={handleAddToCalendar}
-                >
+                <Button className="w-full bg-[#8B7355] hover:bg-[#6F5C46] text-white" onClick={handleAddToCalendar}>
                   <Calendar className="h-4 w-4 mr-2" />
                   Adicionar ao Calendário
                 </Button>
                 <Button
                   variant="outline"
-                  className="w-full border-[#CFB2A8] text-[#3D2C2E] hover:bg-[#E5D6CD]"
+                  className="w-full border-[#CFB2A8] text-[#3D2C2E] hover:bg-[#E5D6CD] bg-transparent"
                   onClick={() => setCurrentScreen("home")}
                 >
                   Voltar para Home
@@ -3529,7 +3542,7 @@ const SissonePrototype = () => {
       <style dangerouslySetInnerHTML={{ __html: scrollbarHideStyle }} />
       <div className="w-full h-screen mx-auto bg-[#F5F0EB] shadow-xl overflow-hidden">
         {renderCurrentScreen()}
-        
+
         {showToast && (
           <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-white border-2 border-green-500 px-6 py-3 rounded-full shadow-lg z-50 animate-in slide-in-from-bottom-5">
             <div className="flex items-center gap-2">
