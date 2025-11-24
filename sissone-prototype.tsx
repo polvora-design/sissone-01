@@ -251,7 +251,11 @@ function RegistrationScreen({ onNext, onPrev }: { onNext: () => void; onPrev: ()
           </div>
         </div>
 
-        <Button variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] hover:bg-[#E5D6CD] bg-transparent">
+        <Button
+          onClick={onNext}
+          variant="outline"
+          className="w-full border-[#E5D6CD] text-[#3D2C2E] hover:bg-[#E5D6CD] bg-transparent"
+        >
           Continuar com Google
         </Button>
       </div>
