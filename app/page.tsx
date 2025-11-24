@@ -3140,18 +3140,20 @@ const SissonePrototype = () => {
                 </span>
               </div>
 
+              {/* START: Updates */}
               <div className="mt-4 flex items-center gap-3">
                 <div className="flex -space-x-2">
                   {selectedClass.reviews.slice(0, 4).map((review: any, idx: number) => (
                     <div
                       key={idx}
-                      className="w-8 h-8 rounded-full bg-[#CFB2A8] border-2 border-white flex items-center justify-center overflow-hidden"
+                      className="w-8 h-8 rounded-full bg-[#CFB2A8] border-2 border-white flex items-center justify-center overflow-hidden relative flex-shrink-0"
                     >
                       {review.hasPhoto ? (
                         <Image
                           src={review.avatar || "/placeholder.svg"}
                           alt={review.name}
-                          fill
+                          width={32}
+                          height={32}
                           className="object-cover"
                         />
                       ) : (
@@ -3159,12 +3161,13 @@ const SissonePrototype = () => {
                       )}
                     </div>
                   ))}
-                  <div className="w-8 h-8 rounded-full bg-[#8B7355] border-2 border-white flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-[#8B7355] border-2 border-white flex items-center justify-center flex-shrink-0">
                     <span className="text-xs font-medium text-white">+{Math.floor(Math.random() * 20) + 5}</span>
                   </div>
                 </div>
                 <span className="text-sm text-[#3D2C2E] opacity-70">Participantes</span>
               </div>
+              {/* END: Updates */}
 
               <div className="grid grid-cols-2 gap-4 mt-6">
                 <div className="flex items-center gap-2 text-[#3D2C2E]">
