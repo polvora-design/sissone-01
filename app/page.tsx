@@ -3112,48 +3112,14 @@ const SissonePrototype = () => {
       {selectedClass && (
         <div className="flex-1 overflow-y-auto">
           <div className="mx-auto w-full max-w-[1040px] p-4 space-y-6">
-            {/* Carrossel de Imagens */}
-            <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden bg-gray-200 flex-shrink-0">
+            {/* CHANGE: Removed carousel, using single image with fixed height */}
+            <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden bg-gray-200">
               <Image
-                src={selectedClass.images[currentImageIndex] || "/placeholder.svg"}
+                src={selectedClass.images[0] || "/placeholder.svg"}
                 alt={selectedClass.name}
                 fill
                 className="object-cover"
               />
-
-              {selectedClass.images.length > 1 && (
-                <>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
-                    onClick={() =>
-                      setCurrentImageIndex((prev) => (prev === 0 ? selectedClass.images.length - 1 : prev - 1))
-                    }
-                  >
-                    <ArrowLeft className="h-5 w-5" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
-                    onClick={() =>
-                      setCurrentImageIndex((prev) => (prev === selectedClass.images.length - 1 ? 0 : prev + 1))
-                    }
-                  >
-                    <ArrowLeft className="h-5 w-5 rotate-180" />
-                  </Button>
-                </>
-              )}
-
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                {selectedClass.images.map((_, idx) => (
-                  <div
-                    key={idx}
-                    className={`w-2 h-2 rounded-full ${idx === currentImageIndex ? "bg-white" : "bg-white/50"}`}
-                  />
-                ))}
-              </div>
             </div>
 
             {/* Class Info */}
