@@ -1735,7 +1735,7 @@ const SissonePrototype = () => {
     <div className="h-screen bg-background flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
-        <div className="bg-background p-4 shadow-sm flex items-center justify-between flex-shrink-0">
+        <div className="bg-background p-4 flex items-center justify-between flex-shrink-0 border-none shadow-none">
           <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={40} className="h-10 w-auto" />
           <div className="flex gap-2 items-center">
             <a
@@ -1874,7 +1874,7 @@ const SissonePrototype = () => {
           </div>
 
           {/* Categories */}
-          <div className="px-4 space-y-12">
+          <div className="space-y-12 px-0">
             {/* Faça uma aula ainda hoje */}
             <div>
               <div className="flex items-center justify-between mb-4">
