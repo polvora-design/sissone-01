@@ -21,6 +21,7 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
+  Search,
 } from "lucide-react"
 import Image from "next/image"
 
@@ -1708,10 +1709,83 @@ const SissonePrototype = () => {
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto w-full max-w-[1040px]">
           {/* Hero Section */}
-          <div className="relative h-64 bg-gradient-to-r from-[#CFB2A8] to-[#E5D6CD] flex items-center justify-center mb-8">
-            <div className="text-center z-10 px-4">
+          <div className="relative bg-gradient-to-r from-[#CFB2A8] to-[#E5D6CD] py-12 mb-8">
+            <div className="text-center mb-8 px-4">
               <h1 className="text-4xl font-bold text-[#3D2C2E] mb-2">Encontre sua próxima aula</h1>
               <p className="text-[#3D2C2E] opacity-80">Descubra aulas de dança perto de você</p>
+            </div>
+
+            {/* Airbnb-style Search Bar */}
+            <div className="max-w-4xl mx-auto px-4">
+              <div className="bg-white rounded-full shadow-lg p-2 flex items-center gap-2">
+                {/* Onde - Where */}
+                <div className="flex-1 px-6 py-3 border-r border-gray-200 cursor-pointer hover:bg-gray-50 rounded-full transition-colors">
+                  <div className="text-xs font-semibold text-[#3D2C2E] mb-1">Onde</div>
+                  <input
+                    type="text"
+                    placeholder="Buscar localização"
+                    value={searchLocation}
+                    onChange={(e) => setSearchLocation(e.target.value)}
+                    className="text-sm text-[#3D2C2E] w-full outline-none bg-transparent placeholder:text-gray-400"
+                  />
+                </div>
+
+                {/* Quando - When */}
+                <div className="flex-1 px-6 py-3 border-r border-gray-200 relative">
+                  <div className="text-xs font-semibold text-[#3D2C2E] mb-1">Quando</div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setSearchWhen("today")}
+                      className={`text-sm px-3 py-1 rounded-full transition-colors ${
+                        searchWhen === "today" ? "bg-[#8B7355] text-white" : "text-gray-600 hover:bg-gray-100"
+                      }`}
+                    >
+                      Hoje
+                    </button>
+                    <button
+                      onClick={() => {
+                        setSearchWhen("specific")
+                        setShowCalendarModal(true)
+                      }}
+                      className={`text-sm px-3 py-1 rounded-full transition-colors ${
+                        searchWhen === "specific" ? "bg-[#8B7355] text-white" : "text-gray-600 hover:bg-gray-100"
+                      }`}
+                    >
+                      Data
+                    </button>
+                    <button
+                      onClick={() => {
+                        setSearchWhen("weekly")
+                        setShowWeeklyModal(true)
+                      }}
+                      className={`text-sm px-3 py-1 rounded-full transition-colors ${
+                        searchWhen === "weekly" ? "bg-[#8B7355] text-white" : "text-gray-600 hover:bg-gray-100"
+                      }`}
+                    >
+                      Semanal
+                    </button>
+                  </div>
+                </div>
+
+                {/* Modalidade - Dance Style */}
+                <div className="flex-1 px-6 py-3 cursor-pointer hover:bg-gray-50 rounded-full transition-colors">
+                  <div className="text-xs font-semibold text-[#3D2C2E] mb-1">Modalidade</div>
+                  <button
+                    onClick={() => setShowSearchModal(true)}
+                    className="text-sm text-gray-600 hover:text-[#3D2C2E] w-full text-left"
+                  >
+                    {searchModality.length > 0 ? searchModality.join(", ") : "Escolha a modalidade"}
+                  </button>
+                </div>
+
+                {/* Search Button */}
+                <button
+                  onClick={() => setCurrentScreen("search-results")}
+                  className="bg-[#8B7355] hover:bg-[#6F5C46] text-white rounded-full p-4 transition-colors flex-shrink-0"
+                >
+                  <Search className="h-5 w-5" />
+                </button>
+              </div>
             </div>
           </div>
 
@@ -2748,7 +2822,7 @@ const SissonePrototype = () => {
           <div className="bg-white w-full max-w-md rounded-3xl max-h-[85vh] overflow-y-auto">
             <div className="p-6 space-y-6">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-[#3D2C2E]">Buscar Aulas</h2>
+                <h2 className="text-2xl font-bold text-[#3D2C2E]">Escolha a Modalidade</h2>
                 <Button variant="ghost" size="icon" onClick={() => setShowSearchModal(false)}>
                   <X className="h-5 w-5" />
                 </Button>
@@ -2756,62 +2830,6 @@ const SissonePrototype = () => {
 
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Onde?</label>
-                  <Input
-                    placeholder="Digite o local"
-                    value={searchLocation}
-                    onChange={(e) => setSearchLocation(e.target.value)}
-                    className="border-[#CFB2A8]"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Quando?</label>
-                  <div className="flex gap-2 flex-wrap">
-                    <Button
-                      variant={searchWhen === "today" ? "default" : "outline"}
-                      className={
-                        searchWhen === "today"
-                          ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
-                          : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#8B7355] hover:text-white"
-                      }
-                      onClick={() => setSearchWhen("today")}
-                    >
-                      Hoje
-                    </Button>
-                    <Button
-                      variant={searchWhen === "specific" ? "default" : "outline"}
-                      className={
-                        searchWhen === "specific"
-                          ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
-                          : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#8B7355] hover:text-white"
-                      }
-                      onClick={() => {
-                        setSearchWhen("specific")
-                        setShowCalendarModal(true)
-                      }}
-                    >
-                      Data Específica
-                    </Button>
-                    <Button
-                      variant={searchWhen === "weekly" ? "default" : "outline"}
-                      className={
-                        searchWhen === "weekly"
-                          ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
-                          : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#8B7355] hover:text-white"
-                      }
-                      onClick={() => {
-                        setSearchWhen("weekly")
-                        setShowWeeklyModal(true)
-                      }}
-                    >
-                      Semanalmente
-                    </Button>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium text-[#3D2C2E] mb-2 block">Modalidade</label>
                   <div className="flex flex-wrap gap-2">
                     {["Ballet", "Contemporary", "Hip Hop", "Jazz", "Salsa", "Forró", "Samba", "Zouk", "Bachata"].map(
                       (mod) => (
@@ -2841,10 +2859,9 @@ const SissonePrototype = () => {
                 className="w-full bg-[#8B7355] hover:bg-[#6F5C46] text-white h-12"
                 onClick={() => {
                   setShowSearchModal(false)
-                  setCurrentScreen("search-results")
                 }}
               >
-                Buscar
+                Aplicar
               </Button>
             </div>
           </div>
