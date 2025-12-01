@@ -91,12 +91,12 @@ const SissonePrototype = () => {
     {
       id: 1,
       name: "Contemporary Flow",
-      school: "Movement Studio",
+      school: "Dance Studio",
       rating: 4.8,
       price: "R$ 45",
       time: "19:00",
       days: ["Segunda-feira", "Quarta-feira"],
-      location: "Centro",
+      location: "Zona Oeste",
       image: "/contemporary-dance-class-studio.jpg",
       images: [
         "/contemporary-dance-class-studio-interior.jpg",
@@ -104,7 +104,7 @@ const SissonePrototype = () => {
         "/contemporary-dance-instructor-teaching.jpg",
       ],
       tag: "Popular",
-      tagColor: "bg-orange-100 text-orange-800",
+      tagColor: "bg-tag-orange text-tag-orange-foreground",
       category: "contemporary",
       reviews: [
         {
@@ -146,7 +146,7 @@ const SissonePrototype = () => {
         "/urban-dance-class-group.jpg",
       ],
       tag: "Preferido dos Alunos",
-      tagColor: "bg-purple-100 text-purple-800",
+      tagColor: "bg-tag-purple text-tag-purple-foreground",
       category: "hip-hop",
       reviews: [
         {
@@ -184,7 +184,7 @@ const SissonePrototype = () => {
       image: "/ballet-dance-class-studio.jpg",
       images: ["/classical-ballet-studio-interior.jpg", "/ballet-dancers-at-barre.jpg", "/ballet-class-instructor.jpg"],
       tag: "Novo",
-      tagColor: "bg-green-100 text-green-800",
+      tagColor: "bg-tag-green text-tag-green-foreground",
       category: "ballet",
       reviews: [
         {
@@ -222,7 +222,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg", "/salsa-dancers-performance.jpg", "/salsa-dance-class-couple.jpg"],
       tag: "Quente",
-      tagColor: "bg-red-100 text-red-800",
+      tagColor: "bg-tag-red text-tag-red-foreground",
       category: "salsa",
       reviews: [
         {
@@ -260,7 +260,7 @@ const SissonePrototype = () => {
       image: "/jazz-dance-class-modern.jpg",
       images: ["/jazz-studio-rehearsal.jpg", "/jazz-dancers-choreography.jpg", "/jazz-dance-class-modern.jpg"],
       tag: "Trending",
-      tagColor: "bg-yellow-100 text-yellow-800",
+      tagColor: "bg-tag-yellow text-tag-yellow-foreground",
       category: "jazz",
       reviews: [
         {
@@ -302,7 +302,7 @@ const SissonePrototype = () => {
         "/contemporary-dance-students-practicing.jpg",
       ],
       tag: "Intensivo",
-      tagColor: "bg-blue-100 text-blue-800",
+      tagColor: "bg-tag-blue text-tag-blue-foreground",
       category: "contemporary",
       reviews: [
         {
@@ -330,7 +330,7 @@ const SissonePrototype = () => {
         "/hip-hop-dancers-performing-moves.jpg",
       ],
       tag: "Avançado",
-      tagColor: "bg-indigo-100 text-indigo-800",
+      tagColor: "bg-tag-indigo text-tag-indigo-foreground",
       category: "hip-hop",
       reviews: [
         {
@@ -354,7 +354,7 @@ const SissonePrototype = () => {
       image: "/ballet-dancers-at-barre.jpg",
       images: ["/classical-ballet-studio-interior.jpg", "/ballet-class-instructor.jpg", "/ballet-dancers-at-barre.jpg"],
       tag: "Premium",
-      tagColor: "bg-pink-100 text-pink-800",
+      tagColor: "bg-tag-pink text-tag-pink-foreground",
       category: "ballet",
       reviews: [
         {
@@ -378,7 +378,7 @@ const SissonePrototype = () => {
       image: "/salsa-dancers-performance.jpg",
       images: ["/salsa-dance-class-couple.jpg", "/salsa-studio-interior.jpg", "/salsa-dancers-performance.jpg"],
       tag: "Noturno",
-      tagColor: "bg-violet-100 text-violet-800",
+      tagColor: "bg-tag-violet text-tag-violet-foreground",
       category: "salsa",
       reviews: [
         {
@@ -402,7 +402,7 @@ const SissonePrototype = () => {
       image: "/jazz-dancers-choreography.jpg",
       images: ["/jazz-dance-class-modern.jpg", "/jazz-studio-rehearsal.jpg", "/jazz-dancers-choreography.jpg"],
       tag: "Fusion",
-      tagColor: "bg-teal-100 text-teal-800",
+      tagColor: "bg-tag-teal text-tag-teal-foreground",
       category: "jazz",
       reviews: [
         {
@@ -426,7 +426,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg", "/salsa-dance-class-couple.jpg"],
       tag: "Tradicional",
-      tagColor: "bg-amber-100 text-amber-800",
+      tagColor: "bg-tag-amber text-tag-amber-foreground",
       category: "forro",
       reviews: [
         {
@@ -450,7 +450,7 @@ const SissonePrototype = () => {
       image: "/salsa-dancers-performance.jpg",
       images: ["/salsa-dance-class-couple.jpg", "/salsa-dancers-performance.jpg"],
       tag: "Jovem",
-      tagColor: "bg-lime-100 text-lime-800",
+      tagColor: "bg-tag-lime text-tag-lime-foreground",
       category: "forro",
       reviews: [
         {
@@ -474,7 +474,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg", "/salsa-dancers-performance.jpg", "/salsa-dance-class-couple.jpg"],
       tag: "Completo",
-      tagColor: "bg-cyan-100 text-cyan-800",
+      tagColor: "bg-tag-cyan text-tag-cyan-foreground",
       category: "ballroom",
       reviews: [
         {
@@ -498,7 +498,7 @@ const SissonePrototype = () => {
       image: "/salsa-dancers-performance.jpg",
       images: ["/salsa-dance-class-couple.jpg", "/salsa-dancers-performance.jpg"],
       tag: "Elegante",
-      tagColor: "bg-rose-100 text-rose-800",
+      tagColor: "bg-tag-rose text-tag-rose-foreground",
       category: "ballroom",
       reviews: [
         {
@@ -522,7 +522,7 @@ const SissonePrototype = () => {
       image: "/salsa-studio-interior.jpg",
       images: ["/salsa-dancers-performance.jpg", "/salsa-studio-interior.jpg"],
       tag: "Carnaval",
-      tagColor: "bg-yellow-100 text-yellow-800",
+      tagColor: "bg-tag-yellow text-tag-yellow-foreground",
       category: "samba",
       reviews: [
         {
@@ -546,7 +546,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg", "/salsa-dance-class-couple.jpg"],
       tag: "Carioca",
-      tagColor: "bg-emerald-100 text-emerald-800",
+      tagColor: "bg-tag-emerald text-tag-emerald-foreground",
       category: "samba",
       reviews: [
         {
@@ -570,7 +570,7 @@ const SissonePrototype = () => {
       image: "/salsa-dancers-performance.jpg",
       images: ["/salsa-dance-class-couple.jpg", "/salsa-dancers-performance.jpg"],
       tag: "Sensual",
-      tagColor: "bg-fuchsia-100 text-fuchsia-800",
+      tagColor: "bg-tag-fuchsia text-tag-fuchsia-foreground",
       category: "zouk",
       reviews: [
         {
@@ -594,7 +594,7 @@ const SissonePrototype = () => {
       image: "/salsa-studio-interior.jpg",
       images: ["/salsa-dancers-performance.jpg", "/salsa-studio-interior.jpg"],
       tag: "Pro",
-      tagColor: "bg-purple-100 text-purple-800",
+      tagColor: "bg-tag-purple text-tag-purple-foreground",
       category: "zouk",
       reviews: [
         {
@@ -618,7 +618,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg", "/salsa-dance-class-couple.jpg"],
       tag: "Romântico",
-      tagColor: "bg-red-100 text-red-800",
+      tagColor: "bg-tag-red text-tag-red-foreground",
       category: "bachata",
       reviews: [
         {
@@ -642,7 +642,7 @@ const SissonePrototype = () => {
       image: "/salsa-dancers-performance.jpg",
       images: ["/salsa-dance-class-couple.jpg", "/salsa-dancers-performance.jpg"],
       tag: "Autêntico",
-      tagColor: "bg-orange-100 text-orange-800",
+      tagColor: "bg-tag-orange text-tag-orange-foreground",
       category: "bachata",
       reviews: [
         {
@@ -666,7 +666,7 @@ const SissonePrototype = () => {
       image: "/contemporary-dance-instructor-teaching.jpg",
       images: ["/contemporary-dance-class-studio-interior.jpg", "/contemporary-dance-students-practicing.jpg"],
       tag: "Avançado",
-      tagColor: "bg-indigo-100 text-indigo-800",
+      tagColor: "bg-tag-indigo text-tag-indigo-foreground",
       category: "contemporary",
       reviews: [
         {
@@ -690,7 +690,7 @@ const SissonePrototype = () => {
       image: "/contemporary-dance-class-studio-interior.jpg",
       images: ["/contemporary-dance-students-practicing.jpg", "/contemporary-dance-instructor-teaching.jpg"],
       tag: "Workshop",
-      tagColor: "bg-purple-100 text-purple-800",
+      tagColor: "bg-tag-purple text-tag-purple-foreground",
       category: "contemporary",
       reviews: [
         {
@@ -714,7 +714,7 @@ const SissonePrototype = () => {
       image: "/contemporary-dance-students-practicing.jpg",
       images: ["/contemporary-dance-class-studio.jpg"],
       tag: "Express",
-      tagColor: "bg-green-100 text-green-800",
+      tagColor: "bg-tag-green text-tag-green-foreground",
       category: "contemporary",
       reviews: [
         {
@@ -738,7 +738,7 @@ const SissonePrototype = () => {
       image: "/contemporary-dance-class-studio.jpg",
       images: ["/contemporary-dance-instructor-teaching.jpg"],
       tag: "Infantil",
-      tagColor: "bg-pink-100 text-pink-800",
+      tagColor: "bg-tag-pink text-tag-pink-foreground",
       category: "contemporary",
       reviews: [
         {
@@ -762,7 +762,7 @@ const SissonePrototype = () => {
       image: "/contemporary-dance-instructor-teaching.jpg",
       images: ["/contemporary-dance-class-studio-interior.jpg"],
       tag: "Open",
-      tagColor: "bg-blue-100 text-blue-800",
+      tagColor: "bg-tag-blue text-tag-blue-foreground",
       category: "contemporary",
       reviews: [
         {
@@ -786,7 +786,7 @@ const SissonePrototype = () => {
       image: "/hip-hop-dance-class-urban.jpg",
       images: ["/hip-hop-dance-studio-with-students.jpg"],
       tag: "Infantil",
-      tagColor: "bg-pink-100 text-pink-800",
+      tagColor: "bg-tag-pink text-tag-pink-foreground",
       category: "hip-hop",
       reviews: [
         {
@@ -810,7 +810,7 @@ const SissonePrototype = () => {
       image: "/urban-dance-class-group.jpg",
       images: ["/hip-hop-dancers-performing-moves.jpg"],
       tag: "Freestyle",
-      tagColor: "bg-yellow-100 text-yellow-800",
+      tagColor: "bg-tag-yellow text-tag-yellow-foreground",
       category: "hip-hop",
       reviews: [
         {
@@ -834,7 +834,7 @@ const SissonePrototype = () => {
       image: "/hip-hop-dance-studio-with-students.jpg",
       images: ["/hip-hop-dance-class-urban.jpg"],
       tag: "Coreografia",
-      tagColor: "bg-teal-100 text-teal-800",
+      tagColor: "bg-tag-teal text-tag-teal-foreground",
       category: "hip-hop",
       reviews: [
         {
@@ -858,7 +858,7 @@ const SissonePrototype = () => {
       image: "/hip-hop-dancers-performing-moves.jpg",
       images: ["/urban-dance-class-group.jpg"],
       tag: "Battle",
-      tagColor: "bg-red-100 text-red-800",
+      tagColor: "bg-tag-red text-tag-red-foreground",
       category: "hip-hop",
       reviews: [
         {
@@ -882,7 +882,7 @@ const SissonePrototype = () => {
       image: "/ballet-class-instructor.jpg",
       images: ["/classical-ballet-studio-interior.jpg"],
       tag: "Infantil",
-      tagColor: "bg-pink-100 text-pink-800",
+      tagColor: "bg-tag-pink text-tag-pink-foreground",
       category: "ballet",
       reviews: [
         {
@@ -906,7 +906,7 @@ const SissonePrototype = () => {
       image: "/classical-ballet-studio-interior.jpg",
       images: ["/ballet-dancers-at-barre.jpg"],
       tag: "Adulto",
-      tagColor: "bg-purple-100 text-purple-800",
+      tagColor: "bg-tag-purple text-tag-purple-foreground",
       category: "ballet",
       reviews: [
         {
@@ -930,7 +930,7 @@ const SissonePrototype = () => {
       image: "/ballet-dancers-at-barre.jpg",
       images: ["/ballet-class-instructor.jpg"],
       tag: "Avançado",
-      tagColor: "bg-indigo-100 text-indigo-800",
+      tagColor: "bg-tag-indigo text-tag-indigo-foreground",
       category: "ballet",
       reviews: [
         {
@@ -954,7 +954,7 @@ const SissonePrototype = () => {
       image: "/classical-ballet-studio-interior.jpg",
       images: ["/ballet-dancers-at-barre.jpg"],
       tag: "Fitness",
-      tagColor: "bg-green-100 text-green-800",
+      tagColor: "bg-tag-green text-tag-green-foreground",
       category: "ballet",
       reviews: [
         {
@@ -978,7 +978,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg"],
       tag: "Cubana",
-      tagColor: "bg-orange-100 text-orange-800",
+      tagColor: "bg-tag-orange text-tag-orange-foreground",
       category: "salsa",
       reviews: [
         {
@@ -1002,7 +1002,7 @@ const SissonePrototype = () => {
       image: "/salsa-studio-interior.jpg",
       images: ["/salsa-dancers-performance.jpg"],
       tag: "LA Style",
-      tagColor: "bg-blue-100 text-blue-800",
+      tagColor: "bg-tag-blue text-tag-blue-foreground",
       category: "salsa",
       reviews: [
         {
@@ -1026,7 +1026,7 @@ const SissonePrototype = () => {
       image: "/salsa-dancers-performance.jpg",
       images: ["/salsa-dance-class-couple.jpg"],
       tag: "Solo",
-      tagColor: "bg-yellow-100 text-yellow-800",
+      tagColor: "bg-tag-yellow text-tag-yellow-foreground",
       category: "salsa",
       reviews: [
         {
@@ -1050,7 +1050,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg"],
       tag: "Social",
-      tagColor: "bg-purple-100 text-purple-800",
+      tagColor: "bg-tag-purple text-tag-purple-foreground",
       category: "salsa",
       reviews: [
         {
@@ -1074,7 +1074,7 @@ const SissonePrototype = () => {
       image: "/jazz-dance-class-modern.jpg",
       images: ["/jazz-studio-rehearsal.jpg"],
       tag: "Fusão",
-      tagColor: "bg-teal-100 text-teal-800",
+      tagColor: "bg-tag-teal text-tag-teal-foreground",
       category: "jazz",
       reviews: [
         {
@@ -1098,7 +1098,7 @@ const SissonePrototype = () => {
       image: "/jazz-studio-rehearsal.jpg",
       images: ["/jazz-dancers-choreography.jpg"],
       tag: "Broadway",
-      tagColor: "bg-rose-100 text-rose-800",
+      tagColor: "bg-tag-rose text-tag-rose-foreground",
       category: "jazz",
       reviews: [
         {
@@ -1122,7 +1122,7 @@ const SissonePrototype = () => {
       image: "/jazz-dancers-choreography.jpg",
       images: ["/jazz-dance-class-modern.jpg"],
       tag: "Lírico",
-      tagColor: "bg-purple-100 text-purple-800",
+      tagColor: "bg-tag-purple text-tag-purple-foreground",
       category: "jazz",
       reviews: [
         {
@@ -1146,7 +1146,7 @@ const SissonePrototype = () => {
       image: "/jazz-dance-class-modern.jpg",
       images: ["/jazz-studio-rehearsal.jpg"],
       tag: "Infantil",
-      tagColor: "bg-pink-100 text-pink-800",
+      tagColor: "bg-tag-pink text-tag-pink-foreground",
       category: "jazz",
       reviews: [
         {
@@ -1170,7 +1170,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg"],
       tag: "Raiz",
-      tagColor: "bg-amber-100 text-amber-800",
+      tagColor: "bg-tag-amber text-tag-amber-foreground",
       category: "forro",
       reviews: [
         {
@@ -1194,7 +1194,7 @@ const SissonePrototype = () => {
       image: "/salsa-dancers-performance.jpg",
       images: ["/salsa-dance-class-couple.jpg"],
       tag: "Estilizado",
-      tagColor: "bg-lime-100 text-lime-800",
+      tagColor: "bg-tag-lime text-tag-lime-foreground",
       category: "forro",
       reviews: [
         {
@@ -1218,7 +1218,7 @@ const SissonePrototype = () => {
       image: "/salsa-studio-interior.jpg",
       images: ["/salsa-dancers-performance.jpg"],
       tag: "Social",
-      tagColor: "bg-green-100 text-green-800",
+      tagColor: "bg-tag-green text-tag-green-foreground",
       category: "forro",
       reviews: [
         {
@@ -1242,7 +1242,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg"],
       tag: "Iniciante",
-      tagColor: "bg-blue-100 text-blue-800",
+      tagColor: "bg-tag-blue text-tag-blue-foreground",
       category: "forro",
       reviews: [
         {
@@ -1266,7 +1266,7 @@ const SissonePrototype = () => {
       image: "/salsa-dancers-performance.jpg",
       images: ["/salsa-dance-class-couple.jpg"],
       tag: "Completo",
-      tagColor: "bg-cyan-100 text-cyan-800",
+      tagColor: "bg-tag-cyan text-tag-cyan-foreground",
       category: "ballroom",
       reviews: [
         {
@@ -1290,7 +1290,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg"],
       tag: "Romântico",
-      tagColor: "bg-rose-100 text-rose-800",
+      tagColor: "bg-tag-rose text-tag-rose-foreground",
       category: "ballroom",
       reviews: [
         {
@@ -1314,7 +1314,7 @@ const SissonePrototype = () => {
       image: "/salsa-studio-interior.jpg",
       images: ["/salsa-dance-class-couple.jpg"],
       tag: "Infantil",
-      tagColor: "bg-pink-100 text-pink-800",
+      tagColor: "bg-tag-pink text-tag-pink-foreground",
       category: "ballroom",
       reviews: [
         {
@@ -1338,7 +1338,7 @@ const SissonePrototype = () => {
       image: "/salsa-dancers-performance.jpg",
       images: ["/salsa-dance-class-couple.jpg"],
       tag: "Avançado",
-      tagColor: "bg-indigo-100 text-indigo-800",
+      tagColor: "bg-tag-indigo text-tag-indigo-foreground",
       category: "ballroom",
       reviews: [
         {
@@ -1362,7 +1362,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg"],
       tag: "Rock",
-      tagColor: "bg-yellow-100 text-yellow-800",
+      tagColor: "bg-tag-yellow text-tag-yellow-foreground",
       category: "samba",
       reviews: [
         {
@@ -1386,7 +1386,7 @@ const SissonePrototype = () => {
       image: "/salsa-studio-interior.jpg",
       images: ["/salsa-dancers-performance.jpg"],
       tag: "Bahia",
-      tagColor: "bg-orange-100 text-orange-800",
+      tagColor: "bg-tag-orange text-tag-orange-foreground",
       category: "samba",
       reviews: [
         {
@@ -1410,7 +1410,7 @@ const SissonePrototype = () => {
       image: "/salsa-dancers-performance.jpg",
       images: ["/salsa-dance-class-couple.jpg"],
       tag: "Fitness",
-      tagColor: "bg-green-100 text-green-800",
+      tagColor: "bg-tag-green text-tag-green-foreground",
       category: "samba",
       reviews: [
         {
@@ -1434,7 +1434,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg"],
       tag: "Pro",
-      tagColor: "bg-indigo-100 text-indigo-800",
+      tagColor: "bg-tag-indigo text-tag-indigo-foreground",
       category: "samba",
       reviews: [
         {
@@ -1458,7 +1458,7 @@ const SissonePrototype = () => {
       image: "/salsa-dancers-performance.jpg",
       images: ["/salsa-dance-class-couple.jpg"],
       tag: "Flow",
-      tagColor: "bg-purple-100 text-purple-800",
+      tagColor: "bg-tag-purple text-tag-purple-foreground",
       category: "zouk",
       reviews: [
         {
@@ -1482,7 +1482,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg"],
       tag: "Lambada",
-      tagColor: "bg-yellow-100 text-yellow-800",
+      tagColor: "bg-tag-yellow text-tag-yellow-foreground",
       category: "zouk",
       reviews: [
         {
@@ -1506,7 +1506,7 @@ const SissonePrototype = () => {
       image: "/salsa-studio-interior.jpg",
       images: ["/salsa-dancers-performance.jpg"],
       tag: "Iniciante",
-      tagColor: "bg-blue-100 text-blue-800",
+      tagColor: "bg-tag-blue text-tag-blue-foreground",
       category: "zouk",
       reviews: [
         {
@@ -1530,7 +1530,7 @@ const SissonePrototype = () => {
       image: "/salsa-dancers-performance.jpg",
       images: ["/salsa-dance-class-couple.jpg"],
       tag: "Workshop",
-      tagColor: "bg-red-100 text-red-800",
+      tagColor: "bg-tag-red text-tag-red-foreground",
       category: "zouk",
       reviews: [
         {
@@ -1554,7 +1554,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg"],
       tag: "Tradicional",
-      tagColor: "bg-orange-100 text-orange-800",
+      tagColor: "bg-tag-orange text-tag-orange-foreground",
       category: "bachata",
       reviews: [
         {
@@ -1578,7 +1578,7 @@ const SissonePrototype = () => {
       image: "/salsa-studio-interior.jpg",
       images: ["/salsa-dancers-performance.jpg"],
       tag: "Moderna",
-      tagColor: "bg-purple-100 text-purple-800",
+      tagColor: "bg-tag-purple text-tag-purple-foreground",
       category: "bachata",
       reviews: [
         {
@@ -1602,7 +1602,7 @@ const SissonePrototype = () => {
       image: "/salsa-dancers-performance.jpg",
       images: ["/salsa-dance-class-couple.jpg"],
       tag: "Styling",
-      tagColor: "bg-pink-100 text-pink-800",
+      tagColor: "bg-tag-pink text-tag-pink-foreground",
       category: "bachata",
       reviews: [
         {
@@ -1626,7 +1626,7 @@ const SissonePrototype = () => {
       image: "/salsa-dance-class-couple.jpg",
       images: ["/salsa-studio-interior.jpg"],
       tag: "Social",
-      tagColor: "bg-cyan-100 text-cyan-800",
+      tagColor: "bg-tag-cyan text-tag-cyan-foreground",
       category: "bachata",
       reviews: [
         {
@@ -1690,17 +1690,17 @@ const SissonePrototype = () => {
   }
 
   const renderHomeScreen = () => (
-    <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
+    <div className="h-screen bg-background flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
-        <div className="bg-[#F5F0EB] p-4 shadow-sm flex items-center justify-between flex-shrink-0">
+        <div className="bg-background p-4 shadow-sm flex items-center justify-between flex-shrink-0">
           <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={40} className="h-10 w-auto" />
           <div className="flex gap-2">
             <a
               href="https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-[#8B7355] hover:bg-[#6F5C46] text-white h-9 px-4 py-2 rounded-md"
+              className="hidden md:inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary hover:bg-primary/90 text-primary-foreground h-9 px-4 py-2 rounded-md"
             >
               Cadastrar minha escola
             </a>
@@ -1708,7 +1708,7 @@ const SissonePrototype = () => {
               href="https://v0-sissone-wireframes-git-usurio-a-logado-sissone-mvp.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-[#8B7355] bg-transparent hover:bg-[#E5D6CD] text-[#8B7355] h-9 px-4 py-2 rounded-md"
+              className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-primary bg-transparent hover:bg-secondary text-primary h-9 px-4 py-2 rounded-md"
             >
               Login Aluno
             </a>
@@ -1719,20 +1719,20 @@ const SissonePrototype = () => {
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto w-full max-w-[1040px]">
           {/* Hero Section */}
-          <div className="relative bg-gradient-to-r from-[#CFB2A8] to-[#E5D6CD] py-12 mb-8">
+          <div className="relative bg-gradient-to-r from-accent to-secondary py-12 mb-8">
             <div className="text-center mb-8 px-4">
-              <h1 className="text-4xl font-bold text-[#3D2C2E] mb-2">Encontre sua próxima aula</h1>
-              <p className="text-[#3D2C2E] opacity-80">Descubra aulas de dança perto de você</p>
+              <h1 className="text-4xl font-bold text-foreground mb-2">Encontre sua próxima aula</h1>
+              <p className="text-foreground opacity-80">Descubra aulas de dança perto de você</p>
             </div>
 
             {/* Mobile Search Button */}
             <button
               onClick={() => setShowSearchModal(true)}
-              className="md:hidden w-full bg-white rounded-full shadow-lg p-4 flex items-center gap-3 text-left"
+              className="md:hidden w-full bg-card rounded-full shadow-lg p-4 flex items-center gap-3 text-left"
             >
-              <Search className="h-5 w-5 text-gray-400 flex-shrink-0" />
+              <Search className="h-5 w-5 text-muted-foreground flex-shrink-0" />
               <div className="flex-1">
-                <div className="text-sm font-semibold text-[#3D2C2E]">
+                <div className="text-sm font-semibold text-foreground">
                   {searchLocation || searchModality.length > 0
                     ? `${searchLocation ? searchLocation : "Qualquer lugar"} · ${searchModality.length > 0 ? searchModality.join(", ") : "Qualquer modalidade"}`
                     : "Onde · Quando · Modalidade"}
@@ -1741,27 +1741,29 @@ const SissonePrototype = () => {
             </button>
 
             {/* Desktop Search Bar - Airbnb style */}
-            <div className="hidden md:flex bg-white rounded-full shadow-lg p-2 items-center gap-2">
+            <div className="hidden md:flex bg-card rounded-full shadow-lg p-2 items-center gap-2">
               {/* Onde - Where */}
-              <div className="flex-1 px-6 py-3 border-r border-gray-200 cursor-pointer hover:bg-gray-50 rounded-full transition-colors">
-                <div className="text-xs font-semibold text-[#3D2C2E] mb-1">Onde</div>
+              <div className="flex-1 px-6 py-3 border-r border-border cursor-pointer hover:bg-muted rounded-full transition-colors">
+                <div className="text-xs font-semibold text-foreground mb-1">Onde</div>
                 <input
                   type="text"
                   placeholder="Buscar localização"
                   value={searchLocation}
                   onChange={(e) => setSearchLocation(e.target.value)}
-                  className="text-sm text-[#3D2C2E] w-full outline-none bg-transparent placeholder:text-gray-400"
+                  className="text-sm text-foreground w-full outline-none bg-transparent placeholder:text-muted-foreground"
                 />
               </div>
 
               {/* Quando - When */}
-              <div className="flex-1 px-6 py-3 border-r border-gray-200 relative">
-                <div className="text-xs font-semibold text-[#3D2C2E] mb-1">Quando</div>
+              <div className="flex-1 px-6 py-3 border-r border-border relative">
+                <div className="text-xs font-semibold text-foreground mb-1">Quando</div>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setSearchWhen("today")}
                     className={`text-sm px-3 py-1 rounded-full transition-colors ${
-                      searchWhen === "today" ? "bg-[#8B7355] text-white" : "text-gray-600 hover:bg-gray-100"
+                      searchWhen === "today"
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:bg-muted"
                     }`}
                   >
                     Hoje
@@ -1772,7 +1774,9 @@ const SissonePrototype = () => {
                       setShowCalendarModal(true)
                     }}
                     className={`text-sm px-3 py-1 rounded-full transition-colors ${
-                      searchWhen === "specific" ? "bg-[#8B7355] text-white" : "text-gray-600 hover:bg-gray-100"
+                      searchWhen === "specific"
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:bg-muted"
                     }`}
                   >
                     Data
@@ -1783,7 +1787,9 @@ const SissonePrototype = () => {
                       setShowWeeklyModal(true)
                     }}
                     className={`text-sm px-3 py-1 rounded-full transition-colors ${
-                      searchWhen === "weekly" ? "bg-[#8B7355] text-white" : "text-gray-600 hover:bg-gray-100"
+                      searchWhen === "weekly"
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:bg-muted"
                     }`}
                   >
                     Semanal
@@ -1792,11 +1798,11 @@ const SissonePrototype = () => {
               </div>
 
               {/* Modalidade - Dance Style */}
-              <div className="flex-1 px-6 py-3 cursor-pointer hover:bg-gray-50 rounded-full transition-colors">
-                <div className="text-xs font-semibold text-[#3D2C2E] mb-1">Modalidade</div>
+              <div className="flex-1 px-6 py-3 cursor-pointer hover:bg-muted rounded-full transition-colors">
+                <div className="text-xs font-semibold text-foreground mb-1">Modalidade</div>
                 <button
                   onClick={() => setShowSearchModal(true)}
-                  className="text-sm text-gray-600 hover:text-[#3D2C2E] w-full text-left"
+                  className="text-sm text-muted-foreground hover:text-foreground w-full text-left"
                 >
                   {searchModality.length > 0 ? searchModality.join(", ") : "Escolha a modalidade"}
                 </button>
@@ -1805,7 +1811,7 @@ const SissonePrototype = () => {
               {/* Search Button */}
               <button
                 onClick={() => setCurrentScreen("search-results")}
-                className="bg-[#8B7355] hover:bg-[#6F5C46] text-white rounded-full p-4 transition-colors flex-shrink-0"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-4 transition-colors flex-shrink-0"
               >
                 <Search className="h-5 w-5" />
               </button>
@@ -1819,7 +1825,7 @@ const SissonePrototype = () => {
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => setCurrentScreen("search-results")}
-                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
                 >
                   Faça uma aula ainda hoje
                 </button>
@@ -1827,7 +1833,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("today", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -1835,7 +1841,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("today", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -1846,7 +1852,7 @@ const SissonePrototype = () => {
                 {classes.slice(0, 7).map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
@@ -1861,7 +1867,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
                         onClick={(e) => {
                           e.stopPropagation()
                           toggleFavorite(classItem.id)
@@ -1869,7 +1875,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -1878,19 +1884,21 @@ const SissonePrototype = () => {
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-card-foreground opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
-                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                        <span className="text-sm font-medium text-card-foreground pointer-events-none">
                           {classItem.rating}
                         </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <span className="text-lg font-bold text-card-foreground pointer-events-none">
+                          {classItem.price}
+                        </span>
                         <Button
                           size="sm"
-                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
@@ -1912,7 +1920,7 @@ const SissonePrototype = () => {
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => navigateToSearchResults("Contemporary")}
-                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
                 >
                   Contemporary
                 </button>
@@ -1920,7 +1928,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("contemporary", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -1928,7 +1936,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("contemporary", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -1939,7 +1947,7 @@ const SissonePrototype = () => {
                 {getClassesByCategory("contemporary").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
@@ -1954,7 +1962,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
                         onClick={(e) => {
                           e.stopPropagation()
                           toggleFavorite(classItem.id)
@@ -1962,7 +1970,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -1971,19 +1979,21 @@ const SissonePrototype = () => {
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-card-foreground opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
-                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                        <span className="text-sm font-medium text-card-foreground pointer-events-none">
                           {classItem.rating}
                         </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <span className="text-lg font-bold text-card-foreground pointer-events-none">
+                          {classItem.price}
+                        </span>
                         <Button
                           size="sm"
-                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
@@ -2005,7 +2015,7 @@ const SissonePrototype = () => {
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => navigateToSearchResults("Hip Hop")}
-                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
                 >
                   Hip Hop
                 </button>
@@ -2013,7 +2023,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("hip-hop", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -2021,7 +2031,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("hip-hop", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -2032,7 +2042,7 @@ const SissonePrototype = () => {
                 {getClassesByCategory("hip-hop").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
@@ -2047,7 +2057,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
                         onClick={(e) => {
                           e.stopPropagation()
                           toggleFavorite(classItem.id)
@@ -2055,7 +2065,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2064,19 +2074,21 @@ const SissonePrototype = () => {
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-card-foreground opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
-                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                        <span className="text-sm font-medium text-card-foreground pointer-events-none">
                           {classItem.rating}
                         </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <span className="text-lg font-bold text-card-foreground pointer-events-none">
+                          {classItem.price}
+                        </span>
                         <Button
                           size="sm"
-                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
@@ -2098,7 +2110,7 @@ const SissonePrototype = () => {
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => navigateToSearchResults("Ballet")}
-                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
                 >
                   Ballet
                 </button>
@@ -2106,7 +2118,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("ballet", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -2114,7 +2126,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("ballet", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -2125,7 +2137,7 @@ const SissonePrototype = () => {
                 {getClassesByCategory("ballet").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
@@ -2140,7 +2152,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
                         onClick={(e) => {
                           e.stopPropagation()
                           toggleFavorite(classItem.id)
@@ -2148,7 +2160,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2157,19 +2169,21 @@ const SissonePrototype = () => {
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-card-foreground opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
-                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                        <span className="text-sm font-medium text-card-foreground pointer-events-none">
                           {classItem.rating}
                         </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <span className="text-lg font-bold text-card-foreground pointer-events-none">
+                          {classItem.price}
+                        </span>
                         <Button
                           size="sm"
-                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
@@ -2191,7 +2205,7 @@ const SissonePrototype = () => {
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => navigateToSearchResults("Salsa")}
-                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
                 >
                   Salsa
                 </button>
@@ -2199,7 +2213,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("salsa", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -2207,7 +2221,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("salsa", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -2218,7 +2232,7 @@ const SissonePrototype = () => {
                 {getClassesByCategory("salsa").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
@@ -2233,7 +2247,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
                         onClick={(e) => {
                           e.stopPropagation()
                           toggleFavorite(classItem.id)
@@ -2241,7 +2255,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2250,19 +2264,21 @@ const SissonePrototype = () => {
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-card-foreground opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
-                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                        <span className="text-sm font-medium text-card-foreground pointer-events-none">
                           {classItem.rating}
                         </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <span className="text-lg font-bold text-card-foreground pointer-events-none">
+                          {classItem.price}
+                        </span>
                         <Button
                           size="sm"
-                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
@@ -2284,7 +2300,7 @@ const SissonePrototype = () => {
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => navigateToSearchResults("Jazz")}
-                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
                 >
                   Jazz
                 </button>
@@ -2292,7 +2308,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("jazz", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -2300,7 +2316,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("jazz", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -2311,7 +2327,7 @@ const SissonePrototype = () => {
                 {getClassesByCategory("jazz").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
@@ -2326,7 +2342,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
                         onClick={(e) => {
                           e.stopPropagation()
                           toggleFavorite(classItem.id)
@@ -2334,7 +2350,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2343,19 +2359,21 @@ const SissonePrototype = () => {
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-card-foreground opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
-                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                        <span className="text-sm font-medium text-card-foreground pointer-events-none">
                           {classItem.rating}
                         </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <span className="text-lg font-bold text-card-foreground pointer-events-none">
+                          {classItem.price}
+                        </span>
                         <Button
                           size="sm"
-                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
@@ -2377,7 +2395,7 @@ const SissonePrototype = () => {
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => navigateToSearchResults("Forró")}
-                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
                 >
                   Forró
                 </button>
@@ -2385,7 +2403,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("forro", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -2393,7 +2411,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("forro", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -2404,7 +2422,7 @@ const SissonePrototype = () => {
                 {getClassesByCategory("forro").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
@@ -2419,7 +2437,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
                         onClick={(e) => {
                           e.stopPropagation()
                           toggleFavorite(classItem.id)
@@ -2427,7 +2445,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2436,19 +2454,21 @@ const SissonePrototype = () => {
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-card-foreground opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
-                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                        <span className="text-sm font-medium text-card-foreground pointer-events-none">
                           {classItem.rating}
                         </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <span className="text-lg font-bold text-card-foreground pointer-events-none">
+                          {classItem.price}
+                        </span>
                         <Button
                           size="sm"
-                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
@@ -2470,7 +2490,7 @@ const SissonePrototype = () => {
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => navigateToSearchResults("Dança de Salão")}
-                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
                 >
                   Dança de Salão
                 </button>
@@ -2478,7 +2498,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("ballroom", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -2486,7 +2506,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("ballroom", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -2497,7 +2517,7 @@ const SissonePrototype = () => {
                 {getClassesByCategory("ballroom").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
@@ -2512,7 +2532,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
                         onClick={(e) => {
                           e.stopPropagation()
                           toggleFavorite(classItem.id)
@@ -2520,7 +2540,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2529,19 +2549,21 @@ const SissonePrototype = () => {
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-card-foreground opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
-                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                        <span className="text-sm font-medium text-card-foreground pointer-events-none">
                           {classItem.rating}
                         </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <span className="text-lg font-bold text-card-foreground pointer-events-none">
+                          {classItem.price}
+                        </span>
                         <Button
                           size="sm"
-                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
@@ -2563,7 +2585,7 @@ const SissonePrototype = () => {
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => navigateToSearchResults("Samba")}
-                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
                 >
                   Samba
                 </button>
@@ -2571,7 +2593,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("samba", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -2579,7 +2601,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("samba", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -2590,7 +2612,7 @@ const SissonePrototype = () => {
                 {getClassesByCategory("samba").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
@@ -2605,7 +2627,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
                         onClick={(e) => {
                           e.stopPropagation()
                           toggleFavorite(classItem.id)
@@ -2613,7 +2635,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2622,19 +2644,21 @@ const SissonePrototype = () => {
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-card-foreground opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
-                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                        <span className="text-sm font-medium text-card-foreground pointer-events-none">
                           {classItem.rating}
                         </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <span className="text-lg font-bold text-card-foreground pointer-events-none">
+                          {classItem.price}
+                        </span>
                         <Button
                           size="sm"
-                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
@@ -2656,7 +2680,7 @@ const SissonePrototype = () => {
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => navigateToSearchResults("Zouk")}
-                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
                 >
                   Zouk
                 </button>
@@ -2664,7 +2688,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("zouk", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -2672,7 +2696,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("zouk", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -2683,7 +2707,7 @@ const SissonePrototype = () => {
                 {getClassesByCategory("zouk").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
@@ -2698,7 +2722,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
                         onClick={(e) => {
                           e.stopPropagation()
                           toggleFavorite(classItem.id)
@@ -2706,7 +2730,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2715,19 +2739,21 @@ const SissonePrototype = () => {
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-card-foreground opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
-                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                        <span className="text-sm font-medium text-card-foreground pointer-events-none">
                           {classItem.rating}
                         </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <span className="text-lg font-bold text-card-foreground pointer-events-none">
+                          {classItem.price}
+                        </span>
                         <Button
                           size="sm"
-                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
@@ -2749,7 +2775,7 @@ const SissonePrototype = () => {
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => navigateToSearchResults("Bachata")}
-                  className="text-2xl font-bold text-[#3D2C2E] hover:text-[#8B7355] transition-colors"
+                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
                 >
                   Bachata
                 </button>
@@ -2757,7 +2783,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("bachata", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -2765,7 +2791,7 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-[#CFB2A8] hover:bg-[#E5D6CD] bg-transparent"
+                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
                     onClick={() => scrollCategory("bachata", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -2776,7 +2802,7 @@ const SissonePrototype = () => {
                 {getClassesByCategory("bachata").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
@@ -2791,7 +2817,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors z-10"
+                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
                         onClick={(e) => {
                           e.stopPropagation()
                           toggleFavorite(classItem.id)
@@ -2799,7 +2825,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2808,19 +2834,21 @@ const SissonePrototype = () => {
                       </div>
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                      <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                      <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-card-foreground opacity-70 line-clamp-1">{classItem.school}</p>
                       <div className="flex items-center gap-1 my-2">
-                        <Star className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-sm font-medium text-[#3D2C2E] pointer-events-none">
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                        <span className="text-sm font-medium text-card-foreground pointer-events-none">
                           {classItem.rating}
                         </span>
                       </div>
                       <div className="flex items-center justify-between mt-3">
-                        <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                        <span className="text-lg font-bold text-card-foreground pointer-events-none">
+                          {classItem.price}
+                        </span>
                         <Button
                           size="sm"
-                          className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
@@ -2842,10 +2870,10 @@ const SissonePrototype = () => {
 
       {showSearchModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white w-full max-w-md rounded-3xl max-h-[85vh] overflow-y-auto">
+          <div className="bg-card w-full max-w-md rounded-3xl max-h-[85vh] overflow-y-auto">
             <div className="p-6 space-y-6">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-[#3D2C2E]">Escolha a Modalidade</h2>
+                <h2 className="text-2xl font-bold text-foreground">Escolha a Modalidade</h2>
                 <Button variant="ghost" size="icon" onClick={() => setShowSearchModal(false)}>
                   <X className="h-5 w-5" />
                 </Button>
@@ -2861,8 +2889,8 @@ const SissonePrototype = () => {
                           variant={searchModality.includes(mod) ? "default" : "outline"}
                           className={
                             searchModality.includes(mod)
-                              ? "bg-[#8B7355] hover:bg-[#6F5C46] text-white"
-                              : "border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#8B7355] hover:text-white"
+                              ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                              : "border-primary text-foreground bg-transparent hover:bg-primary hover:text-primary-foreground"
                           }
                           onClick={() => {
                             setSearchModality((prev) =>
@@ -2878,8 +2906,9 @@ const SissonePrototype = () => {
                 </div>
               </div>
 
+              {/* Using semantic primary token */}
               <Button
-                className="w-full bg-[#8B7355] hover:bg-[#6F5C46] text-white h-12"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12"
                 onClick={() => {
                   setShowSearchModal(false)
                 }}
@@ -2894,25 +2923,25 @@ const SissonePrototype = () => {
   )
 
   const renderSearchResultsScreen = () => (
-    <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
+    <div className="h-screen bg-background flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
-        <div className="bg-[#F5F0EB] p-4 shadow-sm flex-shrink-0">
+        <div className="bg-background p-4 shadow-sm flex-shrink-0">
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-[#E5D6CD]">
+            <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-secondary">
               <ArrowLeft className="h-5 w-5" />
             </Button>
 
             <Button
               variant="ghost"
-              className="flex-1 justify-start px-3 py-2 h-auto min-h-[40px] hover:bg-[#E5D6CD]"
+              className="flex-1 justify-start px-3 py-2 h-auto min-h-[40px] hover:bg-secondary"
               onClick={() => setShowSearchModal(true)}
             >
               <div className="flex items-center gap-2">
-                <Edit3 className="h-4 w-4 text-[#3D2C2E] opacity-70" />
+                <Edit3 className="h-4 w-4 text-foreground opacity-70" />
                 <div className="text-left">
-                  <div className="text-sm font-medium text-[#3D2C2E] truncate">{getSearchSummary()}</div>
-                  <div className="text-xs text-[#3D2C2E] opacity-70">Toque para editar</div>
+                  <div className="text-sm font-medium text-foreground truncate">{getSearchSummary()}</div>
+                  <div className="text-xs text-foreground opacity-70">Toque para editar</div>
                 </div>
               </div>
             </Button>
@@ -2920,7 +2949,7 @@ const SissonePrototype = () => {
             <Button
               variant="outline"
               size="sm"
-              className="border-[#CFB2A8] text-[#3D2C2E] bg-transparent hover:bg-[#8B7355] hover:text-white transition-colors"
+              className="border-primary text-foreground bg-transparent hover:bg-primary hover:text-primary-foreground transition-colors"
               onClick={() => setShowSearchFiltersModal(true)}
             >
               <Filter className="h-4 w-4" />
@@ -2938,6 +2967,7 @@ const SissonePrototype = () => {
             onMouseMove={handleMapMouseMove}
             onMouseUp={handleMapMouseUp}
             onMouseLeave={handleMapMouseUp}
+            // Using semantic accent and border tokens
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23E5D6CD' width='100' height='100'/%3E%3Cpath d='M0 0L50 50M50 0L100 50M0 50L50 100M50 50L100 100' stroke='%23CFB2A8' strokeWidth='1'/%3E%3C/svg%3E")`,
               backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
@@ -2947,7 +2977,7 @@ const SissonePrototype = () => {
             {classes.slice(0, 8).map((classItem, idx) => (
               <div
                 key={classItem.id}
-                className="absolute w-10 h-10 bg-[#8B7355] rounded-full flex items-center justify-center text-white font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
+                className="absolute w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
                 style={{
                   left: `${30 + idx * 15 + mapPosition.x * 0.1}%`,
                   top: `${25 + (idx % 3) * 20 + mapPosition.y * 0.1}%`,
@@ -2964,18 +2994,19 @@ const SissonePrototype = () => {
           </div>
 
           {/* Map hint */}
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-white/90 px-4 py-2 rounded-full text-sm text-[#3D2C2E] shadow-md pointer-events-none">
+          {/* Using semantic card, foreground and muted-foreground tokens */}
+          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-card/90 px-4 py-2 rounded-full text-sm text-foreground shadow-md pointer-events-none">
             Arraste o mapa para explorar
           </div>
         </div>
 
         {/* Cards Section */}
-        <div className="flex-1 overflow-y-auto bg-[#F5F0EB]">
+        <div className="flex-1 overflow-y-auto bg-background">
           <div className="mx-auto w-full max-w-[1040px] p-4 space-y-4">
             {classes.map((classItem) => (
               <Card
                 key={classItem.id}
-                className="bg-white border-[#E5D6CD] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                className="bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                 onClick={() => {
                   setSelectedClass(classItem)
                   setCurrentImageIndex(0)
@@ -2998,11 +3029,11 @@ const SissonePrototype = () => {
                     {/* Top Row */}
                     <div className="flex items-start justify-between gap-2 mb-2">
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-[#3D2C2E] text-lg line-clamp-1">{classItem.name}</h3>
-                        <p className="text-sm text-[#3D2C2E] opacity-70 line-clamp-1">{classItem.school}</p>
+                        <h3 className="font-semibold text-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                        <p className="text-sm text-foreground opacity-70 line-clamp-1">{classItem.school}</p>
                       </div>
                       <button
-                        className="flex-shrink-0 w-8 h-8 flex items-center justify-center hover:bg-[#F5F0EB] rounded-full transition-colors"
+                        className="flex-shrink-0 w-8 h-8 flex items-center justify-center hover:bg-muted rounded-full transition-colors"
                         onClick={(e) => {
                           e.stopPropagation()
                           toggleFavorite(classItem.id)
@@ -3010,7 +3041,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -3022,8 +3053,8 @@ const SissonePrototype = () => {
                         {classItem.tag}
                       </Badge>
                       <div className="flex items-center gap-1">
-                        <Star className="h-3 w-3 fill-[#CFB2A8] text-[#CFB2A8]" />
-                        <span className="text-xs font-medium text-[#3D2C2E] pointer-events-none">
+                        <Star className="h-3 w-3 fill-accent text-accent" />
+                        <span className="text-xs font-medium text-foreground pointer-events-none">
                           {classItem.rating}
                         </span>
                       </div>
@@ -3031,10 +3062,10 @@ const SissonePrototype = () => {
 
                     {/* Bottom Row */}
                     <div className="flex items-center justify-between mt-auto pt-2">
-                      <span className="text-lg font-bold text-[#3D2C2E] pointer-events-none">{classItem.price}</span>
+                      <span className="text-lg font-bold text-foreground pointer-events-none">{classItem.price}</span>
                       <Button
                         size="sm"
-                        className="bg-[#8B7355] hover:bg-[#6F5C46] text-white"
+                        className="bg-primary hover:bg-primary/90 text-primary-foreground"
                         onClick={(e) => {
                           e.stopPropagation()
                           setSelectedClass(classItem)
@@ -3056,22 +3087,23 @@ const SissonePrototype = () => {
   )
 
   const renderFiltersScreen = () => (
-    <div className="min-h-screen bg-[#F5F0EB]">
+    // Using semantic background token
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-[#F5F0EB] p-4 shadow-sm flex items-center gap-3">
+      <div className="bg-background p-4 shadow-sm flex items-center gap-3">
         <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")}>
           <ArrowLeft className="h-4 w-4" />
         </Button>
-        <h1 className="text-lg font-semibold text-[#3D2C2E]">Filtros</h1>
+        <h1 className="text-lg font-semibold text-foreground">Filtros</h1>
       </div>
 
       <div className="p-4 space-y-6">
         {/* Day of Week */}
         <div>
-          <h3 className="font-medium text-[#3D2C2E] mb-3">Dia da Semana</h3>
+          <h3 className="font-medium text-foreground mb-3">Dia da Semana</h3>
           <div className="grid grid-cols-2 gap-2">
             {["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"].map((day) => (
-              <Button key={day} variant="outline" className="border-[#CFB2A8] text-[#3D2C2E] text-sm bg-transparent">
+              <Button key={day} variant="outline" className="border-primary text-foreground text-sm bg-transparent">
                 {day}
               </Button>
             ))}
@@ -3080,10 +3112,10 @@ const SissonePrototype = () => {
 
         {/* Shifts */}
         <div>
-          <h3 className="font-medium text-[#3D2C2E] mb-3">Turno</h3>
+          <h3 className="font-medium text-foreground mb-3">Turno</h3>
           <div className="grid grid-cols-3 gap-2">
             {["Manhã", "Tarde", "Noite"].map((shift) => (
-              <Button key={shift} variant="outline" className="border-[#CFB2A8] text-[#3D2C2E] text-sm bg-transparent">
+              <Button key={shift} variant="outline" className="border-primary text-foreground text-sm bg-transparent">
                 {shift}
               </Button>
             ))}
@@ -3092,19 +3124,19 @@ const SissonePrototype = () => {
 
         {/* Price Range */}
         <div>
-          <h3 className="font-medium text-[#3D2C2E] mb-3">Faixa de Preço</h3>
+          <h3 className="font-medium text-foreground mb-3">Faixa de Preço</h3>
           <div className="flex gap-2">
-            <Input placeholder="Mínimo" className="border-[#CFB2A8]" />
-            <Input placeholder="Máximo" className="border-[#CFB2A8]" />
+            <Input placeholder="Mínimo" className="border-primary" />
+            <Input placeholder="Máximo" className="border-primary" />
           </div>
         </div>
 
         {/* Dance Styles */}
         <div>
-          <h3 className="font-medium text-[#3D2C2E] mb-3">Modalidade</h3>
+          <h3 className="font-medium text-foreground mb-3">Modalidade</h3>
           <div className="flex flex-wrap gap-2">
             {["Ballet", "Contemporary", "Hip Hop", "Jazz", "Salsa", "Forró"].map((style) => (
-              <Button key={style} variant="outline" className="border-[#CFB2A8] text-[#3D2C2E] text-sm bg-transparent">
+              <Button key={style} variant="outline" className="border-primary text-foreground text-sm bg-transparent">
                 {style}
               </Button>
             ))}
@@ -3114,8 +3146,9 @@ const SissonePrototype = () => {
 
       {/* Apply Button */}
       <div className="p-4 mt-6">
+        {/* Using semantic primary token */}
         <Button
-          className="w-full bg-[#8B7355] hover:bg-[#6F5C46] text-white h-12"
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12"
           onClick={() => setCurrentScreen("search-results")}
         >
           Aplicar Filtros
@@ -3125,23 +3158,24 @@ const SissonePrototype = () => {
   )
 
   const renderDetailScreen = () => (
-    <div className="h-screen bg-[#F5F0EB] flex flex-col">
+    // Using semantic background token
+    <div className="h-screen bg-background flex flex-col">
       {/* Header - Fixed at top */}
-      <div className="flex-shrink-0 bg-[#F5F0EB] shadow-sm">
+      <div className="flex-shrink-0 bg-background shadow-sm">
         <div className="mx-auto w-full max-w-[1040px] p-4 flex items-center gap-3">
-          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-[#E5D6CD]">
+          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-secondary">
             <ArrowLeft className="h-4 w-4" />
           </Button>
-          <h1 className="text-lg font-semibold text-[#3D2C2E]">Detalhes da Aula</h1>
+          <h1 className="text-lg font-semibold text-foreground">Detalhes da Aula</h1>
           <Button
             variant="ghost"
             size="icon"
             onClick={() => toggleFavorite(selectedClass?.id)}
-            className="ml-auto hover:bg-[#E5D6CD]"
+            className="ml-auto hover:bg-secondary"
           >
             <Heart
               className={`h-5 w-5 ${
-                favorites.includes(selectedClass?.id) ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#3D2C2E]"
+                favorites.includes(selectedClass?.id) ? "fill-accent text-accent" : "text-foreground"
               }`}
             />
           </Button>
@@ -3171,7 +3205,7 @@ const SissonePrototype = () => {
                     onClick={() =>
                       setCurrentImageIndex((prev) => (prev === 0 ? selectedClass.images.length - 1 : prev - 1))
                     }
-                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-card/80 hover:bg-card"
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
@@ -3181,7 +3215,7 @@ const SissonePrototype = () => {
                     onClick={() =>
                       setCurrentImageIndex((prev) => (prev === selectedClass.images.length - 1 ? 0 : prev + 1))
                     }
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-card/80 hover:bg-card"
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
@@ -3206,16 +3240,16 @@ const SissonePrototype = () => {
             <div>
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <h2 className="text-2xl font-bold text-[#3D2C2E]">{selectedClass.name}</h2>
-                  <p className="text-[#3D2C2E] opacity-70">{selectedClass.school}</p>
+                  <h2 className="text-2xl font-bold text-foreground">{selectedClass.name}</h2>
+                  <p className="text-foreground opacity-70">{selectedClass.school}</p>
                 </div>
                 <Badge className={`${selectedClass.tagColor} border-0 pointer-events-none`}>{selectedClass.tag}</Badge>
               </div>
 
               <div className="flex items-center gap-1 mt-2">
-                <Star className="h-5 w-5 fill-[#CFB2A8] text-[#CFB2A8]" />
-                <span className="font-medium text-[#3D2C2E] pointer-events-none">{selectedClass.rating}</span>
-                <span className="text-sm text-[#3D2C2E] opacity-70 ml-1 pointer-events-none">
+                <Star className="h-5 w-5 fill-accent text-accent" />
+                <span className="font-medium text-foreground pointer-events-none">{selectedClass.rating}</span>
+                <span className="text-sm text-foreground opacity-70 ml-1 pointer-events-none">
                   ({selectedClass.reviews.length} avaliações)
                 </span>
               </div>
@@ -3226,7 +3260,8 @@ const SissonePrototype = () => {
                   {selectedClass.reviews.slice(0, 4).map((review: any, idx: number) => (
                     <div
                       key={idx}
-                      className="w-8 h-8 rounded-full bg-[#CFB2A8] border-2 border-white flex items-center justify-center overflow-hidden relative flex-shrink-0"
+                      // Using semantic accent and border tokens
+                      className="w-8 h-8 rounded-full bg-accent border-2 border-white flex items-center justify-center overflow-hidden relative flex-shrink-0"
                     >
                       {review.hasPhoto ? (
                         <Image
@@ -3237,32 +3272,36 @@ const SissonePrototype = () => {
                           className="object-cover"
                         />
                       ) : (
-                        <span className="text-xs font-medium text-white">{review.avatar}</span>
+                        // Using semantic primary-foreground token
+                        <span className="text-xs font-medium text-primary-foreground">{review.avatar}</span>
                       )}
                     </div>
                   ))}
-                  <div className="w-8 h-8 rounded-full bg-[#8B7355] border-2 border-white flex items-center justify-center flex-shrink-0">
-                    <span className="text-xs font-medium text-white">+{Math.floor(Math.random() * 20) + 5}</span>
+                  {/* Using semantic primary and primary-foreground tokens */}
+                  <div className="w-8 h-8 rounded-full bg-primary border-2 border-white flex items-center justify-center flex-shrink-0">
+                    <span className="text-xs font-medium text-primary-foreground">
+                      {Math.floor(Math.random() * 20) + 5}
+                    </span>
                   </div>
                 </div>
-                <span className="text-sm text-[#3D2C2E] opacity-70">Participantes</span>
+                <span className="text-sm text-foreground opacity-70">Participantes</span>
               </div>
               {/* END: Updates */}
 
               <div className="grid grid-cols-2 gap-4 mt-6">
-                <div className="flex items-center gap-2 text-[#3D2C2E]">
+                <div className="flex items-center gap-2 text-foreground">
                   <Clock className="h-5 w-5 opacity-70" />
                   <span>{selectedClass.time}</span>
                 </div>
-                <div className="flex items-center gap-2 text-[#3D2C2E]">
+                <div className="flex items-center gap-2 text-foreground">
                   <Calendar className="h-5 w-5 opacity-70" />
                   <span>{selectedClass.days.join(", ")}</span>
                 </div>
-                <div className="flex items-center gap-2 text-[#3D2C2E]">
+                <div className="flex items-center gap-2 text-foreground">
                   <MapPin className="h-5 w-5 opacity-70" />
                   <span>{selectedClass.location}</span>
                 </div>
-                <div className="flex items-center gap-2 text-[#3D2C2E]">
+                <div className="flex items-center gap-2 text-foreground">
                   <User className="h-5 w-5 opacity-70" />
                   <span>Todos os níveis</span>
                 </div>
@@ -3270,15 +3309,16 @@ const SissonePrototype = () => {
             </div>
 
             {/* Price and CTA */}
-            <Card className="bg-white border-[#E5D6CD]">
+            {/* Using semantic card and border tokens */}
+            <Card className="bg-card border-border">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <p className="text-3xl font-bold text-[#3D2C2E] pointer-events-none">{selectedClass.price}</p>
-                    <p className="text-sm text-[#3D2C2E] opacity-70">por aula</p>
+                    <p className="text-3xl font-bold text-foreground pointer-events-none">{selectedClass.price}</p>
+                    <p className="text-sm text-foreground opacity-70">por aula</p>
                   </div>
                   <Button
-                    className="bg-[#8B7355] hover:bg-[#6F5C46] text-white px-8"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground px-8"
                     onClick={() => setCurrentScreen("schedule")}
                   >
                     Agendar Experimental
@@ -3288,12 +3328,13 @@ const SissonePrototype = () => {
             </Card>
 
             {/* Description */}
-            <Card className="bg-white border-[#E5D6CD]">
+            {/* Using semantic card and border tokens */}
+            <Card className="bg-card border-border">
               <CardHeader>
-                <h3 className="text-lg font-semibold text-[#3D2C2E]">Sobre a Aula</h3>
+                <h3 className="text-lg font-semibold text-foreground">Sobre a Aula</h3>
               </CardHeader>
               <CardContent>
-                <p className="text-[#3D2C2E] opacity-70">
+                <p className="text-foreground opacity-70">
                   Uma experiência transformadora de dança que combina técnica, expressão e criatividade. Perfeito para
                   todos os níveis, desde iniciantes até avançados.
                 </p>
@@ -3301,9 +3342,10 @@ const SissonePrototype = () => {
             </Card>
 
             {/* Reviews */}
-            <Card className="bg-white border-[#E5D6CD]">
+            {/* Using semantic card and border tokens */}
+            <Card className="bg-card border-border">
               <CardHeader className="flex flex-row items-center justify-between">
-                <h3 className="text-lg font-semibold text-[#3D2C2E]">Avaliações</h3>
+                <h3 className="text-lg font-semibold text-foreground">Avaliações</h3>
                 {selectedClass.reviews.length > 1 && (
                   <div className="flex gap-2">
                     <Button
@@ -3331,7 +3373,8 @@ const SissonePrototype = () => {
               </CardHeader>
               <CardContent>
                 <div className="flex gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#CFB2A8] flex items-center justify-center overflow-hidden flex-shrink-0">
+                  {/* Using semantic accent and border tokens */}
+                  <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center overflow-hidden flex-shrink-0">
                     {selectedClass.reviews[currentReviewIndex].hasPhoto ? (
                       <Image
                         src={selectedClass.reviews[currentReviewIndex].avatar || "/placeholder.svg"}
@@ -3341,19 +3384,20 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                     ) : (
-                      <span className="text-sm font-medium text-white">
+                      // Using semantic primary-foreground token
+                      <span className="text-sm font-medium text-primary-foreground">
                         {selectedClass.reviews[currentReviewIndex].avatar}
                       </span>
                     )}
                   </div>
                   <div className="flex-1">
-                    <p className="font-medium text-[#3D2C2E]">{selectedClass.reviews[currentReviewIndex].name}</p>
+                    <p className="font-medium text-foreground">{selectedClass.reviews[currentReviewIndex].name}</p>
                     <div className="flex gap-1 my-1">
                       {Array.from({ length: selectedClass.reviews[currentReviewIndex].rating }).map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
+                        <Star key={i} className="h-4 w-4 fill-accent text-accent" />
                       ))}
                     </div>
-                    <p className="text-sm text-[#3D2C2E] opacity-70">
+                    <p className="text-sm text-foreground opacity-70">
                       {selectedClass.reviews[currentReviewIndex].comment}
                     </p>
                   </div>
@@ -3369,25 +3413,27 @@ const SissonePrototype = () => {
   const renderScheduleScreen = () => renderScheduleScreenContent()
 
   const renderScheduleScreenContent = () => (
-    <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
+    // Using semantic background token
+    <div className="h-screen bg-background flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
-        <div className="bg-[#F5F0EB] p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
-          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("detail")} className="hover:bg-[#E5D6CD]">
+        <div className="bg-background p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
+          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("detail")} className="hover:bg-secondary">
             <ArrowLeft className="h-4 w-4" />
           </Button>
-          <h1 className="text-lg font-semibold text-[#3D2C2E]">Agendar Experimental</h1>
+          <h1 className="text-lg font-semibold text-foreground">Agendar Experimental</h1>
         </div>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-6">
         <div className="mx-auto w-full max-w-[1040px] space-y-6">
           {/* Class Summary */}
-          <Card className="bg-white border-[#E5D6CD]">
+          {/* Using semantic card and border tokens */}
+          <Card className="bg-card border-border">
             <CardContent className="p-4">
-              <h3 className="font-semibold text-[#3D2C2E]">{selectedClass?.name}</h3>
-              <p className="text-sm text-[#3D2C2E] opacity-70">{selectedClass?.school}</p>
-              <div className="flex items-center gap-3 mt-2 text-sm text-[#3D2C2E] opacity-70">
+              <h3 className="font-semibold text-foreground">{selectedClass?.name}</h3>
+              <p className="text-sm text-foreground opacity-70">{selectedClass?.school}</p>
+              <div className="flex items-center gap-3 mt-2 text-sm text-foreground opacity-70">
                 <span>{selectedClass?.days.join(" e ")}</span>
                 <span>{selectedClass?.time}</span>
                 <span>{selectedClass?.price}</span>
@@ -3396,17 +3442,20 @@ const SissonePrototype = () => {
           </Card>
 
           {/* Sign Up Form */}
-          <Card className="bg-white border-[#E5D6CD]">
+          {/* Using semantic card and border tokens */}
+          <Card className="bg-card border-border">
             <CardHeader>
-              <h3 className="font-semibold text-[#3D2C2E]">Cadastro Rápido</h3>
-              <p className="text-sm text-[#3D2C2E] opacity-70">Apenas alguns detalhes para começar</p>
+              <h3 className="font-semibold text-foreground">Cadastro Rápido</h3>
+              <p className="text-sm text-foreground opacity-70">Apenas alguns detalhes para começar</p>
             </CardHeader>
             <CardContent className="space-y-4">
               {isLoggedIn ? (
+                // Using semantic green tokens
                 <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
                   <div className="flex items-center gap-2">
                     <Check className="h-5 w-5 text-green-600" />
                     <div>
+                      {/* Using semantic green tokens */}
                       <p className="text-sm font-medium text-green-800">Conectado como</p>
                       <p className="text-sm text-green-700">{userEmail}</p>
                     </div>
@@ -3415,32 +3464,35 @@ const SissonePrototype = () => {
               ) : (
                 <>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#3D2C2E]">Nome Completo</label>
-                    <Input placeholder="Digite seu nome completo" className="border-[#CFB2A8]" />
+                    <label className="text-sm font-medium text-foreground">Nome Completo</label>
+                    <Input placeholder="Digite seu nome completo" className="border-primary" />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#3D2C2E]">E-mail</label>
-                    <Input type="email" placeholder="seu@email.com" className="border-[#CFB2A8]" />
+                    <label className="text-sm font-medium text-foreground">E-mail</label>
+                    <Input type="email" placeholder="seu@email.com" className="border-primary" />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#3D2C2E]">Telefone</label>
-                    <Input type="tel" placeholder="(00) 00000-0000" className="border-[#CFB2A8]" />
+                    <label className="text-sm font-medium text-foreground">Telefone</label>
+                    <Input type="tel" placeholder="(00) 00000-0000" className="border-primary" />
                   </div>
 
                   <div className="relative">
                     <div className="absolute inset-0 flex items-center">
-                      <span className="w-full border-t border-[#E5D6CD]" />
+                      {/* Using semantic border token */}
+                      <span className="w-full border-t border-border" />
                     </div>
                     <div className="relative flex justify-center text-xs uppercase">
-                      <span className="bg-white px-2 text-[#3D2C2E] opacity-70">ou</span>
+                      {/* Using semantic background and foreground tokens */}
+                      <span className="bg-card px-2 text-foreground opacity-70">ou</span>
                     </div>
                   </div>
 
+                  {/* Using semantic border, foreground, and primary tokens */}
                   <Button
                     variant="outline"
-                    className="w-full border-[#CFB2A8] text-[#3D2C2E] bg-white hover:bg-[#F5F0EB]"
+                    className="w-full border-primary text-foreground bg-card hover:bg-secondary"
                     onClick={handleGoogleLogin}
                   >
                     <Image src="/google-logo.png" alt="Google" width={20} height={20} className="mr-2" />
@@ -3452,16 +3504,18 @@ const SissonePrototype = () => {
           </Card>
 
           {/* Date Selection */}
-          <Card className="bg-white border-[#E5D6CD]">
+          {/* Using semantic card and border tokens */}
+          <Card className="bg-card border-border">
             <CardHeader>
-              <h3 className="font-semibold text-[#3D2C2E]">Escolha o Dia</h3>
+              <h3 className="font-semibold text-foreground">Escolha o Dia</h3>
             </CardHeader>
             <CardContent className="space-y-3">
               {selectedClass?.days.map((day: string) => (
                 <Button
                   key={day}
                   variant="outline"
-                  className="w-full justify-start border-[#CFB2A8] text-[#3D2C2E] hover:bg-[#F5F0EB] bg-transparent"
+                  // Using semantic border, foreground, and secondary tokens
+                  className="w-full justify-start border-primary text-foreground hover:bg-secondary bg-transparent"
                 >
                   <Calendar className="h-4 w-4 mr-2" />
                   {day} - {selectedClass.time}
@@ -3473,14 +3527,15 @@ const SissonePrototype = () => {
           {/* Confirm Button */}
           <div className="flex gap-3">
             <Button
-              className="flex-1 bg-[#8B7355] hover:bg-[#6F5C46] text-white h-12"
+              className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground h-12"
               onClick={() => setCurrentScreen("confirmation")}
             >
               Confirmar Agendamento
             </Button>
+            {/* Using semantic border, foreground, and secondary tokens */}
             <Button
               variant="outline"
-              className="px-6 border-[#CFB2A8] text-[#3D2C2E] bg-white hover:bg-[#F5F0EB] h-12"
+              className="px-6 border-primary text-foreground bg-card hover:bg-secondary h-12"
               onClick={handleAddToCalendar}
             >
               <Calendar className="h-5 w-5" />
@@ -3492,59 +3547,68 @@ const SissonePrototype = () => {
   )
 
   const renderConfirmationScreen = () => (
-    <div className="h-screen bg-[#F5F0EB] flex flex-col overflow-hidden">
+    // Using semantic background token
+    <div className="h-screen bg-background flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
-        <div className="bg-[#F5F0EB] p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
-          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-[#E5D6CD]">
+        <div className="bg-background p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
+          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-secondary">
             <ArrowLeft className="h-4 w-4" />
           </Button>
-          <h1 className="text-lg font-semibold text-[#3D2C2E]">Confirmação</h1>
+          <h1 className="text-lg font-semibold text-foreground">Confirmação</h1>
         </div>
       </div>
 
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="mx-auto w-full max-w-[1040px]">
-          <Card className="bg-white border-[#E5D6CD]">
+          {/* Using semantic card and border tokens */}
+          <Card className="bg-card border-border">
             <CardContent className="p-8 text-center space-y-6">
+              {/* Using semantic green tokens */}
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
                 <Check className="h-8 w-8 text-green-600" />
               </div>
 
               <div className="space-y-2">
-                <h2 className="text-2xl font-bold text-[#3D2C2E]">Aula Agendada!</h2>
-                <p className="text-[#3D2C2E] opacity-70">Sua aula experimental foi agendada com sucesso</p>
+                <h2 className="text-2xl font-bold text-foreground">Aula Agendada!</h2>
+                <p className="text-foreground opacity-70">Sua aula experimental foi agendada com sucesso</p>
               </div>
 
               {selectedClass && (
-                <div className="bg-[#F5F0EB] rounded-lg p-4 space-y-2 text-left">
+                // Using semantic background token
+                <div className="bg-background rounded-lg p-4 space-y-2 text-left">
                   <div className="flex justify-between">
-                    <span className="text-sm font-medium text-[#3D2C2E]">Aula:</span>
-                    <span className="text-sm text-[#3D2C2E]">{selectedClass.name}</span>
+                    <span className="text-sm font-medium text-foreground">Aula:</span>
+                    <span className="text-sm text-foreground">{selectedClass.name}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm font-medium text-[#3D2C2E]">Studio:</span>
-                    <span className="text-sm text-[#3D2C2E]">{selectedClass.school}</span>
+                    <span className="text-sm font-medium text-foreground">Studio:</span>
+                    <span className="text-sm text-foreground">{selectedClass.school}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm font-medium text-[#3D2C2E]">Data:</span>
-                    <span className="text-sm text-[#3D2C2E]">{selectedDate}</span>
+                    <span className="text-sm font-medium text-foreground">Data:</span>
+                    <span className="text-sm text-foreground">{selectedDate}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm font-medium text-[#3D2C2E]">Horário:</span>
-                    <span className="text-sm text-[#3D2C2E]">{selectedTime}</span>
+                    <span className="text-sm font-medium text-foreground">Horário:</span>
+                    <span className="text-sm text-foreground">{selectedTime}</span>
                   </div>
                 </div>
               )}
 
               <div className="space-y-3">
-                <Button className="w-full bg-[#8B7355] hover:bg-[#6F5C46] text-white" onClick={handleAddToCalendar}>
+                {/* Using semantic primary token */}
+                <Button
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                  onClick={handleAddToCalendar}
+                >
                   <Calendar className="h-4 w-4 mr-2" />
                   Adicionar ao Calendário
                 </Button>
+                {/* Using semantic border, foreground, and secondary tokens */}
                 <Button
                   variant="outline"
-                  className="w-full border-[#CFB2A8] text-[#3D2C2E] hover:bg-[#E5D6CD] bg-transparent"
+                  className="w-full border-primary text-foreground hover:bg-secondary bg-transparent"
                   onClick={() => setCurrentScreen("home")}
                 >
                   Voltar para Home
@@ -3589,14 +3653,15 @@ const SissonePrototype = () => {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: scrollbarHideStyle }} />
-      <div className="w-full h-screen mx-auto bg-[#F5F0EB] shadow-xl overflow-hidden">
+      <div className="w-full h-screen mx-auto bg-background shadow-xl overflow-hidden">
         {renderCurrentScreen()}
 
         {showToast && (
-          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-white border-2 border-green-500 px-6 py-3 rounded-full shadow-lg z-50 animate-in slide-in-from-bottom-5">
+          // Using semantic background, border, foreground, and toast tokens
+          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-card border-2 border-green-500 px-6 py-3 rounded-full shadow-lg z-50 animate-in slide-in-from-bottom-5">
             <div className="flex items-center gap-2">
               <Check className="h-5 w-5 text-green-600" />
-              <p className="text-sm font-medium text-[#3D2C2E]">{toastMessage}</p>
+              <p className="text-sm font-medium text-foreground">{toastMessage}</p>
             </div>
           </div>
         )}

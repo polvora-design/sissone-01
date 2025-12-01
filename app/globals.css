@@ -4,25 +4,46 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --background: oklch(0.969 0.006 85); /* #F5F0EB - light warm beige */
+  --foreground: oklch(0.235 0.015 25); /* #3D2C2E - dark brown */
+  --card: oklch(1 0 0); /* white */
+  --card-foreground: oklch(0.235 0.015 25); /* #3D2C2E */
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.235 0.015 25);
+
+  /* Brand colors for Sissone */
+  --primary: oklch(0.548 0.045 45); /* #8B7355 - warm brown CTA color */
+  --primary-foreground: oklch(1 0 0); /* white text on primary */
+  --secondary: oklch(0.869 0.025 55); /* #E5D6CD - light beige accent */
+  --secondary-foreground: oklch(0.235 0.015 25); /* dark text on secondary */
+
+  --muted: oklch(0.869 0.025 55); /* #E5D6CD */
+  --muted-foreground: oklch(0.556 0.015 25); /* medium opacity text */
+  --accent: oklch(0.785 0.03 50); /* #CFB2A8 - medium beige accent */
+  --accent-foreground: oklch(0.235 0.015 25);
+
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.869 0.025 55); /* #E5D6CD */
+  --input: oklch(0.922 0.015 55);
+  --ring: oklch(0.548 0.045 45);
+
+  /* Tag colors */
+  --tag-orange: oklch(0.95 0.05 50);
+  --tag-orange-foreground: oklch(0.5 0.15 45);
+  --tag-purple: oklch(0.92 0.05 300);
+  --tag-purple-foreground: oklch(0.4 0.15 300);
+  --tag-green: oklch(0.93 0.05 150);
+  --tag-green-foreground: oklch(0.35 0.15 150);
+  --tag-red: oklch(0.93 0.08 25);
+  --tag-red-foreground: oklch(0.45 0.2 25);
+  --tag-blue: oklch(0.92 0.05 230);
+  --tag-blue-foreground: oklch(0.4 0.15 230);
+  --tag-yellow: oklch(0.95 0.08 85);
+  --tag-yellow-foreground: oklch(0.45 0.15 70);
+  --tag-pink: oklch(0.93 0.08 350);
+  --tag-pink-foreground: oklch(0.45 0.15 350);
+
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -42,12 +63,12 @@
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
+  --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: oklch(0.548 0.045 45);
+  --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -55,7 +76,7 @@
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.269 0 0);
   --input: oklch(0.269 0 0);
   --ring: oklch(0.439 0 0);
@@ -95,6 +116,23 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
+  /* Tag color tokens */
+  --color-tag-orange: var(--tag-orange);
+  --color-tag-orange-foreground: var(--tag-orange-foreground);
+  --color-tag-purple: var(--tag-purple);
+  --color-tag-purple-foreground: var(--tag-purple-foreground);
+  --color-tag-green: var(--tag-green);
+  --color-tag-green-foreground: var(--tag-green-foreground);
+  --color-tag-red: var(--tag-red);
+  --color-tag-red-foreground: var(--tag-red-foreground);
+  --color-tag-blue: var(--tag-blue);
+  --color-tag-blue-foreground: var(--tag-blue-foreground);
+  --color-tag-yellow: var(--tag-yellow);
+  --color-tag-yellow-foreground: var(--tag-yellow-foreground);
+  --color-tag-pink: var(--tag-pink);
+  --color-tag-pink-foreground: var(--tag-pink-foreground);
+
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
