@@ -1880,7 +1880,7 @@ const SissonePrototype = () => {
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => setCurrentScreen("search-results")}
-                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
+                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors text-left"
                 >
                   Faça uma aula ainda hoje
                 </button>
