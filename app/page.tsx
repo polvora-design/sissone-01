@@ -1695,14 +1695,24 @@ const SissonePrototype = () => {
         {/* Header */}
         <div className="bg-[#F5F0EB] p-4 shadow-sm flex items-center justify-between flex-shrink-0">
           <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={40} className="h-10 w-auto" />
-          <Button
-            variant="outline"
-            size="sm"
-            className="bg-[#8B7355] hover:bg-[#6F5C46] text-white border-[#8B7355]"
-            onClick={() => setShowSearchModal(true)}
-          >
-            Buscar Aulas
-          </Button>
+          <div className="flex gap-2">
+            <a
+              href="https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-[#8B7355] hover:bg-[#6F5C46] text-white h-9 px-4 py-2 rounded-md"
+            >
+              Cadastrar minha escola
+            </a>
+            <a
+              href="https://v0-sissone-wireframes-git-usurio-a-logado-sissone-mvp.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-[#8B7355] bg-transparent hover:bg-[#E5D6CD] text-[#8B7355] h-9 px-4 py-2 rounded-md"
+            >
+              Login Aluno
+            </a>
+          </div>
         </div>
       </div>
 
@@ -1715,77 +1725,90 @@ const SissonePrototype = () => {
               <p className="text-[#3D2C2E] opacity-80">Descubra aulas de dança perto de você</p>
             </div>
 
-            {/* Airbnb-style Search Bar */}
-            <div className="max-w-4xl mx-auto px-4">
-              <div className="bg-white rounded-full shadow-lg p-2 flex items-center gap-2">
-                {/* Onde - Where */}
-                <div className="flex-1 px-6 py-3 border-r border-gray-200 cursor-pointer hover:bg-gray-50 rounded-full transition-colors">
-                  <div className="text-xs font-semibold text-[#3D2C2E] mb-1">Onde</div>
-                  <input
-                    type="text"
-                    placeholder="Buscar localização"
-                    value={searchLocation}
-                    onChange={(e) => setSearchLocation(e.target.value)}
-                    className="text-sm text-[#3D2C2E] w-full outline-none bg-transparent placeholder:text-gray-400"
-                  />
+            {/* Mobile Search Button */}
+            <button
+              onClick={() => setShowSearchModal(true)}
+              className="md:hidden w-full bg-white rounded-full shadow-lg p-4 flex items-center gap-3 text-left"
+            >
+              <Search className="h-5 w-5 text-gray-400 flex-shrink-0" />
+              <div className="flex-1">
+                <div className="text-sm font-semibold text-[#3D2C2E]">
+                  {searchLocation || searchModality.length > 0
+                    ? `${searchLocation ? searchLocation : "Qualquer lugar"} · ${searchModality.length > 0 ? searchModality.join(", ") : "Qualquer modalidade"}`
+                    : "Onde · Quando · Modalidade"}
                 </div>
+              </div>
+            </button>
 
-                {/* Quando - When */}
-                <div className="flex-1 px-6 py-3 border-r border-gray-200 relative">
-                  <div className="text-xs font-semibold text-[#3D2C2E] mb-1">Quando</div>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => setSearchWhen("today")}
-                      className={`text-sm px-3 py-1 rounded-full transition-colors ${
-                        searchWhen === "today" ? "bg-[#8B7355] text-white" : "text-gray-600 hover:bg-gray-100"
-                      }`}
-                    >
-                      Hoje
-                    </button>
-                    <button
-                      onClick={() => {
-                        setSearchWhen("specific")
-                        setShowCalendarModal(true)
-                      }}
-                      className={`text-sm px-3 py-1 rounded-full transition-colors ${
-                        searchWhen === "specific" ? "bg-[#8B7355] text-white" : "text-gray-600 hover:bg-gray-100"
-                      }`}
-                    >
-                      Data
-                    </button>
-                    <button
-                      onClick={() => {
-                        setSearchWhen("weekly")
-                        setShowWeeklyModal(true)
-                      }}
-                      className={`text-sm px-3 py-1 rounded-full transition-colors ${
-                        searchWhen === "weekly" ? "bg-[#8B7355] text-white" : "text-gray-600 hover:bg-gray-100"
-                      }`}
-                    >
-                      Semanal
-                    </button>
-                  </div>
-                </div>
+            {/* Desktop Search Bar - Airbnb style */}
+            <div className="hidden md:flex bg-white rounded-full shadow-lg p-2 items-center gap-2">
+              {/* Onde - Where */}
+              <div className="flex-1 px-6 py-3 border-r border-gray-200 cursor-pointer hover:bg-gray-50 rounded-full transition-colors">
+                <div className="text-xs font-semibold text-[#3D2C2E] mb-1">Onde</div>
+                <input
+                  type="text"
+                  placeholder="Buscar localização"
+                  value={searchLocation}
+                  onChange={(e) => setSearchLocation(e.target.value)}
+                  className="text-sm text-[#3D2C2E] w-full outline-none bg-transparent placeholder:text-gray-400"
+                />
+              </div>
 
-                {/* Modalidade - Dance Style */}
-                <div className="flex-1 px-6 py-3 cursor-pointer hover:bg-gray-50 rounded-full transition-colors">
-                  <div className="text-xs font-semibold text-[#3D2C2E] mb-1">Modalidade</div>
+              {/* Quando - When */}
+              <div className="flex-1 px-6 py-3 border-r border-gray-200 relative">
+                <div className="text-xs font-semibold text-[#3D2C2E] mb-1">Quando</div>
+                <div className="flex gap-2">
                   <button
-                    onClick={() => setShowSearchModal(true)}
-                    className="text-sm text-gray-600 hover:text-[#3D2C2E] w-full text-left"
+                    onClick={() => setSearchWhen("today")}
+                    className={`text-sm px-3 py-1 rounded-full transition-colors ${
+                      searchWhen === "today" ? "bg-[#8B7355] text-white" : "text-gray-600 hover:bg-gray-100"
+                    }`}
                   >
-                    {searchModality.length > 0 ? searchModality.join(", ") : "Escolha a modalidade"}
+                    Hoje
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSearchWhen("specific")
+                      setShowCalendarModal(true)
+                    }}
+                    className={`text-sm px-3 py-1 rounded-full transition-colors ${
+                      searchWhen === "specific" ? "bg-[#8B7355] text-white" : "text-gray-600 hover:bg-gray-100"
+                    }`}
+                  >
+                    Data
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSearchWhen("weekly")
+                      setShowWeeklyModal(true)
+                    }}
+                    className={`text-sm px-3 py-1 rounded-full transition-colors ${
+                      searchWhen === "weekly" ? "bg-[#8B7355] text-white" : "text-gray-600 hover:bg-gray-100"
+                    }`}
+                  >
+                    Semanal
                   </button>
                 </div>
+              </div>
 
-                {/* Search Button */}
+              {/* Modalidade - Dance Style */}
+              <div className="flex-1 px-6 py-3 cursor-pointer hover:bg-gray-50 rounded-full transition-colors">
+                <div className="text-xs font-semibold text-[#3D2C2E] mb-1">Modalidade</div>
                 <button
-                  onClick={() => setCurrentScreen("search-results")}
-                  className="bg-[#8B7355] hover:bg-[#6F5C46] text-white rounded-full p-4 transition-colors flex-shrink-0"
+                  onClick={() => setShowSearchModal(true)}
+                  className="text-sm text-gray-600 hover:text-[#3D2C2E] w-full text-left"
                 >
-                  <Search className="h-5 w-5" />
+                  {searchModality.length > 0 ? searchModality.join(", ") : "Escolha a modalidade"}
                 </button>
               </div>
+
+              {/* Search Button */}
+              <button
+                onClick={() => setCurrentScreen("search-results")}
+                className="bg-[#8B7355] hover:bg-[#6F5C46] text-white rounded-full p-4 transition-colors flex-shrink-0"
+              >
+                <Search className="h-5 w-5" />
+              </button>
             </div>
           </div>
 
