@@ -3499,8 +3499,8 @@ const SissonePrototype = () => {
             {/* Price and CTA */}
             {/* Using semantic card and border tokens */}
             <Card className="bg-card border-border">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between mb-4">
+              <CardContent className="p-6 px-6 py-0">
+                <div className="flex items-start flex-col gap-4 justify-between mb-0">
                   <div>
                     <p className="text-3xl font-bold text-foreground pointer-events-none">{selectedClass.price}</p>
                     <p className="text-sm text-foreground opacity-70">por aula</p>
