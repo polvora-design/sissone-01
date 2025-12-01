@@ -1882,7 +1882,7 @@ const SissonePrototype = () => {
                   onClick={() => setCurrentScreen("search-results")}
                   className="text-2xl font-bold text-foreground hover:text-primary transition-colors text-left"
                 >
-                  Faça uma aula ainda hoje
+                  Ainda hoje
                 </button>
                 <div className="flex gap-2">
                   <Button
@@ -1907,7 +1907,7 @@ const SissonePrototype = () => {
                 {classes.slice(0, 7).map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-auto my-0"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
