@@ -22,6 +22,8 @@ import {
   ChevronRight,
   X,
   Search,
+  ChevronDown,
+  Navigation,
 } from "lucide-react"
 import Image from "next/image"
 
@@ -30,7 +32,7 @@ type Screen = "home" | "filters" | "detail" | "schedule" | "confirmation" | "sea
 const SissonePrototype = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>("home")
   const [favorites, setFavorites] = useState<number[]>([])
-  const [selectedClass, setSelectedClass] = useState<any>(null)
+  const [selectedClass, setSelectedClass] = useState<(typeof classes)[0] | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0)
   const [showSearchModal, setShowSearchModal] = useState(false)
@@ -67,6 +69,15 @@ const SissonePrototype = () => {
 
   const [categoryScrollPositions, setCategoryScrollPositions] = useState<Record<string, number>>({})
 
+  const [showMobileSearch, setShowMobileSearch] = useState(false)
+  const [mobileSearchStep, setMobileSearchStep] = useState<"where" | "when" | "modality">("where")
+  const [showLoginDropdown, setShowLoginDropdown] = useState(false)
+
+  // Search filters
+  const [searchQuery, setSearchQuery] = useState("")
+  const [searchDate, setSearchDate] = useState("")
+  // const [searchModality, setSearchModality] = useState<string[]>([]) // Redundant, already declared above
+
   const showToastNotification = (message: string) => {
     setToastMessage(message)
     setShowToast(true)
@@ -85,6 +96,37 @@ const SissonePrototype = () => {
 
   const toggleFavorite = (id: number) => {
     setFavorites((prev) => (prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]))
+  }
+
+  const handleMobileSearchOpen = () => {
+    setShowMobileSearch(true)
+    setMobileSearchStep("where")
+  }
+
+  const handleMobileSearchClose = () => {
+    setShowMobileSearch(false)
+    setMobileSearchStep("where")
+  }
+
+  const handleMobileSearchClear = () => {
+    setSearchQuery("")
+    setSearchDate("")
+    setSearchModality([])
+  }
+
+  const handleMobileSearchSubmit = () => {
+    setShowMobileSearch(false)
+    handleSearch()
+  }
+
+  // Placeholder for the actual search logic
+  const handleSearch = () => {
+    console.log("Searching with:", {
+      query: searchQuery,
+      date: searchDate,
+      modality: searchModality.join(", "),
+    })
+    setCurrentScreen("search-results") // Navigate to search results
   }
 
   const classes = [
@@ -1695,23 +1737,47 @@ const SissonePrototype = () => {
         {/* Header */}
         <div className="bg-background p-4 shadow-sm flex items-center justify-between flex-shrink-0">
           <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={40} className="h-10 w-auto" />
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
             <a
               href="https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary hover:bg-primary/90 text-primary-foreground h-9 px-4 py-2 rounded-md"
+              className="inline-flex items-center justify-center text-xs md:text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary hover:bg-primary/90 text-primary-foreground h-9 px-2 md:px-4 py-2 rounded-md"
             >
-              Cadastrar minha escola
+              <span className="hidden sm:inline">Cadastrar minha escola</span>
+              <span className="sm:hidden">Cadastrar</span>
             </a>
-            <a
-              href="https://v0-sissone-wireframes-git-usurio-a-logado-sissone-mvp.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-primary bg-transparent hover:bg-secondary text-primary h-9 px-4 py-2 rounded-md"
-            >
-              Login Aluno
-            </a>
+            <div className="relative">
+              <button
+                onClick={() => setShowLoginDropdown(!showLoginDropdown)}
+                className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-primary bg-transparent hover:bg-secondary text-primary h-9 px-4 py-2 rounded-md"
+              >
+                Login
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </button>
+              {showLoginDropdown && (
+                <div className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-md shadow-lg z-50">
+                  <a
+                    href="https://v0-sissone-wireframes-git-usurio-b-logado-sissone-mvp.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-4 py-2 text-sm text-foreground hover:bg-secondary rounded-t-md"
+                    onClick={() => setShowLoginDropdown(false)}
+                  >
+                    Login Escola
+                  </a>
+                  <a
+                    href="https://v0-sissone-wireframes-git-usurio-a-logado-sissone-mvp.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-4 py-2 text-sm text-foreground hover:bg-secondary rounded-b-md"
+                    onClick={() => setShowLoginDropdown(false)}
+                  >
+                    Login Aluno
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -1725,95 +1791,84 @@ const SissonePrototype = () => {
               <p className="text-foreground opacity-80">Descubra aulas de dança perto de você</p>
             </div>
 
-            {/* Mobile Search Button */}
-            <button
-              onClick={() => setShowSearchModal(true)}
-              className="md:hidden w-full bg-card rounded-full shadow-lg p-4 flex items-center gap-3 text-left"
-            >
-              <Search className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-              <div className="flex-1">
-                <div className="text-sm font-semibold text-foreground">
-                  {searchLocation || searchModality.length > 0
-                    ? `${searchLocation ? searchLocation : "Qualquer lugar"} · ${searchModality.length > 0 ? searchModality.join(", ") : "Qualquer modalidade"}`
-                    : "Onde · Quando · Modalidade"}
+            <div className="px-4">
+              {/* Desktop Search Bar */}
+              <div className="hidden md:flex bg-card rounded-full shadow-lg p-2 items-center gap-2 max-w-4xl mx-auto">
+                {/* Onde */}
+                <div className="flex-1 px-4 py-2 border-r border-border">
+                  <label className="block text-xs font-semibold text-foreground mb-1">Onde</label>
+                  <input
+                    type="text"
+                    placeholder="Buscar destinos"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full text-sm text-foreground bg-transparent border-none outline-none placeholder:text-muted-foreground"
+                  />
                 </div>
-              </div>
-            </button>
 
-            {/* Desktop Search Bar - Airbnb style */}
-            <div className="hidden md:flex bg-card rounded-full shadow-lg p-2 items-center gap-2">
-              {/* Onde - Where */}
-              <div className="flex-1 px-6 py-3 border-r border-border cursor-pointer hover:bg-muted rounded-full transition-colors">
-                <div className="text-xs font-semibold text-foreground mb-1">Onde</div>
-                <input
-                  type="text"
-                  placeholder="Buscar localização"
-                  value={searchLocation}
-                  onChange={(e) => setSearchLocation(e.target.value)}
-                  className="text-sm text-foreground w-full outline-none bg-transparent placeholder:text-muted-foreground"
-                />
-              </div>
+                {/* Quando */}
+                <div className="flex-1 px-4 py-2 border-r border-border">
+                  <label className="block text-xs font-semibold text-foreground mb-1">Quando</label>
+                  <div className="flex gap-2">
+                    <Button
+                      variant={searchDate === "today" ? "default" : "ghost"}
+                      size="sm"
+                      className={
+                        searchDate === "today"
+                          ? "bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7"
+                          : "text-xs h-7"
+                      }
+                      onClick={() => setSearchDate("today")}
+                    >
+                      Hoje
+                    </Button>
+                    <Button
+                      variant={searchDate === "week" ? "default" : "ghost"}
+                      size="sm"
+                      className={
+                        searchDate === "week"
+                          ? "bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7"
+                          : "text-xs h-7"
+                      }
+                      onClick={() => setSearchDate("week")}
+                    >
+                      Semana
+                    </Button>
+                  </div>
+                </div>
 
-              {/* Quando - When */}
-              <div className="flex-1 px-6 py-3 border-r border-border relative">
-                <div className="text-xs font-semibold text-foreground mb-1">Quando</div>
-                <div className="flex gap-2">
+                {/* Modalidade */}
+                <div className="flex-1 px-4 py-2">
+                  <label className="block text-xs font-semibold text-foreground mb-1">Modalidade</label>
                   <button
-                    onClick={() => setSearchWhen("today")}
-                    className={`text-sm px-3 py-1 rounded-full transition-colors ${
-                      searchWhen === "today"
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:bg-muted"
-                    }`}
+                    onClick={() => setShowSearchModal(true)}
+                    className="text-sm text-foreground hover:text-primary text-left"
                   >
-                    Hoje
-                  </button>
-                  <button
-                    onClick={() => {
-                      setSearchWhen("specific")
-                      setShowCalendarModal(true)
-                    }}
-                    className={`text-sm px-3 py-1 rounded-full transition-colors ${
-                      searchWhen === "specific"
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:bg-muted"
-                    }`}
-                  >
-                    Data
-                  </button>
-                  <button
-                    onClick={() => {
-                      setSearchWhen("weekly")
-                      setShowWeeklyModal(true)
-                    }}
-                    className={`text-sm px-3 py-1 rounded-full transition-colors ${
-                      searchWhen === "weekly"
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:bg-muted"
-                    }`}
-                  >
-                    Semanal
+                    {searchModality.length > 0 ? searchModality.join(", ") : "Escolher estilos"}
                   </button>
                 </div>
-              </div>
 
-              {/* Modalidade - Dance Style */}
-              <div className="flex-1 px-6 py-3 cursor-pointer hover:bg-muted rounded-full transition-colors">
-                <div className="text-xs font-semibold text-foreground mb-1">Modalidade</div>
+                {/* Search Button */}
                 <button
-                  onClick={() => setShowSearchModal(true)}
-                  className="text-sm text-muted-foreground hover:text-foreground w-full text-left"
+                  onClick={handleSearch}
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-3 flex items-center justify-center"
                 >
-                  {searchModality.length > 0 ? searchModality.join(", ") : "Escolha a modalidade"}
+                  <Search className="h-5 w-5" />
                 </button>
               </div>
 
-              {/* Search Button */}
               <button
-                onClick={() => setCurrentScreen("search-results")}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-4 transition-colors flex-shrink-0"
+                onClick={handleMobileSearchOpen}
+                className="md:hidden w-full bg-card rounded-full shadow-lg p-4 flex items-center gap-3"
               >
-                <Search className="h-5 w-5" />
+                <Search className="h-5 w-5 text-muted-foreground" />
+                <div className="flex-1 text-left">
+                  <div className="text-sm font-semibold text-foreground">Para onde?</div>
+                  <div className="text-xs text-muted-foreground">
+                    {searchQuery || "Buscar destinos"} • {searchDate || "Quando"} •{" "}
+                    {searchModality.length > 0 ? searchModality.join(", ") : "Modalidade"}
+                  </div>
+                </div>
               </button>
             </div>
           </div>
@@ -2906,7 +2961,6 @@ const SissonePrototype = () => {
                 </div>
               </div>
 
-              {/* Using semantic primary token */}
               <Button
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12"
                 onClick={() => {
@@ -2916,6 +2970,140 @@ const SissonePrototype = () => {
                 Aplicar
               </Button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {showMobileSearch && (
+        <div className="fixed inset-0 bg-background z-50 flex flex-col">
+          {/* Header */}
+          <div className="flex items-center justify-between p-4 border-b border-border">
+            <button onClick={handleMobileSearchClose} className="p-2">
+              <X className="h-6 w-6 text-foreground" />
+            </button>
+            <button onClick={handleMobileSearchClear} className="text-sm font-medium text-foreground underline">
+              Limpar tudo
+            </button>
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 overflow-y-auto p-4">
+            {/* Onde Section */}
+            <div className="mb-6">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">Onde?</h2>
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <input
+                  type="text"
+                  placeholder="Buscar destinos"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3 text-foreground bg-card border border-border rounded-lg outline-none focus:ring-2 focus:ring-primary"
+                />
+              </div>
+
+              {/* Recent Searches / Suggestions */}
+              <div className="mt-4 space-y-4">
+                <div>
+                  <h3 className="text-sm font-medium text-muted-foreground mb-2">Buscas recentes</h3>
+                  <button className="flex items-center gap-3 p-3 w-full text-left hover:bg-secondary rounded-lg">
+                    <MapPin className="h-5 w-5 text-muted-foreground" />
+                    <div>
+                      <div className="text-sm font-medium text-foreground">São Paulo • Centro</div>
+                      <div className="text-xs text-muted-foreground">15 de dez. de 2025 - 4 aulas</div>
+                    </div>
+                  </button>
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-muted-foreground mb-2">Destinos sugeridos</h3>
+                  <button className="flex items-center gap-3 p-3 w-full text-left hover:bg-secondary rounded-lg">
+                    <Navigation className="h-5 w-5 text-muted-foreground" />
+                    <div>
+                      <div className="text-sm font-medium text-foreground">Perto de você</div>
+                      <div className="text-xs text-muted-foreground">Descubra o que há perto de você</div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Quando Section */}
+            <div className="mb-6 py-4 border-t border-border">
+              <h2 className="text-lg font-semibold text-foreground mb-3">Quando</h2>
+              <div className="flex gap-2">
+                <Button
+                  variant={searchDate === "today" ? "default" : "outline"}
+                  className={
+                    searchDate === "today"
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                      : "border-border text-foreground hover:bg-secondary"
+                  }
+                  onClick={() => setSearchDate("today")}
+                >
+                  Hoje
+                </Button>
+                <Button
+                  variant={searchDate === "week" ? "default" : "outline"}
+                  className={
+                    searchDate === "week"
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                      : "border-border text-foreground hover:bg-secondary"
+                  }
+                  onClick={() => setSearchDate("week")}
+                >
+                  Esta Semana
+                </Button>
+                <Button
+                  variant={searchDate === "month" ? "default" : "outline"}
+                  className={
+                    searchDate === "month"
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                      : "border-border text-foreground hover:bg-secondary"
+                  }
+                  onClick={() => setSearchDate("month")}
+                >
+                  Este Mês
+                </Button>
+              </div>
+            </div>
+
+            {/* Modalidade Section */}
+            <div className="py-4 border-t border-border">
+              <h2 className="text-lg font-semibold text-foreground mb-3">Modalidade</h2>
+              <div className="flex flex-wrap gap-2">
+                {["Ballet", "Contemporary", "Hip Hop", "Jazz", "Salsa", "Forró", "Samba", "Zouk", "Bachata"].map(
+                  (mod) => (
+                    <Button
+                      key={mod}
+                      variant={searchModality.includes(mod) ? "default" : "outline"}
+                      className={
+                        searchModality.includes(mod)
+                          ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                          : "border-border text-foreground hover:bg-secondary"
+                      }
+                      onClick={() => {
+                        setSearchModality((prev) =>
+                          prev.includes(mod) ? prev.filter((m) => m !== mod) : [...prev, mod],
+                        )
+                      }}
+                    >
+                      {mod}
+                    </Button>
+                  ),
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Footer with Search Button */}
+          <div className="p-4 border-t border-border bg-background">
+            <Button
+              onClick={handleMobileSearchSubmit}
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12 text-base font-semibold"
+            >
+              <Search className="mr-2 h-5 w-5" />
+              Buscar
+            </Button>
           </div>
         </div>
       )}
