@@ -1943,7 +1943,7 @@ const SissonePrototype = () => {
           </div>
 
           {/* Categories */}
-          <div className="space-y-12 px-0">
+          <div className="px-0 space-y-6">
             {/* Faça uma aula ainda hoje */}
             <div>
               <div className="flex items-center justify-between mb-4">
