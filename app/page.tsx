@@ -2440,7 +2440,7 @@ const SissonePrototype = () => {
             </div>
 
             {/* Jazz */}
-            <div>
+            <div className="pl-4">
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => handleCategoryClick("jazz")}
@@ -2469,7 +2469,7 @@ const SissonePrototype = () => {
               </div>
               <div
                 ref={categoryRefs.jazz}
-                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4 pl-0"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
                 {getClassesByCategory("jazz").map((classItem) => (
