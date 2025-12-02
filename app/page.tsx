@@ -1770,7 +1770,7 @@ const SissonePrototype = () => {
     <div className="h-screen bg-background flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
-        <header className="bg-background p-4 flex items-center justify-between shadow-sm flex-shrink-0">
+        <header className="bg-background p-4 flex items-center justify-between flex-shrink-0 shadow-none">
           <div className="flex items-center gap-3">
             <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={40} className="h-8 w-auto" />
           </div>
