@@ -1843,7 +1843,7 @@ const SissonePrototype = () => {
         <div className="mx-auto w-full max-w-[1040px] px-4">
           {/* Hero Section */}
           <div className="py-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
+            <h1 className="text-4xl text-foreground mb-6 text-balance font-normal md:text-4xl text-center">
               Encontre sua próxima Aula
             </h1>
 
