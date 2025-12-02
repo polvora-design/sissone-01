@@ -78,7 +78,10 @@ const SissonePrototype = () => {
   const [searchQuery, setSearchQuery] = useState("")
   const [searchDate, setSearchDate] = useState("")
   const [showDatePicker, setShowDatePicker] = useState(false)
-  const [selectedSpecificDate, setSelectedSpecificDate] = useState("")
+  const [dateRangeStart, setDateRangeStart] = useState<Date | null>(null)
+  const [dateRangeEnd, setDateRangeEnd] = useState<Date | null>(null)
+  // Calendar month state for date range picker
+  const [calendarMonth, setCalendarMonth] = useState<Date | null>(null)
 
   const categoryRefs = {
     today: useRef<HTMLDivElement>(null),
@@ -1736,8 +1739,15 @@ const SissonePrototype = () => {
     const parts = []
     if (searchLocation) parts.push(searchLocation)
     if (searchWhen === "today") parts.push("Hoje")
-    else if (searchWhen === "specific" && selectedSpecificDate) parts.push(selectedSpecificDate)
-    else if (searchWhen === "weekly" && selectedDays.length > 0) parts.push(selectedDays.join(", "))
+    // Updated to check for dateRangeStart for specific date selection
+    else if (searchWhen === "specific" && dateRangeStart) {
+      const formattedDate = dateRangeStart.toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      })
+      parts.push(formattedDate)
+    } else if (searchWhen === "weekly" && selectedDays.length > 0) parts.push(selectedDays.join(", "))
     if (searchModality.length > 0) parts.push(searchModality.join(", "))
 
     return parts.length > 0 ? parts.join(" • ") : "Buscar aulas"
@@ -1884,7 +1894,7 @@ const SissonePrototype = () => {
                       setShowDatePicker(true)
                     }}
                   >
-                    Dia específico
+                    Data específica
                   </Button>
                 </div>
               </div>
@@ -2027,7 +2037,7 @@ const SissonePrototype = () => {
 
             {/* Contemporary */}
             <div className="px-0">
-              <div className="flex items-center justify-between mx-4">
+              <div className="flex items-center justify-between mb-4 px-4">
                 <button
                   onClick={() => handleCategoryClick("contemporary")}
                   className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
@@ -3160,7 +3170,7 @@ const SissonePrototype = () => {
                     setShowDatePicker(true)
                   }}
                 >
-                  Dia específico
+                  Data específica
                 </Button>
               </div>
             </div>
@@ -3205,7 +3215,208 @@ const SissonePrototype = () => {
           </div>
         </div>
       )}
-    </div>
+
+      {/* Date Range Picker Modal */}
+      {showDatePicker && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-card w-full max-w-md rounded-3xl overflow-hidden">
+            <div className="p-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-bold text-foreground">Selecione o período</h2>
+                <Button variant="ghost" size="icon" onClick={() => setShowDatePicker(false)}>
+                  <X className="h-5 w-5" />
+                </Button>
+              </div>
+
+              {/* Date Range Display */}
+              <div className="flex items-center gap-3 p-3 bg-background rounded-lg border border-border">
+                <div className="flex-1 text-center">
+                  <p className="text-xs text-muted-foreground mb-1">Data inicial</p>
+                  <p className="font-medium text-foreground">
+                    {dateRangeStart ? dateRangeStart.toLocaleDateString("pt-BR") : "Selecione"}
+                  </p>
+                </div>
+                <div className="text-muted-foreground">→</div>
+                <div className="flex-1 text-center">
+                  <p className="text-xs text-muted-foreground mb-1">Data final</p>
+                  <p className="font-medium text-foreground">
+                    {dateRangeEnd ? dateRangeEnd.toLocaleDateString("pt-BR") : "Selecione"}
+                  </p>
+                </div>
+              </div>
+
+              {/* Simple Calendar Grid */}
+              <div className="space-y-3">
+                {/* Month Header */}
+                <div className="flex items-center justify-between">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => {
+                      const currentMonth = calendarMonth || new Date()
+                      setCalendarMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1))
+                    }}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <span className="font-semibold text-foreground">
+                    {(calendarMonth || new Date()).toLocaleDateString("pt-BR", { month: "long", year: "numeric" })}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => {
+                      const currentMonth = calendarMonth || new Date()
+                      setCalendarMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1))
+                    }}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+
+                {/* Week Days Header */}
+                <div className="grid grid-cols-7 gap-1 text-center">
+                  {["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"].map((day) => (
+                    <div key={day} className="text-xs font-medium text-muted-foreground py-2">
+                      {day}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Calendar Days */}
+                <div className="grid grid-cols-7 gap-1">
+                  {(() => {
+                    const month = calendarMonth || new Date()
+                    const firstDay = new Date(month.getFullYear(), month.getMonth(), 1)
+                    const lastDay = new Date(month.getFullYear(), month.getMonth() + 1, 0)
+                    const startPadding = firstDay.getDay()
+                    const days = []
+
+                    // Add padding for days before the first of the month
+                    for (let i = 0; i < startPadding; i++) {
+                      days.push(<div key={`pad-${i}`} className="h-10" />)
+                    }
+
+                    // Add actual days
+                    for (let day = 1; day <= lastDay.getDate(); day++) {
+                      const date = new Date(month.getFullYear(), month.getMonth(), day)
+                      const isStart = dateRangeStart && date.toDateString() === dateRangeStart.toDateString()
+                      const isEnd = dateRangeEnd && date.toDateString() === dateRangeEnd.toDateString()
+                      const isInRange =
+                        dateRangeStart &&
+                        dateRangeEnd &&
+                        date > dateRangeStart &&
+                        date < dateRangeEnd
+                      const isPast = date < new Date(new Date().setHours(0, 0, 0, 0))
+
+                      days.push(
+                        <button
+                          key={day}
+                          disabled={isPast}
+                          className={`h-10 rounded-full text-sm font-medium transition-colors
+                            ${isPast ? "text-muted-foreground/50 cursor-not-allowed" : "hover:bg-secondary cursor-pointer"}
+                            ${isStart || isEnd ? "bg-primary text-primary-foreground" : ""}
+                            ${isInRange ? "bg-primary/20 text-foreground" : ""}
+                          `}
+                          onClick={() => {
+                            if (isPast) return
+                            if (!dateRangeStart || (dateRangeStart && dateRangeEnd)) {
+                              // Start new selection
+                              setDateRangeStart(date)
+                              setDateRangeEnd(null)
+                            } else if (date < dateRangeStart) {
+                              // If clicking before start, reset
+                              setDateRangeStart(date)
+                              setDateRangeEnd(null)
+                            } else {
+                              // Set end date
+                              setDateRangeEnd(date)
+                            }
+                          }}
+                        >
+                          {day}
+                        </button>
+                      )
+                    }
+
+                    return days
+                  })()}
+                </div>
+              </div>
+
+              {/* Quick Selection */}
+              <div className="flex gap-2 flex-wrap">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-border text-foreground hover:bg-secondary bg-transparent"
+                  onClick={() => {
+                    const today = new Date()
+                    const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000)
+                    setDateRangeStart(today)
+                    setDateRangeEnd(nextWeek)
+                  }}
+                >
+                  Próximos 7 dias
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-border text-foreground hover:bg-secondary bg-transparent"
+                  onClick={() => {
+                    const today = new Date()
+                    const nextMonth = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000)
+                    setDateRangeStart(today)
+                    setDateRangeEnd(nextMonth)
+                  }}
+                >
+                  Próximos 30 dias
+                </Button>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-3 pt-2">
+                <Button
+                  variant="outline"
+                  className="flex-1 border-border text-foreground hover:bg-secondary bg-transparent"
+                  onClick={() => {
+                    setDateRangeStart(null)
+                    setDateRangeEnd(null)
+                  }}
+                >
+                  Limpar
+                </Button>
+                <Button
+                  className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
+                  onClick={() => {
+                    setShowDatePicker(false)
+                    if (dateRangeStart && dateRangeEnd) {
+                      setSearchDate("specific")
+                    }
+                  }}
+                >
+                  Aplicar
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+
+      {renderCurrentScreen()}
+
+        {showToast && (
+          // Using semantic background, border, foreground, and toast tokens
+          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-card border-2 border-green-500 px-6 py-3 rounded-full shadow-lg z-50 animate-in slide-in-from-bottom-5">
+            <div className="flex items-center gap-2">
+              <Check className="h-5 w-5 text-green-600" />
+              <p className="text-sm font-medium text-foreground">{toastMessage}</p>
+            </div>
+          </div>
+        )}
+      </div>
+  </>
   )
 
   const renderSearchResultsScreen = () => (
