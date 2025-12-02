@@ -3676,7 +3676,7 @@ const SissonePrototype = () => {
                 )}
               </CardHeader>
               <CardContent>
-                <div className="flex gap-3">
+                <div className="flex gap-3 pt-2">
                   {/* Using semantic accent and border tokens */}
                   <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center overflow-hidden flex-shrink-0">
                     {selectedClass.reviews[currentReviewIndex].hasPhoto ? (
