@@ -2865,7 +2865,7 @@ const SissonePrototype = () => {
               </div>
               <div
                 ref={categoryRefs.zouk}
-                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4 pl-4"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
                 {getClassesByCategory("zouk").map((classItem) => (
@@ -2935,7 +2935,7 @@ const SissonePrototype = () => {
             </div>
 
             {/* Bachata */}
-            <div className="pb-8">
+            <div className="pb-8 pl-4">
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => handleCategoryClick("bachata")}
