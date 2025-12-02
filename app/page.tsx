@@ -1842,7 +1842,7 @@ const SissonePrototype = () => {
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto w-full max-w-[1040px] px-0">
           {/* Hero Section */}
-          <div className="py-12">
+          <div className="py-12 px-4">
             <h1 className="text-4xl text-foreground mb-6 text-balance font-normal md:text-4xl text-center">
               Encontre sua próxima Aula
             </h1>
@@ -1929,7 +1929,7 @@ const SissonePrototype = () => {
 
             <button
               onClick={handleMobileSearchOpen}
-              className="md:hidden w-full bg-card rounded-full shadow-lg p-4 flex items-center gap-3"
+              className="md:hidden w-full bg-card rounded-full shadow-lg p-4 flex items-center gap-3 px-4"
             >
               <Search className="h-5 w-5 text-muted-foreground" />
               <div className="flex-1 text-left">
