@@ -3317,7 +3317,7 @@ const SissonePrototype = () => {
                   setCurrentScreen("detail")
                 }}
               >
-                <div className="flex gap-4 p-4">
+                <div className="flex p-4 gap-4">
                   {/* Image */}
                   <div className="relative w-32 h-32 flex-shrink-0 rounded-lg overflow-hidden">
                     <Image
