@@ -1840,7 +1840,7 @@ const SissonePrototype = () => {
       </div>
 
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto w-full max-w-[1040px] px-4">
+        <div className="mx-auto w-full max-w-[1040px] px-0">
           {/* Hero Section */}
           <div className="py-12">
             <h1 className="text-4xl text-foreground mb-6 text-balance font-normal md:text-4xl text-center">
@@ -1946,7 +1946,7 @@ const SissonePrototype = () => {
           <div className="px-0 space-y-6">
             {/* Faça uma aula ainda hoje */}
             <div>
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 px-4">
                 <button
                   onClick={() => handleCategoryClick("today")}
                   className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
@@ -1974,7 +1974,7 @@ const SissonePrototype = () => {
               </div>
               <div
                 ref={categoryRefs.today}
-                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth px-4"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
                 {todayClasses.map((classItem) => (
