@@ -2073,7 +2073,7 @@ const SissonePrototype = () => {
               </div>
               <div
                 ref={categoryRefs.contemporary}
-                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4 mx-4"
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4 mx-4 pt-4"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
                 {getClassesByCategory("contemporary").map((classItem) => (
