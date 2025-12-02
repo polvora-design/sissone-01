@@ -26,6 +26,7 @@ import {
   Navigation,
 } from "lucide-react"
 import Image from "next/image"
+import { useRef } from "react"
 
 type Screen = "home" | "filters" | "detail" | "schedule" | "confirmation" | "search-results"
 
@@ -76,7 +77,22 @@ const SissonePrototype = () => {
   // Search filters
   const [searchQuery, setSearchQuery] = useState("")
   const [searchDate, setSearchDate] = useState("")
-  // const [searchModality, setSearchModality] = useState<string[]>([]) // Redundant, already declared above
+  const [showDatePicker, setShowDatePicker] = useState(false)
+  const [selectedSpecificDate, setSelectedSpecificDate] = useState("")
+
+  const categoryRefs = {
+    today: useRef<HTMLDivElement>(null),
+    contemporary: useRef<HTMLDivElement>(null),
+    "hip-hop": useRef<HTMLDivElement>(null),
+    ballet: useRef<HTMLDivElement>(null),
+    salsa: useRef<HTMLDivElement>(null),
+    jazz: useRef<HTMLDivElement>(null),
+    forro: useRef<HTMLDivElement>(null),
+    ballroom: useRef<HTMLDivElement>(null),
+    samba: useRef<HTMLDivElement>(null),
+    zouk: useRef<HTMLDivElement>(null),
+    bachata: useRef<HTMLDivElement>(null),
+  }
 
   const showToastNotification = (message: string) => {
     setToastMessage(message)
@@ -1666,7 +1682,7 @@ const SissonePrototype = () => {
       days: ["Sexta-feira", "Sábado"],
       location: "Centro",
       image: "/salsa-dance-class-couple.jpg",
-      images: ["/salsa-studio-interior.jpg"],
+      images: ["/salsa-studio-interior.jpg", "/salsa-dance-class-couple.jpg"],
       tag: "Social",
       tagColor: "bg-tag-cyan text-tag-cyan-foreground",
       category: "bachata",
@@ -1681,6 +1697,9 @@ const SissonePrototype = () => {
       ],
     },
   ]
+
+  // Today classes
+  const todayClasses = classes.slice(0, 7)
 
   const getClassesByCategory = (category: string) => {
     return classes.filter((c) => c.category === category).slice(0, 7)
@@ -1697,11 +1716,27 @@ const SissonePrototype = () => {
     }
   }
 
+  const handleCategoryScroll = (categoryId: keyof typeof categoryRefs, direction: "left" | "right") => {
+    const container = categoryRefs[categoryId].current
+    if (container) {
+      const scrollAmount = 320 // Card width + gap
+      container.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      })
+    }
+  }
+
+  const handleCategoryClick = (categoryId: keyof typeof categoryRefs) => {
+    setCurrentScreen("search-results")
+    setSearchModality([categoryId.replace("-", " ").charAt(0).toUpperCase() + categoryId.slice(1)])
+  }
+
   const getSearchSummary = () => {
     const parts = []
     if (searchLocation) parts.push(searchLocation)
     if (searchWhen === "today") parts.push("Hoje")
-    else if (searchWhen === "specific" && selectedDate) parts.push(selectedDate)
+    else if (searchWhen === "specific" && selectedSpecificDate) parts.push(selectedSpecificDate)
     else if (searchWhen === "weekly" && selectedDays.length > 0) parts.push(selectedDays.join(", "))
     if (searchModality.length > 0) parts.push(searchModality.join(", "))
 
@@ -1735,43 +1770,65 @@ const SissonePrototype = () => {
     <div className="h-screen bg-background flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
-        <div className="bg-background p-4 flex items-center justify-between flex-shrink-0 border-none shadow-none">
-          <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={40} className="h-10 w-auto" />
-          <div className="flex gap-2 items-center">
-            <a
-              href="https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center text-xs md:text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary hover:bg-primary/90 text-primary-foreground h-9 px-2 md:px-4 py-2 rounded-md"
+        <header className="bg-background p-4 flex items-center justify-between shadow-sm flex-shrink-0">
+          <div className="flex items-center gap-3">
+            <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={40} className="h-8 w-auto" />
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              className="hidden md:inline-flex border-primary text-foreground hover:bg-secondary bg-transparent"
+              asChild
             >
-              <span className="hidden sm:inline">Cadastrar minha escola</span>
-              <span className="sm:hidden">Cadastrar</span>
-            </a>
+              <a
+                href="https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Cadastrar minha escola
+              </a>
+            </Button>
+            <Button
+              size="sm"
+              className="hidden md:inline-flex border-primary text-foreground hover:bg-secondary bg-transparent"
+              variant="outline"
+              asChild
+            >
+              <a
+                href="https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Cadastrar minha escola
+              </a>
+            </Button>
+
             <div className="relative">
-              <button
+              <Button
+                size="sm"
+                variant="outline"
+                className="border-primary text-foreground hover:bg-secondary bg-transparent"
                 onClick={() => setShowLoginDropdown(!showLoginDropdown)}
-                className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-primary bg-transparent hover:bg-secondary text-primary h-9 px-4 py-2 rounded-md"
               >
                 Login
                 <ChevronDown className="ml-1 h-4 w-4" />
-              </button>
+              </Button>
               {showLoginDropdown && (
-                <div className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-md shadow-lg z-50">
+                <div className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-lg z-50">
                   <a
                     href="https://v0-sissone-wireframes-git-usurio-b-logado-sissone-mvp.vercel.app/"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="block px-4 py-2 text-sm text-foreground hover:bg-secondary rounded-t-md"
-                    onClick={() => setShowLoginDropdown(false)}
+                    className="block px-4 py-2 text-sm text-foreground hover:bg-secondary rounded-t-lg"
+                    rel="noreferrer"
                   >
                     Login Escola
                   </a>
                   <a
                     href="https://v0-sissone-wireframes-git-usurio-a-logado-sissone-mvp.vercel.app/"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="block px-4 py-2 text-sm text-foreground hover:bg-secondary rounded-b-md"
-                    onClick={() => setShowLoginDropdown(false)}
+                    className="block px-4 py-2 text-sm text-foreground hover:bg-secondary rounded-b-lg"
+                    rel="noreferrer"
                   >
                     Login Aluno
                   </a>
@@ -1779,98 +1836,110 @@ const SissonePrototype = () => {
               )}
             </div>
           </div>
-        </div>
+        </header>
       </div>
 
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto w-full max-w-[1040px]">
+        <div className="mx-auto w-full max-w-[1040px] px-4">
           {/* Hero Section */}
-          <div className="relative bg-gradient-to-r from-accent to-secondary py-12 mb-8">
-            <div className="text-center mb-8 px-4">
-              <h1 className="text-4xl font-bold text-foreground mb-2">Encontre sua próxima aula</h1>
-              <p className="text-foreground opacity-80">Descubra aulas de dança perto de você</p>
-            </div>
+          <div className="py-12">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
+              Encontre sua próxima Aula
+            </h1>
 
-            <div className="px-4">
-              {/* Desktop Search Bar */}
-              <div className="hidden md:flex bg-card rounded-full shadow-lg p-2 items-center gap-2 max-w-4xl mx-auto">
-                {/* Onde */}
-                <div className="flex-1 px-4 py-2 border-r border-border">
-                  <label className="block text-xs font-semibold text-foreground mb-1">Onde</label>
-                  <input
-                    type="text"
-                    placeholder="Buscar destinos"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full text-sm text-foreground bg-transparent border-none outline-none placeholder:text-muted-foreground"
-                  />
-                </div>
+            {/* Desktop Search Bar */}
+            <div className="hidden md:flex items-center bg-card rounded-full shadow-lg p-2 gap-2">
+              {/* Onde */}
+              <div className="flex-1 px-4 py-2 border-r border-border">
+                <label className="block text-xs font-semibold text-foreground mb-1">Onde</label>
+                <input
+                  type="text"
+                  placeholder="Buscar destinos"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full text-sm text-foreground bg-transparent border-none outline-none placeholder:text-muted-foreground"
+                />
+              </div>
 
-                {/* Quando */}
-                <div className="flex-1 px-4 py-2 border-r border-border">
-                  <label className="block text-xs font-semibold text-foreground mb-1">Quando</label>
-                  <div className="flex gap-2">
-                    <Button
-                      variant={searchDate === "today" ? "default" : "ghost"}
-                      size="sm"
-                      className={
-                        searchDate === "today"
-                          ? "bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7"
-                          : "text-xs h-7"
-                      }
-                      onClick={() => setSearchDate("today")}
-                    >
-                      Hoje
-                    </Button>
-                    <Button
-                      variant={searchDate === "week" ? "default" : "ghost"}
-                      size="sm"
-                      className={
-                        searchDate === "week"
-                          ? "bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7"
-                          : "text-xs h-7"
-                      }
-                      onClick={() => setSearchDate("week")}
-                    >
-                      Semana
-                    </Button>
-                  </div>
-                </div>
-
-                {/* Modalidade */}
-                <div className="flex-1 px-4 py-2">
-                  <label className="block text-xs font-semibold text-foreground mb-1">Modalidade</label>
-                  <button
-                    onClick={() => setShowSearchModal(true)}
-                    className="text-sm text-foreground hover:text-primary text-left"
+              {/* Quando */}
+              <div className="flex-1 px-4 py-2 border-r border-border">
+                <label className="block text-xs font-semibold text-foreground mb-1">Quando</label>
+                <div className="flex gap-2">
+                  <Button
+                    variant={searchDate === "today" ? "default" : "ghost"}
+                    size="sm"
+                    className={
+                      searchDate === "today"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7"
+                        : "text-xs h-7"
+                    }
+                    onClick={() => setSearchDate("today")}
                   >
-                    {searchModality.length > 0 ? searchModality.join(", ") : "Escolher estilos"}
-                  </button>
+                    Hoje
+                  </Button>
+                  <Button
+                    variant={searchDate === "week" ? "default" : "ghost"}
+                    size="sm"
+                    className={
+                      searchDate === "week"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7"
+                        : "text-xs h-7"
+                    }
+                    onClick={() => setSearchDate("week")}
+                  >
+                    Semanalmente
+                  </Button>
+                  <Button
+                    variant={searchDate === "specific" ? "default" : "ghost"}
+                    size="sm"
+                    className={
+                      searchDate === "specific"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7"
+                        : "text-xs h-7"
+                    }
+                    onClick={() => {
+                      setSearchDate("specific")
+                      setShowDatePicker(true)
+                    }}
+                  >
+                    Dia específico
+                  </Button>
                 </div>
+              </div>
 
-                {/* Search Button */}
+              {/* Modalidade */}
+              <div className="flex-1 px-4 py-2">
+                <label className="block text-xs font-semibold text-foreground mb-1">Modalidade</label>
                 <button
-                  onClick={handleSearch}
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-3 flex items-center justify-center"
+                  onClick={() => setShowSearchModal(true)}
+                  className="text-sm text-foreground hover:text-primary text-left"
                 >
-                  <Search className="h-5 w-5" />
+                  {searchModality.length > 0 ? searchModality.join(", ") : "Escolher estilos"}
                 </button>
               </div>
 
+              {/* Search Button */}
               <button
-                onClick={handleMobileSearchOpen}
-                className="md:hidden w-full bg-card rounded-full shadow-lg p-4 flex items-center gap-3"
+                onClick={handleSearch}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-3 flex items-center justify-center"
               >
-                <Search className="h-5 w-5 text-muted-foreground" />
-                <div className="flex-1 text-left">
-                  <div className="text-sm font-semibold text-foreground">Para onde?</div>
-                  <div className="text-xs text-muted-foreground">
-                    {searchQuery || "Buscar destinos"} • {searchDate || "Quando"} •{" "}
-                    {searchModality.length > 0 ? searchModality.join(", ") : "Modalidade"}
-                  </div>
-                </div>
+                <Search className="h-5 w-5" />
               </button>
             </div>
+
+            <button
+              onClick={handleMobileSearchOpen}
+              className="md:hidden w-full bg-card rounded-full shadow-lg p-4 flex items-center gap-3"
+            >
+              <Search className="h-5 w-5 text-muted-foreground" />
+              <div className="flex-1 text-left">
+                <div className="text-sm font-semibold text-foreground">Para onde?</div>
+                <div className="text-xs text-muted-foreground">
+                  {searchQuery || "Buscar destinos"} • {searchDate || "Quando"} •{" "}
+                  {searchModality.length > 0 ? searchModality.join(", ") : "Modalidade"}
+                </div>
+              </div>
+            </button>
           </div>
 
           {/* Categories */}
@@ -1879,42 +1948,46 @@ const SissonePrototype = () => {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <button
-                  onClick={() => setCurrentScreen("search-results")}
-                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors text-left"
+                  onClick={() => handleCategoryClick("today")}
+                  className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
                 >
-                  Ainda hoje
+                  Faça uma aula ainda hoje
                 </button>
                 <div className="flex gap-2">
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("today", "left")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("today", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("today", "right")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("today", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-              <div id="category-today" className="flex gap-4 overflow-x-auto scrollbar-hide">
-                {classes.slice(0, 7).map((classItem) => (
+              <div
+                ref={categoryRefs.today}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                {todayClasses.map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-auto my-0"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       setCurrentScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full">
+                    <div className="relative h-48 w-full flex-shrink-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -1930,7 +2003,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
+                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -1961,7 +2034,7 @@ const SissonePrototype = () => {
                             setCurrentScreen("detail")
                           }}
                         >
-                          Ver detalhes
+                          Agendar
                         </Button>
                       </div>
                     </CardContent>
@@ -1974,8 +2047,8 @@ const SissonePrototype = () => {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <button
-                  onClick={() => navigateToSearchResults("Contemporary")}
-                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
+                  onClick={() => handleCategoryClick("contemporary")}
+                  className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
                 >
                   Contemporary
                 </button>
@@ -1983,22 +2056,26 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("contemporary", "left")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("contemporary", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("contemporary", "right")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("contemporary", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-              <div id="category-contemporary" className="flex gap-4 overflow-x-auto scrollbar-hide">
+              <div
+                ref={categoryRefs.contemporary}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
                 {getClassesByCategory("contemporary").map((classItem) => (
                   <Card
                     key={classItem.id}
@@ -2009,7 +2086,7 @@ const SissonePrototype = () => {
                       setCurrentScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full">
+                    <div className="relative h-48 w-full flex-shrink-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2025,7 +2102,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
+                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2056,7 +2133,7 @@ const SissonePrototype = () => {
                             setCurrentScreen("detail")
                           }}
                         >
-                          Ver detalhes
+                          Agendar
                         </Button>
                       </div>
                     </CardContent>
@@ -2069,8 +2146,8 @@ const SissonePrototype = () => {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <button
-                  onClick={() => navigateToSearchResults("Hip Hop")}
-                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
+                  onClick={() => handleCategoryClick("hip-hop")}
+                  className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
                 >
                   Hip Hop
                 </button>
@@ -2078,22 +2155,26 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("hip-hop", "left")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("hip-hop", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("hip-hop", "right")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("hip-hop", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-              <div id="category-hip-hop" className="flex gap-4 overflow-x-auto scrollbar-hide">
+              <div
+                ref={categoryRefs["hip-hop"]}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
                 {getClassesByCategory("hip-hop").map((classItem) => (
                   <Card
                     key={classItem.id}
@@ -2104,7 +2185,7 @@ const SissonePrototype = () => {
                       setCurrentScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full">
+                    <div className="relative h-48 w-full flex-shrink-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2120,7 +2201,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
+                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2151,7 +2232,7 @@ const SissonePrototype = () => {
                             setCurrentScreen("detail")
                           }}
                         >
-                          Ver detalhes
+                          Agendar
                         </Button>
                       </div>
                     </CardContent>
@@ -2164,8 +2245,8 @@ const SissonePrototype = () => {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <button
-                  onClick={() => navigateToSearchResults("Ballet")}
-                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
+                  onClick={() => handleCategoryClick("ballet")}
+                  className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
                 >
                   Ballet
                 </button>
@@ -2173,22 +2254,26 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("ballet", "left")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("ballet", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("ballet", "right")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("ballet", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-              <div id="category-ballet" className="flex gap-4 overflow-x-auto scrollbar-hide">
+              <div
+                ref={categoryRefs.ballet}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
                 {getClassesByCategory("ballet").map((classItem) => (
                   <Card
                     key={classItem.id}
@@ -2199,7 +2284,7 @@ const SissonePrototype = () => {
                       setCurrentScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full">
+                    <div className="relative h-48 w-full flex-shrink-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2215,7 +2300,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
+                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2246,7 +2331,7 @@ const SissonePrototype = () => {
                             setCurrentScreen("detail")
                           }}
                         >
-                          Ver detalhes
+                          Agendar
                         </Button>
                       </div>
                     </CardContent>
@@ -2259,8 +2344,8 @@ const SissonePrototype = () => {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <button
-                  onClick={() => navigateToSearchResults("Salsa")}
-                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
+                  onClick={() => handleCategoryClick("salsa")}
+                  className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
                 >
                   Salsa
                 </button>
@@ -2268,22 +2353,26 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("salsa", "left")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("salsa", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("salsa", "right")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("salsa", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-              <div id="category-salsa" className="flex gap-4 overflow-x-auto scrollbar-hide">
+              <div
+                ref={categoryRefs.salsa}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
                 {getClassesByCategory("salsa").map((classItem) => (
                   <Card
                     key={classItem.id}
@@ -2294,7 +2383,7 @@ const SissonePrototype = () => {
                       setCurrentScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full">
+                    <div className="relative h-48 w-full flex-shrink-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2310,7 +2399,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
+                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2341,7 +2430,7 @@ const SissonePrototype = () => {
                             setCurrentScreen("detail")
                           }}
                         >
-                          Ver detalhes
+                          Agendar
                         </Button>
                       </div>
                     </CardContent>
@@ -2354,8 +2443,8 @@ const SissonePrototype = () => {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <button
-                  onClick={() => navigateToSearchResults("Jazz")}
-                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
+                  onClick={() => handleCategoryClick("jazz")}
+                  className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
                 >
                   Jazz
                 </button>
@@ -2363,22 +2452,26 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("jazz", "left")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("jazz", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("jazz", "right")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("jazz", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-              <div id="category-jazz" className="flex gap-4 overflow-x-auto scrollbar-hide">
+              <div
+                ref={categoryRefs.jazz}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
                 {getClassesByCategory("jazz").map((classItem) => (
                   <Card
                     key={classItem.id}
@@ -2389,7 +2482,7 @@ const SissonePrototype = () => {
                       setCurrentScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full">
+                    <div className="relative h-48 w-full flex-shrink-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2405,7 +2498,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
+                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2436,7 +2529,7 @@ const SissonePrototype = () => {
                             setCurrentScreen("detail")
                           }}
                         >
-                          Ver detalhes
+                          Agendar
                         </Button>
                       </div>
                     </CardContent>
@@ -2449,8 +2542,8 @@ const SissonePrototype = () => {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <button
-                  onClick={() => navigateToSearchResults("Forró")}
-                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
+                  onClick={() => handleCategoryClick("forro")}
+                  className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
                 >
                   Forró
                 </button>
@@ -2458,22 +2551,26 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("forro", "left")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("forro", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("forro", "right")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("forro", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-              <div id="category-forro" className="flex gap-4 overflow-x-auto scrollbar-hide">
+              <div
+                ref={categoryRefs.forro}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
                 {getClassesByCategory("forro").map((classItem) => (
                   <Card
                     key={classItem.id}
@@ -2484,7 +2581,7 @@ const SissonePrototype = () => {
                       setCurrentScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full">
+                    <div className="relative h-48 w-full flex-shrink-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2500,7 +2597,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
+                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2531,7 +2628,7 @@ const SissonePrototype = () => {
                             setCurrentScreen("detail")
                           }}
                         >
-                          Ver detalhes
+                          Agendar
                         </Button>
                       </div>
                     </CardContent>
@@ -2544,8 +2641,8 @@ const SissonePrototype = () => {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <button
-                  onClick={() => navigateToSearchResults("Dança de Salão")}
-                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
+                  onClick={() => handleCategoryClick("ballroom")}
+                  className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
                 >
                   Dança de Salão
                 </button>
@@ -2553,22 +2650,26 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("ballroom", "left")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("ballroom", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("ballroom", "right")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("ballroom", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-              <div id="category-ballroom" className="flex gap-4 overflow-x-auto scrollbar-hide">
+              <div
+                ref={categoryRefs.ballroom}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
                 {getClassesByCategory("ballroom").map((classItem) => (
                   <Card
                     key={classItem.id}
@@ -2579,7 +2680,7 @@ const SissonePrototype = () => {
                       setCurrentScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full">
+                    <div className="relative h-48 w-full flex-shrink-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2595,7 +2696,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
+                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2626,7 +2727,7 @@ const SissonePrototype = () => {
                             setCurrentScreen("detail")
                           }}
                         >
-                          Ver detalhes
+                          Agendar
                         </Button>
                       </div>
                     </CardContent>
@@ -2639,8 +2740,8 @@ const SissonePrototype = () => {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <button
-                  onClick={() => navigateToSearchResults("Samba")}
-                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
+                  onClick={() => handleCategoryClick("samba")}
+                  className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
                 >
                   Samba
                 </button>
@@ -2648,22 +2749,26 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("samba", "left")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("samba", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("samba", "right")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("samba", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-              <div id="category-samba" className="flex gap-4 overflow-x-auto scrollbar-hide">
+              <div
+                ref={categoryRefs.samba}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
                 {getClassesByCategory("samba").map((classItem) => (
                   <Card
                     key={classItem.id}
@@ -2674,7 +2779,7 @@ const SissonePrototype = () => {
                       setCurrentScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full">
+                    <div className="relative h-48 w-full flex-shrink-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2690,7 +2795,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
+                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2721,7 +2826,7 @@ const SissonePrototype = () => {
                             setCurrentScreen("detail")
                           }}
                         >
-                          Ver detalhes
+                          Agendar
                         </Button>
                       </div>
                     </CardContent>
@@ -2734,8 +2839,8 @@ const SissonePrototype = () => {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <button
-                  onClick={() => navigateToSearchResults("Zouk")}
-                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
+                  onClick={() => handleCategoryClick("zouk")}
+                  className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
                 >
                   Zouk
                 </button>
@@ -2743,22 +2848,26 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("zouk", "left")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("zouk", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("zouk", "right")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("zouk", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-              <div id="category-zouk" className="flex gap-4 overflow-x-auto scrollbar-hide">
+              <div
+                ref={categoryRefs.zouk}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
                 {getClassesByCategory("zouk").map((classItem) => (
                   <Card
                     key={classItem.id}
@@ -2769,7 +2878,7 @@ const SissonePrototype = () => {
                       setCurrentScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full">
+                    <div className="relative h-48 w-full flex-shrink-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2785,7 +2894,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
+                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2816,7 +2925,7 @@ const SissonePrototype = () => {
                             setCurrentScreen("detail")
                           }}
                         >
-                          Ver detalhes
+                          Agendar
                         </Button>
                       </div>
                     </CardContent>
@@ -2829,8 +2938,8 @@ const SissonePrototype = () => {
             <div className="pb-8">
               <div className="flex items-center justify-between mb-4">
                 <button
-                  onClick={() => navigateToSearchResults("Bachata")}
-                  className="text-2xl font-bold text-foreground hover:text-primary transition-colors"
+                  onClick={() => handleCategoryClick("bachata")}
+                  className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
                 >
                   Bachata
                 </button>
@@ -2838,22 +2947,26 @@ const SissonePrototype = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("bachata", "left")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("bachata", "left")}
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-8 w-8 border-accent hover:bg-secondary bg-transparent"
-                    onClick={() => scrollCategory("bachata", "right")}
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("bachata", "right")}
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-              <div id="category-bachata" className="flex gap-4 overflow-x-auto scrollbar-hide">
+              <div
+                ref={categoryRefs.bachata}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
                 {getClassesByCategory("bachata").map((classItem) => (
                   <Card
                     key={classItem.id}
@@ -2864,7 +2977,7 @@ const SissonePrototype = () => {
                       setCurrentScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full">
+                    <div className="relative h-48 w-full flex-shrink-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2880,7 +2993,7 @@ const SissonePrototype = () => {
                       >
                         <Heart
                           className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
+                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
                           }`}
                         />
                       </button>
@@ -2911,7 +3024,7 @@ const SissonePrototype = () => {
                             setCurrentScreen("detail")
                           }}
                         >
-                          Ver detalhes
+                          Agendar
                         </Button>
                       </div>
                     </CardContent>
@@ -3051,18 +3164,21 @@ const SissonePrototype = () => {
                   }
                   onClick={() => setSearchDate("week")}
                 >
-                  Esta Semana
+                  Semanalmente
                 </Button>
                 <Button
-                  variant={searchDate === "month" ? "default" : "outline"}
+                  variant={searchDate === "specific" ? "default" : "outline"}
                   className={
-                    searchDate === "month"
+                    searchDate === "specific"
                       ? "bg-primary text-primary-foreground hover:bg-primary/90"
                       : "border-border text-foreground hover:bg-secondary"
                   }
-                  onClick={() => setSearchDate("month")}
+                  onClick={() => {
+                    setSearchDate("specific")
+                    setShowDatePicker(true)
+                  }}
                 >
-                  Este Mês
+                  Dia específico
                 </Button>
               </div>
             </div>
@@ -3793,13 +3909,18 @@ const SissonePrototype = () => {
                   <Calendar className="h-4 w-4 mr-2" />
                   Adicionar ao Calendário
                 </Button>
-                {/* Using semantic border, foreground, and secondary tokens */}
                 <Button
                   variant="outline"
                   className="w-full border-primary text-foreground hover:bg-secondary bg-transparent"
-                  onClick={() => setCurrentScreen("home")}
+                  asChild
                 >
-                  Voltar para Home
+                  <a
+                    href="https://v0-sissone-wireframes-git-usurio-a-logado-sissone-mvp.vercel.app/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Login como aluno
+                  </a>
                 </Button>
               </div>
             </CardContent>
