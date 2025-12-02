@@ -2144,7 +2144,7 @@ const SissonePrototype = () => {
 
             {/* Hip Hop */}
             <div>
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 px-4">
                 <button
                   onClick={() => handleCategoryClick("hip-hop")}
                   className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
@@ -2172,7 +2172,7 @@ const SissonePrototype = () => {
               </div>
               <div
                 ref={categoryRefs["hip-hop"]}
-                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth px-4"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
                 {getClassesByCategory("hip-hop").map((classItem) => (
