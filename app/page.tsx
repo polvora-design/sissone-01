@@ -2638,7 +2638,7 @@ const SissonePrototype = () => {
             </div>
 
             {/* Dança de Salão */}
-            <div>
+            <div className="pl-4">
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => handleCategoryClick("ballroom")}
@@ -2737,7 +2737,7 @@ const SissonePrototype = () => {
             </div>
 
             {/* Samba */}
-            <div>
+            <div className="pl-4">
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => handleCategoryClick("samba")}
