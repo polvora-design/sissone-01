@@ -3365,7 +3365,7 @@ const SissonePrototype = () => {
                     </div>
 
                     {/* Bottom Row */}
-                    <div className="flex items-center justify-between mt-auto pt-2 flex-col">
+                    <div className="flex justify-between mt-auto pt-2 flex-col items-start">
                       <span className="text-lg font-bold text-foreground pointer-events-none">{classItem.price}</span>
                       <Button
                         size="sm"
