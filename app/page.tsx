@@ -1775,32 +1775,14 @@ const SissonePrototype = () => {
             <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={40} className="h-8 w-auto" />
           </div>
           <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              className="hidden md:inline-flex border-primary text-foreground hover:bg-secondary bg-transparent"
-              asChild
-            >
+            <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
               <a
                 href="https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/"
                 target="_blank"
                 rel="noreferrer"
               >
-                Cadastrar minha escola
-              </a>
-            </Button>
-            <Button
-              size="sm"
-              className="hidden md:inline-flex border-primary text-foreground hover:bg-secondary bg-transparent"
-              variant="outline"
-              asChild
-            >
-              <a
-                href="https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Cadastrar minha escola
+                <span className="hidden sm:inline">Cadastrar minha escola</span>
+                <span className="sm:hidden">Cadastrar</span>
               </a>
             </Button>
 
@@ -3298,7 +3280,7 @@ const SissonePrototype = () => {
           </div>
 
           {/* Map hint */}
-          {/* Using semantic card, foreground and muted-foreground tokens */}
+          {/* Using semantic card and foreground tokens */}
           <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-card/90 px-4 py-2 rounded-full text-sm text-foreground shadow-md pointer-events-none">
             Arraste o mapa para explorar
           </div>
