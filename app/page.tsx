@@ -2341,7 +2341,7 @@ const SissonePrototype = () => {
             </div>
 
             {/* Salsa */}
-            <div>
+            <div className="pl-4">
               <div className="flex items-center justify-between mb-4">
                 <button
                   onClick={() => handleCategoryClick("salsa")}
