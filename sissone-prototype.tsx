@@ -442,7 +442,7 @@ export default function SissonePrototype() {
                   </div>
                 )}
 
-                <div className="flex items-center gap-2 mt-3 pt-3 border-t border-[#E5D6CD]">
+                <div className="flex items-center justify-center gap-2 mt-3 pt-3 border-t border-[#E5D6CD]">
                   {renderStars(4)}
                   <span className="text-[#3D2C2E] opacity-70 text-sm">(24 avaliações)</span>
                 </div>
@@ -860,6 +860,15 @@ export default function SissonePrototype() {
 
         <div className="space-y-2">
           <Button className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">Salvar Alterações</Button>
+          <Button
+            variant="outline"
+            className="w-full border-[#CFB2A8] text-[#CFB2A8] bg-white hover:bg-[#CFB2A8]/10"
+            onClick={() =>
+              window.open("https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/", "_blank")
+            }
+          >
+            Cadastrar minha escola
+          </Button>
           <Button variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white">
             Alterar Senha
           </Button>
