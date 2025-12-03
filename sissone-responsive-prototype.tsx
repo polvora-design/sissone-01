@@ -2,13 +2,45 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Home, User, Plus, Eye, Users, Calendar, ArrowLeft, Star, Clock, MapPin, DollarSign, Menu, X, Filter, Building2, Upload, ChevronLeft, ChevronRight, Trophy, Edit, Trash2, Search, UserPlus, FileDown, LucideTag as PriceTag, Shield, ShieldCheck, AlertCircle, TrendingUp, TrendingDown, Copy, Mail, Check } from 'lucide-react'
+import {
+  Home,
+  User,
+  Plus,
+  Eye,
+  Users,
+  Calendar,
+  ArrowLeft,
+  Star,
+  Clock,
+  MapPin,
+  DollarSign,
+  Menu,
+  X,
+  Filter,
+  Building2,
+  Upload,
+  ChevronLeft,
+  ChevronRight,
+  Trophy,
+  Edit,
+  Trash2,
+  Search,
+  UserPlus,
+  LucideTag as PriceTag,
+  AlertCircle,
+  TrendingUp,
+  TrendingDown,
+  Copy,
+  Mail,
+  Check,
+  GraduationCap,
+} from "lucide-react"
 
 type ToastType = "success" | "error" | "info"
 type Toast = {
@@ -19,17 +51,16 @@ type Toast = {
 
 type Screen =
   | "dashboard"
+  | "profile"
   | "school-units"
-  | "classes"
   | "create-class"
-  | "class-preview"
+  | "view-class"
+  | "classes"
   | "pricing"
   | "students"
-  | "create-plan"
-  | "edit-plan"
-  | "create-combo"
-  | "edit-combo"
-  | "invite-student"
+  | "student-profile"
+  | "user-profile"
+  | "student-view"
 
 type Unit = {
   id: string
@@ -708,17 +739,25 @@ export default function SissoneResponsivePrototype() {
     role: "admin",
   })
 
+  const [userProfileForm, setUserProfileForm] = useState({
+    name: "Gestor Principal",
+    email: "gestor@sissone.com.br",
+    phone: "+55 (11) 98765-4321",
+    password: "",
+    confirmPassword: "",
+  })
+
   const [classData, setClassData] = useState({
-    title: "",
-    date: "",
-    time: "",
-    price: "",
-    description: "",
     unit: "",
+    title: "",
     isRecurring: false,
     recurringDays: [] as string[],
+    date: "",
     endDate: "",
+    time: "",
+    price: "",
     hasEndDate: false,
+    description: "",
     images: [] as string[],
   })
 
@@ -728,6 +767,19 @@ export default function SissoneResponsivePrototype() {
     setTimeout(() => {
       setToasts((prev) => prev.filter((toast) => toast.id !== id))
     }, 3000)
+  }
+
+  const handleUserProfileUpdate = () => {
+    if (!userProfileForm.name || !userProfileForm.email || !userProfileForm.phone) {
+      showToast("Por favor, preencha todos os campos obrigatórios", "error")
+      return
+    }
+    if (userProfileForm.password && userProfileForm.password !== userProfileForm.confirmPassword) {
+      showToast("As senhas não coincidem", "error")
+      return
+    }
+    showToast("Perfil atualizado com sucesso!")
+    navigateTo("dashboard")
   }
 
   const navigateTo = (screen: Screen) => {
@@ -888,7 +940,7 @@ export default function SissoneResponsivePrototype() {
             <div className="flex items-center justify-between">
               <div>
                 <img src="/sissone-logo.png" alt="Sissone" className="h-8 mb-2" />
-                <p className="text-xs" style={{ color: "#3D2C2E" }}>
+                <p className="text-xs" style={{ color: "#3D2E" }}>
                   Para quem quer aprender, ensinar e viver a dança
                 </p>
               </div>
@@ -975,29 +1027,33 @@ export default function SissoneResponsivePrototype() {
       </div>
 
       <div className="hidden lg:flex items-center gap-3">
-        <div className="text-right">
-          <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
-            {userProfile.name}
-          </p>
-          <p className="text-xs flex items-center gap-1" style={{ color: "#CFB2A8" }}>
-            {userProfile.role === "admin" ? (
-              <>
-                <ShieldCheck className="w-3 h-3" />
-                Admin (Editor)
-              </>
-            ) : (
-              <>
-                <Shield className="w-3 h-3" />
-                Gestor (Visualizador)
-              </>
-            )}
-          </p>
-        </div>
-        <div className="w-10 h-10 rounded-full" style={{ backgroundColor: "#CFB2A8" }}>
-          <div className="flex items-center justify-center h-full">
-            <User className="w-5 h-5" style={{ color: "#3D2C2E" }} />
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigateTo("student-view")}
+          className="flex items-center gap-2 hover:bg-[#CFB2A8]/20"
+        >
+          <GraduationCap className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+          <span className="text-sm" style={{ color: "#3D2C2E" }}>
+            Meu perfil de Aluno
+          </span>
+        </Button>
+        <button
+          onClick={() => navigateTo("user-profile")}
+          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+        >
+          <div className="text-right">
+            <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+              {userProfile.name}
+            </p>
+            {/* Removed role badge */}
           </div>
-        </div>
+          <div className="w-10 h-10 rounded-full" style={{ backgroundColor: "#CFB2A8" }}>
+            <div className="flex items-center justify-center h-full">
+              <User className="w-5 h-5" style={{ color: "#3D2C2E" }} />
+            </div>
+          </div>
+        </button>
       </div>
     </div>
   )
@@ -1661,7 +1717,8 @@ export default function SissoneResponsivePrototype() {
               <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
                 <SelectValue>
                   <span className="text-sm">
-                    Unidade: {classUnitFilter === "all" ? "Todas" : mockUnits.find((u) => u.id === classUnitFilter)?.name}
+                    Unidade:{" "}
+                    {classUnitFilter === "all" ? "Todas" : mockUnits.find((u) => u.id === classUnitFilter)?.name}
                   </span>
                 </SelectValue>
               </SelectTrigger>
@@ -1679,7 +1736,12 @@ export default function SissoneResponsivePrototype() {
               <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
                 <SelectValue>
                   <span className="text-sm">
-                    Frequência: {classFrequencyFilter === "all" ? "Todas" : classFrequencyFilter === "recurring" ? "Recorrentes" : "Únicas"}
+                    Frequência:{" "}
+                    {classFrequencyFilter === "all"
+                      ? "Todas"
+                      : classFrequencyFilter === "recurring"
+                        ? "Recorrentes"
+                        : "Únicas"}
                   </span>
                 </SelectValue>
               </SelectTrigger>
@@ -1694,7 +1756,14 @@ export default function SissoneResponsivePrototype() {
               <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
                 <SelectValue>
                   <span className="text-sm">
-                    Rentabilidade: {classRentabilityFilter === "all" ? "Todas" : classRentabilityFilter === "high" ? "Alta" : classRentabilityFilter === "medium" ? "Média" : "Baixa"}
+                    Rentabilidade:{" "}
+                    {classRentabilityFilter === "all"
+                      ? "Todas"
+                      : classRentabilityFilter === "high"
+                        ? "Alta"
+                        : classRentabilityFilter === "medium"
+                          ? "Média"
+                          : "Baixa"}
                   </span>
                 </SelectValue>
               </SelectTrigger>
@@ -1867,7 +1936,10 @@ export default function SissoneResponsivePrototype() {
                         setPlans(plans.map((p) => (p.id === editingPlan.id ? editingPlan : p)))
                         showToast("Plano editado com sucesso!")
                       } else if (newPlan.name && newPlan.discount) {
-                        setPlans([...plans, { id: String(plans.length + 1), name: newPlan.name, discount: Number(newPlan.discount) }])
+                        setPlans([
+                          ...plans,
+                          { id: String(plans.length + 1), name: newPlan.name, discount: Number(newPlan.discount) },
+                        ])
                         showToast("Plano criado com sucesso!")
                       }
                       setCurrentScreen("pricing")
@@ -1998,7 +2070,12 @@ export default function SissoneResponsivePrototype() {
                       } else if (newCombo.name && newCombo.classes.length > 0 && newCombo.price) {
                         setCombos([
                           ...combos,
-                          { id: String(combos.length + 1), name: newCombo.name, classes: newCombo.classes, price: Number(newCombo.price) },
+                          {
+                            id: String(combos.length + 1),
+                            name: newCombo.name,
+                            classes: newCombo.classes,
+                            price: Number(newCombo.price),
+                          },
                         ])
                         showToast("Combo criado com sucesso!")
                       }
@@ -2178,9 +2255,9 @@ export default function SissoneResponsivePrototype() {
       const matchesSearch =
         student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         student.email.toLowerCase().includes(searchTerm.toLowerCase())
-      const matchesUnit = selectedUnit === "all" || student.unit === selectedUnit
+      const matchesUnit = selectedUnit === "all" || student.unitId === selectedUnit // Corrected to use unitId
       const matchesFrequency =
-        frequencyFilter === "all" || student.frequency.toLowerCase() === frequencyFilter.toLowerCase()
+        frequencyFilter === "all" || student.frequency.toString() === frequencyFilter.toLowerCase() // Corrected comparison
 
       return matchesSearch && matchesUnit && matchesFrequency
     })
@@ -2192,10 +2269,7 @@ export default function SissoneResponsivePrototype() {
             <h1 className="text-2xl font-bold" style={{ color: "#3D2C2E" }}>
               Alunos ({filteredStudents.length})
             </h1>
-            <Button
-              onClick={() => setShowInviteModal(true)}
-              style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
-            >
+            <Button onClick={() => setShowInviteModal(true)} style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
               <UserPlus className="w-4 h-4 mr-2" />
               Novo Aluno
             </Button>
@@ -2317,7 +2391,16 @@ export default function SissoneResponsivePrototype() {
             <Select defaultValue="all" onValueChange={setFrequencyFilter}>
               <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
                 <SelectValue>
-                  <span className="text-sm">Freq.: {frequencyFilter === "all" ? "Todas" : frequencyFilter === "high" ? "Alta" : frequencyFilter === "medium" ? "Média" : "Baixa"}</span>
+                  <span className="text-sm">
+                    Freq.:{" "}
+                    {frequencyFilter === "all"
+                      ? "Todas"
+                      : frequencyFilter === "high"
+                        ? "Alta"
+                        : frequencyFilter === "medium"
+                          ? "Média"
+                          : "Baixa"}
+                  </span>
                 </SelectValue>
               </SelectTrigger>
               <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
@@ -2401,7 +2484,10 @@ export default function SissoneResponsivePrototype() {
                         </td>
                         <td className="p-4">
                           <div className="flex items-center gap-2">
-                            <div className="w-16 h-2 rounded-full overflow-hidden" style={{ backgroundColor: "#F5F0EB" }}>
+                            <div
+                              className="w-16 h-2 rounded-full overflow-hidden"
+                              style={{ backgroundColor: "#F5F0EB" }}
+                            >
                               <div
                                 className="h-full"
                                 style={{
@@ -2926,7 +3012,9 @@ export default function SissoneResponsivePrototype() {
                     <Clock className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
                     <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
                       {classData.date || "Data de início"}
-                      {classData.hasEndDate && classData.endDate ? ` até ${classData.endDate}` : " (Sem data de término)"}
+                      {classData.hasEndDate && classData.endDate
+                        ? ` até ${classData.endDate}`
+                        : " (Sem data de término)"}
                     </span>
                   </div>
                 </>
@@ -3001,17 +3089,127 @@ export default function SissoneResponsivePrototype() {
     </div>
   )
 
+  const renderUserProfile = () => (
+    <div className="p-4 lg:p-6 pb-24 lg:pb-6">
+      {" "}
+      {/* Added padding to match other screens */}
+      <div className="max-w-2xl mx-auto">
+        {" "}
+        {/* Centering content */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Meus Dados de Login</CardTitle>
+            <CardDescription>Gerencie suas informações pessoais e credenciais de acesso</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex justify-center mb-6">
+              <div
+                className="w-24 h-24 rounded-full flex items-center justify-center"
+                style={{ backgroundColor: "#CFB2A8" }}
+              >
+                <User className="w-12 h-12" style={{ color: "#3D2C2E" }} />
+              </div>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="profile-name">Nome Completo *</Label>
+                <Input
+                  id="profile-name"
+                  value={userProfileForm.name}
+                  onChange={(e) => setUserProfileForm({ ...userProfileForm, name: e.target.value })}
+                  placeholder="Digite seu nome"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="profile-email">Email *</Label>
+                <Input
+                  id="profile-email"
+                  type="email"
+                  value={userProfileForm.email}
+                  onChange={(e) => setUserProfileForm({ ...userProfileForm, email: e.target.value })}
+                  placeholder="seu@email.com"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="profile-phone">Telefone *</Label>
+                <Input
+                  id="profile-phone"
+                  type="tel"
+                  value={userProfileForm.phone}
+                  onChange={(e) => setUserProfileForm({ ...userProfileForm, phone: e.target.value })}
+                  placeholder="+55 (11) 98765-4321"
+                />
+              </div>
+            </div>
+
+            <div className="border-t pt-4 mt-6">
+              <h3 className="text-lg font-semibold mb-4" style={{ color: "#3D2C2E" }}>
+                Alterar Senha
+              </h3>
+              <p className="text-sm text-gray-500 mb-4">Deixe em branco se não desejar alterar sua senha</p>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="space-y-2">
+                  <Label htmlFor="profile-password">Nova Senha</Label>
+                  <Input
+                    id="profile-password"
+                    type="password"
+                    value={userProfileForm.password}
+                    onChange={(e) => setUserProfileForm({ ...userProfileForm, password: e.target.value })}
+                    placeholder="Digite a nova senha"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="profile-confirm-password">Confirmar Nova Senha</Label>
+                  <Input
+                    id="profile-confirm-password"
+                    type="password"
+                    value={userProfileForm.confirmPassword}
+                    onChange={(e) => setUserProfileForm({ ...userProfileForm, confirmPassword: e.target.value })}
+                    placeholder="Confirme a nova senha"
+                  />
+                </div>
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter className="flex flex-col sm:flex-row gap-3">
+            <Button onClick={() => navigateTo("dashboard")} variant="outline" className="w-full sm:w-auto">
+              Cancelar
+            </Button>
+            <Button
+              onClick={handleUserProfileUpdate}
+              className="w-full sm:w-auto"
+              style={{ backgroundColor: "#3D2C2E" }}
+            >
+              Salvar Alterações
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
+    </div>
+  )
+
   const renderContent = () => {
     switch (currentScreen) {
       case "dashboard":
         return renderDashboard()
+      // case "profile": // Kept for potential future use or if it was intended
+      //   return renderProfile() // renderProfile is not defined, so it's commented out
+      case "user-profile":
+        return renderUserProfile()
       case "school-units":
         return renderSchoolUnits()
       case "classes":
         return renderClasses()
       case "create-class":
         return renderCreateClass()
-      case "class-preview":
+      case "view-class": // Corrected to match the new type definition
+        return renderClassPreview()
+      case "class-preview": // Kept for backward compatibility or if it was intended as a synonym
         return renderClassPreview()
       case "pricing":
       case "create-plan":
@@ -3021,8 +3219,12 @@ export default function SissoneResponsivePrototype() {
         return renderPricing()
       case "students":
         return renderStudents()
-      case "invite-student": // Removed this case as renderInviteStudent is removed
-        return null
+      case "student-profile": // Added for student-profile case
+        return <div>Student Profile</div> // Placeholder
+      case "student-view": // Added for student-view case
+        return <div>Student View</div> // Placeholder
+      case "invite-student":
+        return renderInviteStudent()
       default:
         return renderDashboard()
     }
@@ -3056,6 +3258,7 @@ export default function SissoneResponsivePrototype() {
         {currentScreen === "school-units" && renderHeader("Escola & Unidades")}
         {currentScreen === "classes" && renderHeader("Aulas")}
         {currentScreen === "create-class" && renderHeader("Criar Aula")}
+        {currentScreen === "view-class" && renderHeader("Visualizar Aula")}
         {currentScreen === "class-preview" && renderHeader("Visualizar Aula")}
         {currentScreen === "pricing" && renderHeader("Precificação")}
         {currentScreen === "create-plan" && renderHeader("Novo Plano")}
@@ -3064,15 +3267,28 @@ export default function SissoneResponsivePrototype() {
         {currentScreen === "edit-combo" && renderHeader("Editar Combo")}
         {currentScreen === "students" && renderHeader("Alunos")}
         {currentScreen === "invite-student" && renderHeader("Convidar Aluno")}
-
+        {currentScreen === "user-profile" && renderHeader("Meu Perfil")} {/* Added header for user-profile */}
+        {currentScreen === "student-profile" && renderHeader("Perfil do Aluno")}{" "}
+        {/* Added header for student-profile */}
+        {currentScreen === "student-view" && renderHeader("Meu Perfil de Aluno")} {/* Added header for student-view */}
         <div className="flex-1 overflow-auto">
           {currentScreen === "dashboard" && renderDashboard()}
           {currentScreen === "school-units" && renderSchoolUnits()}
           {currentScreen === "classes" && renderClasses()}
           {currentScreen === "create-class" && renderCreateClass()}
+          {currentScreen === "view-class" && renderClassPreview()}
           {currentScreen === "class-preview" && renderClassPreview()}
-          {(currentScreen === "pricing" || currentScreen === "create-plan" || currentScreen === "edit-plan" || currentScreen === "create-combo" || currentScreen === "edit-combo") && renderPricing()}
+          {(currentScreen === "pricing" ||
+            currentScreen === "create-plan" ||
+            currentScreen === "edit-plan" ||
+            currentScreen === "create-combo" ||
+            currentScreen === "edit-combo") &&
+            renderPricing()}
           {currentScreen === "students" && renderStudents()}
+          {currentScreen === "user-profile" && renderUserProfile()} {/* Render user profile */}
+          {currentScreen === "student-profile" && <div>Student Profile Content</div>}{" "}
+          {/* Placeholder for student-profile */}
+          {currentScreen === "student-view" && <div>Student View Content</div>} {/* Placeholder for student-view */}
           {currentScreen === "invite-student" && renderInviteStudent()}
         </div>
       </div>
