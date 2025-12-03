@@ -1369,6 +1369,95 @@ const SissonePrototype = () => {
   //   setCurrentScreen("search-results")
   // }
 
+  const getFilteredClasses = () => {
+    let filtered = classes
+
+    // Filter by categories (dance styles)
+    if (searchFilters.categories.length > 0) {
+      // The 'tag' property in the original classes data seems to be a string like "Popular", "Novo" etc.
+      // It's more likely that 'category' property is what should be used for filtering by dance style.
+      // For demonstration purposes, assuming 'tag' can be mapped to categories if needed, but 'category' is more robust.
+      // Let's use 'category' for filtering.
+      filtered = filtered.filter((c) => searchFilters.categories.includes(c.category))
+    }
+
+    // Filter by days of week
+    if (searchFilters.days.length > 0) {
+      // Assuming the 'days' property in class data corresponds to the available days.
+      // Need to map the filter days (e.g., "Segunda") to the data days (e.g., "Segunda-feira").
+      const dayMap: Record<string, string> = {
+        Segunda: "Segunda-feira",
+        Terça: "Terça-feira",
+        Quarta: "Quarta-feira",
+        Quinta: "Quinta-feira",
+        Sexta: "Sexta-feira",
+        Sábado: "Sábado",
+        Domingo: "Domingo",
+      }
+      const dataDays = searchFilters.days.map((day) => dayMap[day]).filter(Boolean)
+      filtered = filtered.filter((c) => c.days?.some((d) => dataDays.includes(d)))
+    }
+
+    // Filter by time shifts (morning, afternoon, night)
+    if (searchFilters.shifts.length > 0) {
+      filtered = filtered.filter(
+        (c) =>
+          c.schedule?.some((s) => {
+            // Assuming 'schedule' is an array of objects with a 'time' property.
+            // The original classes data does not have a 'schedule' property.
+            // This filtering logic is based on the assumption that 'classes' would have a 'schedule' property like:
+            // schedule: [{ day: 'Monday', time: '09:00' }, { day: 'Wednesday', time: '19:00' }]
+            // Since 'schedule' is not present, this part of the filter will not work as intended with the current data structure.
+            // For now, we'll adapt it to use the 'time' property directly if 'schedule' is missing.
+            const hour = Number.parseInt(s.time.split(":")[0])
+            const shift = hour < 12 ? "Manhã" : hour < 18 ? "Tarde" : "Noite"
+            return searchFilters.shifts.includes(shift)
+          }) ||
+          // Fallback for classes without a 'schedule' property, using the 'time' property directly.
+          // This assumes 'time' is a string like "19:00".
+          (() => {
+            if (!c.schedule && c.time) {
+              const hour = Number.parseInt(c.time.split(":")[0])
+              const shift = hour < 12 ? "Manhã" : hour < 18 ? "Tarde" : "Noite"
+              return searchFilters.shifts.includes(shift)
+            }
+            return false // If no schedule and no time, don't match
+          })(),
+      )
+    }
+
+    // Filter by rating
+    if (searchFilters.rating) {
+      const minRating = Number.parseFloat(searchFilters.rating)
+      filtered = filtered.filter((c) => Number.parseFloat(c.rating) >= minRating)
+    }
+
+    // Filter by price
+    if (searchFilters.priceMin) {
+      const minPrice = Number.parseFloat(searchFilters.priceMin)
+      filtered = filtered.filter((c) => {
+        const price = Number.parseFloat(c.price.replace("R$", "").replace(",", "."))
+        return price >= minPrice
+      })
+    }
+    if (searchFilters.priceMax) {
+      const maxPrice = Number.parseFloat(searchFilters.priceMax)
+      filtered = filtered.filter((c) => {
+        const price = Number.parseFloat(c.price.replace("R$", "").replace(",", "."))
+        return price <= maxPrice
+      })
+    }
+
+    // Filter by location if selected
+    if (selectedLocation) {
+      // For now, just filter by neighborhood - in a real app this would use distance calculation
+      // This assumes 'location' property holds the neighborhood string.
+      filtered = filtered.filter((c) => c.location.includes(selectedLocation))
+    }
+
+    return filtered
+  }
+
   const renderHomeScreen = () => (
     <div className="h-screen bg-background flex flex-col overflow-hidden">
       <div className="mx-auto w-full max-w-[1040px]">
@@ -3133,7 +3222,7 @@ const SissonePrototype = () => {
         {/* Cards Section - Left side on desktop */}
         <div className="h-full overflow-y-auto bg-background md:w-1/2">
           <div className="mx-auto w-full max-w-full md:max-w-[520px] p-4 space-y-4">
-            {classes.map((classItem) => (
+            {getFilteredClasses().map((classItem) => (
               <Card
                 key={classItem.id}
                 className="bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
@@ -3291,6 +3380,175 @@ const SissonePrototype = () => {
           </div>
         </div>
       </div>
+
+      {showSearchFiltersModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center md:justify-center">
+          <div className="bg-background w-full md:w-[600px] md:rounded-xl max-h-[90vh] overflow-y-auto">
+            {/* Header */}
+            <div className="sticky top-0 bg-background border-b border-border p-4 flex items-center justify-between">
+              <h2 className="text-xl font-bold text-foreground">Filtros</h2>
+              <Button variant="ghost" size="icon" onClick={() => setShowSearchFiltersModal(false)}>
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+
+            {/* Filter Content */}
+            <div className="p-6 space-y-6">
+              {/* Dance Style Filter */}
+              <div>
+                <h3 className="font-semibold text-foreground mb-3">Modalidade</h3>
+                <div className="flex flex-wrap gap-2">
+                  {["Dança Contemporânea", "Hip Hop", "Salsa", "Jazz", "Forró", "Dança de Salão", "Samba"].map(
+                    (style) => (
+                      <Button
+                        key={style}
+                        variant={searchFilters.categories.includes(style) ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => {
+                          setSearchFilters((prev) => ({
+                            ...prev,
+                            categories: prev.categories.includes(style)
+                              ? prev.categories.filter((c) => c !== style)
+                              : [...prev.categories, style],
+                          }))
+                        }}
+                        className={searchFilters.categories.includes(style) ? "bg-primary text-primary-foreground" : ""}
+                      >
+                        {style}
+                      </Button>
+                    ),
+                  )}
+                </div>
+              </div>
+
+              {/* Day of Week Filter */}
+              <div>
+                <h3 className="font-semibold text-foreground mb-3">Dia da Semana</h3>
+                <div className="flex flex-wrap gap-2">
+                  {["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"].map((day) => (
+                    <Button
+                      key={day}
+                      variant={searchFilters.days.includes(day) ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => {
+                        setSearchFilters((prev) => ({
+                          ...prev,
+                          days: prev.days.includes(day) ? prev.days.filter((d) => d !== day) : [...prev.days, day],
+                        }))
+                      }}
+                      className={searchFilters.days.includes(day) ? "bg-primary text-primary-foreground" : ""}
+                    >
+                      {day}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Time Shift Filter */}
+              <div>
+                <h3 className="font-semibold text-foreground mb-3">Período do Dia</h3>
+                <div className="flex flex-wrap gap-2">
+                  {["Manhã", "Tarde", "Noite"].map((shift) => (
+                    <Button
+                      key={shift}
+                      variant={searchFilters.shifts.includes(shift) ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => {
+                        setSearchFilters((prev) => ({
+                          ...prev,
+                          shifts: prev.shifts.includes(shift)
+                            ? prev.shifts.filter((s) => s !== shift)
+                            : [...prev.shifts, shift],
+                        }))
+                      }}
+                      className={searchFilters.shifts.includes(shift) ? "bg-primary text-primary-foreground" : ""}
+                    >
+                      {shift}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Rating Filter */}
+              <div>
+                <h3 className="font-semibold text-foreground mb-3">Avaliação Mínima</h3>
+                <div className="flex flex-wrap gap-2">
+                  {["4.5", "4.0", "3.5", "3.0"].map((rating) => (
+                    <Button
+                      key={rating}
+                      variant={searchFilters.rating === rating ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => {
+                        setSearchFilters((prev) => ({
+                          ...prev,
+                          rating: prev.rating === rating ? "" : rating,
+                        }))
+                      }}
+                      className={searchFilters.rating === rating ? "bg-primary text-primary-foreground" : ""}
+                    >
+                      <Star className="h-3 w-3 mr-1 fill-current" />
+                      {rating}+
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Price Range Filter */}
+              <div>
+                <h3 className="font-semibold text-foreground mb-3">Faixa de Preço (R$)</h3>
+                <div className="flex gap-3">
+                  <div className="flex-1">
+                    <label className="text-sm text-foreground opacity-70 mb-1 block">Mínimo</label>
+                    <input
+                      type="number"
+                      placeholder="0"
+                      value={searchFilters.priceMin}
+                      onChange={(e) => setSearchFilters((prev) => ({ ...prev, priceMin: e.target.value }))}
+                      className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="text-sm text-foreground opacity-70 mb-1 block">Máximo</label>
+                    <input
+                      type="number"
+                      placeholder="1000"
+                      value={searchFilters.priceMax}
+                      onChange={(e) => setSearchFilters((prev) => ({ ...prev, priceMax: e.target.value }))}
+                      className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer Actions */}
+            <div className="sticky bottom-0 bg-background border-t border-border p-4 flex gap-3">
+              <Button
+                variant="outline"
+                className="flex-1 bg-transparent"
+                onClick={() => {
+                  setSearchFilters({
+                    categories: [],
+                    days: [],
+                    shifts: [],
+                    priceMin: "",
+                    priceMax: "",
+                    rating: "",
+                  })
+                }}
+              >
+                Limpar Filtros
+              </Button>
+              <Button
+                className="flex-1 bg-primary text-primary-foreground"
+                onClick={() => setShowSearchFiltersModal(false)}
+              >
+                Aplicar Filtros
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 
