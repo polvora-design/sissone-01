@@ -3204,9 +3204,9 @@ const SissonePrototype = () => {
 
   const renderSearchResultsScreen = () => (
     <div className="h-screen bg-background flex flex-col overflow-hidden">
-      <div className="mx-auto w-full max-w-[1040px]">
-        {/* Header */}
-        <div className="bg-background p-4 shadow-sm flex-shrink-0">
+      {/* Header - centered container */}
+      <div className="bg-background shadow-sm flex-shrink-0">
+        <div className="mx-auto w-full max-w-[1044px] px-4 py-4">
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-secondary">
               <ArrowLeft className="h-5 w-5" />
@@ -3245,165 +3245,257 @@ const SissonePrototype = () => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-hidden relative">
-        {/* Cards Section - Left side on desktop */}
-        <div className="h-full overflow-y-auto bg-background md:w-1/2">
-          <div className="mx-auto w-full max-w-full md:max-w-[520px] p-4 space-y-4">
-            {getFilteredClasses().map((classItem) => (
-              <Card
-                key={classItem.id}
-                className="bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                onClick={() => {
-                  setSelectedClass(classItem)
-                  setCurrentImageIndex(0)
-                  setCurrentScreen("detail")
+      {/* Main Content - centered container with side-by-side layout on desktop */}
+      <div className="flex-1 overflow-hidden">
+        <div className="mx-auto w-full max-w-[1044px] h-full">
+          {/* Mobile: Stack map and cards */}
+          <div className="md:hidden h-full flex flex-col">
+            {/* Mobile Map */}
+            <div className="h-64 relative bg-gray-200 flex-shrink-0">
+              <div
+                className="absolute inset-0 cursor-move select-none"
+                onMouseDown={handleMapMouseDown}
+                onMouseMove={handleMapMouseMove}
+                onMouseUp={handleMapMouseUp}
+                onMouseLeave={handleMapMouseUp}
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23E5D6CD' width='100' height='100'/%3E%3Cpath d='M0 0L50 50M50 0L100 50M0 50L50 100M50 50L100 100' stroke='%23CFB2A8' strokeWidth='1'/%3E%3C/svg%3E")`,
+                  backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
                 }}
               >
-                <div className="flex p-4 gap-4">
-                  {/* Image */}
-                  <div className="relative w-32 h-32 flex-shrink-0 rounded-lg overflow-hidden">
-                    <Image
-                      src={classItem.image || "/placeholder.svg"}
-                      alt={classItem.name}
-                      fill
-                      className="object-cover"
-                    />
+                {/* Map Markers */}
+                {classes.slice(0, 8).map((classItem, idx) => (
+                  <div
+                    key={classItem.id}
+                    className="absolute w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
+                    style={{
+                      left: `${30 + idx * 15 + mapPosition.x * 0.1}%`,
+                      top: `${25 + (idx % 3) * 20 + mapPosition.y * 0.1}%`,
+                    }}
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    {classItem.price.replace("R$ ", "")}
                   </div>
+                ))}
+              </div>
+              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-card/90 px-4 py-2 rounded-full text-sm text-foreground shadow-md pointer-events-none">
+                Arraste o mapa para explorar
+              </div>
+            </div>
 
-                  {/* Content */}
-                  <div className="flex-1 flex flex-col min-w-0">
-                    {/* Top Row */}
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-foreground text-lg line-clamp-1">{classItem.name}</h3>
-                        <p className="text-sm text-foreground opacity-70 line-clamp-1">{classItem.school}</p>
-                      </div>
-                      <button
-                        className="flex-shrink-0 w-8 h-8 flex items-center justify-center hover:bg-muted rounded-full transition-colors"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleFavorite(classItem.id)
-                        }}
-                      >
-                        <Heart
-                          className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
-                          }`}
+            {/* Mobile Cards List */}
+            <div className="flex-1 overflow-y-auto bg-background px-4">
+              <div className="py-4 space-y-4">
+                {getFilteredClasses().map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    <div className="flex p-4 gap-4">
+                      {/* Image */}
+                      <div className="relative w-32 h-32 flex-shrink-0 rounded-lg overflow-hidden">
+                        <Image
+                          src={classItem.image || "/placeholder.svg"}
+                          alt={classItem.name}
+                          fill
+                          className="object-cover"
                         />
-                      </button>
-                    </div>
+                      </div>
 
-                    {/* Tag and Rating */}
-                    <div className="flex items-center gap-2 mb-2 flex-wrap">
-                      <Badge className={`${classItem.tagColor} border-0 pointer-events-none text-xs`}>
-                        {classItem.tag}
-                      </Badge>
-                      <div className="flex items-center gap-1">
-                        <Star className="h-3 w-3 fill-accent text-accent" />
-                        <span className="text-xs font-medium text-foreground pointer-events-none">
-                          {classItem.rating}
-                        </span>
+                      {/* Content */}
+                      <div className="flex-1 flex flex-col min-w-0">
+                        {/* Top Row */}
+                        <div className="flex items-start justify-between gap-2 mb-2">
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-semibold text-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                            <p className="text-sm text-foreground opacity-70 line-clamp-1">{classItem.school}</p>
+                          </div>
+                          <button
+                            className="flex-shrink-0 w-8 h-8 flex items-center justify-center hover:bg-muted rounded-full transition-colors"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              toggleFavorite(classItem.id)
+                            }}
+                          >
+                            <Heart
+                              className={`h-4 w-4 ${
+                                favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
+                              }`}
+                            />
+                          </button>
+                        </div>
+
+                        {/* Tag and Rating */}
+                        <div className="flex items-center gap-2 mb-2 flex-wrap">
+                          <Badge className={`${classItem.tagColor} border-0 pointer-events-none text-xs`}>
+                            {classItem.tag}
+                          </Badge>
+                          <div className="flex items-center gap-1">
+                            <Star className="h-3 w-3 fill-accent text-accent" />
+                            <span className="text-xs font-medium text-foreground pointer-events-none">
+                              {classItem.rating}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Bottom Row */}
+                        <div className="flex justify-between mt-auto pt-2 flex-col items-start">
+                          <span className="text-lg font-bold text-foreground pointer-events-none">
+                            {classItem.price}
+                          </span>
+                          <Button
+                            size="sm"
+                            className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              setSelectedClass(classItem)
+                              setCurrentImageIndex(0)
+                              setCurrentScreen("detail")
+                            }}
+                          >
+                            Ver detalhes
+                          </Button>
+                        </div>
                       </div>
                     </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
 
-                    {/* Bottom Row */}
-                    <div className="flex justify-between mt-auto pt-2 flex-col items-start">
-                      <span className="text-lg font-bold text-foreground pointer-events-none">{classItem.price}</span>
-                      <Button
-                        size="sm"
-                        className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setSelectedClass(classItem)
-                          setCurrentImageIndex(0)
-                          setCurrentScreen("detail")
-                        }}
-                      >
-                        Ver detalhes
-                      </Button>
+          {/* Desktop: Side-by-side layout */}
+          <div className="hidden md:flex h-full">
+            {/* Cards Section - Left side */}
+            <div className="w-1/2 h-full overflow-y-auto bg-background px-4">
+              <div className="py-4 space-y-4">
+                {getFilteredClasses().map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    <div className="flex p-4 gap-4">
+                      {/* Image */}
+                      <div className="relative w-32 h-32 flex-shrink-0 rounded-lg overflow-hidden">
+                        <Image
+                          src={classItem.image || "/placeholder.svg"}
+                          alt={classItem.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex-1 flex flex-col min-w-0">
+                        {/* Top Row */}
+                        <div className="flex items-start justify-between gap-2 mb-2">
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-semibold text-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                            <p className="text-sm text-foreground opacity-70 line-clamp-1">{classItem.school}</p>
+                          </div>
+                          <button
+                            className="flex-shrink-0 w-8 h-8 flex items-center justify-center hover:bg-muted rounded-full transition-colors"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              toggleFavorite(classItem.id)
+                            }}
+                          >
+                            <Heart
+                              className={`h-4 w-4 ${
+                                favorites.includes(classItem.id) ? "fill-accent text-accent" : "text-foreground"
+                              }`}
+                            />
+                          </button>
+                        </div>
+
+                        {/* Tag and Rating */}
+                        <div className="flex items-center gap-2 mb-2 flex-wrap">
+                          <Badge className={`${classItem.tagColor} border-0 pointer-events-none text-xs`}>
+                            {classItem.tag}
+                          </Badge>
+                          <div className="flex items-center gap-1">
+                            <Star className="h-3 w-3 fill-accent text-accent" />
+                            <span className="text-xs font-medium text-foreground pointer-events-none">
+                              {classItem.rating}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Bottom Row */}
+                        <div className="flex justify-between mt-auto pt-2 flex-col items-start">
+                          <span className="text-lg font-bold text-foreground pointer-events-none">
+                            {classItem.price}
+                          </span>
+                          <Button
+                            size="sm"
+                            className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              setSelectedClass(classItem)
+                              setCurrentImageIndex(0)
+                              setCurrentScreen("detail")
+                            }}
+                          >
+                            Ver detalhes
+                          </Button>
+                        </div>
+                      </div>
                     </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            {/* Map Section - Right side */}
+            <div className="w-1/2 h-full relative">
+              <div
+                className="absolute inset-0 cursor-move select-none"
+                onMouseDown={handleMapMouseDown}
+                onMouseMove={handleMapMouseMove}
+                onMouseUp={handleMapMouseUp}
+                onMouseLeave={handleMapMouseUp}
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23E5D6CD' width='100' height='100'/%3E%3Cpath d='M0 0L50 50M50 0L100 50M0 50L50 100M50 50L100 100' stroke='%23CFB2A8' strokeWidth='1'/%3E%3C/svg%3E")`,
+                  backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
+                }}
+              >
+                {/* Map Markers */}
+                {classes.slice(0, 8).map((classItem, idx) => (
+                  <div
+                    key={classItem.id}
+                    className="absolute w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
+                    style={{
+                      left: `${30 + idx * 15 + mapPosition.x * 0.1}%`,
+                      top: `${25 + (idx % 3) * 20 + mapPosition.y * 0.1}%`,
+                    }}
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      setCurrentScreen("detail")
+                    }}
+                  >
+                    {classItem.price.replace("R$ ", "")}
                   </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Map Section - Right side on desktop with absolute positioning */}
-        <div className="hidden md:block md:absolute md:right-0 md:top-0 md:bottom-0 md:w-1/2">
-          <div
-            className="absolute inset-0 cursor-move select-none"
-            onMouseDown={handleMapMouseDown}
-            onMouseMove={handleMapMouseMove}
-            onMouseUp={handleMapMouseUp}
-            onMouseLeave={handleMapMouseUp}
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23E5D6CD' width='100' height='100'/%3E%3Cpath d='M0 0L50 50M50 0L100 50M0 50L50 100M50 50L100 100' stroke='%23CFB2A8' strokeWidth='1'/%3E%3C/svg%3E")`,
-              backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
-            }}
-          >
-            {/* Map Markers */}
-            {classes.slice(0, 8).map((classItem, idx) => (
-              <div
-                key={classItem.id}
-                className="absolute w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
-                style={{
-                  left: `${30 + idx * 15 + mapPosition.x * 0.1}%`,
-                  top: `${25 + (idx % 3) * 20 + mapPosition.y * 0.1}%`,
-                }}
-                onClick={() => {
-                  setSelectedClass(classItem)
-                  setCurrentImageIndex(0)
-                  setCurrentScreen("detail")
-                }}
-              >
-                {classItem.price.replace("R$ ", "")}
+                ))}
               </div>
-            ))}
-          </div>
-
-          {/* Map hint */}
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-card/90 px-4 py-2 rounded-full text-sm text-foreground shadow-md pointer-events-none">
-            Arraste o mapa para explorar
-          </div>
-        </div>
-
-        {/* Mobile Map - shown above cards on mobile */}
-        <div className="md:hidden h-64 relative bg-gray-200">
-          <div
-            className="absolute inset-0 cursor-move select-none"
-            onMouseDown={handleMapMouseDown}
-            onMouseMove={handleMapMouseMove}
-            onMouseUp={handleMapMouseUp}
-            onMouseLeave={handleMapMouseUp}
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23E5D6CD' width='100' height='100'/%3E%3Cpath d='M0 0L50 50M50 0L100 50M0 50L50 100M50 50L100 100' stroke='%23CFB2A8' strokeWidth='1'/%3E%3C/svg%3E")`,
-              backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
-            }}
-          >
-            {/* Map Markers */}
-            {classes.slice(0, 8).map((classItem, idx) => (
-              <div
-                key={classItem.id}
-                className="absolute w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
-                style={{
-                  left: `${30 + idx * 15 + mapPosition.x * 0.1}%`,
-                  top: `${25 + (idx % 3) * 20 + mapPosition.y * 0.1}%`,
-                }}
-                onClick={() => {
-                  setSelectedClass(classItem)
-                  setCurrentImageIndex(0)
-                  setCurrentScreen("detail")
-                }}
-              >
-                {classItem.price.replace("R$ ", "")}
+              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-card/90 px-4 py-2 rounded-full text-sm text-foreground shadow-md pointer-events-none">
+                Arraste o mapa para explorar
               </div>
-            ))}
-          </div>
-
-          {/* Map hint */}
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-card/90 px-4 py-2 rounded-full text-sm text-foreground shadow-md pointer-events-none">
-            Arraste o mapa para explorar
+            </div>
           </div>
         </div>
       </div>
@@ -3425,26 +3517,33 @@ const SissonePrototype = () => {
               <div>
                 <h3 className="font-semibold text-foreground mb-3">Modalidade</h3>
                 <div className="flex flex-wrap gap-2">
-                  {["Dança Contemporânea", "Hip Hop", "Salsa", "Jazz", "Forró", "Dança de Salão", "Samba"].map(
-                    (style) => (
-                      <Button
-                        key={style}
-                        variant={searchFilters.categories.includes(style) ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => {
-                          setSearchFilters((prev) => ({
-                            ...prev,
-                            categories: prev.categories.includes(style)
-                              ? prev.categories.filter((c) => c !== style)
-                              : [...prev.categories, style],
-                          }))
-                        }}
-                        className={searchFilters.categories.includes(style) ? "bg-primary text-primary-foreground" : ""}
-                      >
-                        {style}
-                      </Button>
-                    ),
-                  )}
+                  {[
+                    "Dança Contemporânea",
+                    "Hip Hop",
+                    "Salsa",
+                    "Jazz",
+                    "Forró",
+                    "Dança de Salão",
+                    "Samba",
+                    "Bachata",
+                  ].map((style) => (
+                    <Button
+                      key={style}
+                      variant={searchFilters.categories.includes(style) ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => {
+                        setSearchFilters((prev) => ({
+                          ...prev,
+                          categories: prev.categories.includes(style)
+                            ? prev.categories.filter((c) => c !== style)
+                            : [...prev.categories, style],
+                        }))
+                      }}
+                      className={searchFilters.categories.includes(style) ? "bg-primary text-primary-foreground" : ""}
+                    >
+                      {style}
+                    </Button>
+                  ))}
                 </div>
               </div>
 
@@ -3677,6 +3776,7 @@ const SissonePrototype = () => {
                     "Forró",
                     "Dança de Salão",
                     "Samba",
+                    "Bachata",
                   ].map((mod) => (
                     <Button
                       key={mod}
@@ -3779,13 +3879,21 @@ const SissonePrototype = () => {
         <div>
           <h3 className="font-medium text-foreground mb-3">Modalidade</h3>
           <div className="flex flex-wrap gap-2">
-            {["Ballet", "Dança Contemporânea", "Hip Hop", "Jazz", "Salsa", "Forró", "Dança de Salão", "Samba"].map(
-              (style) => (
-                <Button key={style} variant="outline" className="border-primary text-foreground text-sm bg-transparent">
-                  {style}
-                </Button>
-              ),
-            )}
+            {[
+              "Ballet",
+              "Dança Contemporânea",
+              "Hip Hop",
+              "Jazz",
+              "Salsa",
+              "Forró",
+              "Dança de Salão",
+              "Samba",
+              "Bachata",
+            ].map((style) => (
+              <Button key={style} variant="outline" className="border-primary text-foreground text-sm bg-transparent">
+                {style}
+              </Button>
+            ))}
           </div>
         </div>
       </div>
