@@ -79,6 +79,7 @@ const SissonePrototype = () => {
   const [showMobileSearch, setShowMobileSearch] = useState(false)
   // const [mobileSearchStep, setMobileSearchStep] = useState<"where" | "when" | "modality">("where") // Removed from updates
   const [showLoginDropdown, setShowLoginDropdown] = useState(false)
+  const [showLocationDropdown, setShowLocationDropdown] = useState(false)
 
   // Search filters
   const [searchQuery, setSearchQuery] = useState("")
@@ -1434,15 +1435,55 @@ const SissonePrototype = () => {
             {/* Desktop Search Bar */}
             <div className="hidden md:flex items-center bg-card rounded-full shadow-lg p-2 gap-2">
               {/* Onde */}
-              <div className="flex-1 px-4 py-2 border-r border-border">
+              <div className="flex-1 px-4 py-2 border-r border-border relative">
                 <label className="block text-xs font-semibold text-foreground mb-1">Onde</label>
                 <input
                   type="text"
                   placeholder="Buscar destinos"
-                  value={selectedLocation} // Use selectedLocation
-                  onChange={(e) => setSelectedLocation(e.target.value)} // Update selectedLocation
+                  value={selectedLocation}
+                  onChange={(e) => setSelectedLocation(e.target.value)}
+                  onFocus={() => setShowLocationDropdown(true)}
+                  onBlur={() => setTimeout(() => setShowLocationDropdown(false), 200)}
                   className="w-full text-sm text-foreground bg-transparent border-none outline-none placeholder:text-muted-foreground"
                 />
+                {showLocationDropdown && (
+                  <div className="absolute left-0 top-full mt-2 w-80 bg-card border border-border rounded-lg shadow-lg z-50 p-4">
+                    <div className="space-y-4">
+                      <div>
+                        <h3 className="text-xs font-medium text-muted-foreground mb-2">Buscas recentes</h3>
+                        <button
+                          onClick={() => {
+                            setSelectedLocation("São Paulo • Centro")
+                            setShowLocationDropdown(false)
+                          }}
+                          className="flex items-center gap-3 p-2 w-full text-left hover:bg-secondary rounded-lg"
+                        >
+                          <MapPin className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                          <div>
+                            <div className="text-sm font-medium text-foreground">São Paulo • Centro</div>
+                            <div className="text-xs text-muted-foreground">15 de dez. de 2025 - 4 aulas</div>
+                          </div>
+                        </button>
+                      </div>
+                      <div>
+                        <h3 className="text-xs font-medium text-muted-foreground mb-2">Destinos sugeridos</h3>
+                        <button
+                          onClick={() => {
+                            setSelectedLocation("Perto de você")
+                            setShowLocationDropdown(false)
+                          }}
+                          className="flex items-center gap-3 p-2 w-full text-left hover:bg-secondary rounded-lg"
+                        >
+                          <Navigation className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                          <div>
+                            <div className="text-sm font-medium text-foreground">Perto de você</div>
+                            <div className="text-xs text-muted-foreground">Descubra o que há perto de você</div>
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Quando */}
@@ -2735,7 +2776,10 @@ const SissonePrototype = () => {
               <div className="mt-4 space-y-4">
                 <div>
                   <h3 className="text-sm font-medium text-muted-foreground mb-2">Buscas recentes</h3>
-                  <button className="flex items-center gap-3 p-3 w-full text-left hover:bg-secondary rounded-lg">
+                  <button
+                    onClick={() => setSelectedLocation("São Paulo • Centro")}
+                    className="flex items-center gap-3 p-3 w-full text-left hover:bg-secondary rounded-lg"
+                  >
                     <MapPin className="h-5 w-5 text-muted-foreground" />
                     <div>
                       <div className="text-sm font-medium text-foreground">São Paulo • Centro</div>
@@ -2745,7 +2789,10 @@ const SissonePrototype = () => {
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-muted-foreground mb-2">Destinos sugeridos</h3>
-                  <button className="flex items-center gap-3 p-3 w-full text-left hover:bg-secondary rounded-lg">
+                  <button
+                    onClick={() => setSelectedLocation("Perto de você")}
+                    className="flex items-center gap-3 p-3 w-full text-left hover:bg-secondary rounded-lg"
+                  >
                     <Navigation className="h-5 w-5 text-muted-foreground" />
                     <div>
                       <div className="text-sm font-medium text-foreground">Perto de você</div>
