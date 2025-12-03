@@ -1374,12 +1374,13 @@ const SissonePrototype = () => {
   const getFilteredClasses = () => {
     let filtered = classes
 
-    // Filter by categories (dance styles)
+    // Filter by selected style from search
+    if (selectedStyle) {
+      filtered = filtered.filter((c) => c.category === selectedStyle)
+    }
+
+    // Filter by additional searchFilters categories (from filter modal)
     if (searchFilters.categories.length > 0) {
-      // The 'tag' property in the original classes data seems to be a string like "Popular", "Novo" etc.
-      // It's more likely that 'category' property is what should be used for filtering by dance style.
-      // For demonstration purposes, assuming 'tag' can be mapped to categories if needed, but 'category' is more robust.
-      // Let's use 'category' for filtering.
       filtered = filtered.filter((c) => searchFilters.categories.includes(c.category))
     }
 
@@ -1451,10 +1452,11 @@ const SissonePrototype = () => {
     }
 
     // Filter by location if selected
-    if (selectedLocation) {
+    if (selectedLocation && selectedLocation !== "Perto de você") {
       // For now, just filter by neighborhood - in a real app this would use distance calculation
-      // This assumes 'location' property holds the neighborhood string.
-      filtered = filtered.filter((c) => c.location.includes(selectedLocation))
+      // Extract city name from "City • Neighborhood" format
+      const locationParts = selectedLocation.split("•").map((s) => s.trim())
+      filtered = filtered.filter((c) => locationParts.some((part) => c.location.includes(part)))
     }
 
     return filtered
