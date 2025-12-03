@@ -17,6 +17,7 @@ export default function SissonePrototype() {
   const [currentClassStatus, setCurrentClassStatus] = useState<ClassStatus>("today")
   const [isCheckedIn, setIsCheckedIn] = useState(false)
   const [showCheckInNotification, setShowCheckInNotification] = useState(false)
+  const [showProfileSaveNotification, setShowProfileSaveNotification] = useState(false)
 
   const screens = ["Login", "Dashboard", "Detalhes", "Check-in", "Feedback", "Reviews", "Perfil"]
 
@@ -71,6 +72,13 @@ export default function SissonePrototype() {
     setIsCheckedIn(false)
     setShowCheckInNotification(true)
     setTimeout(() => setShowCheckInNotification(false), 3000)
+  }
+
+  const handleSaveProfile = () => {
+    setShowProfileSaveNotification(true)
+    setTimeout(() => {
+      setShowProfileSaveNotification(false)
+    }, 2000)
   }
 
   const LoginScreen = () => (
@@ -782,6 +790,13 @@ export default function SissonePrototype() {
         </div>
       </div>
 
+      {showProfileSaveNotification && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 animate-in fade-in slide-in-from-top-2">
+          <Check className="w-5 h-5" />
+          <span>Perfil atualizado com sucesso!</span>
+        </div>
+      )}
+
       <div className="p-4 space-y-6">
         <div className="text-center py-6">
           <div className="w-24 h-24 bg-[#CFB2A8] rounded-full flex items-center justify-center mx-auto mb-3">
@@ -859,7 +874,9 @@ export default function SissonePrototype() {
         </Card>
 
         <div className="space-y-2">
-          <Button className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">Salvar Alterações</Button>
+          <Button className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white" onClick={handleSaveProfile}>
+            Salvar Alterações
+          </Button>
           <Button
             variant="outline"
             className="w-full border-[#CFB2A8] text-[#CFB2A8] bg-white hover:bg-[#CFB2A8]/10"
@@ -868,9 +885,6 @@ export default function SissonePrototype() {
             }
           >
             Cadastrar minha escola
-          </Button>
-          <Button variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white">
-            Alterar Senha
           </Button>
           <Button variant="outline" className="w-full border-red-300 text-red-600 bg-white hover:bg-red-50">
             Sair da Conta
