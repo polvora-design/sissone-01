@@ -99,6 +99,8 @@ const SissonePrototype = () => {
   const [showMobileSearchModal, setShowMobileSearchModal] = useState(false) // From updates
   const [selectedTime, setSelectedTime] = useState<string>("") // New state for selected time
 
+  const [showDesktopSearchEdit, setShowDesktopSearchEdit] = useState(false)
+
   const categoryRefs = {
     today: useRef<HTMLDivElement>(null),
     contemporary: useRef<HTMLDivElement>(null),
@@ -2821,7 +2823,7 @@ const SissonePrototype = () => {
         </div>
       )}
 
-      {showMobileSearchModal && ( // Use showMobileSearchModal
+      {showMobileSearchModal && ( // Use showMobileSearchModal state
         <div className="fixed inset-0 bg-background z-50 flex flex-col">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-border">
@@ -3195,7 +3197,14 @@ const SissonePrototype = () => {
             <Button
               variant="ghost"
               className="flex-1 justify-start px-3 py-2 h-auto min-h-[40px] hover:bg-secondary"
-              onClick={() => setShowMobileSearchModal(true)}
+              onClick={() => {
+                // On mobile, open mobile modal; on desktop, open desktop edit
+                if (window.innerWidth < 768) {
+                  setShowMobileSearchModal(true)
+                } else {
+                  setShowDesktopSearchEdit(true)
+                }
+              }}
             >
               <div className="flex items-center gap-2">
                 <Edit3 className="h-4 w-4 text-foreground opacity-70" />
@@ -3544,6 +3553,157 @@ const SissonePrototype = () => {
                 onClick={() => setShowSearchFiltersModal(false)}
               >
                 Aplicar Filtros
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showDesktopSearchEdit && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-card w-full max-w-2xl rounded-3xl p-6 max-h-[80vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-foreground">Editar busca</h2>
+              <Button variant="ghost" size="icon" onClick={() => setShowDesktopSearchEdit(false)}>
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+
+            <div className="space-y-6">
+              {/* Onde Section */}
+              <div>
+                <label className="text-sm font-medium text-foreground mb-2 block">Onde?</label>
+                <div className="relative">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <input
+                    type="text"
+                    placeholder="Buscar destinos"
+                    value={selectedLocation}
+                    onChange={(e) => setSelectedLocation(e.target.value)}
+                    className="w-full pl-12 pr-4 py-3 text-foreground bg-background border border-border rounded-lg outline-none focus:ring-2 focus:ring-primary"
+                  />
+                </div>
+                {/* Quick location options */}
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" onClick={() => setSelectedLocation("São Paulo • Centro")}>
+                    São Paulo • Centro
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={() => setSelectedLocation("Perto de você")}>
+                    Perto de você
+                  </Button>
+                </div>
+              </div>
+
+              {/* Quando Section */}
+              <div>
+                <label className="text-sm font-medium text-foreground mb-2 block">Quando</label>
+                <div className="flex gap-2">
+                  <Button
+                    variant={selectedDate === "Hoje" ? "default" : "outline"}
+                    className={
+                      selectedDate === "Hoje"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                        : "border-border text-foreground hover:bg-secondary"
+                    }
+                    onClick={() => {
+                      setSelectedDate("Hoje")
+                      setDateRangeStart(null)
+                      setDateRangeEnd(null)
+                    }}
+                  >
+                    Hoje
+                  </Button>
+                  <Button
+                    variant={selectedDate === "Semanalmente" ? "default" : "outline"}
+                    className={
+                      selectedDate === "Semanalmente"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                        : "border-border text-foreground hover:bg-secondary"
+                    }
+                    onClick={() => {
+                      setSelectedDate("Semanalmente")
+                      setDateRangeStart(null)
+                      setDateRangeEnd(null)
+                    }}
+                  >
+                    Semanalmente
+                  </Button>
+                  <Button
+                    variant={selectedDate === "specific" ? "default" : "outline"}
+                    className={
+                      selectedDate === "specific"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                        : "border-border text-foreground hover:bg-secondary"
+                    }
+                    onClick={() => {
+                      setSelectedDate("specific")
+                      setShowDatePicker(true)
+                    }}
+                  >
+                    Data específica
+                  </Button>
+                </div>
+                {dateRangeStart && <div className="mt-2 text-sm text-muted-foreground">{formatDateRange()}</div>}
+              </div>
+
+              {/* Modalidade Section */}
+              <div>
+                <label className="text-sm font-medium text-foreground mb-2 block">Modalidade</label>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "Ballet",
+                    "Dança Contemporânea",
+                    "Hip Hop",
+                    "Jazz",
+                    "Salsa",
+                    "Forró",
+                    "Dança de Salão",
+                    "Samba",
+                  ].map((mod) => (
+                    <Button
+                      key={mod}
+                      variant={selectedStyle === mod ? "default" : "outline"}
+                      className={
+                        selectedStyle === mod
+                          ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                          : "border-border text-foreground hover:bg-secondary"
+                      }
+                      onClick={() => {
+                        setSelectedStyle(mod)
+                      }}
+                    >
+                      {mod}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-3 mt-6 pt-6 border-t border-border">
+              <Button
+                variant="outline"
+                className="flex-1 bg-transparent"
+                onClick={() => {
+                  setSelectedLocation("")
+                  setSearchQuery("")
+                  setSelectedDate("Hoje")
+                  setSelectedStyle("")
+                  setDateRangeStart(null)
+                  setDateRangeEnd(null)
+                }}
+              >
+                Limpar tudo
+              </Button>
+              <Button
+                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
+                onClick={() => {
+                  setShowDesktopSearchEdit(false)
+                  // Search is already applied via state updates
+                }}
+              >
+                <Search className="mr-2 h-4 w-4" />
+                Aplicar
               </Button>
             </div>
           </div>
