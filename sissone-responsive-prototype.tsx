@@ -938,7 +938,7 @@ export default function SissoneResponsivePrototype() {
           <div className="p-6 border-b" style={{ borderColor: "#E5D6CD" }}>
             <div className="flex items-center justify-between">
               <div>
-                <img src="/sissone-logo.png" alt="Sissone" className="h-8 mb-2" />
+                <img src="/images/svgexport-1.svg" alt="Sissone" className="h-8" />
                 <p className="text-xs" style={{ color: "#3D2E" }}>
                   Para quem quer aprender, ensinar e viver a dança
                 </p>
