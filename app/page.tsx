@@ -3281,29 +3281,45 @@ const SissonePrototype = () => {
                       onMouseEnter={() => setHoveredPin(classItem.id)}
                       onMouseLeave={() => setHoveredPin(null)}
                     >
-                      {/* Pin Marker */}
                       <div
-                        className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
+                        className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border-2 border-primary"
                         onClick={() => {
                           setSelectedClass(classItem)
                           setCurrentImageIndex(0)
                           setCurrentScreen("detail")
                         }}
                       >
-                        {classItem.price.replace("R$ ", "")}
+                        <Image
+                          src={classItem.image || "/placeholder.svg"}
+                          alt={classItem.name}
+                          width={40}
+                          height={40}
+                          className="object-cover w-full h-full"
+                        />
                       </div>
 
-                      {/* Info Card on Hover */}
                       {hoveredPin === classItem.id && (
-                        <div className="absolute top-12 left-1/2 -translate-x-1/2 w-64 bg-card rounded-lg shadow-xl p-3 border border-border pointer-events-none">
-                          <h4 className="font-semibold text-foreground text-sm line-clamp-1 mb-1">{classItem.name}</h4>
-                          <p className="text-xs text-foreground opacity-70 mb-2">{classItem.school}</p>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-1">
-                              <Star className="h-3 w-3 fill-accent text-accent" />
-                              <span className="text-xs font-medium text-foreground">{classItem.rating}</span>
+                        <div className="absolute top-12 left-1/2 -translate-x-1/2 w-64 bg-card rounded-lg shadow-xl overflow-hidden border border-border pointer-events-none">
+                          <div className="relative w-full h-32">
+                            <Image
+                              src={classItem.image || "/placeholder.svg"}
+                              alt={classItem.name}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                          <div className="p-3">
+                            <h4 className="font-semibold text-foreground text-sm line-clamp-1 mb-1">
+                              {classItem.name}
+                            </h4>
+                            <p className="text-xs text-foreground opacity-70 mb-2">{classItem.school}</p>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-1">
+                                <Star className="h-3 w-3 fill-accent text-accent" />
+                                <span className="text-xs font-medium text-foreground">{classItem.rating}</span>
+                              </div>
+                              <span className="text-sm font-bold text-foreground">{classItem.price}</span>
                             </div>
-                            <span className="text-sm font-bold text-foreground">{classItem.price}</span>
                           </div>
                         </div>
                       )}
@@ -3490,7 +3506,7 @@ const SissonePrototype = () => {
 
             <div className="w-1/2 h-full relative overflow-visible">
               <div
-                className="absolute inset-0 cursor-move select-none overflow-hidden"
+                className="absolute inset-0 cursor-move select-none"
                 onMouseDown={handleMapMouseDown}
                 onMouseMove={handleMapMouseMove}
                 onMouseUp={handleMapMouseUp}
@@ -3501,7 +3517,7 @@ const SissonePrototype = () => {
                 }}
               >
                 {getFilteredClasses()
-                  .slice(0, 8)
+                  .slice(0, 10)
                   .map((classItem, idx) => (
                     <div
                       key={classItem.id}
@@ -3515,31 +3531,45 @@ const SissonePrototype = () => {
                       onMouseEnter={() => setHoveredPin(classItem.id)}
                       onMouseLeave={() => setHoveredPin(null)}
                     >
-                      {/* Pin Marker */}
                       <div
-                        className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
+                        className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border-2 border-primary"
                         onClick={() => {
                           setSelectedClass(classItem)
                           setCurrentImageIndex(0)
                           setCurrentScreen("detail")
                         }}
                       >
-                        {classItem.price.replace("R$ ", "")}
+                        <Image
+                          src={classItem.image || "/placeholder.svg"}
+                          alt={classItem.name}
+                          width={48}
+                          height={48}
+                          className="object-cover w-full h-full"
+                        />
                       </div>
 
-                      {/* Info Card on Hover */}
                       {hoveredPin === classItem.id && (
-                        <div className="absolute top-14 left-1/2 -translate-x-1/2 w-72 bg-card rounded-lg shadow-xl p-4 border border-border pointer-events-none">
-                          <h4 className="font-semibold text-foreground text-base line-clamp-1 mb-1">
-                            {classItem.name}
-                          </h4>
-                          <p className="text-sm text-foreground opacity-70 mb-3">{classItem.school}</p>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-1">
-                              <Star className="h-4 w-4 fill-accent text-accent" />
-                              <span className="text-sm font-medium text-foreground">{classItem.rating}</span>
+                        <div className="absolute top-14 left-1/2 -translate-x-1/2 w-72 bg-card rounded-lg shadow-xl overflow-hidden border border-border pointer-events-none">
+                          <div className="relative w-full h-40">
+                            <Image
+                              src={classItem.image || "/placeholder.svg"}
+                              alt={classItem.name}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                          <div className="p-4">
+                            <h4 className="font-semibold text-foreground text-base line-clamp-1 mb-1">
+                              {classItem.name}
+                            </h4>
+                            <p className="text-sm text-foreground opacity-70 mb-3">{classItem.school}</p>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-1">
+                                <Star className="h-4 w-4 fill-accent text-accent" />
+                                <span className="text-sm font-medium text-foreground">{classItem.rating}</span>
+                              </div>
+                              <span className="text-lg font-bold text-foreground">{classItem.price}</span>
                             </div>
-                            <span className="text-lg font-bold text-foreground">{classItem.price}</span>
                           </div>
                         </div>
                       )}
