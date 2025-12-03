@@ -1,32 +1,38 @@
 "use client"
 
+import { CardHeader } from "@/components/ui/card"
+
+import { Input } from "@/components/ui/input"
+
+import { CardContent } from "@/components/ui/card"
+
+import { Badge } from "@/components/ui/badge"
+
+import { Card } from "@/components/ui/card"
+
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import {
-  ArrowLeft,
   Heart,
-  MapPin,
   Star,
-  Clock,
+  MapPin,
   Calendar,
-  User,
-  Check,
-  Filter,
-  Edit3,
-  ChevronLeft,
-  ChevronRight,
+  Users,
   X,
   Search,
-  ChevronDown,
   Navigation,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  ArrowLeft,
+  Edit3,
+  Filter,
+  Clock,
+  Check,
 } from "lucide-react"
 import Image from "next/image"
-import { useRef } from "react"
 
 type Screen = "home" | "filters" | "detail" | "schedule" | "confirmation" | "search-results"
 
@@ -78,10 +84,12 @@ const SissonePrototype = () => {
   const [searchQuery, setSearchQuery] = useState("")
   const [searchDate, setSearchDate] = useState("")
   const [showDatePicker, setShowDatePicker] = useState(false)
+  const [selectedSpecificDate, setSelectedSpecificDate] = useState("")
+
   const [dateRangeStart, setDateRangeStart] = useState<Date | null>(null)
   const [dateRangeEnd, setDateRangeEnd] = useState<Date | null>(null)
-  // Calendar month state for date range picker
-  const [calendarMonth, setCalendarMonth] = useState<Date | null>(null)
+  const [calendarMonth, setCalendarMonth] = useState(new Date())
+  const [showMobileDatePicker, setShowMobileDatePicker] = useState(false)
 
   const categoryRefs = {
     today: useRef<HTMLDivElement>(null),
@@ -125,12 +133,15 @@ const SissonePrototype = () => {
   const handleMobileSearchClose = () => {
     setShowMobileSearch(false)
     setMobileSearchStep("where")
+    setShowMobileDatePicker(false)
   }
 
   const handleMobileSearchClear = () => {
     setSearchQuery("")
     setSearchDate("")
     setSearchModality([])
+    setDateRangeStart(null)
+    setDateRangeEnd(null)
   }
 
   const handleMobileSearchSubmit = () => {
@@ -146,6 +157,96 @@ const SissonePrototype = () => {
       modality: searchModality.join(", "),
     })
     setCurrentScreen("search-results") // Navigate to search results
+  }
+
+  const formatDateRange = () => {
+    if (!dateRangeStart && !dateRangeEnd) return ""
+    if (dateRangeStart && !dateRangeEnd) {
+      return dateRangeStart.toLocaleDateString("pt-BR", { day: "numeric", month: "short" })
+    }
+    if (dateRangeStart && dateRangeEnd) {
+      return `${dateRangeStart.toLocaleDateString("pt-BR", { day: "numeric", month: "short" })} - ${dateRangeEnd.toLocaleDateString("pt-BR", { day: "numeric", month: "short" })}`
+    }
+    return ""
+  }
+
+  const handleDateClick = (date: Date) => {
+    if (!dateRangeStart || (dateRangeStart && dateRangeEnd)) {
+      setDateRangeStart(date)
+      setDateRangeEnd(null)
+    } else {
+      if (date < dateRangeStart) {
+        setDateRangeEnd(dateRangeStart)
+        setDateRangeStart(date)
+      } else {
+        setDateRangeEnd(date)
+      }
+    }
+  }
+
+  const isDateInRange = (date: Date) => {
+    if (!dateRangeStart) return false
+    if (!dateRangeEnd) return date.toDateString() === dateRangeStart.toDateString()
+    return date >= dateRangeStart && date <= dateRangeEnd
+  }
+
+  const isDateRangeStart = (date: Date) => {
+    return dateRangeStart && date.toDateString() === dateRangeStart.toDateString()
+  }
+
+  const isDateRangeEnd = (date: Date) => {
+    return dateRangeEnd && date.toDateString() === dateRangeEnd.toDateString()
+  }
+
+  const getDaysInMonth = (date: Date) => {
+    const year = date.getFullYear()
+    const month = date.getMonth()
+    const firstDay = new Date(year, month, 1)
+    const lastDay = new Date(year, month + 1, 0)
+    const daysInMonth = lastDay.getDate()
+    const startingDayOfWeek = firstDay.getDay()
+
+    return { daysInMonth, startingDayOfWeek }
+  }
+
+  const changeMonth = (offset: number) => {
+    setCalendarMonth(new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() + offset, 1))
+  }
+
+  const renderCalendar = () => {
+    const { daysInMonth, startingDayOfWeek } = getDaysInMonth(calendarMonth)
+    const days = []
+
+    // Add empty cells for days before the first day of the month
+    for (let i = 0; i < startingDayOfWeek; i++) {
+      days.push(<div key={`empty-${i}`} className="h-10" />)
+    }
+
+    // Add cells for each day of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth(), day)
+      const isInRange = isDateInRange(date)
+      const isStart = isDateRangeStart(date)
+      const isEnd = isDateRangeEnd(date)
+      const isToday = date.toDateString() === new Date().toDateString()
+
+      days.push(
+        <button
+          key={day}
+          onClick={() => handleDateClick(date)}
+          className={`h-10 flex items-center justify-center text-sm rounded-full transition-colors
+            ${isStart || isEnd ? "bg-primary text-primary-foreground font-semibold" : ""}
+            ${isInRange && !isStart && !isEnd ? "bg-primary/20 text-foreground" : ""}
+            ${!isInRange && !isStart && !isEnd ? "hover:bg-secondary text-foreground" : ""}
+            ${isToday && !isInRange ? "border-2 border-primary" : ""}
+          `}
+        >
+          {day}
+        </button>,
+      )
+    }
+
+    return days
   }
 
   const classes = [
@@ -1739,15 +1840,8 @@ const SissonePrototype = () => {
     const parts = []
     if (searchLocation) parts.push(searchLocation)
     if (searchWhen === "today") parts.push("Hoje")
-    // Updated to check for dateRangeStart for specific date selection
-    else if (searchWhen === "specific" && dateRangeStart) {
-      const formattedDate = dateRangeStart.toLocaleDateString("pt-BR", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-      })
-      parts.push(formattedDate)
-    } else if (searchWhen === "weekly" && selectedDays.length > 0) parts.push(selectedDays.join(", "))
+    else if (searchWhen === "specific" && selectedSpecificDate) parts.push(selectedSpecificDate)
+    else if (searchWhen === "weekly" && selectedDays.length > 0) parts.push(selectedDays.join(", "))
     if (searchModality.length > 0) parts.push(searchModality.join(", "))
 
     return parts.length > 0 ? parts.join(" • ") : "Buscar aulas"
@@ -1897,6 +1991,7 @@ const SissonePrototype = () => {
                     Data específica
                   </Button>
                 </div>
+                {dateRangeStart && <div className="mt-1 text-xs text-muted-foreground">{formatDateRange()}</div>}
               </div>
 
               {/* Modalidade */}
@@ -3167,13 +3262,92 @@ const SissonePrototype = () => {
                   }
                   onClick={() => {
                     setSearchDate("specific")
-                    setShowDatePicker(true)
+                    setShowMobileDatePicker(true)
                   }}
                 >
                   Data específica
                 </Button>
               </div>
+              {dateRangeStart && <div className="mt-2 text-sm text-muted-foreground">{formatDateRange()}</div>}
             </div>
+
+            {showMobileDatePicker && (
+              <div className="mb-6 py-4 border-t border-border">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-semibold text-foreground">Selecione o período</h2>
+                  <Button variant="ghost" size="sm" onClick={() => setShowMobileDatePicker(false)}>
+                    Fechar
+                  </Button>
+                </div>
+
+                {/* Calendar */}
+                <div className="space-y-4">
+                  {/* Month Navigation */}
+                  <div className="flex items-center justify-between">
+                    <button onClick={() => changeMonth(-1)} className="p-2 hover:bg-secondary rounded-full">
+                      <ChevronLeft className="h-5 w-5 text-foreground" />
+                    </button>
+                    <div className="text-base font-semibold text-foreground">
+                      {calendarMonth.toLocaleDateString("pt-BR", { month: "long", year: "numeric" })}
+                    </div>
+                    <button onClick={() => changeMonth(1)} className="p-2 hover:bg-secondary rounded-full">
+                      <ChevronRight className="h-5 w-5 text-foreground" />
+                    </button>
+                  </div>
+
+                  {/* Day Labels */}
+                  <div className="grid grid-cols-7 gap-1">
+                    {["D", "S", "T", "Q", "Q", "S", "S"].map((day, i) => (
+                      <div key={i} className="text-center text-xs font-medium text-muted-foreground py-2">
+                        {day}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Calendar Grid */}
+                  <div className="grid grid-cols-7 gap-1">{renderCalendar()}</div>
+
+                  {/* Quick Actions */}
+                  <div className="flex gap-2 pt-4">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 text-xs bg-transparent"
+                      onClick={() => {
+                        const today = new Date()
+                        const weekLater = new Date(today)
+                        weekLater.setDate(weekLater.getDate() + 7)
+                        setDateRangeStart(today)
+                        setDateRangeEnd(weekLater)
+                      }}
+                    >
+                      7 dias
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 text-xs bg-transparent"
+                      onClick={() => {
+                        const today = new Date()
+                        const monthLater = new Date(today)
+                        monthLater.setDate(monthLater.getDate() + 30)
+                        setDateRangeStart(today)
+                        setDateRangeEnd(monthLater)
+                      }}
+                    >
+                      30 dias
+                    </Button>
+                  </div>
+
+                  {/* Selected Range Display */}
+                  {dateRangeStart && (
+                    <div className="text-sm text-center text-foreground pt-2">
+                      {formatDateRange() || "Selecione a data final"}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
 
             {/* Modalidade Section */}
             <div className="py-4 border-t border-border">
@@ -3216,141 +3390,55 @@ const SissonePrototype = () => {
         </div>
       )}
 
-      {/* Date Range Picker Modal */}
       {showDatePicker && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-card w-full max-w-md rounded-3xl overflow-hidden">
-            <div className="p-6 space-y-4">
+          <div className="bg-card w-full max-w-md rounded-3xl p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-bold text-foreground">Selecione o período</h2>
+              <Button variant="ghost" size="icon" onClick={() => setShowDatePicker(false)}>
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+
+            {/* Calendar */}
+            <div className="space-y-4">
+              {/* Month Navigation */}
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-foreground">Selecione o período</h2>
-                <Button variant="ghost" size="icon" onClick={() => setShowDatePicker(false)}>
-                  <X className="h-5 w-5" />
-                </Button>
+                <button onClick={() => changeMonth(-1)} className="p-2 hover:bg-secondary rounded-full">
+                  <ChevronLeft className="h-5 w-5 text-foreground" />
+                </button>
+                <div className="text-base font-semibold text-foreground">
+                  {calendarMonth.toLocaleDateString("pt-BR", { month: "long", year: "numeric" })}
+                </div>
+                <button onClick={() => changeMonth(1)} className="p-2 hover:bg-secondary rounded-full">
+                  <ChevronRight className="h-5 w-5 text-foreground" />
+                </button>
               </div>
 
-              {/* Date Range Display */}
-              <div className="flex items-center gap-3 p-3 bg-background rounded-lg border border-border">
-                <div className="flex-1 text-center">
-                  <p className="text-xs text-muted-foreground mb-1">Data inicial</p>
-                  <p className="font-medium text-foreground">
-                    {dateRangeStart ? dateRangeStart.toLocaleDateString("pt-BR") : "Selecione"}
-                  </p>
-                </div>
-                <div className="text-muted-foreground">→</div>
-                <div className="flex-1 text-center">
-                  <p className="text-xs text-muted-foreground mb-1">Data final</p>
-                  <p className="font-medium text-foreground">
-                    {dateRangeEnd ? dateRangeEnd.toLocaleDateString("pt-BR") : "Selecione"}
-                  </p>
-                </div>
+              {/* Day Labels */}
+              <div className="grid grid-cols-7 gap-1">
+                {["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"].map((day) => (
+                  <div key={day} className="text-center text-xs font-medium text-muted-foreground py-2">
+                    {day}
+                  </div>
+                ))}
               </div>
 
-              {/* Simple Calendar Grid */}
-              <div className="space-y-3">
-                {/* Month Header */}
-                <div className="flex items-center justify-between">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => {
-                      const currentMonth = calendarMonth || new Date()
-                      setCalendarMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1))
-                    }}
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </Button>
-                  <span className="font-semibold text-foreground">
-                    {(calendarMonth || new Date()).toLocaleDateString("pt-BR", { month: "long", year: "numeric" })}
-                  </span>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => {
-                      const currentMonth = calendarMonth || new Date()
-                      setCalendarMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1))
-                    }}
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
-                </div>
+              {/* Calendar Grid */}
+              <div className="grid grid-cols-7 gap-1">{renderCalendar()}</div>
 
-                {/* Week Days Header */}
-                <div className="grid grid-cols-7 gap-1 text-center">
-                  {["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"].map((day) => (
-                    <div key={day} className="text-xs font-medium text-muted-foreground py-2">
-                      {day}
-                    </div>
-                  ))}
-                </div>
-
-                {/* Calendar Days */}
-                <div className="grid grid-cols-7 gap-1">
-                  {(() => {
-                    const month = calendarMonth || new Date()
-                    const firstDay = new Date(month.getFullYear(), month.getMonth(), 1)
-                    const lastDay = new Date(month.getFullYear(), month.getMonth() + 1, 0)
-                    const startPadding = firstDay.getDay()
-                    const days = []
-
-                    // Add padding for days before the first of the month
-                    for (let i = 0; i < startPadding; i++) {
-                      days.push(<div key={`pad-${i}`} className="h-10" />)
-                    }
-
-                    // Add actual days
-                    for (let day = 1; day <= lastDay.getDate(); day++) {
-                      const date = new Date(month.getFullYear(), month.getMonth(), day)
-                      const isStart = dateRangeStart && date.toDateString() === dateRangeStart.toDateString()
-                      const isEnd = dateRangeEnd && date.toDateString() === dateRangeEnd.toDateString()
-                      const isInRange = dateRangeStart && dateRangeEnd && date > dateRangeStart && date < dateRangeEnd
-                      const isPast = date < new Date(new Date().setHours(0, 0, 0, 0))
-
-                      days.push(
-                        <button
-                          key={day}
-                          disabled={isPast}
-                          className={`h-10 rounded-full text-sm font-medium transition-colors
-                            ${isPast ? "text-muted-foreground/50 cursor-not-allowed" : "hover:bg-secondary cursor-pointer"}
-                            ${isStart || isEnd ? "bg-primary text-primary-foreground" : ""}
-                            ${isInRange ? "bg-primary/20 text-foreground" : ""}
-                          `}
-                          onClick={() => {
-                            if (isPast) return
-                            if (!dateRangeStart || (dateRangeStart && dateRangeEnd)) {
-                              // Start new selection
-                              setDateRangeStart(date)
-                              setDateRangeEnd(null)
-                            } else if (date < dateRangeStart) {
-                              // If clicking before start, reset
-                              setDateRangeStart(date)
-                              setDateRangeEnd(null)
-                            } else {
-                              // Set end date
-                              setDateRangeEnd(date)
-                            }
-                          }}
-                        >
-                          {day}
-                        </button>,
-                      )
-                    }
-
-                    return days
-                  })()}
-                </div>
-              </div>
-
-              {/* Quick Selection */}
-              <div className="flex gap-2 flex-wrap">
+              {/* Quick Actions */}
+              <div className="flex gap-2 pt-4 border-t border-border">
                 <Button
                   variant="outline"
                   size="sm"
-                  className="border-border text-foreground hover:bg-secondary bg-transparent"
+                  className="flex-1 bg-transparent"
                   onClick={() => {
                     const today = new Date()
-                    const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000)
+                    const weekLater = new Date(today)
+                    weekLater.setDate(weekLater.getDate() + 7)
                     setDateRangeStart(today)
-                    setDateRangeEnd(nextWeek)
+                    setDateRangeEnd(weekLater)
                   }}
                 >
                   Próximos 7 dias
@@ -3358,55 +3446,35 @@ const SissonePrototype = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="border-border text-foreground hover:bg-secondary bg-transparent"
+                  className="flex-1 bg-transparent"
                   onClick={() => {
                     const today = new Date()
-                    const nextMonth = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000)
+                    const monthLater = new Date(today)
+                    monthLater.setDate(monthLater.getDate() + 30)
                     setDateRangeStart(today)
-                    setDateRangeEnd(nextMonth)
+                    setDateRangeEnd(monthLater)
                   }}
                 >
                   Próximos 30 dias
                 </Button>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex gap-3 pt-2">
-                <Button
-                  variant="outline"
-                  className="flex-1 border-border text-foreground hover:bg-secondary bg-transparent"
-                  onClick={() => {
-                    setDateRangeStart(null)
-                    setDateRangeEnd(null)
-                  }}
-                >
-                  Limpar
-                </Button>
-                <Button
-                  className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
-                  onClick={() => {
-                    setShowDatePicker(false)
-                    if (dateRangeStart && dateRangeEnd) {
-                      setSearchDate("specific")
-                    }
-                  }}
-                >
-                  Aplicar
-                </Button>
-              </div>
+              {/* Selected Range Display */}
+              {dateRangeStart && (
+                <div className="text-sm text-center text-foreground pt-2">
+                  {formatDateRange() || "Selecione a data final"}
+                </div>
+              )}
+
+              {/* Apply Button */}
+              <Button
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12 mt-4"
+                onClick={() => setShowDatePicker(false)}
+                disabled={!dateRangeStart}
+              >
+                Aplicar
+              </Button>
             </div>
-          </div>
-        </div>
-      )}
-
-      {renderCurrentScreen()}
-
-      {showToast && (
-        // Using semantic background, border, foreground, and toast tokens
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-card border-2 border-green-500 px-6 py-3 rounded-full shadow-lg z-50 animate-in slide-in-from-bottom-5">
-          <div className="flex items-center gap-2">
-            <Check className="h-5 w-5 text-green-600" />
-            <p className="text-sm font-medium text-foreground">{toastMessage}</p>
           </div>
         </div>
       )}
@@ -3793,7 +3861,7 @@ const SissonePrototype = () => {
                   <span>{selectedClass.location}</span>
                 </div>
                 <div className="flex items-center gap-2 text-foreground">
-                  <User className="h-5 w-5 opacity-70" />
+                  <Users className="h-5 w-5 opacity-70" />
                   <span>Todos os níveis</span>
                 </div>
               </div>
