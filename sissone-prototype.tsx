@@ -6,7 +6,20 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
-import { Star, Calendar, Clock, MapPin, ArrowLeft, Mail, Phone, Edit2, Check, X, QrCode } from "lucide-react"
+import {
+  Star,
+  Calendar,
+  Clock,
+  MapPin,
+  ArrowLeft,
+  Mail,
+  Phone,
+  Edit2,
+  Check,
+  X,
+  QrCode,
+  AlertCircle,
+} from "lucide-react"
 import Image from "next/image"
 
 type ClassStatus = "today" | "future" | "past-not-reviewed" | "past-reviewed"
@@ -46,6 +59,11 @@ export default function SissonePrototype() {
     setCurrentScreen(6)
   }
 
+  const goToFeedback = (status: ClassStatus) => {
+    setCurrentClassStatus(status)
+    setCurrentScreen(4)
+  }
+
   const renderStars = (count: number, interactive = false) => {
     return (
       <div className="flex gap-1">
@@ -83,7 +101,7 @@ export default function SissonePrototype() {
 
   const LoginScreen = () => (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-[#F5F0EB]">
-      <div className="w-full max-w-sm space-y-6">
+      <div className="w-full max-w-md space-y-6">
         <div className="text-center">
           <div className="mx-auto mb-4 flex items-center justify-center">
             <Image src="/sissone-logo.svg" alt="Sissone" width={200} height={62} className="h-auto" />
@@ -167,219 +185,224 @@ export default function SissonePrototype() {
           </div>
         </div>
 
-        <div className="p-4 md:p-8 space-y-6">
+        <div className="p-4 md:p-8 lg:p-12 space-y-8">
           <div>
-            <h2 className="text-xl font-bold text-[#3D2C2E] mb-1">Bem-vinda, Sarah!</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-[#3D2C2E] mb-1">Bem-vinda, Sarah!</h2>
             <p className="text-[#3D2C2E] opacity-70">Pronta para dançar hoje?</p>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-[#3D2C2E] mb-3">Aulas de Hoje</h3>
+            <h3 className="text-lg md:text-xl font-semibold text-[#3D2C2E] mb-4">Aulas de Hoje</h3>
 
-            <Card className="bg-white border-[#E5D6CD]">
-              <CardContent className="p-4">
-                <div className="flex justify-between items-start mb-3">
-                  <div>
-                    <h4 className="font-semibold text-[#3D2C2E]">Fluxo Contemporâneo</h4>
-                    <p className="text-[#3D2C2E] opacity-70 text-sm">Estúdio Movement</p>
-                  </div>
-                  <div className="text-right text-sm text-[#3D2C2E] opacity-70">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      Hoje
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <Card className="bg-white border-[#E5D6CD]">
+                <CardContent className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h4 className="font-semibold text-[#3D2C2E] text-lg">Fluxo Contemporâneo</h4>
+                      <p className="text-[#3D2C2E] opacity-70 text-sm">Estúdio Movement</p>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      18:00
+                    <div className="text-right text-sm text-[#3D2C2E] opacity-70">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        Hoje
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-4 h-4" />
+                        18:00
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-1 mb-3">
-                  <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
-                  <span className="text-sm text-[#3D2C2E] opacity-70">Centro - Sala A</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <Button
-                    onClick={() => goToDetails("today")}
-                    variant="outline"
-                    className="border-[#E5D6CD] text-[#3D2C2E] bg-white"
-                  >
-                    Ver Detalhes
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      goToDetails("today")
-                      setTimeout(() => setCurrentScreen(3), 100)
-                    }}
-                    className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
-                  >
-                    Check-in
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="flex items-center gap-1 mb-4">
+                    <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
+                    <span className="text-sm text-[#3D2C2E] opacity-70">Centro - Sala A</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button
+                      onClick={() => goToDetails("today")}
+                      variant="outline"
+                      className="border-[#E5D6CD] text-[#3D2C2E] bg-white"
+                    >
+                      Ver Detalhes
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        goToDetails("today")
+                        setTimeout(() => setCurrentScreen(3), 100)
+                      }}
+                      className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+                    >
+                      Check-in
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-[#3D2C2E] mb-3">Aulas da Semana</h3>
+            <h3 className="text-lg md:text-xl font-semibold text-[#3D2C2E] mb-4">Aulas da Semana</h3>
 
-            <Card className="bg-white border-[#E5D6CD] mb-3">
-              <CardContent className="p-4">
-                <div className="flex justify-between items-start mb-3">
-                  <div>
-                    <h4 className="font-semibold text-[#3D2C2E]">Fundamentos de Jazz</h4>
-                    <p className="text-[#3D2C2E] opacity-70 text-sm">Academia Rhythm Dance</p>
-                  </div>
-                  <div className="text-right text-sm text-[#3D2C2E] opacity-70">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      17 Jan
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <Card className="bg-white border-[#E5D6CD]">
+                <CardContent className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h4 className="font-semibold text-[#3D2C2E] text-lg">Fundamentos de Jazz</h4>
+                      <p className="text-[#3D2C2E] opacity-70 text-sm">Academia Rhythm Dance</p>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      19:30
+                    <div className="text-right text-sm text-[#3D2C2E] opacity-70">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        Amanhã
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-4 h-4" />
+                        19:30
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-1 mb-3">
-                  <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
-                  <span className="text-sm text-[#3D2C2E] opacity-70">Zona Norte - Sala B</span>
-                </div>
-                <Button
-                  onClick={() => goToDetails("future")}
-                  className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
-                >
-                  Ver Detalhes
-                </Button>
-              </CardContent>
-            </Card>
+                  <div className="flex items-center gap-1 mb-4">
+                    <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
+                    <span className="text-sm text-[#3D2C2E] opacity-70">Zona Sul - Sala Principal</span>
+                  </div>
+                  <Button
+                    onClick={() => goToDetails("future")}
+                    variant="outline"
+                    className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white"
+                  >
+                    Ver Detalhes
+                  </Button>
+                </CardContent>
+              </Card>
 
-            <Card className="bg-white border-[#E5D6CD]">
-              <CardContent className="p-4">
-                <div className="flex justify-between items-start mb-3">
-                  <div>
-                    <h4 className="font-semibold text-[#3D2C2E]">Dança de Salão</h4>
-                    <p className="text-[#3D2C2E] opacity-70 text-sm">Studio Dance Flow</p>
-                  </div>
-                  <div className="text-right text-sm text-[#3D2C2E] opacity-70">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      19 Jan
+              <Card className="bg-white border-[#E5D6CD]">
+                <CardContent className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h4 className="font-semibold text-[#3D2C2E] text-lg">Dança de Salão</h4>
+                      <p className="text-[#3D2C2E] opacity-70 text-sm">Estúdio Harmonia</p>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      16:00
+                    <div className="text-right text-sm text-[#3D2C2E] opacity-70">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        Sábado
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-4 h-4" />
+                        15:00
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-1 mb-3">
-                  <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
-                  <span className="text-sm text-[#3D2C2E] opacity-70">Centro - Sala 3</span>
-                </div>
-                <Button
-                  onClick={() => goToDetails("future")}
-                  className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
-                >
-                  Ver Detalhes
-                </Button>
-              </CardContent>
-            </Card>
+                  <div className="flex items-center gap-1 mb-4">
+                    <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
+                    <span className="text-sm text-[#3D2C2E] opacity-70">Bairro Novo - Salão 2</span>
+                  </div>
+                  <Button
+                    onClick={() => goToDetails("future")}
+                    variant="outline"
+                    className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white"
+                  >
+                    Ver Detalhes
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-[#3D2C2E] mb-3">Aulas Anteriores</h3>
+            <h3 className="text-lg md:text-xl font-semibold text-[#3D2C2E] mb-4">Aulas Anteriores</h3>
 
-            <Card className="bg-white border-[#E5D6CD] mb-3">
-              <CardContent className="p-4">
-                <div className="flex justify-between items-start mb-3">
-                  <div>
-                    <h4 className="font-semibold text-[#3D2C2E]">Ballet Clássico</h4>
-                    <p className="text-[#3D2C2E] opacity-70 text-sm">Estúdio Elegance</p>
-                    <div className="flex items-center gap-2 mt-1">
-                      {renderStars(5)}
-                      <span className="text-[#CFB2A8] text-xs font-medium">Sua avaliação</span>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <Card className="bg-white border-[#E5D6CD]">
+                <CardContent className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h4 className="font-semibold text-[#3D2C2E] text-lg">Hip Hop Iniciante</h4>
+                      <p className="text-[#3D2C2E] opacity-70 text-sm">Urban Move Studio</p>
+                    </div>
+                    <div className="text-right text-sm text-[#3D2C2E] opacity-70">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        12 de Janeiro
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-4 h-4" />
+                        20:00
+                      </div>
                     </div>
                   </div>
-                  <div className="text-right text-sm text-[#3D2C2E] opacity-70">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      15 Jan
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      17:00
-                    </div>
+                  <div className="flex items-center gap-1 mb-3">
+                    <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
+                    <span className="text-sm text-[#3D2C2E] opacity-70">Centro Urbano - Sala Hip Hop</span>
                   </div>
-                </div>
-                <div className="flex items-center gap-1 mb-3">
-                  <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
-                  <span className="text-sm text-[#3D2C2E] opacity-70">Centro - Sala Principal</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <Button
-                    onClick={() => goToDetails("past-reviewed")}
-                    variant="outline"
-                    className="border-[#E5D6CD] text-[#3D2C2E] bg-white"
-                  >
-                    Ver Detalhes
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      goToDetails("past-reviewed")
-                      setTimeout(() => setCurrentScreen(4), 100)
-                    }}
-                    className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
-                  >
-                    <Edit2 className="w-4 h-4 mr-1" />
-                    Editar Avaliação
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="flex items-center gap-2 mb-4 p-2 bg-[#E5D6CD]/30 rounded">
+                    <AlertCircle className="w-4 h-4 text-[#CFB2A8]" />
+                    <span className="text-sm text-[#3D2C2E]">Avaliação pendente</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button
+                      onClick={() => goToDetails("past-not-reviewed")}
+                      variant="outline"
+                      className="border-[#E5D6CD] text-[#3D2C2E] bg-white"
+                    >
+                      Ver Detalhes
+                    </Button>
+                    <Button
+                      onClick={() => goToFeedback("past-not-reviewed")}
+                      className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+                    >
+                      Avaliar
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
 
-            <Card className="bg-white border-[#E5D6CD]">
-              <CardContent className="p-4">
-                <div className="flex justify-between items-start mb-3">
-                  <div>
-                    <h4 className="font-semibold text-[#3D2C2E]">Hip Hop Iniciante</h4>
-                    <p className="text-[#3D2C2E] opacity-70 text-sm">Urban Move Studio</p>
-                    <p className="text-[#CFB2A8] text-xs mt-1 font-medium">Aguardando avaliação</p>
-                  </div>
-                  <div className="text-right text-sm text-[#3D2C2E] opacity-70">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      12 Jan
+              <Card className="bg-white border-[#E5D6CD]">
+                <CardContent className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h4 className="font-semibold text-[#3D2C2E] text-lg">Ballet Clássico</h4>
+                      <p className="text-[#3D2C2E] opacity-70 text-sm">Estúdio Elegance</p>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      20:00
+                    <div className="text-right text-sm text-[#3D2C2E] opacity-70">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        15 de Janeiro
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-4 h-4" />
+                        17:00
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-1 mb-3">
-                  <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
-                  <span className="text-sm text-[#3D2C2E] opacity-70">Zona Sul - Sala 2</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <Button
-                    onClick={() => goToDetails("past-not-reviewed")}
-                    variant="outline"
-                    className="border-[#E5D6CD] text-[#3D2C2E] bg-white"
-                  >
-                    Ver Detalhes
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      goToDetails("past-not-reviewed")
-                      setTimeout(() => setCurrentScreen(4), 100)
-                    }}
-                    className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
-                  >
-                    Avaliar
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="flex items-center gap-1 mb-3">
+                    <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
+                    <span className="text-sm text-[#3D2C2E] opacity-70">Bairro Clássico - Estúdio Principal</span>
+                  </div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="flex">{renderStars(5, false)}</div>
+                    <span className="text-sm text-[#3D2C2E] font-medium">Você avaliou</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button
+                      onClick={() => goToDetails("past-reviewed")}
+                      variant="outline"
+                      className="border-[#E5D6CD] text-[#3D2C2E] bg-white"
+                    >
+                      Ver Detalhes
+                    </Button>
+                    <Button
+                      onClick={() => goToFeedback("past-reviewed")}
+                      variant="outline"
+                      className="border-[#CFB2A8] text-[#CFB2A8] bg-transparent hover:bg-[#CFB2A8]/10"
+                    >
+                      Editar Avaliação
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </div>
@@ -439,9 +462,9 @@ export default function SissonePrototype() {
             </div>
           </div>
 
-          <div className="p-4 md:p-8 space-y-4 max-w-2xl mx-auto">
+          <div className="p-4 md:p-8 lg:p-12 space-y-6 max-w-4xl mx-auto">
             <Card className="bg-white border-[#E5D6CD]">
-              <CardContent className="p-6 space-y-4">
+              <CardContent className="p-8 space-y-6">
                 <div>
                   <h2 className="text-2xl font-bold text-[#3D2C2E] mb-2">{classInfo.title}</h2>
                   <p className="text-[#3D2C2E] opacity-70 font-medium">{classInfo.studio}</p>
@@ -505,11 +528,11 @@ export default function SissonePrototype() {
               </CardContent>
             </Card>
 
-            <div className="space-y-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {currentClassStatus === "today" && (
                 <Button
                   onClick={() => setCurrentScreen(3)}
-                  className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+                  className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white w-full"
                 >
                   Fazer Check-in
                 </Button>
@@ -517,8 +540,8 @@ export default function SissonePrototype() {
 
               {currentClassStatus === "past-not-reviewed" && (
                 <Button
-                  onClick={() => setCurrentScreen(4)}
-                  className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+                  onClick={() => goToFeedback("past-not-reviewed")}
+                  className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white w-full"
                 >
                   Avaliar Aula
                 </Button>
@@ -526,8 +549,8 @@ export default function SissonePrototype() {
 
               {currentClassStatus === "past-reviewed" && (
                 <Button
-                  onClick={() => setCurrentScreen(4)}
-                  className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+                  onClick={() => goToFeedback("past-reviewed")}
+                  className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white w-full"
                 >
                   <Edit2 className="w-4 h-4 mr-2" />
                   Editar Avaliação
@@ -537,7 +560,7 @@ export default function SissonePrototype() {
               <Button
                 onClick={() => setCurrentScreen(5)}
                 variant="outline"
-                className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white"
+                className="border-[#E5D6CD] text-[#3D2C2E] bg-white w-full"
               >
                 Ver Avaliações da Comunidade
               </Button>
@@ -573,7 +596,7 @@ export default function SissonePrototype() {
           </div>
         </div>
 
-        <div className="p-6 md:p-8 text-center space-y-6 max-w-md mx-auto">
+        <div className="p-4 md:p-8 lg:p-12 space-y-6 max-w-3xl mx-auto">
           <div>
             <h2 className="text-xl font-bold text-[#3D2C2E] mb-2">Fluxo Contemporâneo</h2>
             <p className="text-[#3D2C2E] opacity-70">Estúdio Movement</p>
@@ -633,7 +656,7 @@ export default function SissonePrototype() {
             </div>
           </div>
 
-          <div className="p-4 md:p-8 space-y-4 max-w-2xl mx-auto">
+          <div className="p-4 md:p-8 lg:p-12 space-y-6 max-w-3xl mx-auto">
             <div className="text-center">
               <h2 className="text-xl font-bold text-[#3D2C2E] mb-2">{classInfo.title}</h2>
               <p className="text-[#3D2C2E] opacity-70">{classInfo.studio}</p>
@@ -694,7 +717,7 @@ export default function SissonePrototype() {
           </div>
         </div>
 
-        <div className="p-4 md:p-8 space-y-4 max-w-2xl mx-auto">
+        <div className="p-4 md:p-8 lg:p-12 space-y-6 max-w-4xl mx-auto">
           <Card className="bg-white border-[#E5D6CD]">
             <CardHeader className="pb-3">
               <div className="text-center">
@@ -789,9 +812,9 @@ export default function SissonePrototype() {
     </div>
   )
 
-  const ProfileScreen = () => (
-    <div className="min-h-screen bg-[#F5F0EB]">
-      <div className="mx-auto max-w-[1440px]">
+  const ProfileScreen = () => {
+    return (
+      <div className="min-h-screen bg-[#F5F0EB]">
         {showProfileSaveNotification && (
           <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 animate-in fade-in slide-in-from-top-2">
             <Check className="w-5 h-5" />
@@ -799,112 +822,121 @@ export default function SissonePrototype() {
           </div>
         )}
 
-        <div className="bg-white border-b border-[#E5D6CD] p-4">
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" onClick={goHome} className="text-[#3D2C2E]">
-              <ArrowLeft className="w-4 h-4" />
-            </Button>
-            <h1 className="text-lg font-bold text-[#3D2C2E]">Perfil e Configurações</h1>
-          </div>
-        </div>
-
-        <div className="p-4 md:p-8 space-y-6 max-w-2xl mx-auto">
-          <div className="text-center py-6">
-            <div className="w-24 h-24 bg-[#CFB2A8] rounded-full flex items-center justify-center mx-auto mb-3">
-              <span className="text-white text-3xl font-bold">S</span>
+        <div className="mx-auto max-w-[1440px]">
+          <div className="bg-white border-b border-[#E5D6CD] p-4">
+            <div className="flex items-center gap-3">
+              <Button variant="ghost" size="sm" onClick={goHome} className="text-[#3D2C2E]">
+                <ArrowLeft className="w-4 h-4" />
+              </Button>
+              <h1 className="text-lg font-bold text-[#3D2C2E]">Perfil e Configurações</h1>
             </div>
-            <h2 className="text-xl font-bold text-[#3D2C2E]">Sarah Oliveira</h2>
-            <p className="text-[#3D2C2E] opacity-70 text-sm">Membro desde Jan 2024</p>
           </div>
 
-          <Card className="bg-white border-[#E5D6CD]">
-            <CardContent className="p-6 space-y-4">
-              <h3 className="font-semibold text-[#3D2C2E] mb-3">Informações Pessoais</h3>
-
-              <div>
-                <Label htmlFor="name" className="text-[#3D2C2E]">
-                  Nome Completo
-                </Label>
-                <Input id="name" type="text" defaultValue="Sarah Oliveira" className="mt-1 bg-white border-[#E5D6CD]" />
+          <div className="p-4 md:p-8 lg:p-12 space-y-8 max-w-4xl mx-auto">
+            <div className="text-center py-6">
+              <div className="w-24 h-24 bg-[#CFB2A8] rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-white text-3xl font-bold">S</span>
               </div>
+              <h2 className="text-xl font-bold text-[#3D2C2E]">Sarah Oliveira</h2>
+              <p className="text-[#3D2C2E] opacity-70 text-sm">Membro desde Jan 2024</p>
+            </div>
 
-              <div>
-                <Label htmlFor="email-profile" className="text-[#3D2C2E]">
-                  E-mail
-                </Label>
-                <div className="relative mt-1">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#3D2C2E] opacity-50" />
-                  <Input
-                    id="email-profile"
-                    type="email"
-                    defaultValue="sarah.oliveira@email.com"
-                    className="pl-10 bg-white border-[#E5D6CD]"
-                  />
-                </div>
-              </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card className="bg-white border-[#E5D6CD]">
+                <CardContent className="p-6 space-y-4">
+                  <h3 className="font-semibold text-[#3D2C2E] mb-3">Informações Pessoais</h3>
 
-              <div>
-                <Label htmlFor="phone" className="text-[#3D2C2E]">
-                  Telefone
-                </Label>
-                <div className="relative mt-1">
-                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#3D2C2E] opacity-50" />
-                  <Input
-                    id="phone"
-                    type="tel"
-                    defaultValue="(11) 98765-4321"
-                    className="pl-10 bg-white border-[#E5D6CD]"
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+                  <div>
+                    <Label htmlFor="name" className="text-[#3D2C2E]">
+                      Nome Completo
+                    </Label>
+                    <Input
+                      id="name"
+                      type="text"
+                      defaultValue="Sarah Oliveira"
+                      className="mt-1 bg-white border-[#E5D6CD]"
+                    />
+                  </div>
 
-          <Card className="bg-white border-[#E5D6CD]">
-            <CardContent className="p-6 space-y-4">
-              <h3 className="font-semibold text-[#3D2C2E] mb-3">Preferências de Dança</h3>
+                  <div>
+                    <Label htmlFor="email-profile" className="text-[#3D2C2E]">
+                      E-mail
+                    </Label>
+                    <div className="relative mt-1">
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#3D2C2E] opacity-50" />
+                      <Input
+                        id="email-profile"
+                        type="email"
+                        defaultValue="sarah.oliveira@email.com"
+                        className="pl-10 bg-white border-[#E5D6CD]"
+                      />
+                    </div>
+                  </div>
 
-              <div>
-                <Label className="text-[#3D2C2E]">Estilos Favoritos</Label>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  <span className="px-3 py-1 bg-[#E5D6CD] text-[#3D2C2E] rounded-full text-sm">Contemporâneo</span>
-                  <span className="px-3 py-1 bg-[#E5D6CD] text-[#3D2C2E] rounded-full text-sm">Jazz</span>
-                  <span className="px-3 py-1 bg-[#E5D6CD] text-[#3D2C2E] rounded-full text-sm">Ballet</span>
-                </div>
-              </div>
+                  <div>
+                    <Label htmlFor="phone" className="text-[#3D2C2E]">
+                      Telefone
+                    </Label>
+                    <div className="relative mt-1">
+                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#3D2C2E] opacity-50" />
+                      <Input
+                        id="phone"
+                        type="tel"
+                        defaultValue="(11) 98765-4321"
+                        className="pl-10 bg-white border-[#E5D6CD]"
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
 
-              <div>
-                <Label className="text-[#3D2C2E]">Nível de Experiência</Label>
-                <div className="flex gap-2 mt-2">
-                  <Button variant="outline" className="flex-1 border-[#CFB2A8] text-[#3D2C2E] bg-[#CFB2A8]/10">
-                    Intermediário
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              <Card className="bg-white border-[#E5D6CD]">
+                <CardContent className="p-6 space-y-4">
+                  <h3 className="font-semibold text-[#3D2C2E] mb-3">Preferências de Dança</h3>
 
-          <div className="space-y-2">
-            <Button className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white" onClick={handleSaveProfile}>
-              Salvar Alterações
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full border-[#CFB2A8] text-[#CFB2A8] bg-white hover:bg-[#CFB2A8]/10"
-              onClick={() =>
-                window.open("https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/", "_blank")
-              }
-            >
-              Cadastrar minha escola
-            </Button>
-            <Button variant="outline" className="w-full border-red-300 text-red-600 bg-white hover:bg-red-50">
-              Sair da Conta
-            </Button>
+                  <div>
+                    <Label className="text-[#3D2C2E]">Estilos Favoritos</Label>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      <span className="px-3 py-1 bg-[#E5D6CD] text-[#3D2C2E] rounded-full text-sm">Contemporâneo</span>
+                      <span className="px-3 py-1 bg-[#E5D6CD] text-[#3D2C2E] rounded-full text-sm">Jazz</span>
+                      <span className="px-3 py-1 bg-[#E5D6CD] text-[#3D2C2E] rounded-full text-sm">Ballet</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label className="text-[#3D2C2E]">Nível de Experiência</Label>
+                    <div className="flex gap-2 mt-2">
+                      <Button variant="outline" className="flex-1 border-[#CFB2A8] text-[#3D2C2E] bg-[#CFB2A8]/10">
+                        Intermediário
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="space-y-3 max-w-2xl mx-auto">
+              <Button className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white" onClick={handleSaveProfile}>
+                Salvar Alterações
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full border-[#CFB2A8] text-[#CFB2A8] bg-white hover:bg-[#CFB2A8]/10"
+                onClick={() =>
+                  window.open("https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/", "_blank")
+                }
+              >
+                Cadastrar minha escola
+              </Button>
+              <Button variant="outline" className="w-full border-red-300 text-red-600 bg-white hover:bg-red-50">
+                Sair da Conta
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 
   const renderScreen = () => {
     switch (currentScreen) {
@@ -928,10 +960,8 @@ export default function SissonePrototype() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F0EB] flex items-center justify-center">
-      <div className="w-full max-w-[1440px] mx-auto">
-        <div className="max-w-sm mx-auto bg-white shadow-lg">{renderScreen()}</div>
-      </div>
+    <div className="min-h-screen bg-[#F5F0EB]">
+      <div className="w-full">{renderScreen()}</div>
     </div>
   )
 }
