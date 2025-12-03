@@ -39,7 +39,6 @@ import {
   Copy,
   Mail,
   Check,
-  GraduationCap,
 } from "lucide-react"
 
 type ToastType = "success" | "error" | "info"
@@ -1027,17 +1026,15 @@ export default function SissoneResponsivePrototype() {
       </div>
 
       <div className="hidden lg:flex items-center gap-3">
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => navigateTo("student-view")}
-          className="flex items-center gap-2 hover:bg-[#CFB2A8]/20"
+        <a
+          href="https://v0-sissone-wireframes-git-usurio-a-logado-sissone-mvp.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm hover:opacity-80 transition-opacity"
+          style={{ color: "#3D2C2E" }}
         >
-          <GraduationCap className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-          <span className="text-sm" style={{ color: "#3D2C2E" }}>
-            Meu perfil de Aluno
-          </span>
-        </Button>
+          Meu perfil de Aluno
+        </a>
         <button
           onClick={() => navigateTo("user-profile")}
           className="flex items-center gap-3 hover:opacity-80 transition-opacity"
