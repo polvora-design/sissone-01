@@ -3504,9 +3504,9 @@ const SissonePrototype = () => {
               </div>
             </div>
 
-            <div className="w-1/2 h-full relative overflow-visible">
+            <div className="w-1/2 h-full relative">
               <div
-                className="absolute inset-0 cursor-move select-none"
+                className="absolute inset-0 cursor-move select-none overflow-hidden"
                 onMouseDown={handleMapMouseDown}
                 onMouseMove={handleMapMouseMove}
                 onMouseUp={handleMapMouseUp}
@@ -3515,16 +3515,17 @@ const SissonePrototype = () => {
                   backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23E5D6CD' width='100' height='100'/%3E%3Cpath d='M0 0L50 50M50 0L100 50M0 50L50 100M50 50L100 100' stroke='%23CFB2A8' strokeWidth='1'/%3E%3C/svg%3E")`,
                   backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
                 }}
-              >
+              />
+              <div className="absolute inset-0 pointer-events-none overflow-visible">
                 {getFilteredClasses()
                   .slice(0, 10)
                   .map((classItem, idx) => (
                     <div
                       key={classItem.id}
-                      className="absolute"
+                      className="absolute pointer-events-auto"
                       style={{
-                        left: `${30 + idx * 15 + mapPosition.x * 0.1}%`,
-                        top: `${25 + (idx % 3) * 20 + mapPosition.y * 0.1}%`,
+                        left: `${30 + idx * 12 + mapPosition.x * 0.1}%`,
+                        top: `${25 + (idx % 4) * 20 + mapPosition.y * 0.1}%`,
                         transform: "translate(-50%, -50%)",
                         zIndex: hoveredPin === classItem.id ? 50 : 10,
                       }}
