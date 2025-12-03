@@ -117,6 +117,22 @@ const SissonePrototype = () => {
     bachata: useRef<HTMLDivElement>(null), // Added for Bachata category
   }
 
+  const mapStyleToCategory = (styleName: string): string => {
+    const styleMap: Record<string, string> = {
+      "Dança Contemporânea": "contemporary",
+      "Hip Hop": "hip-hop",
+      Ballet: "ballet",
+      Salsa: "salsa",
+      Jazz: "jazz",
+      Forró: "forro",
+      "Dança de Salão": "ballroom",
+      Samba: "samba",
+      Zouk: "zouk",
+      Bachata: "bachata",
+    }
+    return styleMap[styleName] || styleName.toLowerCase()
+  }
+
   const showToastNotification = (message: string) => {
     setToastMessage(message)
     setShowToast(true)
@@ -1374,14 +1390,14 @@ const SissonePrototype = () => {
   const getFilteredClasses = () => {
     let filtered = classes
 
-    // Filter by selected style from search
     if (selectedStyle) {
-      filtered = filtered.filter((c) => c.category === selectedStyle)
+      const categoryId = mapStyleToCategory(selectedStyle)
+      filtered = filtered.filter((c) => c.category === categoryId)
     }
 
-    // Filter by additional searchFilters categories (from filter modal)
     if (searchFilters.categories.length > 0) {
-      filtered = filtered.filter((c) => searchFilters.categories.includes(c.category))
+      const categoryIds = searchFilters.categories.map((style) => mapStyleToCategory(style))
+      filtered = filtered.filter((c) => categoryIds.includes(c.category))
     }
 
     // Filter by days of week
@@ -4122,7 +4138,7 @@ const SissonePrototype = () => {
                   {/* Using semantic border, foreground, and primary tokens */}
                   <Button
                     variant="outline"
-                    className="w-full border-primary text-foreground bg-card hover:bg-secondary"
+                    className="w-full border-primary text-foreground hover:bg-secondary bg-transparent"
                     onClick={handleGoogleLogin}
                   >
                     <Image src="/google-logo.png" alt="Google" width={20} height={20} className="mr-2" />
@@ -4176,7 +4192,7 @@ const SissonePrototype = () => {
             {/* Using semantic border, foreground, and secondary tokens */}
             <Button
               variant="outline"
-              className="px-6 border-primary text-foreground bg-card hover:bg-secondary h-12"
+              className="px-6 border-primary text-foreground hover:bg-secondary h-12 bg-transparent"
               onClick={handleAddToCalendar}
             >
               <Calendar className="h-5 w-5" />
