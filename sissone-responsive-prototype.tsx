@@ -39,7 +39,6 @@ import {
   Copy,
   Mail,
   Check,
-  GraduationCap,
 } from "lucide-react"
 
 type ToastType = "success" | "error" | "info"
@@ -61,6 +60,11 @@ type Screen =
   | "student-profile"
   | "user-profile"
   | "student-view"
+  | "create-plan" // Added for new screens
+  | "edit-plan"
+  | "create-combo"
+  | "edit-combo"
+  | "invite-student"
 
 type Unit = {
   id: string
@@ -939,10 +943,11 @@ export default function SissoneResponsivePrototype() {
           <div className="p-6 border-b" style={{ borderColor: "#E5D6CD" }}>
             <div className="flex items-center justify-between">
               <div>
-                <img src="/sissone-logo.png" alt="Sissone" className="h-8 mb-2" />
-                <p className="text-xs" style={{ color: "#3D2E" }}>
-                  Para quem quer aprender, ensinar e viver a dança
-                </p>
+                <img
+                  src="https://v0-sissone-wireframes-git-usurio-a-lead-sissone-mvp.vercel.app/sissone-logo.svg"
+                  alt="Sissone"
+                  className="h-8"
+                />
               </div>
               <Button variant="ghost" size="sm" className="lg:hidden" onClick={() => setSidebarOpen(false)}>
                 <X className="w-5 h-5" style={{ color: "#3D2C2E" }} />
@@ -1027,17 +1032,15 @@ export default function SissoneResponsivePrototype() {
       </div>
 
       <div className="hidden lg:flex items-center gap-3">
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => navigateTo("student-view")}
-          className="flex items-center gap-2 hover:bg-[#CFB2A8]/20"
+        <a
+          href="https://v0-sissone-wireframes-git-usurio-a-logado-sissone-mvp.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm hover:underline"
+          style={{ color: "#3D2C2E" }}
         >
-          <GraduationCap className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-          <span className="text-sm" style={{ color: "#3D2C2E" }}>
-            Meu perfil de Aluno
-          </span>
-        </Button>
+          Meu perfil de Aluno
+        </a>
         <button
           onClick={() => navigateTo("user-profile")}
           className="flex items-center gap-3 hover:opacity-80 transition-opacity"
@@ -1623,8 +1626,8 @@ export default function SissoneResponsivePrototype() {
             </CardContent>
           </Card>
         </div>
-      )}
-    </div>
+      </div>
+  </div>
   )
 
   const renderClasses = () => {
@@ -1860,8 +1863,7 @@ export default function SissoneResponsivePrototype() {
           )}
         </div>
       </div>
-    )
-  }
+  )
 
   const renderPricing = () => {
     if (currentScreen === "create-plan" || currentScreen === "edit-plan") {
@@ -2255,7 +2257,7 @@ export default function SissoneResponsivePrototype() {
       const matchesSearch =
         student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         student.email.toLowerCase().includes(searchTerm.toLowerCase())
-      const matchesUnit = selectedUnit === "all" || student.unitId === selectedUnit // Corrected to use unitId
+      const matchesUnit = unitFilter === "all" || student.unitId === unitFilter // Corrected to use unitFilter
       const matchesFrequency =
         frequencyFilter === "all" || student.frequency.toString() === frequencyFilter.toLowerCase() // Corrected comparison
 
@@ -2377,7 +2379,11 @@ export default function SissoneResponsivePrototype() {
             <Select defaultValue="all">
               <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
                 <SelectValue>
-                  <span className="text-sm">Idade: Todas</span>
+                  <span className="text-sm">
+                    Idade:{" "}
+                    {/* Placeholder for actual age filtering */}
+                    Todas
+                  </span>
                 </SelectValue>
               </SelectTrigger>
               <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
@@ -3059,7 +3065,7 @@ export default function SissoneResponsivePrototype() {
             <div className="space-y-3 lg:space-y-4">
               <Button
                 className="w-full h-10 lg:h-12"
-                onClick={() => showToast("Aula byla publiée com sucesso!")}
+                onClick={() => showToast("Aula była publiée com sucesso!")}
                 style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
               >
                 Publicar Aula
@@ -3197,8 +3203,8 @@ export default function SissoneResponsivePrototype() {
     switch (currentScreen) {
       case "dashboard":
         return renderDashboard()
-      // case "profile": // Kept for potential future use or if it was intended
-      //   return renderProfile() // renderProfile is not defined, so it's commented out
+      case "profile": // Kept for potential future use or if it was intended
+        return <div>Profile Page</div> // Placeholder, as renderProfile is not defined
       case "user-profile":
         return renderUserProfile()
       case "school-units":
