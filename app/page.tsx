@@ -3302,11 +3302,7 @@ const SissonePrototype = () => {
                       const date = new Date(month.getFullYear(), month.getMonth(), day)
                       const isStart = dateRangeStart && date.toDateString() === dateRangeStart.toDateString()
                       const isEnd = dateRangeEnd && date.toDateString() === dateRangeEnd.toDateString()
-                      const isInRange =
-                        dateRangeStart &&
-                        dateRangeEnd &&
-                        date > dateRangeStart &&
-                        date < dateRangeEnd
+                      const isInRange = dateRangeStart && dateRangeEnd && date > dateRangeStart && date < dateRangeEnd
                       const isPast = date < new Date(new Date().setHours(0, 0, 0, 0))
 
                       days.push(
@@ -3335,7 +3331,7 @@ const SissonePrototype = () => {
                           }}
                         >
                           {day}
-                        </button>
+                        </button>,
                       )
                     }
 
@@ -3403,20 +3399,18 @@ const SissonePrototype = () => {
         </div>
       )}
 
-
       {renderCurrentScreen()}
 
-        {showToast && (
-          // Using semantic background, border, foreground, and toast tokens
-          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-card border-2 border-green-500 px-6 py-3 rounded-full shadow-lg z-50 animate-in slide-in-from-bottom-5">
-            <div className="flex items-center gap-2">
-              <Check className="h-5 w-5 text-green-600" />
-              <p className="text-sm font-medium text-foreground">{toastMessage}</p>
-            </div>
+      {showToast && (
+        // Using semantic background, border, foreground, and toast tokens
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-card border-2 border-green-500 px-6 py-3 rounded-full shadow-lg z-50 animate-in slide-in-from-bottom-5">
+          <div className="flex items-center gap-2">
+            <Check className="h-5 w-5 text-green-600" />
+            <p className="text-sm font-medium text-foreground">{toastMessage}</p>
           </div>
-        )}
-      </div>
-  </>
+        </div>
+      )}
+    </div>
   )
 
   const renderSearchResultsScreen = () => (
