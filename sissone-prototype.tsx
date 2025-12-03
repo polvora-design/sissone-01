@@ -294,8 +294,14 @@ function OnboardingScreen() {
         ))}
       </div>
 
-      <Button className="w-full bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white font-semibold">
-        Começar a Criar Seu Perfil
+      <Button asChild className="w-full bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white font-semibold">
+        <a
+          href="https://v0-sissone-wireframes-git-usurio-b-logado-sissone-mvp.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Começar a Criar Seu Perfil
+        </a>
       </Button>
     </div>
   )
