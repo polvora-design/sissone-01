@@ -164,11 +164,23 @@ export default function SissonePrototype() {
         <div className="bg-white border-b border-[#E5D6CD] p-4">
           <div className="flex items-center justify-between">
             <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={37} className="h-auto" />
-            <Button variant="ghost" size="sm" onClick={goToProfile} className="p-0 h-auto">
-              <div className="w-10 h-10 bg-[#CFB2A8] rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-bold">S</span>
-              </div>
-            </Button>
+            <div className="flex items-center gap-3">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() =>
+                  window.open("https://v0-sissone-wireframes-git-usurio-a-lead-sissone-mvp.vercel.app/", "_blank")
+                }
+                className="border-[#CFB2A8] text-[#3D2C2E] hover:bg-[#CFB2A8] hover:text-white"
+              >
+                Buscar aula
+              </Button>
+              <Button variant="ghost" size="sm" onClick={goToProfile} className="p-0 h-auto">
+                <div className="w-10 h-10 bg-[#CFB2A8] rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm font-bold">S</span>
+                </div>
+              </Button>
+            </div>
           </div>
         </div>
 
