@@ -27,26 +27,10 @@ export default function SissonePrototype() {
     }
   }
 
-  const goToScreen = (screen: Screen) => {
-    setCurrentScreen(screen)
-  }
-
   return (
     <div className="w-full min-h-screen bg-[#F5F0EB]">
       {/* Navigation dots */}
-      <div className="flex justify-center gap-2 p-4">
-        {screens.map((screen, index) => (
-          <button
-            key={screen}
-            onClick={() => goToScreen(screen)}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              currentScreen === screen ? "bg-[#3D2C2E]" : "bg-[#E5D6CD]"
-            }`}
-          />
-        ))}
-      </div>
-
-      <div className="px-4 pb-8 md:px-8 lg:px-12 xl:px-16">
+      <div className="px-4 py-8 md:px-8 lg:px-12 xl:px-16">
         {currentScreen === "landing" && <LandingScreen onNext={nextScreen} />}
         {currentScreen === "registration" && <RegistrationScreen onNext={nextScreen} onPrev={prevScreen} />}
         {currentScreen === "onboarding" && <OnboardingScreen />}
