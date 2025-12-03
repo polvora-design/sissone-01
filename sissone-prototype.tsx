@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
-import { Star, Calendar, Clock, MapPin, QrCode, ArrowLeft, Mail, Phone, Edit2, Check, X } from "lucide-react"
+import { Star, Calendar, Clock, MapPin, ArrowLeft, Mail, Phone, Edit2, Check, X, QrCode } from "lucide-react"
 import Image from "next/image"
 
 type ClassStatus = "today" | "future" | "past-not-reviewed" | "past-reviewed"
@@ -109,7 +109,7 @@ export default function SissonePrototype() {
           </Button>
 
           <div className="relative">
-            <div className="absolute inset-0 flex items-center">
+            <div className="absolute inset-0 flex items-center justify-center">
               <span className="w-full border-t border-[#E5D6CD]" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
@@ -918,14 +918,7 @@ export default function SissonePrototype() {
   return (
     <div className="min-h-screen bg-[#F5F0EB] flex items-center justify-center">
       <div className="w-full max-w-[1440px] mx-auto">
-        <div className="max-w-sm mx-auto bg-white shadow-lg">
-          {/* Screen Navigation */}
-          <div className="bg-[#3D2C2E] text-white p-2 text-center text-sm">
-            Tela {currentScreen + 1}/7: {screens[currentScreen]}
-          </div>
-
-          {renderScreen()}
-        </div>
+        <div className="max-w-sm mx-auto bg-white shadow-lg">{renderScreen()}</div>
       </div>
     </div>
   )
