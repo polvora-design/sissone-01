@@ -1507,16 +1507,17 @@ const SissonePrototype = () => {
                     Hoje
                   </Button>
                   <Button
-                    variant={selectedDate === "weekly" ? "default" : "ghost"} // Use selectedDate
+                    variant={selectedDate === "Semanalmente" ? "default" : "ghost"} // Use "Semanalmente" string to match state
                     size="sm"
                     className={
-                      selectedDate === "weekly"
+                      selectedDate === "Semanalmente"
                         ? "bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7"
                         : "text-xs h-7"
                     }
                     onClick={() => {
-                      setSelectedDate("weekly") // Update selectedDate
-                      setShowDatePicker(true) // Open date picker for range
+                      setSelectedDate("Semanalmente") // Set to "Semanalmente" without opening modal
+                      setDateRangeStart(null) // Clear date range
+                      setDateRangeEnd(null)
                     }}
                   >
                     Semanalmente
@@ -2823,15 +2824,16 @@ const SissonePrototype = () => {
                   Hoje
                 </Button>
                 <Button
-                  variant={selectedDate === "weekly" ? "default" : "outline"} // Use selectedDate
+                  variant={selectedDate === "Semanalmente" ? "default" : "outline"} // Use "Semanalmente" string to match state
                   className={
-                    selectedDate === "weekly"
+                    selectedDate === "Semanalmente"
                       ? "bg-primary text-primary-foreground hover:bg-primary/90"
                       : "border-border text-foreground hover:bg-secondary"
                   }
                   onClick={() => {
-                    setSelectedDate("weekly") // Update selectedDate
-                    setShowMobileDatePicker(true) // Open date picker for range
+                    setSelectedDate("Semanalmente") // Set to "Semanalmente" without opening modal
+                    setDateRangeStart(null) // Clear date range
+                    setDateRangeEnd(null)
                   }}
                 >
                   Semanalmente
