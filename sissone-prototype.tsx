@@ -465,6 +465,7 @@ export default function SissonePrototype() {
 
                   <div className="flex items-center justify-center gap-2 mt-3 pt-3 border-t border-[#E5D6CD]">
                     {renderStars(4)}
+                    <span className="text-[#3D2C2E] font-semibold">4.0</span>
                     <span className="text-[#3D2C2E] opacity-70 text-sm">(24 avaliações)</span>
                   </div>
                 </div>
@@ -564,8 +565,8 @@ export default function SissonePrototype() {
       {showCheckInNotification && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
           <div className="bg-[#3D2C2E] text-white rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
-            <div className="w-8 h-8 bg-[#CFB2A8] rounded-full flex items-center justify-center flex-shrink-0">
-              {isCheckedIn ? <Check className="w-5 h-5 text-white" /> : <X className="w-5 h-5 text-white" />}
+            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+              {isCheckedIn ? <Check className="w-5 h-5 text-green-600" /> : <X className="w-5 h-5 text-red-600" />}
             </div>
             <p className="text-sm font-medium">
               {isCheckedIn ? "Check-in confirmado com sucesso!" : "Check-in cancelado"}
@@ -894,10 +895,23 @@ export default function SissonePrototype() {
                 onClick={() =>
                   window.open("https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/", "_blank")
                 }
+                className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+              >
+                Cadastrar minha escola
+              </Button>
+
+              <Button
+                onClick={() => {
+                  setShowProfileSaveNotification(true)
+                  setTimeout(() => {
+                    setShowProfileSaveNotification(false)
+                    goHome()
+                  }, 2000)
+                }}
                 variant="outline"
                 className="w-full border-[#CFB2A8] text-[#CFB2A8] bg-transparent hover:bg-[#CFB2A8]/10"
               >
-                Cadastrar minha escola
+                Salvar e fechar
               </Button>
             </div>
           </div>
