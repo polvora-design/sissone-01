@@ -887,10 +887,6 @@ export default function SissonePrototype() {
             </div>
 
             <div className="mt-6 space-y-3 max-w-md mx-auto">
-              <Button onClick={handleSaveProfile} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
-                Salvar Alterações
-              </Button>
-
               <Button
                 onClick={() =>
                   window.open("https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/", "_blank")
