@@ -1012,29 +1012,28 @@ export default function SissoneResponsivePrototype() {
         </h1>
       </div>
 
-      <div className="hidden lg:flex items-center gap-3">
+      <div className="flex items-center gap-2 lg:gap-3">
         <a
           href="https://v0-sissone-wireframes-git-usurio-a-logado-sissone-mvp.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm hover:opacity-80 transition-opacity"
+          className="hidden lg:block text-sm hover:opacity-80 transition-opacity"
           style={{ color: "#3D2C2E" }}
         >
           Meu perfil de Aluno
         </a>
         <button
           onClick={() => navigateTo("user-profile")}
-          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+          className="flex items-center gap-2 lg:gap-3 hover:opacity-80 transition-opacity"
         >
-          <div className="text-right">
+          <div className="hidden lg:block text-right">
             <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
               {userProfile.name}
             </p>
-            {/* Removed role badge */}
           </div>
-          <div className="w-10 h-10 rounded-full" style={{ backgroundColor: "#CFB2A8" }}>
+          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full flex-shrink-0" style={{ backgroundColor: "#CFB2A8" }}>
             <div className="flex items-center justify-center h-full">
-              <User className="w-5 h-5" style={{ color: "#3D2C2E" }} />
+              <User className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#3D2C2E" }} />
             </div>
           </div>
         </button>
@@ -3329,22 +3328,6 @@ export default function SissoneResponsivePrototype() {
             </Button>
           )
         })}
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => navigateTo("user-profile")}
-          className="flex flex-col items-center gap-1 h-auto py-2 px-1 min-w-0"
-        >
-          <div
-            className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center"
-            style={{ backgroundColor: "#CFB2A8" }}
-          >
-            <User className="w-3 h-3" style={{ color: "#3D2C2E" }} />
-          </div>
-          <span className="text-[10px] leading-tight text-center" style={{ color: "#3D2C2E" }}>
-            Perfil
-          </span>
-        </Button>
       </div>
     </div>
   )
