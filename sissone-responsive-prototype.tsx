@@ -20,8 +20,6 @@ import {
   Clock,
   MapPin,
   DollarSign,
-  Menu,
-  X,
   Filter,
   Building2,
   Upload,
@@ -930,9 +928,7 @@ export default function SissoneResponsivePrototype() {
         )}
 
         <div
-          className={`fixed left-0 top-0 h-full w-64 z-50 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:z-auto ${
-            sidebarOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+          className="hidden lg:block lg:w-64"
           style={{ backgroundColor: "#F5F0EB", borderRight: "1px solid #E5D6CD" }}
         >
           <div className="p-6 border-b" style={{ borderColor: "#E5D6CD" }}>
@@ -940,9 +936,6 @@ export default function SissoneResponsivePrototype() {
               <div>
                 <img src="/images/svgexport-1.svg" alt="Sissone" className="h-8" />
               </div>
-              <Button variant="ghost" size="sm" className="lg:hidden" onClick={() => setSidebarOpen(false)}>
-                <X className="w-5 h-5" style={{ color: "#3D2C2E" }} />
-              </Button>
             </div>
           </div>
 
@@ -970,7 +963,7 @@ export default function SissoneResponsivePrototype() {
             </div>
           </nav>
 
-          <div className="hidden lg:block p-4 mt-8">
+          <div className="p-4 mt-8">
             <h3 className="text-sm font-semibold mb-3" style={{ color: "#3D2C2E" }}>
               Resumo Rápido
             </h3>
@@ -1009,9 +1002,6 @@ export default function SissoneResponsivePrototype() {
   const renderHeader = (title: string, showBack = true) => (
     <div className="flex items-center justify-between p-4 lg:p-6 border-b" style={{ borderColor: "#E5D6CD" }}>
       <div className="flex items-center gap-4">
-        <Button variant="ghost" size="sm" className="lg:hidden" onClick={() => setSidebarOpen(true)}>
-          <Menu className="w-5 h-5" style={{ color: "#3D2C2E" }} />
-        </Button>
         {showBack && (
           <Button variant="ghost" size="sm" onClick={() => navigateTo("dashboard")} className="lg:hidden">
             <ArrowLeft className="w-4 h-4" style={{ color: "#3D2C2E" }} />
@@ -3270,7 +3260,6 @@ export default function SissoneResponsivePrototype() {
       </div>
 
       <div className="hidden lg:block">{renderSidebar()}</div>
-      <div className="lg:hidden">{renderSidebar()}</div>
 
       <div className="flex-1 flex flex-col min-h-screen lg:ml-0 min-w-0">
         {currentScreen === "dashboard" && renderHeader("Painel", false)}
