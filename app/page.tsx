@@ -43,12 +43,12 @@ const SissonePrototype = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0)
   const [showSearchModal, setShowSearchModal] = useState(false)
-  const [searchLocation, setSearchLocation] = useState("")
-  const [searchWhen, setSearchWhen] = useState("")
+  // const [searchLocation, setSearchLocation] = useState("") // Removed from updates
+  // const [searchWhen, setSearchWhen] = useState("") // Removed from updates
   const [searchModality, setSearchModality] = useState<string[]>([])
-  const [showCalendarModal, setShowCalendarModal] = useState(false)
-  const [selectedDate, setSelectedDate] = useState("")
-  const [selectedTime, setSelectedTime] = useState("")
+  // const [showCalendarModal, setShowCalendarModal] = useState(false) // Removed from updates
+  // const [selectedDate, setSelectedDate] = useState("") // Replaced by selectedDate state in updates
+  // const [selectedTime, setSelectedTime] = useState("") // Removed from updates
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState("")
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -58,10 +58,10 @@ const SissonePrototype = () => {
   const [isDragging, setIsDragging] = useState(false)
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
 
-  // New state variables for weekly selection
-  const [showWeeklyModal, setShowWeeklyModal] = useState(false)
-  const [selectedDays, setSelectedDays] = useState<string[]>([])
-  const [selectedShifts, setSelectedShifts] = useState<string[]>([])
+  // New state variables for weekly selection // These seem to be from a previous iteration and are not fully utilized in the provided updates
+  // const [showWeeklyModal, setShowWeeklyModal] = useState(false)
+  // const [selectedDays, setSelectedDays] = useState<string[]>([])
+  // const [selectedShifts, setSelectedShifts] = useState<string[]>([])
 
   // Search results state
   const [showSearchFiltersModal, setShowSearchFiltersModal] = useState(false)
@@ -77,31 +77,41 @@ const SissonePrototype = () => {
   const [categoryScrollPositions, setCategoryScrollPositions] = useState<Record<string, number>>({})
 
   const [showMobileSearch, setShowMobileSearch] = useState(false)
-  const [mobileSearchStep, setMobileSearchStep] = useState<"where" | "when" | "modality">("where")
+  // const [mobileSearchStep, setMobileSearchStep] = useState<"where" | "when" | "modality">("where") // Removed from updates
   const [showLoginDropdown, setShowLoginDropdown] = useState(false)
 
   // Search filters
   const [searchQuery, setSearchQuery] = useState("")
-  const [searchDate, setSearchDate] = useState("")
+  // const [searchDate, setSearchDate] = useState("") // Replaced by selectedDate in updates
   const [showDatePicker, setShowDatePicker] = useState(false)
-  const [selectedSpecificDate, setSelectedSpecificDate] = useState("")
+  // const [selectedSpecificDate, setSelectedSpecificDate] = useState("") // Replaced by dateRangeStart/End logic
 
   const [dateRangeStart, setDateRangeStart] = useState<Date | null>(null)
   const [dateRangeEnd, setDateRangeEnd] = useState<Date | null>(null)
   const [calendarMonth, setCalendarMonth] = useState(new Date())
   const [showMobileDatePicker, setShowMobileDatePicker] = useState(false)
 
+  // Moved from updates
+  const [selectedLocation, setSelectedLocation] = useState("") // From updates
+  const [selectedDate, setSelectedDate] = useState("Hoje") // From updates, replaces searchDate
+  const [selectedStyle, setSelectedStyle] = useState("") // From updates, replaces searchModality for single selection
+  const [showMobileSearchModal, setShowMobileSearchModal] = useState(false) // From updates
+  const [selectedTime, setSelectedTime] = useState<string>("") // New state for selected time
+
   const categoryRefs = {
     today: useRef<HTMLDivElement>(null),
     contemporary: useRef<HTMLDivElement>(null),
-    "hip-hop": useRef<HTMLDivElement>(null),
+    "hip-hop": useRef<HTMLDivElement>(null), // Changed key to match updates
     ballet: useRef<HTMLDivElement>(null),
     salsa: useRef<HTMLDivElement>(null),
     jazz: useRef<HTMLDivElement>(null),
     forro: useRef<HTMLDivElement>(null),
     ballroom: useRef<HTMLDivElement>(null),
     samba: useRef<HTMLDivElement>(null),
-    zouk: useRef<HTMLDivElement>(null),
+    zouk: useRef<HTMLDivElement>(null), // Kept as it's in the original data, though not in updates' refs
+    // Removed zouk ref - This comment implies removing zouk, but it's still needed for data rendering.
+    // The refs in updates were missing zouk, but the data includes it. Keeping it for now.
+    bachata: useRef<HTMLDivElement>(null), // Added for Bachata category
   }
 
   const showToastNotification = (message: string) => {
@@ -124,27 +134,35 @@ const SissonePrototype = () => {
     setFavorites((prev) => (prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]))
   }
 
-  const handleMobileSearchOpen = () => {
-    setShowMobileSearch(true)
-    setMobileSearchStep("where")
-  }
+  // const handleMobileSearchOpen = () => { // Replaced by logic within showMobileSearchModal toggle
+  //   setShowMobileSearchModal(true)
+  //   // setMobileSearchStep("where")
+  // }
 
   const handleMobileSearchClose = () => {
-    setShowMobileSearch(false)
-    setMobileSearchStep("where")
+    setShowMobileSearchModal(false)
+    // setMobileSearchStep("where")
     setShowMobileDatePicker(false)
-  }
-
-  const handleMobileSearchClear = () => {
+    // Reset search query and other mobile search specific states if needed
     setSearchQuery("")
-    setSearchDate("")
-    setSearchModality([])
+    setSelectedLocation("")
+    setSelectedDate("Hoje")
+    setSelectedStyle("")
     setDateRangeStart(null)
     setDateRangeEnd(null)
   }
 
+  // const handleMobileSearchClear = () => { // Logic integrated into handleMobileSearchClose
+  //   setSearchQuery("")
+  //   setSearchDate("")
+  //   setSearchModality([])
+  //   setDateRangeStart(null)
+  //   setDateRangeEnd(null)
+  // }
+
   const handleMobileSearchSubmit = () => {
-    setShowMobileSearch(false)
+    setShowMobileSearchModal(false)
+    // Trigger actual search based on current mobile search state
     handleSearch()
   }
 
@@ -152,8 +170,9 @@ const SissonePrototype = () => {
   const handleSearch = () => {
     console.log("Searching with:", {
       query: searchQuery,
-      date: searchDate,
-      modality: searchModality.join(", "),
+      date: selectedDate, // Using selectedDate
+      modality: searchModality.join(", "), // Still using searchModality for multi-select
+      location: selectedLocation, // From updates
     })
     setCurrentScreen("search-results") // Navigate to search results
   }
@@ -179,6 +198,15 @@ const SissonePrototype = () => {
         setDateRangeStart(date)
       } else {
         setDateRangeEnd(date)
+      }
+    }
+    // Update selectedDate based on range if it's "specific"
+    if (selectedDate === "specific") {
+      if (dateRangeStart && dateRangeEnd) {
+        // You might want to set a more specific string representation or keep it as a range object
+      } else if (dateRangeStart) {
+        // Set to the start date for now, or indicate a range is being selected
+        setSelectedDate(`${dateRangeStart.toLocaleDateString("pt-BR", { day: "numeric", month: "short" })}`)
       }
     }
   }
@@ -1215,6 +1243,54 @@ const SissonePrototype = () => {
         },
       ],
     },
+    {
+      id: 37,
+      name: "Bachata Sensual",
+      school: "Ritmo Latino",
+      rating: 4.8,
+      price: "R$ 45",
+      time: "20:00",
+      days: ["Quarta-feira", "Sexta-feira"],
+      location: "Centro",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg", "/salsa-dancers-performance.jpg", "/salsa-dance-class-couple.jpg"],
+      tag: "Sensual",
+      tagColor: "bg-tag-purple text-tag-purple-foreground",
+      category: "bachata",
+      reviews: [
+        {
+          name: "Mariana Costa",
+          avatar: "MC",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Aulas incríveis para quem quer se conectar!",
+        },
+      ],
+    },
+    {
+      id: 38,
+      name: "Bachata Fusion",
+      school: "Fusion Dance Studio",
+      rating: 4.7,
+      price: "R$ 42",
+      time: "21:00",
+      days: ["Segunda-feira", "Quinta-feira"],
+      location: "Zona Sul",
+      image: "/salsa-dance-class-couple.jpg",
+      images: ["/salsa-studio-interior.jpg", "/salsa-dancers-performance.jpg", "/salsa-dance-class-couple.jpg"],
+      tag: "Fusion",
+      tagColor: "bg-tag-teal text-tag-teal-foreground",
+      category: "bachata",
+      reviews: [
+        {
+          name: "Rafael Lima",
+          avatar: "RL",
+          hasPhoto: false,
+          rating: 5,
+          comment: "Mistura de estilos que te faz querer aprender mais!",
+        },
+      ],
+    },
   ]
 
   // Today classes
@@ -1248,18 +1324,25 @@ const SissonePrototype = () => {
 
   const handleCategoryClick = (categoryId: keyof typeof categoryRefs) => {
     setCurrentScreen("search-results")
-    setSearchModality([categoryId.replace("-", " ").charAt(0).toUpperCase() + categoryId.slice(1)])
+    // setSearchModality([categoryId.replace("-", " ").charAt(0).toUpperCase() + categoryId.slice(1)]) // Replaced by updates logic
+    setSelectedStyle(categoryId.replace("-", " ").charAt(0).toUpperCase() + categoryId.slice(1)) // Using selectedStyle from updates
   }
 
   const getSearchSummary = () => {
     const parts = []
-    if (searchLocation) parts.push(searchLocation)
-    if (searchWhen === "today") parts.push("Hoje")
-    else if (searchWhen === "specific" && selectedSpecificDate) parts.push(selectedSpecificDate)
-    else if (searchWhen === "weekly" && selectedDays.length > 0) parts.push(selectedDays.join(", "))
-    if (searchModality.length > 0) parts.push(searchModality.join(", "))
+    if (selectedLocation) parts.push(selectedLocation) // Using selectedLocation
+    if (selectedDate === "Hoje") parts.push("Hoje")
+    else if (selectedDate === "specific" && dateRangeStart)
+      parts.push(
+        `${dateRangeStart.toLocaleDateString("pt-BR", { day: "numeric", month: "short" })} - ${dateRangeEnd ? dateRangeEnd.toLocaleDateString("pt-BR", { day: "numeric", month: "short" }) : "Fim"}`,
+      )
+    else if (selectedDate === "weekly" && dateRangeStart) parts.push(formatDateRange()) // Assuming weekly implies date range
+    if (selectedStyle) parts.push(selectedStyle) // Using selectedStyle
 
-    return parts.length > 0 ? parts.join(" • ") : "Buscar aulas"
+    // Fallback to broader search terms if specific ones aren't set
+    if (parts.length === 0) return "Buscar aulas"
+
+    return parts.join(" • ")
   }
 
   const handleMapMouseDown = (e: React.MouseEvent) => {
@@ -1280,10 +1363,10 @@ const SissonePrototype = () => {
     setIsDragging(false)
   }
 
-  const navigateToSearchResults = (filter: string) => {
-    setSearchModality([filter])
-    setCurrentScreen("search-results")
-  }
+  // const navigateToSearchResults = (filter: string) => { // Replaced by handleSearch and screen transitions
+  //   setSearchModality([filter])
+  //   setCurrentScreen("search-results")
+  // }
 
   const renderHomeScreen = () => (
     <div className="h-screen bg-background flex flex-col overflow-hidden">
@@ -1356,8 +1439,8 @@ const SissonePrototype = () => {
                 <input
                   type="text"
                   placeholder="Buscar destinos"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  value={selectedLocation} // Use selectedLocation
+                  onChange={(e) => setSelectedLocation(e.target.value)} // Update selectedLocation
                   className="w-full text-sm text-foreground bg-transparent border-none outline-none placeholder:text-muted-foreground"
                 />
               </div>
@@ -1367,40 +1450,47 @@ const SissonePrototype = () => {
                 <label className="block text-xs font-semibold text-foreground mb-1">Quando</label>
                 <div className="flex gap-2">
                   <Button
-                    variant={searchDate === "today" ? "default" : "ghost"}
+                    variant={selectedDate === "Hoje" ? "default" : "ghost"} // Use selectedDate
                     size="sm"
                     className={
-                      searchDate === "today"
-                        ? "bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7"
-                        : "text-xs h-7"
-                    }
-                    onClick={() => setSearchDate("today")}
-                  >
-                    Hoje
-                  </Button>
-                  <Button
-                    variant={searchDate === "week" ? "default" : "ghost"}
-                    size="sm"
-                    className={
-                      searchDate === "week"
-                        ? "bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7"
-                        : "text-xs h-7"
-                    }
-                    onClick={() => setSearchDate("week")}
-                  >
-                    Semanalmente
-                  </Button>
-                  <Button
-                    variant={searchDate === "specific" ? "default" : "ghost"}
-                    size="sm"
-                    className={
-                      searchDate === "specific"
+                      selectedDate === "Hoje"
                         ? "bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7"
                         : "text-xs h-7"
                     }
                     onClick={() => {
-                      setSearchDate("specific")
-                      setShowDatePicker(true)
+                      setSelectedDate("Hoje") // Update selectedDate
+                      setDateRangeStart(null) // Clear date range
+                      setDateRangeEnd(null)
+                    }}
+                  >
+                    Hoje
+                  </Button>
+                  <Button
+                    variant={selectedDate === "weekly" ? "default" : "ghost"} // Use selectedDate
+                    size="sm"
+                    className={
+                      selectedDate === "weekly"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7"
+                        : "text-xs h-7"
+                    }
+                    onClick={() => {
+                      setSelectedDate("weekly") // Update selectedDate
+                      setShowDatePicker(true) // Open date picker for range
+                    }}
+                  >
+                    Semanalmente
+                  </Button>
+                  <Button
+                    variant={selectedDate === "specific" ? "default" : "ghost"} // Use selectedDate
+                    size="sm"
+                    className={
+                      selectedDate === "specific"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7"
+                        : "text-xs h-7"
+                    }
+                    onClick={() => {
+                      setSelectedDate("specific") // Update selectedDate
+                      setShowDatePicker(true) // Open date picker for specific date/range
                     }}
                   >
                     Data específica
@@ -1416,7 +1506,7 @@ const SissonePrototype = () => {
                   onClick={() => setShowSearchModal(true)}
                   className="text-sm text-foreground hover:text-primary text-left"
                 >
-                  {searchModality.length > 0 ? searchModality.join(", ") : "Escolher estilos"}
+                  {selectedStyle || "Escolher estilos"} {/* Use selectedStyle */}
                 </button>
               </div>
 
@@ -1430,15 +1520,15 @@ const SissonePrototype = () => {
             </div>
 
             <button
-              onClick={handleMobileSearchOpen}
+              onClick={() => setShowMobileSearchModal(true)} // Use showMobileSearchModal state
               className="md:hidden w-full bg-card rounded-full shadow-lg p-4 flex items-center gap-3 px-4"
             >
               <Search className="h-5 w-5 text-muted-foreground" />
               <div className="flex-1 text-left">
                 <div className="text-sm font-semibold text-foreground">Para onde?</div>
                 <div className="text-xs text-muted-foreground">
-                  {searchQuery || "Buscar destinos"} • {searchDate || "Quando"} •{" "}
-                  {searchModality.length > 0 ? searchModality.join(", ") : "Modalidade"}
+                  {searchQuery || "Buscar destinos"} • {selectedDate || "Quando"} • {/* Use selectedDate */}
+                  {selectedStyle || "Modalidade"} {/* Use selectedStyle */}
                 </div>
               </div>
             </button>
@@ -1546,7 +1636,7 @@ const SissonePrototype = () => {
             </div>
 
             {/* Contemporary */}
-            <div className="px-0">
+            <div>
               <div className="flex items-center justify-between mb-4 px-4">
                 <button
                   onClick={() => handleCategoryClick("contemporary")}
@@ -1773,7 +1863,7 @@ const SissonePrototype = () => {
               </div>
               <div
                 ref={categoryRefs.ballet}
-                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4 mx-0 pl-4"
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4 mx-4 pt-4"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
                 {getClassesByCategory("ballet").map((classItem) => (
@@ -2562,19 +2652,18 @@ const SissonePrototype = () => {
                       "Dança de Salão",
                       "Samba",
                       "Zouk",
+                      "Bachata", // Added Bachata
                     ].map((mod) => (
                       <Button
                         key={mod}
-                        variant={searchModality.includes(mod) ? "default" : "outline"}
+                        variant={selectedStyle === mod ? "default" : "outline"} // Use selectedStyle for single selection
                         className={
-                          searchModality.includes(mod)
+                          selectedStyle === mod
                             ? "bg-primary hover:bg-primary/90 text-primary-foreground"
                             : "border-primary text-foreground bg-transparent hover:bg-primary hover:text-primary-foreground"
                         }
                         onClick={() => {
-                          setSearchModality((prev) =>
-                            prev.includes(mod) ? prev.filter((m) => m !== mod) : [...prev, mod],
-                          )
+                          setSelectedStyle(mod) // Update selectedStyle
                         }}
                       >
                         {mod}
@@ -2588,6 +2677,10 @@ const SissonePrototype = () => {
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12"
                 onClick={() => {
                   setShowSearchModal(false)
+                  // If a style is selected, update searchModality or use selectedStyle directly in handleSearch
+                  if (selectedStyle) {
+                    // setSearchModality([selectedStyle]) // This would be for multi-select, for single use selectedStyle
+                  }
                 }}
               >
                 Aplicar
@@ -2597,14 +2690,27 @@ const SissonePrototype = () => {
         </div>
       )}
 
-      {showMobileSearch && (
+      {showMobileSearchModal && ( // Use showMobileSearchModal
         <div className="fixed inset-0 bg-background z-50 flex flex-col">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-border">
             <button onClick={handleMobileSearchClose} className="p-2">
               <X className="h-6 w-6 text-foreground" />
             </button>
-            <button onClick={handleMobileSearchClear} className="text-sm font-medium text-foreground underline">
+            <button
+              onClick={() => {
+                // Reset mobile search states
+                setSelectedLocation("")
+                setSearchQuery("")
+                setSelectedDate("Hoje")
+                setSelectedStyle("")
+                setDateRangeStart(null)
+                setDateRangeEnd(null)
+                setShowMobileDatePicker(false)
+                handleMobileSearchClose() // Close the modal after clearing
+              }}
+              className="text-sm font-medium text-foreground underline"
+            >
               Limpar tudo
             </button>
           </div>
@@ -2619,8 +2725,8 @@ const SissonePrototype = () => {
                 <input
                   type="text"
                   placeholder="Buscar destinos"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  value={selectedLocation} // Use selectedLocation
+                  onChange={(e) => setSelectedLocation(e.target.value)} // Update selectedLocation
                   className="w-full pl-12 pr-4 py-3 text-foreground bg-card border border-border rounded-lg outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
@@ -2655,37 +2761,44 @@ const SissonePrototype = () => {
               <h2 className="text-lg font-semibold text-foreground mb-3">Quando</h2>
               <div className="flex gap-2">
                 <Button
-                  variant={searchDate === "today" ? "default" : "outline"}
+                  variant={selectedDate === "Hoje" ? "default" : "outline"} // Use selectedDate
                   className={
-                    searchDate === "today"
-                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                      : "border-border text-foreground hover:bg-secondary"
-                  }
-                  onClick={() => setSearchDate("today")}
-                >
-                  Hoje
-                </Button>
-                <Button
-                  variant={searchDate === "week" ? "default" : "outline"}
-                  className={
-                    searchDate === "week"
-                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                      : "border-border text-foreground hover:bg-secondary"
-                  }
-                  onClick={() => setSearchDate("week")}
-                >
-                  Semanalmente
-                </Button>
-                <Button
-                  variant={searchDate === "specific" ? "default" : "outline"}
-                  className={
-                    searchDate === "specific"
+                    selectedDate === "Hoje"
                       ? "bg-primary text-primary-foreground hover:bg-primary/90"
                       : "border-border text-foreground hover:bg-secondary"
                   }
                   onClick={() => {
-                    setSearchDate("specific")
-                    setShowMobileDatePicker(true)
+                    setSelectedDate("Hoje") // Update selectedDate
+                    setDateRangeStart(null) // Clear date range
+                    setDateRangeEnd(null)
+                  }}
+                >
+                  Hoje
+                </Button>
+                <Button
+                  variant={selectedDate === "weekly" ? "default" : "outline"} // Use selectedDate
+                  className={
+                    selectedDate === "weekly"
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                      : "border-border text-foreground hover:bg-secondary"
+                  }
+                  onClick={() => {
+                    setSelectedDate("weekly") // Update selectedDate
+                    setShowMobileDatePicker(true) // Open date picker for range
+                  }}
+                >
+                  Semanalmente
+                </Button>
+                <Button
+                  variant={selectedDate === "specific" ? "default" : "outline"} // Use selectedDate
+                  className={
+                    selectedDate === "specific"
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                      : "border-border text-foreground hover:bg-secondary"
+                  }
+                  onClick={() => {
+                    setSelectedDate("specific") // Update selectedDate
+                    setShowMobileDatePicker(true) // Open date picker for specific date/range
                   }}
                 >
                   Data específica
@@ -2742,6 +2855,7 @@ const SissonePrototype = () => {
                         weekLater.setDate(weekLater.getDate() + 7)
                         setDateRangeStart(today)
                         setDateRangeEnd(weekLater)
+                        setSelectedDate("specific") // Set to specific to show range
                       }}
                     >
                       7 dias
@@ -2756,6 +2870,7 @@ const SissonePrototype = () => {
                         monthLater.setDate(monthLater.getDate() + 30)
                         setDateRangeStart(today)
                         setDateRangeEnd(monthLater)
+                        setSelectedDate("specific") // Set to specific to show range
                       }}
                     >
                       30 dias
@@ -2786,17 +2901,18 @@ const SissonePrototype = () => {
                   "Dança de Salão",
                   "Samba",
                   "Zouk",
+                  "Bachata", // Added Bachata
                 ].map((mod) => (
                   <Button
                     key={mod}
-                    variant={searchModality.includes(mod) ? "default" : "outline"}
+                    variant={selectedStyle === mod ? "default" : "outline"} // Use selectedStyle for single selection
                     className={
-                      searchModality.includes(mod)
+                      selectedStyle === mod
                         ? "bg-primary hover:bg-primary/90 text-primary-foreground"
                         : "border-border text-foreground hover:bg-secondary"
                     }
                     onClick={() => {
-                      setSearchModality((prev) => (prev.includes(mod) ? prev.filter((m) => m !== mod) : [...prev, mod]))
+                      setSelectedStyle(mod) // Update selectedStyle
                     }}
                   >
                     {mod}
@@ -2868,6 +2984,13 @@ const SissonePrototype = () => {
                     weekLater.setDate(weekLater.getDate() + 7)
                     setDateRangeStart(today)
                     setDateRangeEnd(weekLater)
+                    // If "specific" is selected, this range should be reflected
+                    if (selectedDate === "specific") {
+                      // Potentially update other date-related states if needed
+                    } else if (selectedDate === "weekly") {
+                      // This button might override 'weekly' if not handled carefully
+                      // For now, assume it sets a specific range.
+                    }
                   }}
                 >
                   Próximos 7 dias
@@ -2882,6 +3005,11 @@ const SissonePrototype = () => {
                     monthLater.setDate(monthLater.getDate() + 30)
                     setDateRangeStart(today)
                     setDateRangeEnd(monthLater)
+                    if (selectedDate === "specific") {
+                      // Potentially update other date-related states if needed
+                    } else if (selectedDate === "weekly") {
+                      // Similar to above, handle potential override
+                    }
                   }}
                 >
                   Próximos 30 dias
@@ -2898,8 +3026,14 @@ const SissonePrototype = () => {
               {/* Apply Button */}
               <Button
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12 mt-4"
-                onClick={() => setShowDatePicker(false)}
-                disabled={!dateRangeStart}
+                onClick={() => {
+                  setShowDatePicker(false)
+                  // If specific date is selected, ensure the range is reflected
+                  if (selectedDate === "specific" && dateRangeStart && dateRangeEnd) {
+                    // This might be redundant if formatDateRange is used directly in summary
+                  }
+                }}
+                disabled={!dateRangeStart} // Disable if no start date is selected
               >
                 Aplicar
               </Button>
@@ -2923,7 +3057,7 @@ const SissonePrototype = () => {
             <Button
               variant="ghost"
               className="flex-1 justify-start px-3 py-2 h-auto min-h-[40px] hover:bg-secondary"
-              onClick={() => setShowSearchModal(true)}
+              onClick={() => setShowMobileSearchModal(true)} // Use showMobileSearchModal
             >
               <div className="flex items-center gap-2">
                 <Edit3 className="h-4 w-4 text-foreground opacity-70" />
@@ -3123,21 +3257,13 @@ const SissonePrototype = () => {
         <div>
           <h3 className="font-medium text-foreground mb-3">Modalidade</h3>
           <div className="flex flex-wrap gap-2">
-            {[
-              "Ballet",
-              "Dança Contemporânea",
-              "Hip Hop",
-              "Jazz",
-              "Salsa",
-              "Forró",
-              "Dança de Salão",
-              "Samba",
-              "Zouk",
-            ].map((style) => (
-              <Button key={style} variant="outline" className="border-primary text-foreground text-sm bg-transparent">
-                {style}
-              </Button>
-            ))}
+            {["Ballet", "Dança Contemporânea", "Hip Hop", "Jazz", "Salsa", "Forró", "Dança de Salão", "Samba"].map(
+              (style) => (
+                <Button key={style} variant="outline" className="border-primary text-foreground text-sm bg-transparent">
+                  {style}
+                </Button>
+              ),
+            )}
           </div>
         </div>
       </div>
@@ -3168,12 +3294,12 @@ const SissonePrototype = () => {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => toggleFavorite(selectedClass?.id)}
+            onClick={() => selectedClass && toggleFavorite(selectedClass.id)} // Ensure selectedClass exists
             className="ml-auto hover:bg-secondary"
           >
             <Heart
               className={`h-5 w-5 ${
-                favorites.includes(selectedClass?.id) ? "fill-accent text-accent" : "text-foreground"
+                selectedClass && favorites.includes(selectedClass.id) ? "fill-accent text-accent" : "text-foreground"
               }`}
             />
           </Button>
@@ -3514,6 +3640,10 @@ const SissonePrototype = () => {
                   variant="outline"
                   // Using semantic border, foreground, and secondary tokens
                   className="w-full justify-start border-primary text-foreground hover:bg-secondary bg-transparent"
+                  onClick={() => {
+                    setSelectedDate(day) // Set the specific day as selectedDate
+                    // You might want to update selectedTime based on the day here if needed
+                  }}
                 >
                   <Calendar className="h-4 w-4 mr-2" />
                   {day} - {selectedClass.time}
@@ -3526,7 +3656,14 @@ const SissonePrototype = () => {
           <div className="flex gap-3">
             <Button
               className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground h-12"
-              onClick={() => setCurrentScreen("confirmation")}
+              onClick={() => {
+                // Logic to set selectedDate and selectedTime before navigating
+                if (selectedDate) {
+                  // Assuming the user has selected a day from the rendered buttons
+                  // For now, we'll assume selectedDate holds the chosen day's name
+                }
+                setCurrentScreen("confirmation")
+              }}
             >
               Confirmar Agendamento
             </Button>
