@@ -3127,9 +3127,9 @@ const SissonePrototype = () => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-hidden flex flex-col md:flex-row">
+      <div className="flex-1 overflow-hidden relative">
         {/* Cards Section - Left side on desktop */}
-        <div className="flex-1 overflow-y-auto bg-background order-2 md:order-1">
+        <div className="h-full overflow-y-auto bg-background md:w-1/2">
           <div className="mx-auto w-full max-w-full md:max-w-[520px] p-4 space-y-4">
             {classes.map((classItem) => (
               <Card
@@ -3212,7 +3212,46 @@ const SissonePrototype = () => {
         </div>
 
         {/* Map Section - Right side on desktop with absolute positioning */}
-        <div className="h-1/2 md:h-full md:w-1/2 relative bg-gray-200 flex-shrink-0 order-1 md:order-2 md:absolute md:right-0 md:top-[73px] md:bottom-0">
+        <div className="hidden md:block md:absolute md:right-0 md:top-0 md:bottom-0 md:w-1/2">
+          <div
+            className="absolute inset-0 cursor-move select-none"
+            onMouseDown={handleMapMouseDown}
+            onMouseMove={handleMapMouseMove}
+            onMouseUp={handleMapMouseUp}
+            onMouseLeave={handleMapMouseUp}
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23E5D6CD' width='100' height='100'/%3E%3Cpath d='M0 0L50 50M50 0L100 50M0 50L50 100M50 50L100 100' stroke='%23CFB2A8' strokeWidth='1'/%3E%3C/svg%3E")`,
+              backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
+            }}
+          >
+            {/* Map Markers */}
+            {classes.slice(0, 8).map((classItem, idx) => (
+              <div
+                key={classItem.id}
+                className="absolute w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
+                style={{
+                  left: `${30 + idx * 15 + mapPosition.x * 0.1}%`,
+                  top: `${25 + (idx % 3) * 20 + mapPosition.y * 0.1}%`,
+                }}
+                onClick={() => {
+                  setSelectedClass(classItem)
+                  setCurrentImageIndex(0)
+                  setCurrentScreen("detail")
+                }}
+              >
+                {classItem.price.replace("R$ ", "")}
+              </div>
+            ))}
+          </div>
+
+          {/* Map hint */}
+          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-card/90 px-4 py-2 rounded-full text-sm text-foreground shadow-md pointer-events-none">
+            Arraste o mapa para explorar
+          </div>
+        </div>
+
+        {/* Mobile Map - shown above cards on mobile */}
+        <div className="md:hidden h-64 relative bg-gray-200">
           <div
             className="absolute inset-0 cursor-move select-none"
             onMouseDown={handleMapMouseDown}
