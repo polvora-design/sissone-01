@@ -101,6 +101,9 @@ const SissonePrototype = () => {
 
   const [showDesktopSearchEdit, setShowDesktopSearchEdit] = useState(false)
 
+  // ADDED STATE: hover/active map pin
+  const [hoveredPin, setHoveredPin] = useState<string | null>(null)
+
   const categoryRefs = {
     today: useRef<HTMLDivElement>(null),
     contemporary: useRef<HTMLDivElement>(null),
@@ -3251,7 +3254,7 @@ const SissonePrototype = () => {
           {/* Mobile: Stack map and cards */}
           <div className="md:hidden h-full flex flex-col">
             {/* Mobile Map */}
-            <div className="h-64 relative bg-gray-200 flex-shrink-0">
+            <div className="h-64 relative bg-gray-200 flex-shrink-0 overflow-hidden">
               <div
                 className="absolute inset-0 cursor-move select-none"
                 onMouseDown={handleMapMouseDown}
@@ -3263,24 +3266,49 @@ const SissonePrototype = () => {
                   backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
                 }}
               >
-                {/* Map Markers */}
-                {classes.slice(0, 8).map((classItem, idx) => (
-                  <div
-                    key={classItem.id}
-                    className="absolute w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
-                    style={{
-                      left: `${30 + idx * 15 + mapPosition.x * 0.1}%`,
-                      top: `${25 + (idx % 3) * 20 + mapPosition.y * 0.1}%`,
-                    }}
-                    onClick={() => {
-                      setSelectedClass(classItem)
-                      setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
-                    }}
-                  >
-                    {classItem.price.replace("R$ ", "")}
-                  </div>
-                ))}
+                {getFilteredClasses()
+                  .slice(0, 8)
+                  .map((classItem, idx) => (
+                    <div
+                      key={classItem.id}
+                      className="absolute"
+                      style={{
+                        left: `${30 + idx * 15 + mapPosition.x * 0.1}%`,
+                        top: `${25 + (idx % 3) * 20 + mapPosition.y * 0.1}%`,
+                        transform: "translate(-50%, -50%)",
+                        zIndex: hoveredPin === classItem.id ? 50 : 10,
+                      }}
+                      onMouseEnter={() => setHoveredPin(classItem.id)}
+                      onMouseLeave={() => setHoveredPin(null)}
+                    >
+                      {/* Pin Marker */}
+                      <div
+                        className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
+                        onClick={() => {
+                          setSelectedClass(classItem)
+                          setCurrentImageIndex(0)
+                          setCurrentScreen("detail")
+                        }}
+                      >
+                        {classItem.price.replace("R$ ", "")}
+                      </div>
+
+                      {/* Info Card on Hover */}
+                      {hoveredPin === classItem.id && (
+                        <div className="absolute top-12 left-1/2 -translate-x-1/2 w-64 bg-card rounded-lg shadow-xl p-3 border border-border pointer-events-none">
+                          <h4 className="font-semibold text-foreground text-sm line-clamp-1 mb-1">{classItem.name}</h4>
+                          <p className="text-xs text-foreground opacity-70 mb-2">{classItem.school}</p>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-1">
+                              <Star className="h-3 w-3 fill-accent text-accent" />
+                              <span className="text-xs font-medium text-foreground">{classItem.rating}</span>
+                            </div>
+                            <span className="text-sm font-bold text-foreground">{classItem.price}</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
               </div>
               <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-card/90 px-4 py-2 rounded-full text-sm text-foreground shadow-md pointer-events-none">
                 Arraste o mapa para explorar
@@ -3375,8 +3403,8 @@ const SissonePrototype = () => {
 
           {/* Desktop: Side-by-side layout */}
           <div className="hidden md:flex h-full">
-            {/* Cards Section - Left side */}
-            <div className="w-1/2 h-full overflow-y-auto bg-background px-4">
+            {/* Cards List - Left side */}
+            <div className="w-1/2 h-full overflow-y-auto bg-background pr-2">
               <div className="py-4 space-y-4">
                 {getFilteredClasses().map((classItem) => (
                   <Card
@@ -3460,10 +3488,9 @@ const SissonePrototype = () => {
               </div>
             </div>
 
-            {/* Map Section - Right side */}
-            <div className="w-1/2 h-full relative">
+            <div className="w-1/2 h-full relative overflow-visible">
               <div
-                className="absolute inset-0 cursor-move select-none"
+                className="absolute inset-0 cursor-move select-none overflow-hidden"
                 onMouseDown={handleMapMouseDown}
                 onMouseMove={handleMapMouseMove}
                 onMouseUp={handleMapMouseUp}
@@ -3473,24 +3500,51 @@ const SissonePrototype = () => {
                   backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
                 }}
               >
-                {/* Map Markers */}
-                {classes.slice(0, 8).map((classItem, idx) => (
-                  <div
-                    key={classItem.id}
-                    className="absolute w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
-                    style={{
-                      left: `${30 + idx * 15 + mapPosition.x * 0.1}%`,
-                      top: `${25 + (idx % 3) * 20 + mapPosition.y * 0.1}%`,
-                    }}
-                    onClick={() => {
-                      setSelectedClass(classItem)
-                      setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
-                    }}
-                  >
-                    {classItem.price.replace("R$ ", "")}
-                  </div>
-                ))}
+                {getFilteredClasses()
+                  .slice(0, 8)
+                  .map((classItem, idx) => (
+                    <div
+                      key={classItem.id}
+                      className="absolute"
+                      style={{
+                        left: `${30 + idx * 15 + mapPosition.x * 0.1}%`,
+                        top: `${25 + (idx % 3) * 20 + mapPosition.y * 0.1}%`,
+                        transform: "translate(-50%, -50%)",
+                        zIndex: hoveredPin === classItem.id ? 50 : 10,
+                      }}
+                      onMouseEnter={() => setHoveredPin(classItem.id)}
+                      onMouseLeave={() => setHoveredPin(null)}
+                    >
+                      {/* Pin Marker */}
+                      <div
+                        className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform"
+                        onClick={() => {
+                          setSelectedClass(classItem)
+                          setCurrentImageIndex(0)
+                          setCurrentScreen("detail")
+                        }}
+                      >
+                        {classItem.price.replace("R$ ", "")}
+                      </div>
+
+                      {/* Info Card on Hover */}
+                      {hoveredPin === classItem.id && (
+                        <div className="absolute top-14 left-1/2 -translate-x-1/2 w-72 bg-card rounded-lg shadow-xl p-4 border border-border pointer-events-none">
+                          <h4 className="font-semibold text-foreground text-base line-clamp-1 mb-1">
+                            {classItem.name}
+                          </h4>
+                          <p className="text-sm text-foreground opacity-70 mb-3">{classItem.school}</p>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-1">
+                              <Star className="h-4 w-4 fill-accent text-accent" />
+                              <span className="text-sm font-medium text-foreground">{classItem.rating}</span>
+                            </div>
+                            <span className="text-lg font-bold text-foreground">{classItem.price}</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
               </div>
               <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-card/90 px-4 py-2 rounded-full text-sm text-foreground shadow-md pointer-events-none">
                 Arraste o mapa para explorar
