@@ -939,9 +939,6 @@ export default function SissoneResponsivePrototype() {
             <div className="flex items-center justify-between">
               <div>
                 <img src="/images/svgexport-1.svg" alt="Sissone" className="h-8" />
-                <p className="text-xs" style={{ color: "#3D2E" }}>
-                  Para quem quer aprender, ensinar e viver a dança
-                </p>
               </div>
               <Button variant="ghost" size="sm" className="lg:hidden" onClick={() => setSidebarOpen(false)}>
                 <X className="w-5 h-5" style={{ color: "#3D2C2E" }} />
