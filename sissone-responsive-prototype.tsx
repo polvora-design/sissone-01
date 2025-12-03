@@ -1627,7 +1627,7 @@ export default function SissoneResponsivePrototype() {
           </Card>
         </div>
       </div>
-  </div>
+    </div>
   )
 
   const renderClasses = () => {
@@ -1863,6 +1863,7 @@ export default function SissoneResponsivePrototype() {
           )}
         </div>
       </div>
+    </div>
   )
 
   const renderPricing = () => {
@@ -2259,7 +2260,10 @@ export default function SissoneResponsivePrototype() {
         student.email.toLowerCase().includes(searchTerm.toLowerCase())
       const matchesUnit = unitFilter === "all" || student.unitId === unitFilter // Corrected to use unitFilter
       const matchesFrequency =
-        frequencyFilter === "all" || student.frequency.toString() === frequencyFilter.toLowerCase() // Corrected comparison
+        frequencyFilter === "all" ||
+        (frequencyFilter === "high" && student.frequency >= 80) ||
+        (frequencyFilter === "medium" && student.frequency >= 50 && student.frequency < 80) ||
+        (frequencyFilter === "low" && student.frequency < 50) // Corrected comparison
 
       return matchesSearch && matchesUnit && matchesFrequency
     })
@@ -3000,7 +3004,7 @@ export default function SissoneResponsivePrototype() {
               <div className="flex items-center gap-2">
                 <Building2 className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
                 <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                  {mockUnits.find((u) => u.id === classData.unit)?.name || "Unidade Centro"}
+                  {classData.unit ? mockUnits.find((u) => u.id === classData.unit)?.name : "Unidade Centro"}
                 </span>
               </div>
 
@@ -3017,7 +3021,7 @@ export default function SissoneResponsivePrototype() {
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
                     <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                      {classData.date || "Data de início"}
+                      {classData.date || "15 de março, 2024"}
                       {classData.hasEndDate && classData.endDate
                         ? ` até ${classData.endDate}`
                         : " (Sem data de término)"}
