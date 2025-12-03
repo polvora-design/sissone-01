@@ -1798,7 +1798,7 @@ export default function SissoneResponsivePrototype() {
                       {classItem.isRecurring && (
                         <span
                           className="text-xs px-2 py-1 rounded"
-                          style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                          style={{ backgroundColor: "#CFB2A8", color: "#3D2E" }}
                         >
                           Recorrente: {classItem.frequency}
                         </span>
@@ -3016,7 +3016,7 @@ export default function SissoneResponsivePrototype() {
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
                     <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                      {classData.date || "Data de início"}
+                      {classData.date || "15 de março, 2024"}
                       {classData.hasEndDate && classData.endDate
                         ? ` até ${classData.endDate}`
                         : " (Sem data de término)"}
