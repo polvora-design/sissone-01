@@ -3292,6 +3292,7 @@ export default function SissoneResponsivePrototype() {
         </div>
       </div>
 
+      {/* Mobile Bottom Navigation */}
       <div
         className="lg:hidden fixed bottom-0 left-0 right-0 flex justify-around items-center px-2 py-3 border-t z-30 shadow-lg"
         style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
@@ -3319,7 +3320,12 @@ export default function SissoneResponsivePrototype() {
             </Button>
           )
         })}
-        <Button variant="ghost" size="sm" className="flex flex-col items-center gap-1 h-auto py-2 px-1 min-w-0">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigateTo("user-profile")}
+          className="flex flex-col items-center gap-1 h-auto py-2 px-1 min-w-0"
+        >
           <div
             className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center"
             style={{ backgroundColor: "#CFB2A8" }}
