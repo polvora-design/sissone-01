@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -3090,104 +3090,124 @@ export default function SissoneResponsivePrototype() {
 
   const renderUserProfile = () => (
     <div className="p-4 lg:p-6 pb-24 lg:pb-6">
-      {" "}
-      {/* Added padding to match other screens */}
-      <div className="max-w-2xl mx-auto">
-        {" "}
-        {/* Centering content */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Meus Dados de Login</CardTitle>
-            <CardDescription>Gerencie suas informações pessoais e credenciais de acesso</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex justify-center mb-6">
-              <div
-                className="w-24 h-24 rounded-full flex items-center justify-center"
-                style={{ backgroundColor: "#CFB2A8" }}
-              >
-                <User className="w-12 h-12" style={{ color: "#3D2C2E" }} />
+      <div className="max-w-6xl mx-auto space-y-8">
+        <div>
+          <h2 className="text-lg lg:text-xl font-semibold mb-4" style={{ color: "#3D2C2E" }}>
+            Meus Dados de Login
+          </h2>
+          <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <CardContent className="p-6">
+              <div className="flex justify-center mb-6">
+                <div
+                  className="w-24 h-24 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: "#CFB2A8" }}
+                >
+                  <User className="w-12 h-12" style={{ color: "#3D2C2E" }} />
+                </div>
               </div>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="space-y-2">
-                <Label htmlFor="profile-name">Nome Completo *</Label>
-                <Input
-                  id="profile-name"
-                  value={userProfileForm.name}
-                  onChange={(e) => setUserProfileForm({ ...userProfileForm, name: e.target.value })}
-                  placeholder="Digite seu nome"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="profile-email">Email *</Label>
-                <Input
-                  id="profile-email"
-                  type="email"
-                  value={userProfileForm.email}
-                  onChange={(e) => setUserProfileForm({ ...userProfileForm, email: e.target.value })}
-                  placeholder="seu@email.com"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="profile-phone">Telefone *</Label>
-                <Input
-                  id="profile-phone"
-                  type="tel"
-                  value={userProfileForm.phone}
-                  onChange={(e) => setUserProfileForm({ ...userProfileForm, phone: e.target.value })}
-                  placeholder="+55 (11) 98765-4321"
-                />
-              </div>
-            </div>
-
-            <div className="border-t pt-4 mt-6">
-              <h3 className="text-lg font-semibold mb-4" style={{ color: "#3D2C2E" }}>
-                Alterar Senha
-              </h3>
-              <p className="text-sm text-gray-500 mb-4">Deixe em branco se não desejar alterar sua senha</p>
 
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="profile-password">Nova Senha</Label>
+                  <Label htmlFor="profile-name" style={{ color: "#3D2C2E" }}>
+                    Nome Completo *
+                  </Label>
                   <Input
-                    id="profile-password"
-                    type="password"
-                    value={userProfileForm.password}
-                    onChange={(e) => setUserProfileForm({ ...userProfileForm, password: e.target.value })}
-                    placeholder="Digite a nova senha"
+                    id="profile-name"
+                    value={userProfileForm.name}
+                    onChange={(e) => setUserProfileForm({ ...userProfileForm, name: e.target.value })}
+                    placeholder="Digite seu nome"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="profile-confirm-password">Confirmar Nova Senha</Label>
+                  <Label htmlFor="profile-email" style={{ color: "#3D2C2E" }}>
+                    Email *
+                  </Label>
                   <Input
-                    id="profile-confirm-password"
-                    type="password"
-                    value={userProfileForm.confirmPassword}
-                    onChange={(e) => setUserProfileForm({ ...userProfileForm, confirmPassword: e.target.value })}
-                    placeholder="Confirme a nova senha"
+                    id="profile-email"
+                    type="email"
+                    value={userProfileForm.email}
+                    onChange={(e) => setUserProfileForm({ ...userProfileForm, email: e.target.value })}
+                    placeholder="seu@email.com"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="profile-phone" style={{ color: "#3D2C2E" }}>
+                    Telefone *
+                  </Label>
+                  <Input
+                    id="profile-phone"
+                    type="tel"
+                    value={userProfileForm.phone}
+                    onChange={(e) => setUserProfileForm({ ...userProfileForm, phone: e.target.value })}
+                    placeholder="+55 (11) 98765-4321"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
                   />
                 </div>
               </div>
-            </div>
-          </CardContent>
-          <CardFooter className="flex flex-col sm:flex-row gap-3">
-            <Button onClick={() => navigateTo("dashboard")} variant="outline" className="w-full sm:w-auto">
-              Cancelar
-            </Button>
-            <Button
-              onClick={handleUserProfileUpdate}
-              className="w-full sm:w-auto"
-              style={{ backgroundColor: "#3D2C2E" }}
-            >
-              Salvar Alterações
-            </Button>
-          </CardFooter>
-        </Card>
+
+              <div className="border-t pt-4 mt-6" style={{ borderColor: "#CFB2A8" }}>
+                <h3 className="text-lg font-semibold mb-4" style={{ color: "#3D2C2E" }}>
+                  Alterar Senha
+                </h3>
+                <p className="text-sm mb-4" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                  Deixe em branco se não desejar alterar sua senha
+                </p>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="profile-password" style={{ color: "#3D2C2E" }}>
+                      Nova Senha
+                    </Label>
+                    <Input
+                      id="profile-password"
+                      type="password"
+                      value={userProfileForm.password}
+                      onChange={(e) => setUserProfileForm({ ...userProfileForm, password: e.target.value })}
+                      placeholder="Digite a nova senha"
+                      style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="profile-confirm-password" style={{ color: "#3D2C2E" }}>
+                      Confirmar Nova Senha
+                    </Label>
+                    <Input
+                      id="profile-confirm-password"
+                      type="password"
+                      value={userProfileForm.confirmPassword}
+                      onChange={(e) => setUserProfileForm({ ...userProfileForm, confirmPassword: e.target.value })}
+                      placeholder="Confirme a nova senha"
+                      style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3 mt-6">
+                <Button
+                  onClick={() => navigateTo("dashboard")}
+                  variant="outline"
+                  className="w-full sm:w-auto"
+                  style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  onClick={handleUserProfileUpdate}
+                  className="w-full sm:w-auto"
+                  style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                >
+                  Salvar Alterações
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   )
