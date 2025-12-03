@@ -3515,8 +3515,7 @@ const SissonePrototype = () => {
                   backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23E5D6CD' width='100' height='100'/%3E%3Cpath d='M0 0L50 50M50 0L100 50M0 50L50 100M50 50L100 100' stroke='%23CFB2A8' strokeWidth='1'/%3E%3C/svg%3E")`,
                   backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
                 }}
-              />
-              <div className="absolute inset-0 pointer-events-none overflow-visible">
+              >
                 {getFilteredClasses()
                   .slice(0, 10)
                   .map((classItem, idx) => (
@@ -3550,8 +3549,8 @@ const SissonePrototype = () => {
                       </div>
 
                       {hoveredPin === classItem.id && (
-                        <div className="absolute top-14 left-1/2 -translate-x-1/2 w-72 bg-card rounded-lg shadow-xl overflow-hidden border border-border pointer-events-none">
-                          <div className="relative w-full h-40">
+                        <div className="absolute top-14 left-1/2 -translate-x-1/2 w-64 bg-card rounded-lg shadow-xl overflow-hidden border border-border pointer-events-none z-50">
+                          <div className="relative w-full h-32">
                             <Image
                               src={classItem.image || "/placeholder.svg"}
                               alt={classItem.name}
@@ -3559,17 +3558,17 @@ const SissonePrototype = () => {
                               className="object-cover"
                             />
                           </div>
-                          <div className="p-4">
-                            <h4 className="font-semibold text-foreground text-base line-clamp-1 mb-1">
+                          <div className="p-3">
+                            <h4 className="font-semibold text-foreground text-sm line-clamp-1 mb-1">
                               {classItem.name}
                             </h4>
-                            <p className="text-sm text-foreground opacity-70 mb-3">{classItem.school}</p>
+                            <p className="text-xs text-foreground opacity-70 mb-2">{classItem.school}</p>
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-1">
-                                <Star className="h-4 w-4 fill-accent text-accent" />
-                                <span className="text-sm font-medium text-foreground">{classItem.rating}</span>
+                                <Star className="h-3 w-3 fill-accent text-accent" />
+                                <span className="text-xs font-medium text-foreground">{classItem.rating}</span>
                               </div>
-                              <span className="text-lg font-bold text-foreground">{classItem.price}</span>
+                              <span className="text-sm font-bold text-foreground">{classItem.price}</span>
                             </div>
                           </div>
                         </div>
