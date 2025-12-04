@@ -3275,8 +3275,9 @@ const SissonePrototype = () => {
                 onMouseUp={handleMapMouseUp}
                 onMouseLeave={handleMapMouseUp}
                 style={{
-                  backgroundImage: `url('/sao-paulo-map.png')`,
-                  backgroundSize: "cover",
+                  backgroundImage: `url('/sao-paulo-map.jpg')`,
+                  backgroundSize: "150%",
+                  backgroundRepeat: "no-repeat",
                   backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
                 }}
               >
@@ -3531,8 +3532,9 @@ const SissonePrototype = () => {
                 onMouseUp={handleMapMouseUp}
                 onMouseLeave={handleMapMouseUp}
                 style={{
-                  backgroundImage: `url('/sao-paulo-map.png')`,
-                  backgroundSize: "cover",
+                  backgroundImage: `url('/sao-paulo-map.jpg')`,
+                  backgroundSize: "150%",
+                  backgroundRepeat: "no-repeat",
                   backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
                 }}
               >
