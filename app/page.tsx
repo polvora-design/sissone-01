@@ -38,6 +38,7 @@ type Screen = "home" | "filters" | "detail" | "schedule" | "confirmation" | "sea
 
 const SissonePrototype = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>("home")
+  const [previousScreen, setPreviousScreen] = useState<Screen>("home")
   const [favorites, setFavorites] = useState<number[]>([])
   const [selectedClass, setSelectedClass] = useState<(typeof classes)[0] | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -167,6 +168,11 @@ const SissonePrototype = () => {
 
   const toggleFavorite = (id: number) => {
     setFavorites((prev) => (prev.includes(id) ? prev.filter((fav) => fav !== id) : [...prev, id]))
+  }
+
+  const navigateToScreen = (newScreen: Screen) => {
+    setPreviousScreen(currentScreen)
+    setCurrentScreen(newScreen)
   }
 
   // const handleMobileSearchOpen = () => { // Replaced by logic within showMobileSearchModal toggle
@@ -3224,7 +3230,12 @@ const SissonePrototype = () => {
       <div className="bg-background shadow-sm flex-shrink-0">
         <div className="mx-auto w-full max-w-[1044px] px-4 py-4">
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-secondary">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigateToScreen(previousScreen)}
+              className="hover:bg-secondary"
+            >
               <ArrowLeft className="h-5 w-5" />
             </Button>
 
@@ -4028,7 +4039,12 @@ const SissonePrototype = () => {
       {/* Header - Fixed at top */}
       <div className="flex-shrink-0 bg-background shadow-sm">
         <div className="mx-auto w-full max-w-[1040px] p-4 flex items-center gap-3">
-          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-secondary">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigateToScreen(previousScreen)}
+            className="hover:bg-secondary"
+          >
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <h1 className="text-lg font-semibold text-foreground">Detalhes da Aula</h1>
@@ -4283,7 +4299,12 @@ const SissonePrototype = () => {
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
         <div className="bg-background p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
-          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("detail")} className="hover:bg-secondary">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigateToScreen(previousScreen)}
+            className="hover:bg-secondary"
+          >
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <h1 className="text-lg font-semibold text-foreground">Agendar Experimental</h1>
@@ -4428,7 +4449,12 @@ const SissonePrototype = () => {
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
         <div className="bg-background p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
-          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-secondary">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigateToScreen(previousScreen)}
+            className="hover:bg-secondary"
+          >
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <h1 className="text-lg font-semibold text-foreground">Confirmação</h1>
