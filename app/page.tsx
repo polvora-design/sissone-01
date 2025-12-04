@@ -3054,12 +3054,7 @@ const SissonePrototype = () => {
       <div className="bg-background shadow-sm flex-shrink-0">
         <div className="mx-auto w-full max-w-[1044px] px-4 py-4">
           <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => navigateToScreen(previousScreen)}
-              className="hover:bg-secondary"
-            >
+            <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-secondary">
               <ArrowLeft className="h-5 w-5" />
             </Button>
 
