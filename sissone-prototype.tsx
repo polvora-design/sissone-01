@@ -4,7 +4,20 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, Star, Users, BarChart3, Calendar, CheckCircle, ArrowLeft, Clock, MapPin } from "lucide-react"
+import {
+  ArrowRight,
+  Star,
+  Users,
+  BarChart3,
+  Calendar,
+  CheckCircle,
+  ArrowLeft,
+  Clock,
+  MapPin,
+  Share2,
+  Copy,
+  Check,
+} from "lucide-react"
 
 const screens = ["landing", "registration", "onboarding"] as const
 
@@ -40,6 +53,14 @@ export default function SissonePrototype() {
 }
 
 function LandingScreen({ onNext }: { onNext: () => void }) {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText("sissone.com.br/escola-ballet-maria-clara")
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
   const benefits = [
     {
       icon: Users,
@@ -249,6 +270,60 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
 
             {/* Divider */}
             <div className="border-t border-[#E5D6CD] my-8" />
+
+            {/* QR code and shareable link section */}
+            <div className="bg-[#F5F0EB] rounded-lg p-6 mb-8">
+              <div className="flex flex-col lg:flex-row gap-6 items-center">
+                {/* QR Code */}
+                <div className="flex-shrink-0">
+                  <div className="bg-white p-4 rounded-lg shadow-md">
+                    <img src="/qr-code-for-dance-school-profile.jpg" alt="QR Code do perfil" className="w-40 h-40" />
+                  </div>
+                </div>
+
+                {/* Link info */}
+                <div className="flex-1 space-y-4 text-center lg:text-left">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 justify-center lg:justify-start">
+                      <Share2 className="h-5 w-5 text-[#3D2C2E]" />
+                      <h4 className="text-lg font-bold text-[#3D2C2E]">Compartilhe Seu Perfil</h4>
+                    </div>
+                    <p className="text-sm text-[#3D2C2E] opacity-80">
+                      Use este link único e QR code em suas ações de marketing, redes sociais e materiais impressos
+                    </p>
+                  </div>
+
+                  {/* Copyable link */}
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <div className="flex-1 bg-white border border-[#E5D6CD] rounded-lg px-4 py-3 flex items-center justify-between">
+                      <span className="text-sm text-[#3D2C2E] font-mono truncate">
+                        sissone.com.br/escola-ballet-maria-clara
+                      </span>
+                    </div>
+                    <Button
+                      onClick={handleCopyLink}
+                      className="bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white px-4 whitespace-nowrap"
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="h-4 w-4 mr-2" />
+                          Copiado!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="h-4 w-4 mr-2" />
+                          Copiar Link
+                        </>
+                      )}
+                    </Button>
+                  </div>
+
+                  <p className="text-xs text-[#3D2C2E] opacity-70">
+                    💡 Dica: Adicione o QR code em seus flyers, cartões de visita e na recepção da sua escola
+                  </p>
+                </div>
+              </div>
+            </div>
 
             {/* Cronograma de aulas */}
             <div className="space-y-6">
