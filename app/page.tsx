@@ -3957,7 +3957,7 @@ const SissonePrototype = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="bg-background p-4 shadow-sm flex items-center gap-3">
-        <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")}>
+        <Button variant="ghost" size="icon" onClick={() => navigateToScreen(previousScreen)}>
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <h1 className="text-lg font-semibold text-foreground">Filtros</h1>
@@ -4025,7 +4025,7 @@ const SissonePrototype = () => {
         {/* Using semantic primary token */}
         <Button
           className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12"
-          onClick={() => setCurrentScreen("search-results")}
+          onClick={() => navigateToScreen("search-results")}
         >
           Aplicar Filtros
         </Button>
@@ -4200,7 +4200,7 @@ const SissonePrototype = () => {
                   </div>
                   <Button
                     className="bg-primary hover:bg-primary/90 text-primary-foreground px-8"
-                    onClick={() => setCurrentScreen("schedule")}
+                    onClick={() => navigateToScreen("schedule")}
                   >
                     Agendar Experimental
                   </Button>
