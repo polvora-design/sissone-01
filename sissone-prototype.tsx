@@ -90,7 +90,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
       location: "Estúdio Principal",
       students: 12,
       maxStudents: 15,
-      image: "/ballet-dance-class.png",
+      image: "/classical-ballet-class-with-barre-exercises.jpg",
     },
     {
       id: 2,
@@ -102,7 +102,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
       location: "Sala 2",
       students: 8,
       maxStudents: 10,
-      image: "/contemporary-dance-class.png",
+      image: "/contemporary-dance-expressive-movement.jpg",
     },
     {
       id: 3,
@@ -114,7 +114,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
       location: "Estúdio Principal",
       students: 15,
       maxStudents: 15,
-      image: "/ballet-dance-class.png",
+      image: "/children-kids-ballet-dance-class.jpg",
     },
     {
       id: 4,
@@ -126,7 +126,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
       location: "Sala 1",
       students: 10,
       maxStudents: 12,
-      image: "/contemporary-dance-class.png",
+      image: "/modern-jazz-dance-energetic-performance.jpg",
     },
     {
       id: 5,
@@ -138,7 +138,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
       location: "Sala 2",
       students: 14,
       maxStudents: 15,
-      image: "/contemporary-dance-class.png",
+      image: "/teen-hip-hop-street-dance-urban-style.jpg",
     },
     {
       id: 6,
@@ -150,7 +150,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
       location: "Estúdio Principal",
       students: 6,
       maxStudents: 8,
-      image: "/ballet-dance-class.png",
+      image: "/advanced-ballet-pointe-shoes-professional-dancers.jpg",
     },
   ]
 
