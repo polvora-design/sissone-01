@@ -173,7 +173,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
           <img
             src="/dance-students-dancing-in-motion-studio.jpg"
             alt="Grupo de dançarinos praticando em estúdio de dança"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-top"
           />
         </div>
 
@@ -212,7 +212,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
         <Card className="bg-white border-[#E5D6CD] overflow-hidden shadow-lg">
           {/* Header com foto de capa grande */}
           <div className="relative h-48 md:h-64 lg:h-80">
-            <img src="/images/image.png" alt="Capa da escola" className="w-full h-full object-cover" />
+            <img src="/images/image.png" alt="Capa da escola" className="w-full h-full object-cover object-top" />
             <div className="absolute inset-0 bg-gradient-to-b from-[#3D2C2E]/20 to-[#3D2C2E]/60" />
 
             {/* Foto de perfil sobreposta */}
