@@ -104,6 +104,19 @@ const SissonePrototype = () => {
   // ADDED STATE: hover/active map pin
   const [hoveredPin, setHoveredPin] = useState<string | null>(null)
 
+  const getRandomPinPositions = () => [
+    { left: 25, top: 18 },
+    { left: 42, top: 35 },
+    { left: 68, top: 22 },
+    { left: 55, top: 58 },
+    { left: 78, top: 72 },
+    { left: 33, top: 67 },
+    { left: 15, top: 45 },
+    { left: 62, top: 42 },
+    { left: 48, top: 78 },
+    { left: 85, top: 38 },
+  ]
+
   const categoryRefs = {
     today: useRef<HTMLDivElement>(null),
     contemporary: useRef<HTMLDivElement>(null),
@@ -3262,69 +3275,75 @@ const SissonePrototype = () => {
                 onMouseUp={handleMapMouseUp}
                 onMouseLeave={handleMapMouseUp}
                 style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23E5D6CD' width='100' height='100'/%3E%3Cpath d='M0 0L50 50M50 0L100 50M0 50L50 100M50 50L100 100' stroke='%23CFB2A8' strokeWidth='1'/%3E%3C/svg%3E")`,
+                  backgroundImage: `url('/sao-paulo-map.png')`,
+                  backgroundSize: "cover",
                   backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
                 }}
               >
                 {getFilteredClasses()
                   .slice(0, 8)
-                  .map((classItem, idx) => (
-                    <div
-                      key={classItem.id}
-                      className="absolute"
-                      style={{
-                        left: `${30 + idx * 15 + mapPosition.x * 0.1}%`,
-                        top: `${25 + (idx % 3) * 20 + mapPosition.y * 0.1}%`,
-                        transform: "translate(-50%, -50%)",
-                        zIndex: hoveredPin === classItem.id ? 50 : 10,
-                      }}
-                      onMouseEnter={() => setHoveredPin(classItem.id)}
-                      onMouseLeave={() => setHoveredPin(null)}
-                    >
-                      <div
-                        className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border-2 border-primary"
-                        onClick={() => {
-                          setSelectedClass(classItem)
-                          setCurrentImageIndex(0)
-                          setCurrentScreen("detail")
-                        }}
-                      >
-                        <Image
-                          src={classItem.image || "/placeholder.svg"}
-                          alt={classItem.name}
-                          width={40}
-                          height={40}
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
+                  .map((classItem, idx) => {
+                    const positions = getRandomPinPositions()
+                    const position = positions[idx % positions.length]
 
-                      {hoveredPin === classItem.id && (
-                        <div className="absolute top-12 left-1/2 -translate-x-1/2 w-64 bg-card rounded-lg shadow-xl overflow-hidden border border-border pointer-events-none">
-                          <div className="relative w-full h-32">
-                            <Image
-                              src={classItem.image || "/placeholder.svg"}
-                              alt={classItem.name}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                          <div className="p-3">
-                            <h4 className="font-semibold text-foreground text-sm line-clamp-1 mb-1">
-                              {classItem.name}
-                            </h4>
-                            <p className="text-xs text-foreground opacity-70 mb-2">{classItem.school}</p>
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-1">
-                                <Star className="h-3 w-3 fill-accent text-accent" />
-                                <span className="text-xs font-medium text-foreground">{classItem.rating}</span>
+                    return (
+                      <div
+                        key={classItem.id}
+                        className="absolute"
+                        style={{
+                          left: `${position.left + mapPosition.x * 0.05}%`,
+                          top: `${position.top + mapPosition.y * 0.05}%`,
+                          transform: "translate(-50%, -50%)",
+                          zIndex: hoveredPin === classItem.id ? 50 : 10,
+                        }}
+                        onMouseEnter={() => setHoveredPin(classItem.id)}
+                        onMouseLeave={() => setHoveredPin(null)}
+                      >
+                        <div
+                          className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border-2 border-primary"
+                          onClick={() => {
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            setCurrentScreen("detail")
+                          }}
+                        >
+                          <Image
+                            src={classItem.image || "/placeholder.svg"}
+                            alt={classItem.name}
+                            width={40}
+                            height={40}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+
+                        {hoveredPin === classItem.id && (
+                          <div className="absolute top-12 left-1/2 -translate-x-1/2 w-64 bg-card rounded-lg shadow-xl overflow-hidden border border-border pointer-events-none">
+                            <div className="relative w-full h-32">
+                              <Image
+                                src={classItem.image || "/placeholder.svg"}
+                                alt={classItem.name}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                            <div className="p-3">
+                              <h4 className="font-semibold text-foreground text-sm line-clamp-1 mb-1">
+                                {classItem.name}
+                              </h4>
+                              <p className="text-xs text-foreground opacity-70 mb-2">{classItem.school}</p>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-1">
+                                  <Star className="h-3 w-3 fill-accent text-accent" />
+                                  <span className="text-xs font-medium text-foreground">{classItem.rating}</span>
+                                </div>
+                                <span className="text-sm font-bold text-foreground">{classItem.price}</span>
                               </div>
-                              <span className="text-sm font-bold text-foreground">{classItem.price}</span>
                             </div>
                           </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                        )}
+                      </div>
+                    )
+                  })}
               </div>
               <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-card/90 px-4 py-2 rounded-full text-sm text-foreground shadow-md pointer-events-none">
                 Arraste o mapa para explorar
@@ -3512,69 +3531,75 @@ const SissonePrototype = () => {
                 onMouseUp={handleMapMouseUp}
                 onMouseLeave={handleMapMouseUp}
                 style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23E5D6CD' width='100' height='100'/%3E%3Cpath d='M0 0L50 50M50 0L100 50M0 50L50 100M50 50L100 100' stroke='%23CFB2A8' strokeWidth='1'/%3E%3C/svg%3E")`,
+                  backgroundImage: `url('/sao-paulo-map.png')`,
+                  backgroundSize: "cover",
                   backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
                 }}
               >
                 {getFilteredClasses()
                   .slice(0, 10)
-                  .map((classItem, idx) => (
-                    <div
-                      key={classItem.id}
-                      className="absolute pointer-events-auto"
-                      style={{
-                        left: `${30 + idx * 12 + mapPosition.x * 0.1}%`,
-                        top: `${25 + (idx % 4) * 20 + mapPosition.y * 0.1}%`,
-                        transform: "translate(-50%, -50%)",
-                        zIndex: hoveredPin === classItem.id ? 50 : 10,
-                      }}
-                      onMouseEnter={() => setHoveredPin(classItem.id)}
-                      onMouseLeave={() => setHoveredPin(null)}
-                    >
-                      <div
-                        className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border-2 border-primary"
-                        onClick={() => {
-                          setSelectedClass(classItem)
-                          setCurrentImageIndex(0)
-                          setCurrentScreen("detail")
-                        }}
-                      >
-                        <Image
-                          src={classItem.image || "/placeholder.svg"}
-                          alt={classItem.name}
-                          width={48}
-                          height={48}
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
+                  .map((classItem, idx) => {
+                    const positions = getRandomPinPositions()
+                    const position = positions[idx % positions.length]
 
-                      {hoveredPin === classItem.id && (
-                        <div className="absolute top-14 left-1/2 -translate-x-1/2 w-64 bg-card rounded-lg shadow-xl overflow-hidden border border-border pointer-events-none z-50">
-                          <div className="relative w-full h-32">
-                            <Image
-                              src={classItem.image || "/placeholder.svg"}
-                              alt={classItem.name}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                          <div className="p-3">
-                            <h4 className="font-semibold text-foreground text-sm line-clamp-1 mb-1">
-                              {classItem.name}
-                            </h4>
-                            <p className="text-xs text-foreground opacity-70 mb-2">{classItem.school}</p>
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-1">
-                                <Star className="h-3 w-3 fill-accent text-accent" />
-                                <span className="text-xs font-medium text-foreground">{classItem.rating}</span>
+                    return (
+                      <div
+                        key={classItem.id}
+                        className="absolute pointer-events-auto"
+                        style={{
+                          left: `${position.left + mapPosition.x * 0.05}%`,
+                          top: `${position.top + mapPosition.y * 0.05}%`,
+                          transform: "translate(-50%, -50%)",
+                          zIndex: hoveredPin === classItem.id ? 50 : 10,
+                        }}
+                        onMouseEnter={() => setHoveredPin(classItem.id)}
+                        onMouseLeave={() => setHoveredPin(null)}
+                      >
+                        <div
+                          className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border-2 border-primary"
+                          onClick={() => {
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            setCurrentScreen("detail")
+                          }}
+                        >
+                          <Image
+                            src={classItem.image || "/placeholder.svg"}
+                            alt={classItem.name}
+                            width={48}
+                            height={48}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+
+                        {hoveredPin === classItem.id && (
+                          <div className="absolute top-14 left-1/2 -translate-x-1/2 w-64 bg-card rounded-lg shadow-xl overflow-hidden border border-border pointer-events-none z-50">
+                            <div className="relative w-full h-32">
+                              <Image
+                                src={classItem.image || "/placeholder.svg"}
+                                alt={classItem.name}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                            <div className="p-3">
+                              <h4 className="font-semibold text-foreground text-sm line-clamp-1 mb-1">
+                                {classItem.name}
+                              </h4>
+                              <p className="text-xs text-foreground opacity-70 mb-2">{classItem.school}</p>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-1">
+                                  <Star className="h-3 w-3 fill-accent text-accent" />
+                                  <span className="text-xs font-medium text-foreground">{classItem.rating}</span>
+                                </div>
+                                <span className="text-sm font-bold text-foreground">{classItem.price}</span>
                               </div>
-                              <span className="text-sm font-bold text-foreground">{classItem.price}</span>
                             </div>
                           </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                        )}
+                      </div>
+                    )
+                  })}
               </div>
               <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-card/90 px-4 py-2 rounded-full text-sm text-foreground shadow-md pointer-events-none">
                 Arraste o mapa para explorar
