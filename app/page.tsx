@@ -105,16 +105,16 @@ const SissonePrototype = () => {
   const [hoveredPin, setHoveredPin] = useState<string | null>(null)
 
   const getRandomPinPositions = () => [
-    { left: 25, top: 18 },
-    { left: 42, top: 35 },
-    { left: 68, top: 22 },
-    { left: 55, top: 58 },
-    { left: 78, top: 72 },
-    { left: 33, top: 67 },
-    { left: 15, top: 45 },
-    { left: 62, top: 42 },
-    { left: 48, top: 78 },
-    { left: 85, top: 38 },
+    { left: 15, top: 12 },
+    { left: 35, top: 28 },
+    { left: 65, top: 15 },
+    { left: 50, top: 55 },
+    { left: 82, top: 70 },
+    { left: 25, top: 75 },
+    { left: 8, top: 45 },
+    { left: 72, top: 38 },
+    { left: 45, top: 85 },
+    { left: 88, top: 25 },
   ]
 
   const categoryRefs = {
@@ -3276,7 +3276,7 @@ const SissonePrototype = () => {
                 onMouseLeave={handleMapMouseUp}
                 style={{
                   backgroundImage: `url('/sao-paulo-map.jpg')`,
-                  backgroundSize: "200%", // increased zoom from 150% to 200%
+                  backgroundSize: "250%", // Increased zoom from 200% to 250%
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
                 }}
@@ -3533,7 +3533,7 @@ const SissonePrototype = () => {
                 onMouseLeave={handleMapMouseUp}
                 style={{
                   backgroundImage: `url('/sao-paulo-map.jpg')`,
-                  backgroundSize: "200%", // increased zoom from 150% to 200%
+                  backgroundSize: "250%", // Increased zoom from 200% to 250%
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
                 }}
