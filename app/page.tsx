@@ -4209,18 +4209,18 @@ const SissonePrototype = () => {
           </Card>
 
           {/* Date Selection */}
-          {/* Using semantic card and border tokens */}
           <Card className="bg-card border-border">
             <CardHeader>
-              <h3 className="font-semibold text-foreground">Escolha o Dia</h3>
+              <h3 className="font-semibold text-foreground">Escolha o dia da sua aula teste</h3>
             </CardHeader>
             <CardContent className="space-y-3">
               {selectedClass?.days.map((day: string) => (
                 <Button
                   key={day}
                   variant="outline"
-                  // Using semantic border, foreground, and secondary tokens
-                  className="w-full justify-start border-primary text-foreground hover:bg-secondary bg-transparent"
+                  className={`w-full justify-start border-primary text-foreground hover:bg-secondary ${
+                    selectedDate === day ? "bg-primary text-primary-foreground hover:bg-primary/90" : "bg-transparent"
+                  }`}
                   onClick={() => {
                     setSelectedDate(day) // Set the specific day as selectedDate
                     // You might want to update selectedTime based on the day here if needed
