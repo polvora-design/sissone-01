@@ -212,11 +212,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
         <Card className="bg-white border-[#E5D6CD] overflow-hidden shadow-lg">
           {/* Header com foto de capa grande */}
           <div className="relative h-48 md:h-64 lg:h-80">
-            <img
-              src="/dance-instructor-teaching-a-class-with-students.jpg"
-              alt="Capa da escola"
-              className="w-full h-full object-cover"
-            />
+            <img src="/images/image.png" alt="Capa da escola" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-b from-[#3D2C2E]/20 to-[#3D2C2E]/60" />
 
             {/* Foto de perfil sobreposta */}
