@@ -215,7 +215,7 @@ const SissonePrototype = () => {
       modality: searchModality.join(", "), // Still using searchModality for multi-select
       location: selectedLocation, // From updates
     })
-    setCurrentScreen("search-results") // Navigate to search results
+    navigateToScreen("search-results") // Navigate to search results
   }
 
   const formatDateRange = () => {
@@ -1364,7 +1364,7 @@ const SissonePrototype = () => {
   }
 
   const handleCategoryClick = (categoryId: keyof typeof categoryRefs) => {
-    setCurrentScreen("search-results")
+    navigateToScreen("search-results")
     // setSearchModality([categoryId.replace("-", " ").charAt(0).toUpperCase() + categoryId.slice(1)]) // Replaced by updates logic
     setSelectedStyle(categoryId.replace("-", " ").charAt(0).toUpperCase() + categoryId.slice(1)) // Using selectedStyle from updates
   }
@@ -1749,7 +1749,7 @@ const SissonePrototype = () => {
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
+                      navigateToScreen("detail")
                     }}
                   >
                     <div className="relative h-48 w-full flex-shrink-0">
@@ -1759,22 +1759,6 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
-                      <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleFavorite(classItem.id)
-                        }}
-                      >
-                        <Heart
-                          className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
-                          }`}
-                        />
-                      </button>
-                      <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
-                      </div>
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -1796,7 +1780,7 @@ const SissonePrototype = () => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
-                            setCurrentScreen("detail")
+                            navigateToScreen("detail")
                           }}
                         >
                           Agendar
@@ -1848,7 +1832,7 @@ const SissonePrototype = () => {
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
+                      navigateToScreen("detail")
                     }}
                   >
                     <div className="relative h-48 w-full flex-shrink-0">
@@ -1858,22 +1842,6 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
-                      <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleFavorite(classItem.id)
-                        }}
-                      >
-                        <Heart
-                          className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
-                          }`}
-                        />
-                      </button>
-                      <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
-                      </div>
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -1895,7 +1863,7 @@ const SissonePrototype = () => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
-                            setCurrentScreen("detail")
+                            navigateToScreen("detail")
                           }}
                         >
                           Agendar
@@ -1947,7 +1915,7 @@ const SissonePrototype = () => {
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
+                      navigateToScreen("detail")
                     }}
                   >
                     <div className="relative h-48 w-full flex-shrink-0">
@@ -1957,22 +1925,6 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
-                      <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleFavorite(classItem.id)
-                        }}
-                      >
-                        <Heart
-                          className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
-                          }`}
-                        />
-                      </button>
-                      <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
-                      </div>
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -1994,7 +1946,7 @@ const SissonePrototype = () => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
-                            setCurrentScreen("detail")
+                            navigateToScreen("detail")
                           }}
                         >
                           Agendar
@@ -2046,7 +1998,7 @@ const SissonePrototype = () => {
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
+                      navigateToScreen("detail")
                     }}
                   >
                     <div className="relative h-48 w-full flex-shrink-0">
@@ -2056,22 +2008,6 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
-                      <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleFavorite(classItem.id)
-                        }}
-                      >
-                        <Heart
-                          className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
-                          }`}
-                        />
-                      </button>
-                      <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
-                      </div>
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2093,7 +2029,7 @@ const SissonePrototype = () => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
-                            setCurrentScreen("detail")
+                            navigateToScreen("detail")
                           }}
                         >
                           Agendar
@@ -2145,7 +2081,7 @@ const SissonePrototype = () => {
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
+                      navigateToScreen("detail")
                     }}
                   >
                     <div className="relative h-48 w-full flex-shrink-0">
@@ -2155,22 +2091,6 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
-                      <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleFavorite(classItem.id)
-                        }}
-                      >
-                        <Heart
-                          className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
-                          }`}
-                        />
-                      </button>
-                      <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
-                      </div>
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2192,7 +2112,7 @@ const SissonePrototype = () => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
-                            setCurrentScreen("detail")
+                            navigateToScreen("detail")
                           }}
                         >
                           Agendar
@@ -2244,7 +2164,7 @@ const SissonePrototype = () => {
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
+                      navigateToScreen("detail")
                     }}
                   >
                     <div className="relative h-48 w-full flex-shrink-0">
@@ -2254,22 +2174,6 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
-                      <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleFavorite(classItem.id)
-                        }}
-                      >
-                        <Heart
-                          className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
-                          }`}
-                        />
-                      </button>
-                      <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
-                      </div>
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2291,7 +2195,7 @@ const SissonePrototype = () => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
-                            setCurrentScreen("detail")
+                            navigateToScreen("detail")
                           }}
                         >
                           Agendar
@@ -2343,7 +2247,7 @@ const SissonePrototype = () => {
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
+                      navigateToScreen("detail")
                     }}
                   >
                     <div className="relative h-48 w-full flex-shrink-0">
@@ -2353,22 +2257,6 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
-                      <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleFavorite(classItem.id)
-                        }}
-                      >
-                        <Heart
-                          className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
-                          }`}
-                        />
-                      </button>
-                      <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
-                      </div>
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2390,7 +2278,7 @@ const SissonePrototype = () => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
-                            setCurrentScreen("detail")
+                            navigateToScreen("detail")
                           }}
                         >
                           Agendar
@@ -2442,7 +2330,7 @@ const SissonePrototype = () => {
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
+                      navigateToScreen("detail")
                     }}
                   >
                     <div className="relative h-48 w-full flex-shrink-0">
@@ -2452,22 +2340,6 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
-                      <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleFavorite(classItem.id)
-                        }}
-                      >
-                        <Heart
-                          className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
-                          }`}
-                        />
-                      </button>
-                      <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
-                      </div>
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2489,7 +2361,7 @@ const SissonePrototype = () => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
-                            setCurrentScreen("detail")
+                            navigateToScreen("detail")
                           }}
                         >
                           Agendar
@@ -2541,7 +2413,7 @@ const SissonePrototype = () => {
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
+                      navigateToScreen("detail")
                     }}
                   >
                     <div className="relative h-48 w-full flex-shrink-0">
@@ -2551,22 +2423,6 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
-                      <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleFavorite(classItem.id)
-                        }}
-                      >
-                        <Heart
-                          className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
-                          }`}
-                        />
-                      </button>
-                      <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
-                      </div>
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2588,7 +2444,7 @@ const SissonePrototype = () => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
-                            setCurrentScreen("detail")
+                            navigateToScreen("detail")
                           }}
                         >
                           Agendar
@@ -2640,7 +2496,7 @@ const SissonePrototype = () => {
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
+                      navigateToScreen("detail")
                     }}
                   >
                     <div className="relative h-48 w-full flex-shrink-0">
@@ -2650,22 +2506,6 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
-                      <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleFavorite(classItem.id)
-                        }}
-                      >
-                        <Heart
-                          className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
-                          }`}
-                        />
-                      </button>
-                      <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
-                      </div>
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2687,7 +2527,7 @@ const SissonePrototype = () => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
-                            setCurrentScreen("detail")
+                            navigateToScreen("detail")
                           }}
                         >
                           Agendar
@@ -2739,7 +2579,7 @@ const SissonePrototype = () => {
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
+                      navigateToScreen("detail")
                     }}
                   >
                     <div className="relative h-48 w-full flex-shrink-0">
@@ -2749,22 +2589,6 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
-                      <button
-                        className="absolute top-2 right-2 w-8 h-8 bg-card/90 rounded-full flex items-center justify-center hover:bg-card transition-colors z-10"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleFavorite(classItem.id)
-                        }}
-                      >
-                        <Heart
-                          className={`h-4 w-4 ${
-                            favorites.includes(classItem.id) ? "fill-red-500 text-red-500" : "text-foreground"
-                          }`}
-                        />
-                      </button>
-                      <div className="absolute top-2 left-2">
-                        <Badge className={`${classItem.tagColor} border-0 pointer-events-none`}>{classItem.tag}</Badge>
-                      </div>
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2786,7 +2610,7 @@ const SissonePrototype = () => {
                             e.stopPropagation()
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
-                            setCurrentScreen("detail")
+                            navigateToScreen("detail")
                           }}
                         >
                           Agendar
@@ -3316,7 +3140,7 @@ const SissonePrototype = () => {
                           onClick={() => {
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
-                            setCurrentScreen("detail")
+                            navigateToScreen("detail")
                           }}
                         >
                           <Image
@@ -3372,7 +3196,7 @@ const SissonePrototype = () => {
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
+                      navigateToScreen("detail")
                     }}
                   >
                     <div className="flex p-4 gap-4">
@@ -3434,7 +3258,7 @@ const SissonePrototype = () => {
                               e.stopPropagation()
                               setSelectedClass(classItem)
                               setCurrentImageIndex(0)
-                              setCurrentScreen("detail")
+                              navigateToScreen("detail")
                             }}
                           >
                             Ver detalhes
@@ -3460,7 +3284,7 @@ const SissonePrototype = () => {
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
-                      setCurrentScreen("detail")
+                      navigateToScreen("detail")
                     }}
                   >
                     <div className="flex p-4 gap-4">
@@ -3522,7 +3346,7 @@ const SissonePrototype = () => {
                               e.stopPropagation()
                               setSelectedClass(classItem)
                               setCurrentImageIndex(0)
-                              setCurrentScreen("detail")
+                              navigateToScreen("detail")
                             }}
                           >
                             Ver detalhes
@@ -3573,7 +3397,7 @@ const SissonePrototype = () => {
                           onClick={() => {
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
-                            setCurrentScreen("detail")
+                            navigateToScreen("detail")
                           }}
                         >
                           <Image
@@ -4424,7 +4248,7 @@ const SissonePrototype = () => {
                   // Assuming the user has selected a day from the rendered buttons
                   // For now, we'll assume selectedDate holds the chosen day's name
                 }
-                setCurrentScreen("confirmation")
+                navigateToScreen("confirmation")
               }}
             >
               Confirmar Agendamento
