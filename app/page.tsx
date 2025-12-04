@@ -3276,7 +3276,7 @@ const SissonePrototype = () => {
                 onMouseLeave={handleMapMouseUp}
                 style={{
                   backgroundImage: `url('/sao-paulo-map.jpg')`,
-                  backgroundSize: "150%",
+                  backgroundSize: "200%", // increased zoom from 150% to 200%
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
                 }}
@@ -3301,7 +3301,7 @@ const SissonePrototype = () => {
                         onMouseLeave={() => setHoveredPin(null)}
                       >
                         <div
-                          className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border-2 border-primary"
+                          className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border-2 border-primary"
                           onClick={() => {
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
@@ -3311,8 +3311,8 @@ const SissonePrototype = () => {
                           <Image
                             src={classItem.image || "/placeholder.svg"}
                             alt={classItem.name}
-                            width={40}
-                            height={40}
+                            width={56} // updated from 40 to 56
+                            height={56} // updated from 40 to 56
                             className="object-cover w-full h-full"
                           />
                         </div>
@@ -3533,7 +3533,7 @@ const SissonePrototype = () => {
                 onMouseLeave={handleMapMouseUp}
                 style={{
                   backgroundImage: `url('/sao-paulo-map.jpg')`,
-                  backgroundSize: "150%",
+                  backgroundSize: "200%", // increased zoom from 150% to 200%
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: `${mapPosition.x}px ${mapPosition.y}px`,
                 }}
@@ -3558,7 +3558,7 @@ const SissonePrototype = () => {
                         onMouseLeave={() => setHoveredPin(null)}
                       >
                         <div
-                          className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border-2 border-primary"
+                          className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform overflow-hidden border-2 border-primary"
                           onClick={() => {
                             setSelectedClass(classItem)
                             setCurrentImageIndex(0)
@@ -3568,8 +3568,8 @@ const SissonePrototype = () => {
                           <Image
                             src={classItem.image || "/placeholder.svg"}
                             alt={classItem.name}
-                            width={48}
-                            height={48}
+                            width={64} // updated from 48 to 64
+                            height={64} // updated from 48 to 64
                             className="object-cover w-full h-full"
                           />
                         </div>
