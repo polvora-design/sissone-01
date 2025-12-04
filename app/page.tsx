@@ -317,6 +317,35 @@ const SissonePrototype = () => {
     return days
   }
 
+  const getNextDateForDay = (dayName: string) => {
+    const daysMap: { [key: string]: number } = {
+      "Segunda-feira": 1,
+      "Terça-feira": 2,
+      "Quarta-feira": 3,
+      "Quinta-feira": 4,
+      "Sexta-feira": 5,
+      Sábado: 6,
+      Domingo: 0,
+    }
+
+    const today = new Date()
+    const targetDay = daysMap[dayName]
+    const currentDay = today.getDay()
+
+    let daysUntilTarget = targetDay - currentDay
+    if (daysUntilTarget <= 0) {
+      daysUntilTarget += 7
+    }
+
+    const targetDate = new Date(today)
+    targetDate.setDate(today.getDate() + daysUntilTarget)
+
+    const day = targetDate.getDate()
+    const month = targetDate.getMonth() + 1 // getMonth() is 0-indexed
+
+    return `${day}/${month}`
+  }
+
   const classes = [
     {
       id: 1,
@@ -4222,12 +4251,12 @@ const SissonePrototype = () => {
                     selectedDate === day ? "bg-primary text-primary-foreground hover:bg-primary/90" : "bg-transparent"
                   }`}
                   onClick={() => {
-                    setSelectedDate(day) // Set the specific day as selectedDate
-                    // You might want to update selectedTime based on the day here if needed
+                    setSelectedDate(day)
+                    setSelectedTime(selectedClass.time)
                   }}
                 >
                   <Calendar className="h-4 w-4 mr-2" />
-                  {day} - {selectedClass.time}
+                  {getNextDateForDay(day)} - {day} - {selectedClass.time}
                 </Button>
               ))}
             </CardContent>
@@ -4268,12 +4297,7 @@ const SissonePrototype = () => {
       <div className="mx-auto w-full max-w-[1040px]">
         {/* Header */}
         <div className="bg-background p-4 shadow-sm flex items-center gap-3 flex-shrink-0">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => navigateToScreen(previousScreen)}
-            className="hover:bg-secondary"
-          >
+          <Button variant="ghost" size="icon" onClick={() => setCurrentScreen("home")} className="hover:bg-secondary">
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <h1 className="text-lg font-semibold text-foreground">Confirmação</h1>
@@ -4303,16 +4327,18 @@ const SissonePrototype = () => {
                     <span className="text-sm text-foreground">{selectedClass.name}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm font-medium text-foreground">Studio:</span>
+                    <span className="text-sm font-medium text-foreground">Escola:</span>
                     <span className="text-sm text-foreground">{selectedClass.school}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-sm font-medium text-foreground">Data:</span>
-                    <span className="text-sm text-foreground">{selectedDate}</span>
+                    <span className="text-sm text-foreground">
+                      {selectedDate && `${getNextDateForDay(selectedDate)} - ${selectedDate}`}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-sm font-medium text-foreground">Horário:</span>
-                    <span className="text-sm text-foreground">{selectedTime}</span>
+                    <span className="text-sm text-foreground">{selectedTime || selectedClass.time}</span>
                   </div>
                 </div>
               )}
