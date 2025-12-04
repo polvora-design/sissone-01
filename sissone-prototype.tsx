@@ -173,7 +173,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
           <img
             src="/dance-class-students-practicing-with-visible-faces.jpg"
             alt="Grupo de dançarinos praticando em estúdio de dança"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
           />
         </div>
 
@@ -346,7 +346,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
                         <img
                           src={classItem.image || "/placeholder.svg"}
                           alt={classItem.name}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover object-center"
                         />
                       </div>
 
