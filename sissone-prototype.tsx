@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, Star, Users, BarChart3, Calendar, CheckCircle, ArrowLeft } from "lucide-react"
+import { ArrowRight, Star, Users, BarChart3, Calendar, CheckCircle, ArrowLeft, Clock, MapPin } from "lucide-react"
 
 const screens = ["landing", "registration", "onboarding"] as const
 
@@ -58,6 +58,81 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
     },
   ]
 
+  const classSchedule = [
+    {
+      id: 1,
+      name: "Ballet Clássico Iniciante",
+      level: "Iniciante",
+      duration: "60 min",
+      price: "R$ 50",
+      schedule: "Seg, Qua, Sex • 18:00",
+      location: "Estúdio Principal",
+      students: 12,
+      maxStudents: 15,
+      image: "/ballet-dance-class.png",
+    },
+    {
+      id: 2,
+      name: "Dança Contemporânea Avançada",
+      level: "Avançado",
+      duration: "90 min",
+      price: "R$ 75",
+      schedule: "Ter, Qui • 19:30",
+      location: "Sala 2",
+      students: 8,
+      maxStudents: 10,
+      image: "/contemporary-dance-class.png",
+    },
+    {
+      id: 3,
+      name: "Ballet Infantil",
+      level: "Infantil (6-12 anos)",
+      duration: "45 min",
+      price: "R$ 40",
+      schedule: "Seg, Qua • 16:00",
+      location: "Estúdio Principal",
+      students: 15,
+      maxStudents: 15,
+      image: "/ballet-dance-class.png",
+    },
+    {
+      id: 4,
+      name: "Jazz Moderno",
+      level: "Intermediário",
+      duration: "60 min",
+      price: "R$ 55",
+      schedule: "Ter, Qui, Sáb • 17:00",
+      location: "Sala 1",
+      students: 10,
+      maxStudents: 12,
+      image: "/contemporary-dance-class.png",
+    },
+    {
+      id: 5,
+      name: "Hip Hop Teens",
+      level: "Intermediário",
+      duration: "60 min",
+      price: "R$ 50",
+      schedule: "Qua, Sex • 17:30",
+      location: "Sala 2",
+      students: 14,
+      maxStudents: 15,
+      image: "/contemporary-dance-class.png",
+    },
+    {
+      id: 6,
+      name: "Ballet Clássico Avançado",
+      level: "Avançado",
+      duration: "90 min",
+      price: "R$ 80",
+      schedule: "Seg, Qua, Sex • 20:00",
+      location: "Estúdio Principal",
+      students: 6,
+      maxStudents: 8,
+      image: "/ballet-dance-class.png",
+    },
+  ]
+
   return (
     <div className="space-y-12 md:space-y-16 max-w-6xl mx-auto">
       <div className="flex justify-center">
@@ -106,21 +181,26 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
       </div>
 
       <div className="space-y-6 md:space-y-8">
-        <h2 className="text-2xl md:text-3xl font-bold text-[#3D2C2E] text-center">Veja Como Seu Perfil Ficará</h2>
+        <div className="text-center space-y-3">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#3D2C2E]">Veja Como Seu Perfil Ficará</h2>
+          <p className="text-base md:text-lg text-[#3D2C2E] opacity-80">
+            Mostre sua escola, aulas e horários de forma profissional
+          </p>
+        </div>
 
-        {/* Profile mockup integrado */}
-        <Card className="bg-white border-[#E5D6CD] overflow-hidden">
-          {/* Header com foto de capa e perfil */}
-          <div className="relative">
-            <div className="h-40 md:h-56 bg-gradient-to-br from-[#CFB2A8] to-[#E5D6CD] overflow-hidden">
-              <img
-                src="/dance-instructor-teaching-a-class-with-students.jpg"
-                alt="Capa da escola"
-                className="w-full h-full object-cover opacity-60"
-              />
-            </div>
-            <div className="absolute -bottom-12 md:-bottom-16 left-6 md:left-8">
-              <div className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-full p-1.5 shadow-lg">
+        <Card className="bg-white border-[#E5D6CD] overflow-hidden shadow-lg">
+          {/* Header com foto de capa grande */}
+          <div className="relative h-48 md:h-64 lg:h-80">
+            <img
+              src="/dance-instructor-teaching-a-class-with-students.jpg"
+              alt="Capa da escola"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#3D2C2E]/20 to-[#3D2C2E]/60" />
+
+            {/* Foto de perfil sobreposta */}
+            <div className="absolute -bottom-16 md:-bottom-20 left-6 md:left-8">
+              <div className="w-32 h-32 md:w-40 md:h-40 bg-white rounded-full p-2 shadow-xl">
                 <img
                   src="/dance-instructor-profile-photo.jpg"
                   alt="Foto do perfil"
@@ -130,115 +210,114 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
             </div>
           </div>
 
-          <CardContent className="pt-16 md:pt-20 px-6 md:px-8 pb-6">
+          <CardContent className="pt-20 md:pt-24 px-6 md:px-8 pb-8">
             {/* Informações do perfil */}
-            <div className="space-y-4 mb-6">
+            <div className="space-y-4 mb-8">
               <div>
-                <h3 className="text-xl md:text-2xl font-bold text-[#3D2C2E]">[Nome da Sua Escola]</h3>
-                <p className="text-sm text-[#3D2C2E] opacity-70 mt-1">Ballet Clássico & Contemporâneo</p>
+                <h3 className="text-2xl md:text-3xl font-bold text-[#3D2C2E]">Escola de Ballet Maria Clara</h3>
+                <p className="text-base text-[#3D2C2E] opacity-70 mt-2">
+                  Ballet Clássico • Contemporâneo • Jazz • Hip Hop
+                </p>
               </div>
 
-              <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="h-4 w-4 fill-[#CFB2A8] text-[#CFB2A8]" />
-                ))}
-                <span className="text-sm text-[#3D2C2E] ml-2">4.8 (24 avaliações)</span>
-                <span className="text-sm text-[#3D2C2E] opacity-70 ml-3">• 120 alunos</span>
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="flex items-center gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star key={star} className="h-5 w-5 fill-[#CFB2A8] text-[#CFB2A8]" />
+                  ))}
+                  <span className="text-base text-[#3D2C2E] ml-2 font-semibold">4.9</span>
+                  <span className="text-sm text-[#3D2C2E] opacity-70 ml-1">(127 avaliações)</span>
+                </div>
+                <span className="text-sm text-[#3D2C2E] opacity-70">•</span>
+                <div className="flex items-center gap-1.5">
+                  <Users className="h-4 w-4 text-[#3D2C2E] opacity-70" />
+                  <span className="text-sm text-[#3D2C2E] opacity-70">320 alunos</span>
+                </div>
+                <span className="text-sm text-[#3D2C2E] opacity-70">•</span>
+                <div className="flex items-center gap-1.5">
+                  <MapPin className="h-4 w-4 text-[#3D2C2E] opacity-70" />
+                  <span className="text-sm text-[#3D2C2E] opacity-70">São Paulo, SP</span>
+                </div>
               </div>
 
-              <p className="text-sm text-[#3D2C2E] opacity-80 leading-relaxed">
-                Professora especializada em ballet clássico e contemporâneo com mais de 10 anos de experiência.
-                Oferecemos aulas para todos os níveis em um ambiente acolhedor e profissional.
+              <p className="text-base text-[#3D2C2E] opacity-80 leading-relaxed">
+                Escola especializada em ballet clássico e danças modernas com mais de 15 anos de tradição. Nossa missão
+                é formar dançarinos técnicos e expressivos em um ambiente acolhedor, profissional e inspirador.
+                Oferecemos aulas para todas as idades e níveis.
               </p>
             </div>
 
             {/* Divider */}
-            <div className="border-t border-[#E5D6CD] my-6" />
+            <div className="border-t border-[#E5D6CD] my-8" />
 
-            {/* Lista de aulas */}
-            <div className="space-y-4">
-              <h4 className="text-lg font-semibold text-[#3D2C2E]">Aulas Disponíveis</h4>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Aula 1 */}
-                <div className="flex gap-3 p-3 rounded-lg hover:bg-[#F5F0EB] transition-colors border border-[#E5D6CD]">
-                  <div className="w-24 h-24 md:w-28 md:h-28 bg-[#E5D6CD] rounded-lg flex-shrink-0 overflow-hidden">
-                    <img src="/ballet-dance-class.png" alt="Ballet Clássico" className="w-full h-full object-cover" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h5 className="font-semibold text-[#3D2C2E] truncate">Ballet Clássico</h5>
-                    <p className="text-xs text-[#3D2C2E] opacity-70 mt-0.5">Iniciante</p>
-                    <p className="text-xs text-[#3D2C2E] opacity-70">60 minutos</p>
-                    <div className="flex items-center justify-between mt-2">
-                      <p className="text-sm font-semibold text-[#3D2C2E]">R$ 50/aula</p>
-                      <Button size="sm" className="bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white text-xs px-3 py-1 h-7">
-                        Ver
-                      </Button>
-                    </div>
-                  </div>
+            {/* Cronograma de aulas */}
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="text-xl md:text-2xl font-bold text-[#3D2C2E]">Cronograma de Aulas</h4>
+                  <p className="text-sm text-[#3D2C2E] opacity-70 mt-1">{classSchedule.length} aulas disponíveis</p>
                 </div>
+              </div>
 
-                {/* Aula 2 */}
-                <div className="flex gap-3 p-3 rounded-lg hover:bg-[#F5F0EB] transition-colors border border-[#E5D6CD]">
-                  <div className="w-24 h-24 md:w-28 md:h-28 bg-[#E5D6CD] rounded-lg flex-shrink-0 overflow-hidden">
-                    <img
-                      src="/contemporary-dance-class.png"
-                      alt="Dança Contemporânea"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h5 className="font-semibold text-[#3D2C2E] truncate">Dança Contemporânea</h5>
-                    <p className="text-xs text-[#3D2C2E] opacity-70 mt-0.5">Avançado</p>
-                    <p className="text-xs text-[#3D2C2E] opacity-70">90 minutos</p>
-                    <div className="flex items-center justify-between mt-2">
-                      <p className="text-sm font-semibold text-[#3D2C2E]">R$ 75/aula</p>
-                      <Button size="sm" className="bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white text-xs px-3 py-1 h-7">
-                        Ver
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {classSchedule.map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="bg-[#F5F0EB] border-[#E5D6CD] overflow-hidden hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex flex-col sm:flex-row">
+                      {/* Imagem da aula */}
+                      <div className="w-full sm:w-40 h-40 sm:h-auto bg-[#E5D6CD] flex-shrink-0 overflow-hidden">
+                        <img
+                          src={classItem.image || "/placeholder.svg"}
+                          alt={classItem.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
 
-                {/* Aula 3 */}
-                <div className="flex gap-3 p-3 rounded-lg hover:bg-[#F5F0EB] transition-colors border border-[#E5D6CD]">
-                  <div className="w-24 h-24 md:w-28 md:h-28 bg-[#E5D6CD] rounded-lg flex-shrink-0 overflow-hidden">
-                    <img src="/ballet-dance-class.png" alt="Ballet Infantil" className="w-full h-full object-cover" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h5 className="font-semibold text-[#3D2C2E] truncate">Ballet Infantil</h5>
-                    <p className="text-xs text-[#3D2C2E] opacity-70 mt-0.5">Infantil (6-12 anos)</p>
-                    <p className="text-xs text-[#3D2C2E] opacity-70">45 minutos</p>
-                    <div className="flex items-center justify-between mt-2">
-                      <p className="text-sm font-semibold text-[#3D2C2E]">R$ 40/aula</p>
-                      <Button size="sm" className="bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white text-xs px-3 py-1 h-7">
-                        Ver
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+                      {/* Conteúdo da aula */}
+                      <CardContent className="p-4 flex-1 flex flex-col justify-between">
+                        <div className="space-y-2">
+                          <div>
+                            <h5 className="font-bold text-[#3D2C2E] text-base leading-tight">{classItem.name}</h5>
+                            <p className="text-xs text-[#3D2C2E] opacity-70 mt-0.5">{classItem.level}</p>
+                          </div>
 
-                {/* Aula 4 */}
-                <div className="flex gap-3 p-3 rounded-lg hover:bg-[#F5F0EB] transition-colors border border-[#E5D6CD]">
-                  <div className="w-24 h-24 md:w-28 md:h-28 bg-[#E5D6CD] rounded-lg flex-shrink-0 overflow-hidden">
-                    <img
-                      src="/contemporary-dance-class.png"
-                      alt="Jazz Moderno"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h5 className="font-semibold text-[#3D2C2E] truncate">Jazz Moderno</h5>
-                    <p className="text-xs text-[#3D2C2E] opacity-70 mt-0.5">Intermediário</p>
-                    <p className="text-xs text-[#3D2C2E] opacity-70">60 minutos</p>
-                    <div className="flex items-center justify-between mt-2">
-                      <p className="text-sm font-semibold text-[#3D2C2E]">R$ 55/aula</p>
-                      <Button size="sm" className="bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white text-xs px-3 py-1 h-7">
-                        Ver
-                      </Button>
+                          <div className="space-y-1">
+                            <div className="flex items-center gap-1.5 text-xs text-[#3D2C2E] opacity-80">
+                              <Calendar className="h-3.5 w-3.5" />
+                              <span>{classItem.schedule}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5 text-xs text-[#3D2C2E] opacity-80">
+                              <Clock className="h-3.5 w-3.5" />
+                              <span>{classItem.duration}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5 text-xs text-[#3D2C2E] opacity-80">
+                              <MapPin className="h-3.5 w-3.5" />
+                              <span>{classItem.location}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5 text-xs text-[#3D2C2E] opacity-80">
+                              <Users className="h-3.5 w-3.5" />
+                              <span>
+                                {classItem.students}/{classItem.maxStudents} alunos
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#E5D6CD]">
+                          <p className="text-lg font-bold text-[#3D2C2E]">{classItem.price}</p>
+                          <Button
+                            size="sm"
+                            className="bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white text-xs px-4 py-1.5 h-auto"
+                          >
+                            Ver Detalhes
+                          </Button>
+                        </div>
+                      </CardContent>
                     </div>
-                  </div>
-                </div>
+                  </Card>
+                ))}
               </div>
             </div>
           </CardContent>
