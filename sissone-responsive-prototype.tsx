@@ -1172,7 +1172,7 @@ export default function SissoneResponsivePrototype() {
           <Card style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-shadow">
             <CardHeader>
               <CardTitle className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                Horários de Pico
+                Dias mais movimentados
               </CardTitle>
             </CardHeader>
             <CardContent>
