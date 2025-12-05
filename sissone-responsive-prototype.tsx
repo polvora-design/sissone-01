@@ -37,6 +37,10 @@ import {
   Copy,
   Mail,
   Check,
+  Share2,
+  X,
+  Download,
+  QrCode,
 } from "lucide-react"
 
 type ToastType = "success" | "error" | "info"
@@ -58,6 +62,11 @@ type Screen =
   | "student-profile"
   | "user-profile"
   | "student-view"
+  | "create-plan" // Added for pricing screen navigation
+  | "edit-plan" // Added for pricing screen navigation
+  | "create-combo" // Added for pricing screen navigation
+  | "edit-combo" // Added for pricing screen navigation
+  | "invite-student" // Added for invite student screen
 
 type Unit = {
   id: string
@@ -721,6 +730,9 @@ export default function SissoneResponsivePrototype() {
   const [inviteLink] = useState("https://sissone.com.br/invite/abc123")
   const [linkCopied, setLinkCopied] = useState(false)
 
+  const [showShareLinkModal, setShowShareLinkModal] = useState(false)
+  const schoolLink = "https://sissone.com.br/escola/sissone-dance-studio"
+
   const [showUnitModal, setShowUnitModal] = useState(false)
   const [editingUnit, setEditingUnit] = useState<any>(null)
   const [unitFormData, setUnitFormData] = useState({
@@ -853,6 +865,14 @@ export default function SissoneResponsivePrototype() {
     setLinkCopied(true)
     showToast("Link copiado para a área de transferência!")
     setTimeout(() => setLinkCopied(false), 2000)
+  }
+
+  // Add copySchoolLink function
+  const copySchoolLink = () => {
+    navigator.clipboard.writeText(schoolLink)
+    setLinkCopied(true)
+    setTimeout(() => setLinkCopied(false), 2000)
+    showToast("Link copiado com sucesso!", "success")
   }
 
   const openUnitModal = (unit: any = null) => {
@@ -1280,6 +1300,17 @@ export default function SissoneResponsivePrototype() {
                   Cadastrar Aluno
                 </span>
               </Button>
+              <Button
+                variant="outline"
+                className="h-16 lg:h-20 flex flex-col gap-1 bg-transparent hover:shadow-md transition-all"
+                onClick={() => setShowShareLinkModal(true)}
+                style={{ borderColor: "#CFB2A8", backgroundColor: "#F5F0EB" }}
+              >
+                <Share2 className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: "#3D2C2E" }} />
+                <span className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
+                  Compartilhar Link
+                </span>
+              </Button>
             </div>
           </div>
 
@@ -1380,6 +1411,59 @@ export default function SissoneResponsivePrototype() {
                     </div>
                     <Button className="w-full" style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
                       Salvar Perfil da Escola
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div>
+            <h2 className="text-lg lg:text-xl font-semibold mb-4" style={{ color: "#3D2C2E" }}>
+              Link da Página da Escola
+            </h2>
+            <Card style={{ backgroundColor: "#E5D6CD" }}>
+              <CardContent className="p-6">
+                <p className="text-sm mb-4" style={{ color: "#3D2C2E" }}>
+                  Compartilhe o link único da sua escola em redes sociais, materiais de marketing e com potenciais
+                  alunos.
+                </p>
+
+                <div className="flex flex-col lg:flex-row gap-4">
+                  <div className="flex-1">
+                    <Label className="text-sm font-medium mb-2 block" style={{ color: "#3D2C2E" }}>
+                      Link da Escola
+                    </Label>
+                    <div className="flex gap-2">
+                      <Input
+                        value={schoolLink}
+                        readOnly
+                        className="flex-1"
+                        style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD", color: "#3D2C2E" }}
+                      />
+                      <Button
+                        onClick={copySchoolLink}
+                        style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                        className="flex-shrink-0"
+                      >
+                        <Copy className="w-4 h-4 mr-2" />
+                        {linkCopied ? "Copiado!" : "Copiar"}
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="text-center lg:text-left">
+                    <Label className="text-sm font-medium mb-2 block" style={{ color: "#3D2C2E" }}>
+                      QR Code
+                    </Label>
+                    <Button
+                      onClick={() => setShowShareLinkModal(true)}
+                      variant="outline"
+                      className="bg-transparent"
+                      style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                    >
+                      <QrCode className="w-4 h-4 mr-2" />
+                      Ver QR Code
                     </Button>
                   </div>
                 </div>
@@ -3329,6 +3413,83 @@ export default function SissoneResponsivePrototype() {
           )
         })}
       </div>
+
+      {/* Share Link Modal */}
+      {showShareLinkModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <Card className="w-full max-w-md" style={{ backgroundColor: "#E5D6CD" }}>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle style={{ color: "#3D2C2E" }}>Compartilhar Página da Escola</CardTitle>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowShareLinkModal(false)}
+                  className="hover:bg-white/50"
+                >
+                  <X className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* QR Code */}
+              <div className="flex justify-center">
+                <div className="p-4 rounded-lg" style={{ backgroundColor: "#F5F0EB" }}>
+                  <img
+                    src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(schoolLink)}`}
+                    alt="QR Code"
+                    className="w-48 h-48"
+                  />
+                </div>
+              </div>
+
+              {/* Link */}
+              <div>
+                <Label className="text-sm font-medium mb-2 block" style={{ color: "#3D2C2E" }}>
+                  Link da Escola
+                </Label>
+                <div className="flex gap-2">
+                  <Input
+                    value={schoolLink}
+                    readOnly
+                    className="flex-1 text-sm"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD", color: "#3D2C2E" }}
+                  />
+                  <Button onClick={copySchoolLink} style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
+                    <Copy className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="flex flex-col gap-3">
+                <Button
+                  className="w-full"
+                  onClick={() => {
+                    const link = document.createElement("a")
+                    link.href = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(schoolLink)}`
+                    link.download = "qrcode-sissone.png"
+                    link.click()
+                    showToast("QR Code baixado com sucesso!", "success")
+                  }}
+                  style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Baixar QR Code
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full bg-transparent"
+                  onClick={() => setShowShareLinkModal(false)}
+                  style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                >
+                  Fechar
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   )
 }
