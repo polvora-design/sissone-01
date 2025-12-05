@@ -1772,7 +1772,7 @@ export default function SissoneResponsivePrototype() {
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h3 className="text-lg font-semibold mb-1" style={{ color: "#3D2E" }}>
+                      <h3 className="text-lg font-semibold mb-1" style={{ color: "#3D2C2E" }}>
                         {classItem.title}
                       </h3>
                       <p className="text-sm mb-2" style={{ color: "#CFB2A8" }}>
@@ -1781,7 +1781,7 @@ export default function SissoneResponsivePrototype() {
                       {classItem.isRecurring && (
                         <span
                           className="text-xs px-2 py-1 rounded"
-                          style={{ backgroundColor: "#CFB2A8", color: "#3D2E" }}
+                          style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
                         >
                           Recorrente: {classItem.frequency}
                         </span>
@@ -2407,28 +2407,28 @@ export default function SissoneResponsivePrototype() {
                 <table className="w-full min-w-[600px]">
                   <thead className="border-b" style={{ borderColor: "#CFB2A8" }}>
                     <tr>
-                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2E" }}>
+                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
                         Aluno
                       </th>
                       <th
                         className="text-left p-4 text-sm font-semibold hidden lg:table-cell"
-                        style={{ color: "#3D2E" }}
+                        style={{ color: "#3D2C2E" }}
                       >
                         Telefone
                       </th>
                       <th
                         className="text-left p-4 text-sm font-semibold hidden lg:table-cell"
-                        style={{ color: "#3D2E" }}
+                        style={{ color: "#3D2C2E" }}
                       >
                         Origem
                       </th>
-                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2E" }}>
+                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
                         Aulas
                       </th>
-                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2E" }}>
+                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
                         Frequência
                       </th>
-                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2E" }}>
+                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
                         Situação
                       </th>
                     </tr>
@@ -2952,7 +2952,7 @@ export default function SissoneResponsivePrototype() {
               ) : (
                 <div
                   className="flex items-center justify-center h-full text-sm lg:text-base"
-                  style={{ color: "#3D2E" }}
+                  style={{ color: "#3D2C2E" }}
                 >
                   Imagem da Aula (Placeholder)
                 </div>
