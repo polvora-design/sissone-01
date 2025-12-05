@@ -171,7 +171,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
 
         <div className="w-full h-64 md:h-80 lg:h-96 bg-[#E5D6CD] rounded-lg flex items-center justify-center overflow-hidden">
           <img
-            src="/dance-class-group-active-movement-studio.jpg"
+            src="/images/image-201.png"
             alt="Grupo de dançarinos praticando em estúdio de dança"
             className="w-full h-full object-cover object-top"
           />
