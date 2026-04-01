@@ -73,6 +73,7 @@ const SissonePrototype = () => {
     priceMin: "",
     priceMax: "",
     rating: "",
+    levels: [] as string[],
   })
 
   const [categoryScrollPositions, setCategoryScrollPositions] = useState<Record<string, number>>({})
@@ -101,6 +102,7 @@ const SissonePrototype = () => {
   const [selectedTime, setSelectedTime] = useState<string>("") // New state for selected time
 
   const [showDesktopSearchEdit, setShowDesktopSearchEdit] = useState(false)
+  const [selectedLevel, setSelectedLevel] = useState("")
 
   // ADDED STATE: hover/active map pin
   const [hoveredPin, setHoveredPin] = useState<string | null>(null)
@@ -365,6 +367,7 @@ const SissonePrototype = () => {
       tag: "Popular",
       tagColor: "bg-tag-orange text-tag-orange-foreground",
       category: "contemporary",
+      level: "Todos os níveis",
       reviews: [
         {
           name: "Ana Silva",
@@ -407,6 +410,7 @@ const SissonePrototype = () => {
       tag: "Preferido dos Alunos",
       tagColor: "bg-tag-purple text-tag-purple-foreground",
       category: "hip-hop",
+      level: "Iniciante",
       reviews: [
         {
           name: "João Pedro",
@@ -445,6 +449,7 @@ const SissonePrototype = () => {
       tag: "Novo",
       tagColor: "bg-tag-green text-tag-green-foreground",
       category: "ballet",
+      level: "Iniciante",
       reviews: [
         {
           name: "Isabella Ferreira",
@@ -483,6 +488,7 @@ const SissonePrototype = () => {
       tag: "Quente",
       tagColor: "bg-tag-red text-tag-red-foreground",
       category: "salsa",
+      level: "Iniciante",
       reviews: [
         {
           name: "Pedro Oliveira",
@@ -521,6 +527,7 @@ const SissonePrototype = () => {
       tag: "Trending",
       tagColor: "bg-tag-yellow text-tag-yellow-foreground",
       category: "jazz",
+      level: "Aprendiz",
       reviews: [
         {
           name: "Marina Santos",
@@ -563,6 +570,7 @@ const SissonePrototype = () => {
       tag: "Intensivo",
       tagColor: "bg-tag-blue text-tag-blue-foreground",
       category: "contemporary",
+      level: "Aprendiz",
       reviews: [
         {
           name: "Fernanda Lima",
@@ -591,6 +599,7 @@ const SissonePrototype = () => {
       tag: "Avançado",
       tagColor: "bg-tag-indigo text-tag-indigo-foreground",
       category: "hip-hop",
+      level: "Profissional",
       reviews: [
         {
           name: "Diego Santos",
@@ -615,6 +624,7 @@ const SissonePrototype = () => {
       tag: "Premium",
       tagColor: "bg-tag-pink text-tag-pink-foreground",
       category: "ballet",
+      level: "Profissional",
       reviews: [
         {
           name: "Valentina Costa",
@@ -639,6 +649,7 @@ const SissonePrototype = () => {
       tag: "Noturno",
       tagColor: "bg-tag-violet text-tag-violet-foreground",
       category: "salsa",
+      level: "Profissional",
       reviews: [
         {
           name: "Ricardo Alves",
@@ -663,6 +674,7 @@ const SissonePrototype = () => {
       tag: "Fusion",
       tagColor: "bg-tag-teal text-tag-teal-foreground",
       category: "jazz",
+      level: "Aprendiz",
       reviews: [
         {
           name: "Camila Rocha",
@@ -687,6 +699,7 @@ const SissonePrototype = () => {
       tag: "Tradicional",
       tagColor: "bg-tag-amber text-tag-amber-foreground",
       category: "forro",
+      level: "Todos os níveis",
       reviews: [
         {
           name: "João Mendes",
@@ -711,6 +724,7 @@ const SissonePrototype = () => {
       tag: "Jovem",
       tagColor: "bg-tag-lime text-tag-lime-foreground",
       category: "forro",
+      level: "Iniciante",
       reviews: [
         {
           name: "Paula Santos",
@@ -735,6 +749,7 @@ const SissonePrototype = () => {
       tag: "Completo",
       tagColor: "bg-tag-cyan text-tag-cyan-foreground",
       category: "ballroom",
+      level: "Iniciante",
       reviews: [
         {
           name: "Marcos Silva",
@@ -759,6 +774,7 @@ const SissonePrototype = () => {
       tag: "Avançado",
       tagColor: "bg-tag-indigo text-tag-indigo-foreground",
       category: "ballroom",
+      level: "Profissional",
       reviews: [
         {
           name: "Patrícia Lima",
@@ -783,6 +799,7 @@ const SissonePrototype = () => {
       tag: "Raiz",
       tagColor: "bg-tag-green text-tag-green-foreground",
       category: "samba",
+      level: "Todos os níveis",
       reviews: [
         {
           name: "Roberto Carlos",
@@ -807,6 +824,7 @@ const SissonePrototype = () => {
       tag: "Swing",
       tagColor: "bg-tag-orange text-tag-orange-foreground",
       category: "samba",
+      level: "Aprendiz",
       reviews: [
         {
           name: "Fábio Santos",
@@ -831,6 +849,7 @@ const SissonePrototype = () => {
       tag: "Sensual",
       tagColor: "bg-tag-purple text-tag-purple-foreground",
       category: "zouk",
+      level: "Aprendiz",
       reviews: [
         {
           name: "Bianca Costa",
@@ -855,6 +874,7 @@ const SissonePrototype = () => {
       tag: "Romântico",
       tagColor: "bg-tag-pink text-tag-pink-foreground",
       category: "zouk",
+      level: "Profissional",
       reviews: [
         {
           name: "Eduardo Lima",
@@ -883,6 +903,7 @@ const SissonePrototype = () => {
       tag: "Experimental",
       tagColor: "bg-tag-violet text-tag-violet-foreground",
       category: "contemporary",
+      level: "Aprendiz",
       reviews: [
         {
           name: "Júlia Martins",
@@ -911,6 +932,7 @@ const SissonePrototype = () => {
       tag: "Iniciante",
       tagColor: "bg-tag-green text-tag-green-foreground",
       category: "contemporary",
+      level: "Iniciante",
       reviews: [
         {
           name: "Larissa Souza",
@@ -939,6 +961,7 @@ const SissonePrototype = () => {
       tag: "Freestyle",
       tagColor: "bg-tag-red text-tag-red-foreground",
       category: "hip-hop",
+      level: "Aprendiz",
       reviews: [
         {
           name: "Thiago Oliveira",
@@ -967,6 +990,7 @@ const SissonePrototype = () => {
       tag: "Kids",
       tagColor: "bg-tag-lime text-tag-lime-foreground",
       category: "hip-hop",
+      level: "Iniciante",
       reviews: [
         {
           name: "Fernanda Alves",
@@ -991,6 +1015,7 @@ const SissonePrototype = () => {
       tag: "Adulto",
       tagColor: "bg-tag-cyan text-tag-cyan-foreground",
       category: "ballet",
+      level: "Iniciante",
       reviews: [
         {
           name: "Adriana Martins",
@@ -1015,6 +1040,7 @@ const SissonePrototype = () => {
       tag: "Profissional",
       tagColor: "bg-tag-indigo text-tag-indigo-foreground",
       category: "ballet",
+      level: "Profissional",
       reviews: [
         {
           name: "Carolina Silva",
@@ -1039,6 +1065,7 @@ const SissonePrototype = () => {
       tag: "Cubana",
       tagColor: "bg-tag-teal text-tag-teal-foreground",
       category: "salsa",
+      level: "Todos os níveis",
       reviews: [
         {
           name: "Miguel Fernandes",
@@ -1063,6 +1090,7 @@ const SissonePrototype = () => {
       tag: "NY Style",
       tagColor: "bg-tag-blue text-tag-blue-foreground",
       category: "salsa",
+      level: "Aprendiz",
       reviews: [
         {
           name: "Andrea Costa",
@@ -1087,6 +1115,7 @@ const SissonePrototype = () => {
       tag: "Lírico",
       tagColor: "bg-tag-pink text-tag-pink-foreground",
       category: "jazz",
+      level: "Aprendiz",
       reviews: [
         {
           name: "Isabela Rocha",
@@ -1111,6 +1140,7 @@ const SissonePrototype = () => {
       tag: "Musical",
       tagColor: "bg-tag-amber text-tag-amber-foreground",
       category: "jazz",
+      level: "Profissional",
       reviews: [
         {
           name: "Bruno Almeida",
@@ -1135,6 +1165,7 @@ const SissonePrototype = () => {
       tag: "Eletrônico",
       tagColor: "bg-tag-blue text-tag-blue-foreground",
       category: "forro",
+      level: "Todos os níveis",
       reviews: [
         {
           name: "Rafael Mendes",
@@ -1159,6 +1190,7 @@ const SissonePrototype = () => {
       tag: "Autêntico",
       tagColor: "bg-tag-orange text-tag-orange-foreground",
       category: "forro",
+      level: "Aprendiz",
       reviews: [
         {
           name: "Maria José",
@@ -1183,6 +1215,7 @@ const SissonePrototype = () => {
       tag: "Romântico",
       tagColor: "bg-tag-pink text-tag-pink-foreground",
       category: "ballroom",
+      level: "Todos os níveis",
       reviews: [
         {
           name: "Gustavo Reis",
@@ -1207,6 +1240,7 @@ const SissonePrototype = () => {
       tag: "Gingado",
       tagColor: "bg-tag-lime text-tag-lime-foreground",
       category: "ballroom",
+      level: "Aprendiz",
       reviews: [
         {
           name: "Vanessa Lima",
@@ -1231,6 +1265,7 @@ const SissonePrototype = () => {
       tag: "Gafieira",
       tagColor: "bg-tag-yellow text-tag-yellow-foreground",
       category: "samba",
+      level: "Profissional",
       reviews: [
         {
           name: "Caio Fernandes",
@@ -1255,6 +1290,7 @@ const SissonePrototype = () => {
       tag: "Pagode",
       tagColor: "bg-tag-red text-tag-red-foreground",
       category: "samba",
+      level: "Iniciante",
       reviews: [
         {
           name: "Sandra Oliveira",
@@ -1279,6 +1315,7 @@ const SissonePrototype = () => {
       tag: "Brasileiro",
       tagColor: "bg-tag-green text-tag-green-foreground",
       category: "zouk",
+      level: "Todos os níveis",
       reviews: [
         {
           name: "Renata Silva",
@@ -1303,6 +1340,7 @@ const SissonePrototype = () => {
       tag: "Intenso",
       tagColor: "bg-tag-red text-tag-red-foreground",
       category: "zouk",
+      level: "Profissional",
       reviews: [
         {
           name: "Lucas Andrade",
@@ -1327,6 +1365,7 @@ const SissonePrototype = () => {
       tag: "Sensual",
       tagColor: "bg-tag-purple text-tag-purple-foreground",
       category: "bachata",
+      level: "Aprendiz",
       reviews: [
         {
           name: "Mariana Costa",
@@ -1351,6 +1390,7 @@ const SissonePrototype = () => {
       tag: "Fusion",
       tagColor: "bg-tag-teal text-tag-teal-foreground",
       category: "bachata",
+      level: "Todos os níveis",
       reviews: [
         {
           name: "Rafael Lima",
@@ -1494,6 +1534,16 @@ const SissonePrototype = () => {
             return false // If no schedule and no time, don't match
           })(),
       )
+    }
+
+    // Filter by level
+    if (searchFilters.levels.length > 0) {
+      filtered = filtered.filter((c) => c.level && searchFilters.levels.includes(c.level))
+    }
+
+    // Filter by selected level from search bar
+    if (selectedLevel) {
+      filtered = filtered.filter((c) => c.level === selectedLevel)
     }
 
     // Filter by rating
@@ -1708,8 +1758,26 @@ const SissonePrototype = () => {
                   onClick={() => setShowSearchModal(true)}
                   className="text-sm text-foreground hover:text-primary text-left"
                 >
-                  {selectedStyle || "Escolher estilos"} {/* Use selectedStyle */}
+                  {selectedStyle || "Escolher estilos"}
                 </button>
+              </div>
+
+              <div className="w-px bg-border self-stretch my-2" />
+
+              {/* Nível */}
+              <div className="flex-1 px-4 py-2 relative">
+                <label className="block text-xs font-semibold text-foreground mb-1">Nível</label>
+                <select
+                  value={selectedLevel}
+                  onChange={(e) => setSelectedLevel(e.target.value)}
+                  className="text-sm text-foreground bg-transparent hover:text-primary text-left w-full appearance-none cursor-pointer outline-none"
+                >
+                  <option value="">Todos os níveis</option>
+                  <option value="Iniciante">Iniciante</option>
+                  <option value="Aprendiz">Aprendiz</option>
+                  <option value="Profissional">Profissional</option>
+                  <option value="Todos os níveis">Todos os níveis</option>
+                </select>
               </div>
 
               {/* Search Button */}
@@ -1729,8 +1797,8 @@ const SissonePrototype = () => {
               <div className="flex-1 text-left">
                 <div className="text-sm font-semibold text-foreground">Para onde?</div>
                 <div className="text-xs text-muted-foreground">
-                  {searchQuery || "Buscar destinos"} • {selectedDate || "Quando"} • {/* Use selectedDate */}
-                  {selectedStyle || "Modalidade"} {/* Use selectedStyle */}
+                  {searchQuery || "Buscar destinos"} • {selectedDate || "Quando"} •{" "}
+                  {selectedStyle || "Modalidade"} • {selectedLevel || "Nível"}
                 </div>
               </div>
             </button>
@@ -2699,14 +2767,31 @@ const SissonePrototype = () => {
                 </div>
               </div>
 
+              {/* Nível */}
+              <div>
+                <h3 className="text-lg font-semibold text-foreground mb-3">Nível</h3>
+                <div className="flex flex-wrap gap-2">
+                  {["Iniciante", "Aprendiz", "Profissional", "Todos os níveis"].map((level) => (
+                    <Button
+                      key={level}
+                      variant={selectedLevel === level ? "default" : "outline"}
+                      className={
+                        selectedLevel === level
+                          ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                          : "border-primary text-foreground bg-transparent hover:bg-primary hover:text-primary-foreground"
+                      }
+                      onClick={() => setSelectedLevel(selectedLevel === level ? "" : level)}
+                    >
+                      {level}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
               <Button
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12"
                 onClick={() => {
                   setShowSearchModal(false)
-                  // If a style is selected, update searchModality or use selectedStyle directly in handleSearch
-                  if (selectedStyle) {
-                    // setSearchModality([selectedStyle]) // This would be for multi-select, for single use selectedStyle
-                  }
                 }}
               >
                 Aplicar
@@ -3565,6 +3650,31 @@ const SissonePrototype = () => {
                 </div>
               </div>
 
+              {/* Level Filter */}
+              <div>
+                <h3 className="font-semibold text-foreground mb-3">Nível</h3>
+                <div className="flex flex-wrap gap-2">
+                  {["Iniciante", "Aprendiz", "Profissional", "Todos os níveis"].map((level) => (
+                    <Button
+                      key={level}
+                      variant={searchFilters.levels.includes(level) ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => {
+                        setSearchFilters((prev) => ({
+                          ...prev,
+                          levels: prev.levels.includes(level)
+                            ? prev.levels.filter((l) => l !== level)
+                            : [...prev.levels, level],
+                        }))
+                      }}
+                      className={searchFilters.levels.includes(level) ? "bg-primary text-primary-foreground" : ""}
+                    >
+                      {level}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
               {/* Rating Filter */}
               <div>
                 <h3 className="font-semibold text-foreground mb-3">Avaliação Mínima</h3>
@@ -3630,6 +3740,7 @@ const SissonePrototype = () => {
                     priceMin: "",
                     priceMax: "",
                     rating: "",
+                    levels: [],
                   })
                 }}
               >
@@ -3866,6 +3977,30 @@ const SissonePrototype = () => {
             ))}
           </div>
         </div>
+
+        {/* Level */}
+        <div>
+          <h3 className="font-medium text-foreground mb-3">Nível</h3>
+          <div className="grid grid-cols-2 gap-2">
+            {["Iniciante", "Aprendiz", "Profissional", "Todos os níveis"].map((level) => (
+              <Button
+                key={level}
+                variant={searchFilters.levels.includes(level) ? "default" : "outline"}
+                className={`text-sm ${searchFilters.levels.includes(level) ? "bg-primary text-primary-foreground" : "border-primary text-foreground bg-transparent"}`}
+                onClick={() => {
+                  setSearchFilters((prev) => ({
+                    ...prev,
+                    levels: prev.levels.includes(level)
+                      ? prev.levels.filter((l) => l !== level)
+                      : [...prev.levels, level],
+                  }))
+                }}
+              >
+                {level}
+              </Button>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Apply Button */}
@@ -4032,7 +4167,7 @@ const SissonePrototype = () => {
                 </div>
                 <div className="flex items-center gap-2 text-foreground">
                   <Users className="h-5 w-5 opacity-70" />
-                  <span>Todos os níveis</span>
+                  <span>{selectedClass.level || "Todos os níveis"}</span>
                 </div>
               </div>
             </div>
