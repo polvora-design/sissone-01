@@ -3867,11 +3867,30 @@ const SissonePrototype = () => {
                           ? "bg-primary hover:bg-primary/90 text-primary-foreground"
                           : "border-border text-foreground hover:bg-secondary"
                       }
-                      onClick={() => {
-                        setSelectedStyle(mod)
-                      }}
+                      onClick={() => setSelectedStyle(selectedStyle === mod ? "" : mod)}
                     >
                       {mod}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Nível Section */}
+              <div>
+                <label className="text-sm font-medium text-foreground mb-2 block">Nível</label>
+                <div className="flex flex-wrap gap-2">
+                  {["Iniciante", "Aprendiz", "Profissional", "Todos os níveis"].map((level) => (
+                    <Button
+                      key={level}
+                      variant={selectedLevel === level ? "default" : "outline"}
+                      className={
+                        selectedLevel === level
+                          ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                          : "border-border text-foreground hover:bg-secondary"
+                      }
+                      onClick={() => setSelectedLevel(selectedLevel === level ? "" : level)}
+                    >
+                      {level}
                     </Button>
                   ))}
                 </div>
