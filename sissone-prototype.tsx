@@ -21,6 +21,7 @@ export default function SissonePrototype() {
   const [showProfileSaveNotification, setShowProfileSaveNotification] = useState(false)
   const [showForgotPassword, setShowForgotPassword] = useState(false)
   const [showEmailSentNotification, setShowEmailSentNotification] = useState(false)
+  const [showReviewSentNotification, setShowReviewSentNotification] = useState(false)
   const [selectedStyles, setSelectedStyles] = useState<string[]>(["Contemporâneo", "Jazz", "Ballet"])
   const [selectedLevels, setSelectedLevels] = useState<string[]>(["Intermediário"])
   const [customStyle, setCustomStyle] = useState("")
@@ -699,6 +700,12 @@ export default function SissonePrototype() {
 
   const FeedbackScreen = () => (
     <div className="min-h-screen bg-[#F5F0EB]">
+      {showReviewSentNotification && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg flex items-center gap-2 z-50">
+          <Check size={20} />
+          <span>Avaliação enviada</span>
+        </div>
+      )}
       <div className="mx-auto max-w-[1440px]">
         <div className="bg-white border-b border-[#E5D6CD] p-4">
           <div className="flex items-center gap-3">
@@ -750,7 +757,16 @@ export default function SissonePrototype() {
           </Card>
 
           <div className="space-y-3">
-            <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+            <Button 
+              onClick={() => {
+                setShowReviewSentNotification(true)
+                setTimeout(() => {
+                  setShowReviewSentNotification(false)
+                  nextScreen()
+                }, 2000)
+              }}
+              className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+            >
               {currentClassStatus === "past-reviewed" ? "Atualizar Avaliação" : "Enviar Avaliação"}
             </Button>
             <Button onClick={nextScreen} variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white">
@@ -859,23 +875,20 @@ export default function SissonePrototype() {
   const ProfileScreen = () => (
     <div className="min-h-screen bg-[#F5F0EB]">
       {showProfileSaveNotification && (
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
-          <div className="bg-green-600 text-white rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
-            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-              <Check className="w-5 h-5 text-green-600" />
-            </div>
-            <p className="text-sm font-medium">Alterações salvas com sucesso!</p>
-          </div>
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg flex items-center gap-2 z-50">
+          <Check size={20} />
+          <span>Alterações salvas com sucesso</span>
         </div>
       )}
-
       <div className="mx-auto max-w-[1440px]">
         <div className="bg-white border-b border-[#E5D6CD] p-4">
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" onClick={goHome} className="text-[#3D2C2E]">
-              <ArrowLeft className="w-4 h-4" />
-            </Button>
-            <h1 className="text-lg font-bold text-[#3D2C2E]">Perfil e Configurações</h1>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Button variant="ghost" size="sm" onClick={() => setCurrentScreen(1)} className="text-[#3D2C2E]">
+                <ArrowLeft className="w-4 h-4" />
+              </Button>
+              <h1 className="text-lg font-bold text-[#3D2C2E]">Perfil e Configurações</h1>
+            </div>
           </div>
         </div>
 
