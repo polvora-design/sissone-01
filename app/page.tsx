@@ -1849,14 +1849,14 @@ const SissonePrototype = () => {
                 {todayClasses.map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden m-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -1938,14 +1938,14 @@ const SissonePrototype = () => {
                 {getClassesByLevel("Iniciante").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden m-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2027,14 +2027,14 @@ const SissonePrototype = () => {
                 {getClassesByLevel("Aprendiz").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden m-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2116,14 +2116,14 @@ const SissonePrototype = () => {
                 {getClassesByLevel("Profissional").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden m-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2205,14 +2205,14 @@ const SissonePrototype = () => {
                 {getClassesByCategory("contemporary").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden m-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2294,14 +2294,14 @@ const SissonePrototype = () => {
                 {getClassesByCategory("hip-hop").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden m-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2383,14 +2383,14 @@ const SissonePrototype = () => {
                 {getClassesByCategory("ballet").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden m-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2472,14 +2472,14 @@ const SissonePrototype = () => {
                 {getClassesByCategory("salsa").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden m-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2561,14 +2561,14 @@ const SissonePrototype = () => {
                 {getClassesByCategory("jazz").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden m-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2650,14 +2650,14 @@ const SissonePrototype = () => {
                 {getClassesByCategory("forro").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden m-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2739,14 +2739,14 @@ const SissonePrototype = () => {
                 {getClassesByCategory("ballroom").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden m-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2828,14 +2828,14 @@ const SissonePrototype = () => {
                 {getClassesByCategory("samba").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden m-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -2917,14 +2917,14 @@ const SissonePrototype = () => {
                 {getClassesByCategory("zouk").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden m-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
@@ -3006,14 +3006,14 @@ const SissonePrototype = () => {
                 {getClassesByCategory("bachata").map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
                     onClick={() => {
                       setSelectedClass(classItem)
                       setCurrentImageIndex(0)
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden m-0">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
