@@ -4676,7 +4676,7 @@ const SissonePrototype = () => {
               <h3 className="font-semibold text-foreground">Cadastro Rápido</h3>
               <p className="text-sm text-foreground opacity-70">Apenas alguns detalhes para começar</p>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 p-4">
               {isLoggedIn ? (
                 // Using semantic green tokens
                 <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
@@ -4736,12 +4736,12 @@ const SissonePrototype = () => {
             <CardHeader>
               <h3 className="font-semibold text-foreground">Escolha o dia da sua aula teste</h3>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-3 p-4">
               {selectedClass?.days.map((day: string) => (
                 <Button
                   key={day}
                   variant="outline"
-                  className={`w-full justify-start border-primary text-foreground hover:bg-secondary ${
+                  className={`w-full justify-start border-primary text-foreground hover:bg-secondary h-12 ${
                     selectedDate === day ? "bg-primary text-primary-foreground hover:bg-primary/90" : "bg-transparent"
                   }`}
                   onClick={() => {
