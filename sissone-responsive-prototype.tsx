@@ -1026,6 +1026,19 @@ export default function SissoneResponsivePrototype() {
                 <Share2 className="w-4 h-4 mr-2" />
                 Compartilhar Link
               </Button>
+              <Button
+                variant="outline"
+                className="w-full justify-start h-10 px-3 text-sm"
+                style={{ borderColor: "#CFB2A8", color: "#3D2C2E", backgroundColor: "transparent" }}
+                onClick={() => {
+                  setEditingUnit(null)
+                  setUnitForm({ name: "", address: "", phone: "", email: "", description: "" })
+                  setShowUnitModal(true)
+                }}
+              >
+                <Building2 className="w-4 h-4 mr-2" />
+                Nova Unidade
+              </Button>
             </div>
           </div>
 
