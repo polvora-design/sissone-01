@@ -531,7 +531,7 @@ export default function SissonePrototype() {
                     </div>
                   )}
 
-                  <div className="flex items-center justify-center gap-2 mt-3 pt-3 border-t border-[#E5D6CD]">
+                  <div className="flex items-center gap-2 mt-3 pt-3 border-t border-[#E5D6CD] justify-start">
                     {renderStars(4)}
                     <span className="text-[#3D2C2E] font-semibold">4.0</span>
                     <span className="text-[#3D2C2E] opacity-70 text-sm">(24 avaliações)</span>
