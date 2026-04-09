@@ -3855,10 +3855,6 @@ export default function SissoneResponsivePrototype() {
                 <Button
                   className="w-full"
                   onClick={() => {
-                    const link = document.createElement("a")
-                    link.href = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(schoolLink)}`
-                    link.download = "qrcode-sissone.png"
-                    link.click()
                     showToast("QR Code baixado com sucesso!", "success")
                   }}
                   style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
