@@ -3155,6 +3155,7 @@ const SissonePrototype = () => {
                 setSearchQuery("")
                 setSelectedDate("Hoje")
                 setSelectedStyle("")
+                setSelectedLevel("")
                 setDateRangeStart(null)
                 setDateRangeEnd(null)
                 setShowMobileDatePicker(false)
@@ -3374,6 +3375,29 @@ const SissonePrototype = () => {
                     }}
                   >
                     {mod}
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* Nível Section */}
+            <div className="py-4 border-t border-border">
+              <h2 className="text-lg font-semibold text-foreground mb-3">Nível</h2>
+              <div className="flex flex-wrap gap-2">
+                {["Iniciante", "Aprendiz", "Profissional", "Todos os níveis"].map((level) => (
+                  <Button
+                    key={level}
+                    variant={selectedLevel === level ? "default" : "outline"}
+                    className={
+                      selectedLevel === level
+                        ? "bg-primary hover:bg-primary/90 text-primary-foreground"
+                        : "border-border text-foreground hover:bg-secondary"
+                    }
+                    onClick={() => {
+                      setSelectedLevel(selectedLevel === level ? "" : level)
+                    }}
+                  >
+                    {level}
                   </Button>
                 ))}
               </div>
