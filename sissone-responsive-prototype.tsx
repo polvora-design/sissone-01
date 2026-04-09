@@ -1560,7 +1560,8 @@ export default function SissoneResponsivePrototype() {
                 <Card
                   key={unit.id}
                   style={{ backgroundColor: "#E5D6CD" }}
-                  className="hover:shadow-lg transition-all hover:scale-[1.02]"
+                  className="hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer"
+                  onClick={() => openUnitModal(unit)}
                 >
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between mb-4">
@@ -1584,11 +1585,19 @@ export default function SissoneResponsivePrototype() {
                           size="sm"
                           variant="ghost"
                           className="hover:bg-white/50"
-                          onClick={() => openUnitModal(unit)}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            openUnitModal(unit)
+                          }}
                         >
                           <Edit className="w-4 h-4" style={{ color: "#3D2C2E" }} />
                         </Button>
-                        <Button size="sm" variant="ghost" className="hover:bg-white/50">
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          className="hover:bg-white/50"
+                          onClick={(e) => e.stopPropagation()}
+                        >
                           <Trash2 className="w-4 h-4" style={{ color: "#3D2C2E" }} />
                         </Button>
                       </div>
