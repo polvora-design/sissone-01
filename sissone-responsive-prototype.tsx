@@ -41,6 +41,8 @@ import {
   X,
   Download,
   QrCode,
+  Send,
+  Edit2,
 } from "lucide-react"
 
 type ToastType = "success" | "error" | "info"
@@ -749,6 +751,13 @@ export default function SissoneResponsivePrototype() {
   })
 
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null)
+  const [isEditingStudent, setIsEditingStudent] = useState(false)
+  const [studentEditForm, setStudentEditForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    unitId: "",
+  })
 
   const [userProfileForm, setUserProfileForm] = useState({
     name: "Gestor Principal",
@@ -3312,18 +3321,64 @@ export default function SissoneResponsivePrototype() {
 
     const studentUnit = mockUnits.find((u) => u.id === selectedStudent.unitId)
 
+    const handleStartEdit = () => {
+      setStudentEditForm({
+        name: selectedStudent.name,
+        email: selectedStudent.email,
+        phone: selectedStudent.phone,
+        unitId: selectedStudent.unitId,
+      })
+      setIsEditingStudent(true)
+    }
+
+    const handleSaveStudent = () => {
+      setIsEditingStudent(false)
+      showToast("Dados do aluno atualizados com sucesso!")
+    }
+
+    const handleResendInvite = () => {
+      showToast("Convite reenviado para " + selectedStudent.email)
+    }
+
     return (
       <div className="p-4 lg:p-6 pb-24 lg:pb-6">
         <div className="max-w-4xl mx-auto space-y-6">
-          <Button
-            variant="ghost"
-            onClick={() => navigateTo("students")}
-            className="mb-4"
-            style={{ color: "#3D2C2E" }}
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Voltar para Alunos
-          </Button>
+          <div className="flex items-center justify-between">
+            <Button
+              variant="ghost"
+              onClick={() => {
+                setIsEditingStudent(false)
+                navigateTo("students")
+              }}
+              style={{ color: "#3D2C2E" }}
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Voltar para Alunos
+            </Button>
+
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                onClick={handleResendInvite}
+                className="text-sm"
+                style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+              >
+                <Send className="w-4 h-4 mr-2" />
+                <span className="hidden sm:inline">Reenviar Convite</span>
+                <span className="sm:hidden">Reenviar</span>
+              </Button>
+              {!isEditingStudent && (
+                <Button
+                  onClick={handleStartEdit}
+                  className="text-sm"
+                  style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                >
+                  <Edit2 className="w-4 h-4 mr-2" />
+                  <span className="hidden sm:inline">Editar</span>
+                </Button>
+              )}
+            </div>
+          </div>
 
           <Card style={{ backgroundColor: "#E5D6CD" }}>
             <CardContent className="p-6">
@@ -3347,52 +3402,127 @@ export default function SissoneResponsivePrototype() {
                 </div>
 
                 <div className="flex-1 space-y-4">
-                  <div>
-                    <h2 className="text-xl lg:text-2xl font-semibold" style={{ color: "#3D2C2E" }}>
-                      {selectedStudent.name}
-                    </h2>
-                    <p className="text-sm" style={{ color: "#3D2C2E", opacity: 0.7 }}>
-                      Aluno desde Janeiro 2024
-                    </p>
-                  </div>
+                  {isEditingStudent ? (
+                    <>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label style={{ color: "#3D2C2E" }}>Nome Completo *</Label>
+                          <Input
+                            value={studentEditForm.name}
+                            onChange={(e) => setStudentEditForm({ ...studentEditForm, name: e.target.value })}
+                            placeholder="Nome do aluno"
+                            style={{ backgroundColor: "#F5F0EB", borderColor: "#CFB2A8" }}
+                          />
+                        </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-1">
-                      <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
-                        Email
-                      </Label>
-                      <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
-                        {selectedStudent.email}
-                      </p>
-                    </div>
+                        <div className="space-y-2">
+                          <Label style={{ color: "#3D2C2E" }}>Email *</Label>
+                          <Input
+                            type="email"
+                            value={studentEditForm.email}
+                            onChange={(e) => setStudentEditForm({ ...studentEditForm, email: e.target.value })}
+                            placeholder="email@exemplo.com"
+                            style={{ backgroundColor: "#F5F0EB", borderColor: "#CFB2A8" }}
+                          />
+                        </div>
 
-                    <div className="space-y-1">
-                      <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
-                        Telefone
-                      </Label>
-                      <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
-                        {selectedStudent.phone}
-                      </p>
-                    </div>
+                        <div className="space-y-2">
+                          <Label style={{ color: "#3D2C2E" }}>Telefone *</Label>
+                          <Input
+                            type="tel"
+                            value={studentEditForm.phone}
+                            onChange={(e) => setStudentEditForm({ ...studentEditForm, phone: e.target.value })}
+                            placeholder="(11) 99999-9999"
+                            style={{ backgroundColor: "#F5F0EB", borderColor: "#CFB2A8" }}
+                          />
+                        </div>
 
-                    <div className="space-y-1">
-                      <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
-                        Unidade
-                      </Label>
-                      <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
-                        {studentUnit?.name || "Não definida"}
-                      </p>
-                    </div>
+                        <div className="space-y-2">
+                          <Label style={{ color: "#3D2C2E" }}>Unidade *</Label>
+                          <Select
+                            value={studentEditForm.unitId}
+                            onValueChange={(value) => setStudentEditForm({ ...studentEditForm, unitId: value })}
+                          >
+                            <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#CFB2A8" }}>
+                              <SelectValue placeholder="Selecione a unidade" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {mockUnits.map((unit) => (
+                                <SelectItem key={unit.id} value={unit.id}>
+                                  {unit.name}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
 
-                    <div className="space-y-1">
-                      <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
-                        Origem
-                      </Label>
-                      <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
-                        {selectedStudent.acquisitionType === "platform" ? "Plataforma" : "Convite"}
-                      </p>
-                    </div>
-                  </div>
+                      <div className="flex gap-3 pt-4">
+                        <Button
+                          variant="outline"
+                          onClick={() => setIsEditingStudent(false)}
+                          style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                        >
+                          Cancelar
+                        </Button>
+                        <Button
+                          onClick={handleSaveStudent}
+                          style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                        >
+                          Salvar Alterações
+                        </Button>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div>
+                        <h2 className="text-xl lg:text-2xl font-semibold" style={{ color: "#3D2C2E" }}>
+                          {selectedStudent.name}
+                        </h2>
+                        <p className="text-sm" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                          Aluno desde Janeiro 2024
+                        </p>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                            Email
+                          </Label>
+                          <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                            {selectedStudent.email}
+                          </p>
+                        </div>
+
+                        <div className="space-y-1">
+                          <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                            Telefone
+                          </Label>
+                          <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                            {selectedStudent.phone}
+                          </p>
+                        </div>
+
+                        <div className="space-y-1">
+                          <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                            Unidade
+                          </Label>
+                          <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                            {studentUnit?.name || "Não definida"}
+                          </p>
+                        </div>
+
+                        <div className="space-y-1">
+                          <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                            Origem
+                          </Label>
+                          <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                            {selectedStudent.acquisitionType === "platform" ? "Plataforma" : "Convite"}
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </CardContent>
