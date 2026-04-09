@@ -748,6 +748,8 @@ export default function SissoneResponsivePrototype() {
     role: "admin",
   })
 
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null)
+
   const [userProfileForm, setUserProfileForm] = useState({
     name: "Gestor Principal",
     email: "gestor@sissone.com.br",
@@ -2528,9 +2530,16 @@ export default function SissoneResponsivePrototype() {
                               </div>
                             </div>
                             <div>
-                              <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                              <button
+                                className="text-sm font-medium text-left hover:underline cursor-pointer"
+                                style={{ color: "#3D2C2E" }}
+                                onClick={() => {
+                                  setSelectedStudent(student)
+                                  navigateTo("student-profile")
+                                }}
+                              >
                                 {student.name}
-                              </p>
+                              </button>
                               <p className="text-xs lg:hidden" style={{ color: "#3D2C2E" }}>
                                 {student.phone}
                               </p>
@@ -3285,6 +3294,217 @@ export default function SissoneResponsivePrototype() {
     </div>
   )
 
+  const renderStudentProfile = () => {
+    if (!selectedStudent) {
+      return (
+        <div className="p-4 lg:p-6 pb-24 lg:pb-6">
+          <p style={{ color: "#3D2C2E" }}>Nenhum aluno selecionado</p>
+          <Button
+            onClick={() => navigateTo("students")}
+            className="mt-4"
+            style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+          >
+            Voltar para Alunos
+          </Button>
+        </div>
+      )
+    }
+
+    const studentUnit = mockUnits.find((u) => u.id === selectedStudent.unitId)
+
+    return (
+      <div className="p-4 lg:p-6 pb-24 lg:pb-6">
+        <div className="max-w-4xl mx-auto space-y-6">
+          <Button
+            variant="ghost"
+            onClick={() => navigateTo("students")}
+            className="mb-4"
+            style={{ color: "#3D2C2E" }}
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Voltar para Alunos
+          </Button>
+
+          <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <CardContent className="p-6">
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex flex-col items-center">
+                  <div
+                    className="w-24 h-24 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: "#CFB2A8" }}
+                  >
+                    <User className="w-12 h-12" style={{ color: "#3D2C2E" }} />
+                  </div>
+                  <span
+                    className="text-xs px-2 py-1 rounded mt-3"
+                    style={{
+                      backgroundColor: selectedStudent.paymentStatus === "current" ? "#CFB2A8" : "#F5F0EB",
+                      color: "#3D2C2E",
+                    }}
+                  >
+                    {selectedStudent.paymentStatus === "current" ? "Em dia" : "Pendente"}
+                  </span>
+                </div>
+
+                <div className="flex-1 space-y-4">
+                  <div>
+                    <h2 className="text-xl lg:text-2xl font-semibold" style={{ color: "#3D2C2E" }}>
+                      {selectedStudent.name}
+                    </h2>
+                    <p className="text-sm" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                      Aluno desde Janeiro 2024
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                        Email
+                      </Label>
+                      <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                        {selectedStudent.email}
+                      </p>
+                    </div>
+
+                    <div className="space-y-1">
+                      <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                        Telefone
+                      </Label>
+                      <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                        {selectedStudent.phone}
+                      </p>
+                    </div>
+
+                    <div className="space-y-1">
+                      <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                        Unidade
+                      </Label>
+                      <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                        {studentUnit?.name || "Não definida"}
+                      </p>
+                    </div>
+
+                    <div className="space-y-1">
+                      <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                        Origem
+                      </Label>
+                      <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                        {selectedStudent.acquisitionType === "platform" ? "Plataforma" : "Convite"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <CardHeader>
+              <CardTitle className="text-lg" style={{ color: "#3D2C2E" }}>
+                Frequência
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-4">
+                <div className="flex-1">
+                  <div className="w-full h-4 rounded-full overflow-hidden" style={{ backgroundColor: "#F5F0EB" }}>
+                    <div
+                      className="h-full rounded-full"
+                      style={{
+                        width: `${selectedStudent.frequency}%`,
+                        backgroundColor: "#CFB2A8",
+                      }}
+                    />
+                  </div>
+                </div>
+                <span className="text-lg font-semibold" style={{ color: "#3D2C2E" }}>
+                  {selectedStudent.frequency}%
+                </span>
+              </div>
+              <p className="text-sm mt-2" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                Taxa de presença nas aulas
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <CardHeader>
+              <CardTitle className="text-lg" style={{ color: "#3D2C2E" }}>
+                Aulas Matriculadas
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {selectedStudent.classes.map((className, index) => {
+                  const classInfo = mockClasses.find((c) => c.title === className)
+                  return (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-3 rounded"
+                      style={{ backgroundColor: "#F5F0EB" }}
+                    >
+                      <div>
+                        <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                          {className}
+                        </p>
+                        {classInfo && (
+                          <p className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                            {classInfo.frequency || "Evento único"} - {classInfo.time}
+                          </p>
+                        )}
+                      </div>
+                      <span className="text-sm" style={{ color: "#3D2C2E" }}>
+                        R$ {classInfo?.price || "0"},00
+                      </span>
+                    </div>
+                  )
+                })}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <CardHeader>
+              <CardTitle className="text-lg" style={{ color: "#3D2C2E" }}>
+                Histórico de Pagamentos
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {[
+                  { month: "Março 2024", status: "Pago", value: "R$ 150,00" },
+                  { month: "Fevereiro 2024", status: "Pago", value: "R$ 150,00" },
+                  { month: "Janeiro 2024", status: "Pago", value: "R$ 150,00" },
+                ].map((payment, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-3 rounded"
+                    style={{ backgroundColor: "#F5F0EB" }}
+                  >
+                    <div>
+                      <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                        {payment.month}
+                      </p>
+                      <span
+                        className="text-xs px-2 py-0.5 rounded"
+                        style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                      >
+                        {payment.status}
+                      </span>
+                    </div>
+                    <span className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                      {payment.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    )
+  }
+
   const renderContent = () => {
     switch (currentScreen) {
       case "dashboard":
@@ -3293,6 +3513,8 @@ export default function SissoneResponsivePrototype() {
       //   return renderProfile() // renderProfile is not defined, so it's commented out
       case "user-profile":
         return renderUserProfile()
+      case "student-profile":
+        return renderStudentProfile()
       case "school-units":
         return renderSchoolUnits()
       case "classes":
@@ -3311,8 +3533,6 @@ export default function SissoneResponsivePrototype() {
         return renderPricing()
       case "students":
         return renderStudents()
-      case "student-profile": // Added for student-profile case
-        return <div>Student Profile</div> // Placeholder
       case "student-view": // Added for student-view case
         return <div>Student View</div> // Placeholder
       case "invite-student":
@@ -3377,8 +3597,7 @@ export default function SissoneResponsivePrototype() {
             renderPricing()}
           {currentScreen === "students" && renderStudents()}
           {currentScreen === "user-profile" && renderUserProfile()} {/* Render user profile */}
-          {currentScreen === "student-profile" && <div>Student Profile Content</div>}{" "}
-          {/* Placeholder for student-profile */}
+              {currentScreen === "student-profile" && renderStudentProfile()}
           {currentScreen === "student-view" && <div>Student View Content</div>} {/* Placeholder for student-view */}
           {currentScreen === "invite-student" && renderInviteStudent()}
         </div>
