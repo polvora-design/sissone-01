@@ -1864,7 +1864,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       {classItem.tag && (
-                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
                           {classItem.tag}
                         </div>
                       )}
@@ -1952,7 +1952,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       {classItem.tag && (
-                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
                           {classItem.tag}
                         </div>
                       )}
@@ -2040,7 +2040,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       {classItem.tag && (
-                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
                           {classItem.tag}
                         </div>
                       )}
@@ -2128,7 +2128,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       {classItem.tag && (
-                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
                           {classItem.tag}
                         </div>
                       )}
@@ -2216,7 +2216,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       {classItem.tag && (
-                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
                           {classItem.tag}
                         </div>
                       )}
@@ -2304,7 +2304,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       {classItem.tag && (
-                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
                           {classItem.tag}
                         </div>
                       )}
@@ -2392,7 +2392,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       {classItem.tag && (
-                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
                           {classItem.tag}
                         </div>
                       )}
@@ -2480,7 +2480,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       {classItem.tag && (
-                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
                           {classItem.tag}
                         </div>
                       )}
@@ -2568,7 +2568,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       {classItem.tag && (
-                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
                           {classItem.tag}
                         </div>
                       )}
@@ -2656,7 +2656,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       {classItem.tag && (
-                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
                           {classItem.tag}
                         </div>
                       )}
@@ -2744,7 +2744,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       {classItem.tag && (
-                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
                           {classItem.tag}
                         </div>
                       )}
@@ -2832,7 +2832,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       {classItem.tag && (
-                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
                           {classItem.tag}
                         </div>
                       )}
@@ -2920,7 +2920,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       {classItem.tag && (
-                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
                           {classItem.tag}
                         </div>
                       )}
@@ -3008,7 +3008,7 @@ const SissonePrototype = () => {
                         className="object-cover"
                       />
                       {classItem.tag && (
-                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
                           {classItem.tag}
                         </div>
                       )}
