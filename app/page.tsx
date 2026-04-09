@@ -122,6 +122,9 @@ const SissonePrototype = () => {
 
   const categoryRefs = {
     today: useRef<HTMLDivElement>(null),
+    iniciante: useRef<HTMLDivElement>(null),
+    aprendiz: useRef<HTMLDivElement>(null),
+    profissional: useRef<HTMLDivElement>(null),
     contemporary: useRef<HTMLDivElement>(null),
     "hip-hop": useRef<HTMLDivElement>(null), // Changed key to match updates
     ballet: useRef<HTMLDivElement>(null),
@@ -1410,6 +1413,10 @@ const SissonePrototype = () => {
     return classes.filter((c) => c.category === category).slice(0, 7)
   }
 
+  const getClassesByLevel = (level: string) => {
+    return classes.filter((c) => c.level === level).slice(0, 7)
+  }
+
   const scrollCategory = (categoryId: string, direction: "left" | "right") => {
     const container = document.getElementById(`category-${categoryId}`)
     if (container) {
@@ -1840,6 +1847,255 @@ const SissonePrototype = () => {
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
                 {todayClasses.map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      navigateToScreen("detail")
+                    }}
+                  >
+                    <div className="relative h-48 w-full flex-shrink-0">
+                      <Image
+                        src={classItem.image || "/placeholder.svg"}
+                        alt={classItem.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-card-foreground opacity-70 line-clamp-1">{classItem.school}</p>
+                      <div className="flex items-center gap-1 my-2">
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                        <span className="text-sm font-medium text-card-foreground pointer-events-none">
+                          {classItem.rating}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-lg font-bold text-card-foreground pointer-events-none">
+                          {classItem.price}
+                        </span>
+                        <Button
+                          size="sm"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            navigateToScreen("detail")
+                          }}
+                        >
+                          Agendar
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            {/* Iniciante */}
+            <div>
+              <div className="flex items-center justify-between mb-4 px-4">
+                <button
+                  onClick={() => handleCategoryClick("iniciante")}
+                  className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
+                >
+                  Iniciante
+                </button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("iniciante", "left")}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("iniciante", "right")}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div
+                ref={categoryRefs.iniciante}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth px-4"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                {getClassesByLevel("Iniciante").map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      navigateToScreen("detail")
+                    }}
+                  >
+                    <div className="relative h-48 w-full flex-shrink-0">
+                      <Image
+                        src={classItem.image || "/placeholder.svg"}
+                        alt={classItem.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-card-foreground opacity-70 line-clamp-1">{classItem.school}</p>
+                      <div className="flex items-center gap-1 my-2">
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                        <span className="text-sm font-medium text-card-foreground pointer-events-none">
+                          {classItem.rating}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-lg font-bold text-card-foreground pointer-events-none">
+                          {classItem.price}
+                        </span>
+                        <Button
+                          size="sm"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            navigateToScreen("detail")
+                          }}
+                        >
+                          Agendar
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            {/* Aprendiz */}
+            <div>
+              <div className="flex items-center justify-between mb-4 px-4">
+                <button
+                  onClick={() => handleCategoryClick("aprendiz")}
+                  className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
+                >
+                  Aprendiz
+                </button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("aprendiz", "left")}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("aprendiz", "right")}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div
+                ref={categoryRefs.aprendiz}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth px-4"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                {getClassesByLevel("Aprendiz").map((classItem) => (
+                  <Card
+                    key={classItem.id}
+                    className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                    onClick={() => {
+                      setSelectedClass(classItem)
+                      setCurrentImageIndex(0)
+                      navigateToScreen("detail")
+                    }}
+                  >
+                    <div className="relative h-48 w-full flex-shrink-0">
+                      <Image
+                        src={classItem.image || "/placeholder.svg"}
+                        alt={classItem.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
+                      <p className="text-sm text-card-foreground opacity-70 line-clamp-1">{classItem.school}</p>
+                      <div className="flex items-center gap-1 my-2">
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                        <span className="text-sm font-medium text-card-foreground pointer-events-none">
+                          {classItem.rating}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-lg font-bold text-card-foreground pointer-events-none">
+                          {classItem.price}
+                        </span>
+                        <Button
+                          size="sm"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedClass(classItem)
+                            setCurrentImageIndex(0)
+                            navigateToScreen("detail")
+                          }}
+                        >
+                          Agendar
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            {/* Profissional */}
+            <div>
+              <div className="flex items-center justify-between mb-4 px-4">
+                <button
+                  onClick={() => handleCategoryClick("profissional")}
+                  className="text-xl font-bold text-foreground hover:text-primary cursor-pointer"
+                >
+                  Profissional
+                </button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("profissional", "left")}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 rounded-full border-border hover:bg-secondary bg-transparent"
+                    onClick={() => handleCategoryScroll("profissional", "right")}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              <div
+                ref={categoryRefs.profissional}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth px-4"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                {getClassesByLevel("Profissional").map((classItem) => (
                   <Card
                     key={classItem.id}
                     className="flex-shrink-0 w-72 bg-card border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
