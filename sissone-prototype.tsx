@@ -96,9 +96,13 @@ export default function SissonePrototype() {
   const ForgotPasswordScreen = () => (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-[#F5F0EB]">
       {showEmailSentNotification && (
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg flex items-center gap-2 z-50">
-          <Check size={20} />
-          <span>Email enviado</span>
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
+          <div className="bg-[#3D2C2E] text-white rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
+            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+              <Check className="w-5 h-5 text-green-600" />
+            </div>
+            <p className="text-sm font-medium">Email enviado</p>
+          </div>
         </div>
       )}
       <div className="w-full max-w-md space-y-6">
@@ -701,9 +705,13 @@ export default function SissonePrototype() {
   const FeedbackScreen = () => (
     <div className="min-h-screen bg-[#F5F0EB]">
       {showReviewSentNotification && (
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg flex items-center gap-2 z-50">
-          <Check size={20} />
-          <span>Avaliação enviada</span>
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
+          <div className="bg-[#3D2C2E] text-white rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
+            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+              <Check className="w-5 h-5 text-green-600" />
+            </div>
+            <p className="text-sm font-medium">Avaliação enviada</p>
+          </div>
         </div>
       )}
       <div className="mx-auto max-w-[1440px]">
@@ -875,9 +883,13 @@ export default function SissonePrototype() {
   const ProfileScreen = () => (
     <div className="min-h-screen bg-[#F5F0EB]">
       {showProfileSaveNotification && (
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg flex items-center gap-2 z-50">
-          <Check size={20} />
-          <span>Alterações salvas com sucesso</span>
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
+          <div className="bg-[#3D2C2E] text-white rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
+            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+              <Check className="w-5 h-5 text-green-600" />
+            </div>
+            <p className="text-sm font-medium">Alterações salvas com sucesso</p>
+          </div>
         </div>
       )}
       <div className="mx-auto max-w-[1440px]">
