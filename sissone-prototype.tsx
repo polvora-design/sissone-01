@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Star, Calendar, Clock, MapPin, ArrowLeft, Edit2, Check, X, QrCode, AlertCircle } from "lucide-react"
 import Image from "next/image"
 
@@ -20,6 +21,8 @@ export default function SissonePrototype() {
   const [showProfileSaveNotification, setShowProfileSaveNotification] = useState(false)
   const [showForgotPassword, setShowForgotPassword] = useState(false)
   const [showEmailSentNotification, setShowEmailSentNotification] = useState(false)
+  const [selectedStyles, setSelectedStyles] = useState<string[]>(["Contemporâneo", "Jazz", "Ballet"])
+  const [selectedLevels, setSelectedLevels] = useState<string[]>(["Intermediário"])
 
   const screens = ["Login", "Dashboard", "Detalhes", "Check-in", "Feedback", "Reviews", "Perfil"]
 
@@ -923,22 +926,58 @@ export default function SissonePrototype() {
                 <CardHeader>
                   <h3 className="text-lg font-semibold text-[#3D2C2E]">Preferências de Dança</h3>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-6">
                   <div>
-                    <Label htmlFor="style" className="text-[#3D2C2E]">
-                      Estilos Favoritos
+                    <Label className="text-[#3D2C2E] mb-3 block">
+                      Estilos de Dança
                     </Label>
-                    <Input
-                      id="style"
-                      defaultValue="Contemporâneo, Jazz, Ballet"
-                      className="bg-white border-[#E5D6CD]"
-                    />
+                    <div className="space-y-3">
+                      {["Ballet", "Jazz", "Contemporâneo", "Hip Hop", "Street Dance", "Dança de Salão"].map((style) => (
+                        <div key={style} className="flex items-center gap-3">
+                          <Checkbox
+                            id={`style-${style}`}
+                            checked={selectedStyles.includes(style)}
+                            onCheckedChange={(checked) => {
+                              if (checked) {
+                                setSelectedStyles([...selectedStyles, style])
+                              } else {
+                                setSelectedStyles(selectedStyles.filter((s) => s !== style))
+                              }
+                            }}
+                            className="border-[#CFB2A8] data-[state=checked]:bg-[#CFB2A8] data-[state=checked]:border-[#CFB2A8]"
+                          />
+                          <Label htmlFor={`style-${style}`} className="text-[#3D2C2E] cursor-pointer font-normal">
+                            {style}
+                          </Label>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <div>
-                    <Label htmlFor="level" className="text-[#3D2C2E]">
+                    <Label className="text-[#3D2C2E] mb-3 block">
                       Nível de Experiência
                     </Label>
-                    <Input id="level" defaultValue="Intermediário" className="bg-white border-[#E5D6CD]" />
+                    <div className="space-y-3">
+                      {["Iniciante", "Intermediário", "Avançado", "Profissional"].map((level) => (
+                        <div key={level} className="flex items-center gap-3">
+                          <Checkbox
+                            id={`level-${level}`}
+                            checked={selectedLevels.includes(level)}
+                            onCheckedChange={(checked) => {
+                              if (checked) {
+                                setSelectedLevels([...selectedLevels, level])
+                              } else {
+                                setSelectedLevels(selectedLevels.filter((l) => l !== level))
+                              }
+                            }}
+                            className="border-[#CFB2A8] data-[state=checked]:bg-[#CFB2A8] data-[state=checked]:border-[#CFB2A8]"
+                          />
+                          <Label htmlFor={`level-${level}`} className="text-[#3D2C2E] cursor-pointer font-normal">
+                            {level}
+                          </Label>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <div>
                     <Label htmlFor="bio" className="text-[#3D2C2E]">
