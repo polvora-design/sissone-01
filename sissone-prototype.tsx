@@ -23,6 +23,7 @@ export default function SissonePrototype() {
   const [showEmailSentNotification, setShowEmailSentNotification] = useState(false)
   const [selectedStyles, setSelectedStyles] = useState<string[]>(["Contemporâneo", "Jazz", "Ballet"])
   const [selectedLevels, setSelectedLevels] = useState<string[]>(["Intermediário"])
+  const [customStyle, setCustomStyle] = useState("")
 
   const screens = ["Login", "Dashboard", "Detalhes", "Check-in", "Feedback", "Reviews", "Perfil"]
 
@@ -919,6 +920,16 @@ export default function SissonePrototype() {
                     </Label>
                     <Input id="phone" type="tel" defaultValue="(11) 98765-4321" className="bg-white border-[#E5D6CD]" />
                   </div>
+                  <div>
+                    <Label htmlFor="bio" className="text-[#3D2C2E]">
+                      Sobre Você
+                    </Label>
+                    <Textarea
+                      id="bio"
+                      className="min-h-24 bg-white border-[#E5D6CD] resize-none"
+                      defaultValue="Apaixonada por dança há 5 anos. Sempre em busca de novas experiências e desafios!"
+                    />
+                  </div>
                 </CardContent>
               </Card>
 
@@ -951,6 +962,53 @@ export default function SissonePrototype() {
                           </Label>
                         </div>
                       ))}
+                      {selectedStyles
+                        .filter(
+                          (style) =>
+                            !["Ballet", "Jazz", "Contemporâneo", "Hip Hop", "Street Dance", "Dança de Salão"].includes(
+                              style
+                            )
+                        )
+                        .map((style) => (
+                          <div key={style} className="flex items-center gap-3">
+                            <Checkbox
+                              id={`style-${style}`}
+                              checked={true}
+                              onCheckedChange={() => {
+                                setSelectedStyles(selectedStyles.filter((s) => s !== style))
+                              }}
+                              className="border-[#CFB2A8] data-[state=checked]:bg-[#CFB2A8] data-[state=checked]:border-[#CFB2A8]"
+                            />
+                            <Label htmlFor={`style-${style}`} className="text-[#3D2C2E] cursor-pointer font-normal">
+                              {style}
+                            </Label>
+                          </div>
+                        ))}
+                      <div className="flex items-center gap-2 pt-2">
+                        <Input
+                          value={customStyle}
+                          onChange={(e) => setCustomStyle(e.target.value)}
+                          placeholder="Adicionar outro estilo..."
+                          className="bg-white border-[#E5D6CD] flex-1"
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" && customStyle.trim()) {
+                              setSelectedStyles([...selectedStyles, customStyle.trim()])
+                              setCustomStyle("")
+                            }
+                          }}
+                        />
+                        <Button
+                          onClick={() => {
+                            if (customStyle.trim()) {
+                              setSelectedStyles([...selectedStyles, customStyle.trim()])
+                              setCustomStyle("")
+                            }
+                          }}
+                          className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white px-4"
+                        >
+                          Adicionar
+                        </Button>
+                      </div>
                     </div>
                   </div>
                   <div>
@@ -978,16 +1036,6 @@ export default function SissonePrototype() {
                         </div>
                       ))}
                     </div>
-                  </div>
-                  <div>
-                    <Label htmlFor="bio" className="text-[#3D2C2E]">
-                      Sobre Você
-                    </Label>
-                    <Textarea
-                      id="bio"
-                      className="min-h-24 bg-white border-[#E5D6CD] resize-none"
-                      defaultValue="Apaixonada por dança há 5 anos. Sempre em busca de novas experiências e desafios!"
-                    />
                   </div>
                 </CardContent>
               </Card>
