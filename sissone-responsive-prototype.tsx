@@ -1390,7 +1390,12 @@ export default function SissoneResponsivePrototype() {
                         <Building2 className="w-12 h-12" style={{ color: "#3D2C2E" }} />
                       </div>
                     </div>
-                    <Button variant="ghost" size="sm" className="hover:bg-white/50">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="hover:bg-white/50"
+                      onClick={() => showToast("Logo atualizado com sucesso!")}
+                    >
                       <span style={{ color: "#CFB2A8" }}>Alterar Logo</span>
                     </Button>
                   </div>
@@ -1442,6 +1447,7 @@ export default function SissoneResponsivePrototype() {
                           variant="outline"
                           className="aspect-square flex flex-col items-center justify-center gap-2 bg-transparent"
                           style={{ borderColor: "#CFB2A8", borderStyle: "dashed" }}
+                          onClick={() => showToast("Foto adicionada com sucesso!")}
                         >
                           <Upload className="w-6 h-6" style={{ color: "#3D2C2E" }} />
                           <span className="text-xs" style={{ color: "#3D2C2E" }}>
