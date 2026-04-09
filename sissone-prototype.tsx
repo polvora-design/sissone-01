@@ -19,6 +19,7 @@ export default function SissonePrototype() {
   const [showCheckInNotification, setShowCheckInNotification] = useState(false)
   const [showProfileSaveNotification, setShowProfileSaveNotification] = useState(false)
   const [showForgotPassword, setShowForgotPassword] = useState(false)
+  const [showEmailSentNotification, setShowEmailSentNotification] = useState(false)
 
   const screens = ["Login", "Dashboard", "Detalhes", "Check-in", "Feedback", "Reviews", "Perfil"]
 
@@ -89,6 +90,12 @@ export default function SissonePrototype() {
 
   const ForgotPasswordScreen = () => (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-[#F5F0EB]">
+      {showEmailSentNotification && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg flex items-center gap-2 z-50">
+          <Check size={20} />
+          <span>Email enviado</span>
+        </div>
+      )}
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
           <div className="mx-auto mb-4 flex items-center justify-center">
@@ -107,7 +114,13 @@ export default function SissonePrototype() {
             </Label>
             <Input id="reset-email" type="email" placeholder="seu@email.com" className="bg-white border-[#E5D6CD]" />
           </div>
-          <Button className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+          <Button 
+            onClick={() => {
+              setShowEmailSentNotification(true)
+              setTimeout(() => setShowEmailSentNotification(false), 2000)
+            }}
+            className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+          >
             Criar nova senha
           </Button>
           <Button
