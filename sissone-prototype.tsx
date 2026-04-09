@@ -524,9 +524,6 @@ function OnboardingScreen() {
       <h2 className="text-xl md:text-2xl font-bold text-[#3D2C2E] text-center">Bem-vindo à Sissone!</h2>
 
       <div className="text-center">
-        <div className="w-16 h-16 bg-[#E5D6CD] rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle className="h-8 w-8 text-[#3D2C2E]" />
-        </div>
         <p className="text-[#3D2C2E] opacity-80">Você está pronto! Veja o que fazer a seguir:</p>
       </div>
 
@@ -541,7 +538,6 @@ function OnboardingScreen() {
                 <h3 className="font-semibold text-[#3D2C2E]">{step.title}</h3>
                 <p className="text-sm text-[#3D2C2E] opacity-80">{step.description}</p>
               </div>
-              <div className="w-6 h-6 border-2 border-[#E5D6CD] rounded-full" />
             </CardContent>
           </Card>
         ))}
