@@ -4568,7 +4568,7 @@ const SissonePrototype = () => {
                     className="bg-primary hover:bg-primary/90 text-primary-foreground px-8"
                     onClick={() => navigateToScreen("schedule")}
                   >
-                    Agendar Experimental
+                    Agendar aula experimental
                   </Button>
                 </div>
               </CardContent>
@@ -4673,7 +4673,7 @@ const SissonePrototype = () => {
           >
             <ArrowLeft className="h-4 w-4" />
           </Button>
-          <h1 className="text-lg font-semibold text-foreground">Agendar Experimental</h1>
+          <h1 className="text-lg font-semibold text-foreground">Agendar aula experimental</h1>
         </div>
       </div>
 
