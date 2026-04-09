@@ -1409,18 +1409,52 @@ export default function SissoneResponsivePrototype() {
                     </div>
                     <div>
                       <Label htmlFor="school-photos" className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
-                        Fotos da Escola
+                        Galeria de Fotos
                       </Label>
-                      <Button
-                        variant="outline"
-                        className="w-full mt-1 h-12 bg-transparent"
-                        style={{ borderColor: "#CFB2A8", backgroundColor: "#F5F0EB" }}
-                      >
-                        <Upload className="w-4 h-4 mr-2" style={{ color: "#3D2C2E" }} />
-                        Adicionar Fotos
-                      </Button>
+                      <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        {[
+                          "/ballet-class-studio.png",
+                          "/dance-students-practicing.png",
+                          "/dance-instructor-teaching.png",
+                        ].map((photo, index) => (
+                          <div
+                            key={index}
+                            className="relative aspect-square rounded-lg overflow-hidden group"
+                            style={{ backgroundColor: "#CFB2A8" }}
+                          >
+                            <img
+                              src={photo}
+                              alt={`Foto da escola ${index + 1}`}
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                className="text-white hover:bg-white/20"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </div>
+                        ))}
+                        <Button
+                          variant="outline"
+                          className="aspect-square flex flex-col items-center justify-center gap-2 bg-transparent"
+                          style={{ borderColor: "#CFB2A8", borderStyle: "dashed" }}
+                        >
+                          <Upload className="w-6 h-6" style={{ color: "#3D2C2E" }} />
+                          <span className="text-xs" style={{ color: "#3D2C2E" }}>
+                            Adicionar
+                          </span>
+                        </Button>
+                      </div>
                     </div>
-                    <Button className="w-full" style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
+                    <Button
+                      className="w-full"
+                      style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                      onClick={() => showToast("Perfil da escola salvo com sucesso!")}
+                    >
                       Salvar Perfil da Escola
                     </Button>
                   </div>
