@@ -1596,7 +1596,10 @@ export default function SissoneResponsivePrototype() {
                           size="sm"
                           variant="ghost"
                           className="hover:bg-white/50"
-                          onClick={(e) => e.stopPropagation()}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            showToast("Unidade excluída com sucesso!")
+                          }}
                         >
                           <Trash2 className="w-4 h-4" style={{ color: "#3D2C2E" }} />
                         </Button>
