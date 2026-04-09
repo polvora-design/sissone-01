@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
@@ -54,12 +54,27 @@ export default function SissonePrototype() {
 
 function LandingScreen({ onNext }: { onNext: () => void }) {
   const [copied, setCopied] = useState(false)
+  const [showFloatingButton, setShowFloatingButton] = useState(false)
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText("sissone.com.br/escola-ballet-maria-clara")
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Mostra o botão flutuante após rolar 300px
+      if (window.scrollY > 300) {
+        setShowFloatingButton(true)
+      } else {
+        setShowFloatingButton(false)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const benefits = [
     {
@@ -155,10 +170,11 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
   ]
 
   return (
-    <div className="space-y-12 md:space-y-16 max-w-6xl mx-auto">
-      <div className="flex justify-center">
-        <img src="/sissone-logo.svg" alt="Sissone" className="h-8 md:h-10 lg:h-12" />
-      </div>
+    <>
+      <div className="space-y-12 md:space-y-16 max-w-6xl mx-auto">
+        <div className="flex justify-center">
+          <img src="/sissone-logo.svg" alt="Sissone" className="h-8 md:h-10 lg:h-12" />
+        </div>
 
       {/* Hero section */}
       <div className="text-center space-y-6 md:space-y-8">
@@ -408,6 +424,22 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
         </Button>
       </div>
     </div>
+
+    {/* Floating CTA Button */}
+    <div
+      className={`fixed bottom-6 right-6 z-50 transition-all duration-300 ${
+        showFloatingButton ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+      }`}
+    >
+      <Button
+        onClick={onNext}
+        className="bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white font-semibold text-base px-6 py-6 shadow-xl hover:shadow-2xl transition-shadow rounded-full"
+      >
+        Começar Agora
+        <ArrowRight className="ml-2 h-5 w-5" />
+      </Button>
+    </div>
+  </>
   )
 }
 
