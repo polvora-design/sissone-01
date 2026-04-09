@@ -1863,6 +1863,11 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
+                      {classItem.tag && (
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                          {classItem.tag}
+                        </div>
+                      )}
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -1946,6 +1951,11 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
+                      {classItem.tag && (
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                          {classItem.tag}
+                        </div>
+                      )}
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2029,6 +2039,11 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
+                      {classItem.tag && (
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                          {classItem.tag}
+                        </div>
+                      )}
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2112,6 +2127,11 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
+                      {classItem.tag && (
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                          {classItem.tag}
+                        </div>
+                      )}
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2195,6 +2215,11 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
+                      {classItem.tag && (
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                          {classItem.tag}
+                        </div>
+                      )}
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2278,6 +2303,11 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
+                      {classItem.tag && (
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                          {classItem.tag}
+                        </div>
+                      )}
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2361,6 +2391,11 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
+                      {classItem.tag && (
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                          {classItem.tag}
+                        </div>
+                      )}
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2444,6 +2479,11 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
+                      {classItem.tag && (
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                          {classItem.tag}
+                        </div>
+                      )}
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2527,6 +2567,11 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
+                      {classItem.tag && (
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                          {classItem.tag}
+                        </div>
+                      )}
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2610,6 +2655,11 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
+                      {classItem.tag && (
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                          {classItem.tag}
+                        </div>
+                      )}
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2693,6 +2743,11 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
+                      {classItem.tag && (
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                          {classItem.tag}
+                        </div>
+                      )}
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2776,6 +2831,11 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
+                      {classItem.tag && (
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                          {classItem.tag}
+                        </div>
+                      )}
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2859,6 +2919,11 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
+                      {classItem.tag && (
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                          {classItem.tag}
+                        </div>
+                      )}
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
@@ -2942,6 +3007,11 @@ const SissonePrototype = () => {
                         fill
                         className="object-cover"
                       />
+                      {classItem.tag && (
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${classItem.tagColor}`}>
+                          {classItem.tag}
+                        </div>
+                      )}
                     </div>
                     <CardContent className="p-4">
                       <h3 className="font-semibold text-card-foreground text-lg line-clamp-1">{classItem.name}</h3>
