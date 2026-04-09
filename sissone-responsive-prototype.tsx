@@ -994,7 +994,42 @@ export default function SissoneResponsivePrototype() {
             </div>
           </nav>
 
-          <div className="p-4 mt-8">
+          <div className="p-4 border-t" style={{ borderColor: "#E5D6CD" }}>
+            <h3 className="text-sm font-semibold mb-3" style={{ color: "#3D2C2E" }}>
+              Ações Rápidas
+            </h3>
+            <div className="space-y-2">
+              <Button
+                variant="outline"
+                className="w-full justify-start h-10 px-3 text-sm"
+                style={{ borderColor: "#CFB2A8", color: "#3D2C2E", backgroundColor: "transparent" }}
+                onClick={() => navigateTo("create-class")}
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Nova Aula
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full justify-start h-10 px-3 text-sm"
+                style={{ borderColor: "#CFB2A8", color: "#3D2C2E", backgroundColor: "transparent" }}
+                onClick={() => setShowInviteModal(true)}
+              >
+                <UserPlus className="w-4 h-4 mr-2" />
+                Convidar Aluno
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full justify-start h-10 px-3 text-sm"
+                style={{ borderColor: "#CFB2A8", color: "#3D2C2E", backgroundColor: "transparent" }}
+                onClick={() => setShowShareLinkModal(true)}
+              >
+                <Share2 className="w-4 h-4 mr-2" />
+                Compartilhar Link
+              </Button>
+            </div>
+          </div>
+
+          <div className="p-4 mt-4">
             <h3 className="text-sm font-semibold mb-3" style={{ color: "#3D2C2E" }}>
               Resumo Rápido
             </h3>
