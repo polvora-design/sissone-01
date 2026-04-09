@@ -54,7 +54,7 @@ export default function SissonePrototype() {
 
 function LandingScreen({ onNext }: { onNext: () => void }) {
   const [copied, setCopied] = useState(false)
-  const [showFloatingButton, setShowFloatingButton] = useState(false)
+  const [showFloatingButton, setShowFloatingButton] = useState(true)
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText("sissone.com.br/escola-ballet-maria-clara")
@@ -64,15 +64,21 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Mostra o botão flutuante após rolar 300px
-      if (window.scrollY > 300) {
-        setShowFloatingButton(true)
-      } else {
+      // Esconde o botão flutuante quando o usuário chega perto da seção final do CTA
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+      const scrollTop = window.scrollY
+      
+      // Se o usuário está a 600px do final da página, esconde o botão
+      if (scrollTop + windowHeight >= documentHeight - 600) {
         setShowFloatingButton(false)
+      } else {
+        setShowFloatingButton(true)
       }
     }
 
     window.addEventListener("scroll", handleScroll)
+    handleScroll() // Chama imediatamente para definir estado inicial
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
