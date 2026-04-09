@@ -1856,12 +1856,13 @@ const SissonePrototype = () => {
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 288px"
                       />
                       {classItem.tag && (
                         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
@@ -1944,12 +1945,13 @@ const SissonePrototype = () => {
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 288px"
                       />
                       {classItem.tag && (
                         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
@@ -2032,12 +2034,13 @@ const SissonePrototype = () => {
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 288px"
                       />
                       {classItem.tag && (
                         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
@@ -2120,12 +2123,13 @@ const SissonePrototype = () => {
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 288px"
                       />
                       {classItem.tag && (
                         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
@@ -2208,12 +2212,13 @@ const SissonePrototype = () => {
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 288px"
                       />
                       {classItem.tag && (
                         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
@@ -2296,12 +2301,13 @@ const SissonePrototype = () => {
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 288px"
                       />
                       {classItem.tag && (
                         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
@@ -2384,12 +2390,13 @@ const SissonePrototype = () => {
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 288px"
                       />
                       {classItem.tag && (
                         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
@@ -2472,12 +2479,13 @@ const SissonePrototype = () => {
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 288px"
                       />
                       {classItem.tag && (
                         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
@@ -2560,12 +2568,13 @@ const SissonePrototype = () => {
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 288px"
                       />
                       {classItem.tag && (
                         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
@@ -2648,12 +2657,13 @@ const SissonePrototype = () => {
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 288px"
                       />
                       {classItem.tag && (
                         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
@@ -2736,12 +2746,13 @@ const SissonePrototype = () => {
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 288px"
                       />
                       {classItem.tag && (
                         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
@@ -2824,12 +2835,13 @@ const SissonePrototype = () => {
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 288px"
                       />
                       {classItem.tag && (
                         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
@@ -2912,12 +2924,13 @@ const SissonePrototype = () => {
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 288px"
                       />
                       {classItem.tag && (
                         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
@@ -3000,12 +3013,13 @@ const SissonePrototype = () => {
                       navigateToScreen("detail")
                     }}
                   >
-                    <div className="relative h-48 w-full flex-shrink-0">
+                    <div className="relative h-48 w-full flex-shrink-0 overflow-hidden">
                       <Image
                         src={classItem.image || "/placeholder.svg"}
                         alt={classItem.name}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 288px"
                       />
                       {classItem.tag && (
                         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-bold ${classItem.tagColor} inline-block`}>
