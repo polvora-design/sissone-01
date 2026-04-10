@@ -1408,7 +1408,26 @@ export default function SissoneResponsivePrototype() {
                 <Card
                   key={classItem.id}
                   style={{ backgroundColor: "#E5D6CD" }}
-                  className="hover:shadow-md transition-shadow"
+                  className="hover:shadow-md transition-shadow cursor-pointer hover:scale-[1.01]"
+                  onClick={() => {
+                    setClassData({
+                      title: classItem.title,
+                      date: classItem.date || "",
+                      time: classItem.time,
+                      endTime: classItem.endTime || "19:30",
+                      room: "room-1",
+                      level: "iniciante",
+                      price: classItem.price.toString(),
+                      description: classItem.description || "",
+                      unit: classItem.unitId,
+                      isRecurring: classItem.isRecurring || false,
+                      hasEndDate: false,
+                      endDate: "",
+                      recurringDays: [],
+                      images: [],
+                    })
+                    navigateTo("class-preview")
+                  }}
                 >
                   <CardContent className="p-3 lg:p-4">
                     <div className="flex justify-between items-start">
@@ -1424,16 +1443,6 @@ export default function SissoneResponsivePrototype() {
                             {classItem.enrolled} alunos inscritos
                           </p>
                         </div>
-                      </div>
-                      <div className="flex gap-2">
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          onClick={() => navigateTo("class-preview")}
-                          className="hover:bg-white/50"
-                        >
-                          <Eye className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-                        </Button>
                       </div>
                     </div>
                   </CardContent>
