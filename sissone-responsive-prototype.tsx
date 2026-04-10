@@ -104,8 +104,9 @@ type Student = {
   unitId: string
   classes: string[]
   frequency: number
+  age?: number
   acquisitionType: "invite" | "platform"
-  paymentStatus: "current" | "overdue"
+  paymentStatus: "current" | "overdue" | "pending"
   avatar?: string
 }
 
@@ -260,6 +261,7 @@ const mockStudents: Student[] = [
     unitId: "1",
     classes: ["Ballet Iniciante", "Jazz Avançado"],
     frequency: 95,
+    age: 28,
     acquisitionType: "platform",
     paymentStatus: "current",
   },
@@ -271,6 +273,7 @@ const mockStudents: Student[] = [
     unitId: "2",
     classes: ["Jazz Avançado"],
     frequency: 78,
+    age: 35,
     acquisitionType: "invite",
     paymentStatus: "current",
   },
@@ -282,8 +285,9 @@ const mockStudents: Student[] = [
     unitId: "1",
     classes: ["Ballet Iniciante"],
     frequency: 45,
+    age: 22,
     acquisitionType: "platform",
-    paymentStatus: "overdue",
+    paymentStatus: "pending",
   },
   {
     id: "4",
@@ -293,6 +297,7 @@ const mockStudents: Student[] = [
     unitId: "3",
     classes: ["Contemporâneo Intermediário"],
     frequency: 88,
+    age: 19,
     acquisitionType: "invite",
     paymentStatus: "current",
   },
@@ -304,6 +309,7 @@ const mockStudents: Student[] = [
     unitId: "2",
     classes: ["Sapateado Avançado", "Jazz Avançado"],
     frequency: 92,
+    age: 31,
     acquisitionType: "platform",
     paymentStatus: "current",
   },
@@ -315,6 +321,7 @@ const mockStudents: Student[] = [
     unitId: "1",
     classes: ["Hip Hop Kids"],
     frequency: 67,
+    age: 10,
     acquisitionType: "invite",
     paymentStatus: "current",
   },
@@ -326,6 +333,7 @@ const mockStudents: Student[] = [
     unitId: "3",
     classes: ["Dança de Salão Iniciante"],
     frequency: 81,
+    age: 45,
     acquisitionType: "platform",
     paymentStatus: "current",
   },
@@ -337,6 +345,7 @@ const mockStudents: Student[] = [
     unitId: "2",
     classes: ["Zumba Fitness"],
     frequency: 73,
+    age: 38,
     acquisitionType: "invite",
     paymentStatus: "current",
   },
@@ -348,6 +357,7 @@ const mockStudents: Student[] = [
     unitId: "1",
     classes: ["Ballet Iniciante", "Zumba Fitness"],
     frequency: 90,
+    age: 26,
     acquisitionType: "platform",
     paymentStatus: "current",
   },
@@ -359,6 +369,7 @@ const mockStudents: Student[] = [
     unitId: "2",
     classes: ["Jazz Avançado", "Sapateado Avançado"],
     frequency: 85,
+    age: 29,
     acquisitionType: "invite",
     paymentStatus: "current",
   },
@@ -700,9 +711,9 @@ export default function SissoneResponsivePrototype() {
   const [selectedUnit, setSelectedUnit] = useState<string>("all")
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [searchTerm, setSearchTerm] = useState("")
-  const [frequencyFilter, setFrequencyFilter] = useState("all") // Added for students section filter
   const [unitFilter, setUnitFilter] = useState("all") // Added for students section filter
   const [classFilter, setClassFilter] = useState("all") // Added for students section filter
+  const [paymentFilter, setPaymentFilter] = useState("all") // Added for payment status filter
   const [studentSortBy, setStudentSortBy] = useState("name-asc") // Added for students sorting
   const [selectedStudents, setSelectedStudents] = useState<string[]>([]) // For bulk selection
   
@@ -2721,35 +2732,34 @@ export default function SissoneResponsivePrototype() {
   const renderStudents = () => {
     const filteredStudents = mockStudents
       .filter((student) => {
-        const matchesSearch =
-          student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          student.email.toLowerCase().includes(searchTerm.toLowerCase())
-        const matchesUnit = unitFilter === "all" || student.unitId === unitFilter
-        const matchesFrequency =
-          frequencyFilter === "all" ||
-          (frequencyFilter === "high" && student.frequency >= 80) ||
-          (frequencyFilter === "medium" && student.frequency >= 50 && student.frequency < 80) ||
-          (frequencyFilter === "low" && student.frequency < 50)
-
-        return matchesSearch && matchesUnit && matchesFrequency
+  const matchesSearch =
+  student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  student.email.toLowerCase().includes(searchTerm.toLowerCase())
+  const matchesUnit = unitFilter === "all" || student.unitId === unitFilter
+  const matchesPayment =
+  paymentFilter === "all" ||
+  (paymentFilter === "current" && student.paymentStatus === "current") ||
+  (paymentFilter === "pending" && student.paymentStatus === "pending")
+  
+  return matchesSearch && matchesUnit && matchesPayment
       })
       .sort((a, b) => {
-        switch (studentSortBy) {
-          case "name-asc":
-            return a.name.localeCompare(b.name)
-          case "name-desc":
-            return b.name.localeCompare(a.name)
-          case "frequency-high":
-            return b.frequency - a.frequency
-          case "frequency-low":
-            return a.frequency - b.frequency
-          case "payment-current":
-            return a.paymentStatus === "current" ? -1 : 1
-          case "payment-pending":
-            return a.paymentStatus === "pending" ? -1 : 1
-          default:
-            return 0
-        }
+  switch (studentSortBy) {
+  case "name-asc":
+  return a.name.localeCompare(b.name)
+  case "name-desc":
+  return b.name.localeCompare(a.name)
+  case "frequency-high":
+  return b.frequency - a.frequency
+  case "frequency-low":
+  return a.frequency - b.frequency
+  case "age-young":
+  return (a.age || 0) - (b.age || 0)
+  case "age-old":
+  return (b.age || 0) - (a.age || 0)
+  default:
+  return 0
+  }
       })
 
     return (
@@ -2813,7 +2823,7 @@ export default function SissoneResponsivePrototype() {
           </div>
 
           {/* Filters and Search */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             <div className="relative">
               <Search
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4"
@@ -2864,40 +2874,23 @@ export default function SissoneResponsivePrototype() {
               </SelectContent>
             </Select>
 
-            <Select defaultValue="all">
-              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-                <SelectValue>
-                  <span className="text-sm">Idade: Todas</span>
-                </SelectValue>
-              </SelectTrigger>
-              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-                <SelectItem value="all">Todas</SelectItem>
-                <SelectItem value="kids">Kids (até 12)</SelectItem>
-                <SelectItem value="teen">Teen (13-17)</SelectItem>
-                <SelectItem value="adult">Adulto (18+)</SelectItem>
-              </SelectContent>
-            </Select>
-
-            <Select defaultValue="all" onValueChange={setFrequencyFilter}>
+            <Select defaultValue="all" onValueChange={setPaymentFilter}>
               <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
                 <SelectValue>
                   <span className="text-sm">
-                    Freq.:{" "}
-                    {frequencyFilter === "all"
-                      ? "Todas"
-                      : frequencyFilter === "high"
-                        ? "Alta"
-                        : frequencyFilter === "medium"
-                          ? "Média"
-                          : "Baixa"}
+                    Pagamento:{" "}
+                    {paymentFilter === "all"
+                      ? "Todos"
+                      : paymentFilter === "current"
+                        ? "Em dia"
+                        : "Atrasado"}
                   </span>
                 </SelectValue>
               </SelectTrigger>
               <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
-                <SelectItem value="all">Todas</SelectItem>
-                <SelectItem value="high">Alta (&gt;80%)</SelectItem>
-                <SelectItem value="medium">Média (50-80%)</SelectItem>
-                <SelectItem value="low">Baixa (&lt;50%)</SelectItem>
+                <SelectItem value="all">Todos</SelectItem>
+                <SelectItem value="current">Em dia</SelectItem>
+                <SelectItem value="pending">Atrasado</SelectItem>
               </SelectContent>
             </Select>
 
@@ -2914,9 +2907,9 @@ export default function SissoneResponsivePrototype() {
                           ? "Maior Freq."
                           : studentSortBy === "frequency-low"
                             ? "Menor Freq."
-                            : studentSortBy === "payment-current"
-                              ? "Em dia"
-                              : "Pendente"}
+                            : studentSortBy === "age-young"
+                              ? "Mais Jovem"
+                              : "Mais Velho"}
                   </span>
                 </SelectValue>
               </SelectTrigger>
@@ -2925,8 +2918,8 @@ export default function SissoneResponsivePrototype() {
                 <SelectItem value="name-desc">Nome Z-A</SelectItem>
                 <SelectItem value="frequency-high">Maior Frequência</SelectItem>
                 <SelectItem value="frequency-low">Menor Frequência</SelectItem>
-                <SelectItem value="payment-current">Pagamento em dia</SelectItem>
-                <SelectItem value="payment-pending">Pagamento pendente</SelectItem>
+                <SelectItem value="age-young">Idade: Mais Jovem</SelectItem>
+                <SelectItem value="age-old">Idade: Mais Velho</SelectItem>
               </SelectContent>
             </Select>
           </div>
