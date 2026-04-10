@@ -2991,6 +2991,12 @@ export default function SissoneResponsivePrototype() {
                       >
                         Origem
                       </th>
+                      <th
+                        className="text-left p-4 text-sm font-semibold hidden lg:table-cell"
+                        style={{ color: "#3D2C2E" }}
+                      >
+                        Idade
+                      </th>
                       <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
                         Aulas
                       </th>
@@ -3057,6 +3063,9 @@ export default function SissoneResponsivePrototype() {
                           >
                             {student.acquisitionType === "platform" ? "Plataforma" : "Convite"}
                           </span>
+                        </td>
+                        <td className="p-4 text-sm hidden lg:table-cell" style={{ color: "#3D2C2E" }}>
+                          {student.age ? `${student.age} anos` : "-"}
                         </td>
                         <td className="p-4 text-sm" style={{ color: "#3D2C2E" }}>
                           {student.classes.join(", ")}
