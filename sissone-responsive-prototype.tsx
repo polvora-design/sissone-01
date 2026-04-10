@@ -778,6 +778,7 @@ export default function SissoneResponsivePrototype() {
     time: "",
     endTime: "",
     room: "",
+    level: "",
     price: "",
     hasEndDate: false,
     description: "",
@@ -1981,6 +1982,7 @@ export default function SissoneResponsivePrototype() {
                     time: classItem.time,
                     endTime: classItem.endTime || "19:30",
                     room: "room-1",
+                    level: "iniciante",
                     price: classItem.price.toString(),
                     description: classItem.description || "",
                     unit: classItem.unitId,
@@ -3160,6 +3162,28 @@ export default function SissoneResponsivePrototype() {
                 </Select>
               </div>
               <div>
+                <Label className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                  Nível
+                </Label>
+                <Select
+                  value={classData.level}
+                  onValueChange={(value) => setClassData({ ...classData, level: value })}
+                >
+                  <SelectTrigger
+                    className="mt-1 h-10 lg:h-12"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                  >
+                    <SelectValue placeholder="Selecione o nível" />
+                  </SelectTrigger>
+                  <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                    <SelectItem value="iniciante">Iniciante</SelectItem>
+                    <SelectItem value="intermediario">Intermediário</SelectItem>
+                    <SelectItem value="avancado">Avançado</SelectItem>
+                    <SelectItem value="todos">Todos os níveis</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
                 <Label htmlFor="price" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
                   Preço (R$)
                 </Label>
@@ -3369,9 +3393,25 @@ export default function SissoneResponsivePrototype() {
               </div>
 
               <div className="flex items-center gap-2">
-<MapPin className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
+                <MapPin className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
                 <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
                   {classData.room ? mockRooms.find((r) => r.id === classData.room)?.name : "Sala A"}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
+                <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                  Nível:{" "}
+                  {classData.level === "iniciante"
+                    ? "Iniciante"
+                    : classData.level === "intermediario"
+                      ? "Intermediário"
+                      : classData.level === "avancado"
+                        ? "Avançado"
+                        : classData.level === "todos"
+                          ? "Todos os níveis"
+                          : "Iniciante"}
                 </span>
               </div>
 
