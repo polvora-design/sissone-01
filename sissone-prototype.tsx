@@ -238,6 +238,16 @@ export default function SissonePrototype() {
                 variant="outline"
                 size="sm"
                 onClick={() =>
+                  window.open("https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/", "_blank")
+                }
+                className="border-[#CFB2A8] text-[#3D2C2E] hover:bg-[#CFB2A8] hover:text-white"
+              >
+                Cadastrar minha escola
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() =>
                   window.open("https://v0-sissone-wireframes-git-usurio-a-lead-sissone-mvp.vercel.app/", "_blank")
                 }
                 className="border-[#CFB2A8] text-[#3D2C2E] hover:bg-[#CFB2A8] hover:text-white"
@@ -1074,15 +1084,6 @@ export default function SissonePrototype() {
 
             <div className="mt-6 space-y-3 max-w-md mx-auto">
               <Button
-                onClick={() =>
-                  window.open("https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/", "_blank")
-                }
-                className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
-              >
-                Cadastrar minha escola
-              </Button>
-
-              <Button
                 onClick={() => {
                   setShowProfileSaveNotification(true)
                   setTimeout(() => {
@@ -1090,8 +1091,7 @@ export default function SissonePrototype() {
                     goHome()
                   }, 2000)
                 }}
-                variant="outline"
-                className="w-full border-[#CFB2A8] text-[#CFB2A8] bg-transparent hover:bg-[#CFB2A8]/10"
+                className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
               >
                 Salvar e fechar
               </Button>
