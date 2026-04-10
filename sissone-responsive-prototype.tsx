@@ -2379,16 +2379,21 @@ export default function SissoneResponsivePrototype() {
                       if (currentScreen === "edit-plan" && editingPlan) {
                         setPlans(plans.map((p) => (p.id === editingPlan.id ? editingPlan : p)))
                         showToast("Plano editado com sucesso!")
-                      } else if (newPlan.name && newPlan.discount) {
+                        setCurrentScreen("pricing")
+                        setNewPlan({ name: "", discount: "", duration: "mensal", paymentMethod: "credit", isAutomatic: true, basePrice: "150" })
+                        setEditingPlan(null)
+                      } else if (newPlan.name) {
                         setPlans([
                           ...plans,
-                          { id: String(plans.length + 1), name: newPlan.name, discount: Number(newPlan.discount) },
+                          { id: String(plans.length + 1), name: newPlan.name, discount: Number(newPlan.discount) || 0 },
                         ])
                         showToast("Plano criado com sucesso!")
+                        setCurrentScreen("pricing")
+                        setNewPlan({ name: "", discount: "", duration: "mensal", paymentMethod: "credit", isAutomatic: true, basePrice: "150" })
+                        setEditingPlan(null)
+                      } else {
+                        showToast("Preencha o nome do plano")
                       }
-                      setCurrentScreen("pricing")
-                      setNewPlan({ name: "", discount: "", duration: "mensal", paymentMethod: "credit", isAutomatic: true, basePrice: "150" })
-                      setEditingPlan(null)
                     }}
                     style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
                   >
