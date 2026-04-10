@@ -704,6 +704,7 @@ export default function SissoneResponsivePrototype() {
   const [unitFilter, setUnitFilter] = useState("all") // Added for students section filter
   const [classFilter, setClassFilter] = useState("all") // Added for students section filter
   const [studentSortBy, setStudentSortBy] = useState("name-asc") // Added for students sorting
+  const [selectedStudents, setSelectedStudents] = useState<string[]>([]) // For bulk selection
   
   const [toasts, setToasts] = useState<Toast[]>([])
 
@@ -2930,13 +2931,58 @@ export default function SissoneResponsivePrototype() {
             </Select>
           </div>
 
+          {/* Bulk Actions Bar */}
+          {selectedStudents.length > 0 && (
+            <Card style={{ backgroundColor: "#CFB2A8" }}>
+              <CardContent className="p-3 flex items-center justify-between">
+                <span className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                  {selectedStudents.length} aluno(s) selecionado(s)
+                </span>
+                <div className="flex gap-2">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="bg-transparent"
+                    style={{ borderColor: "#3D2C2E", color: "#3D2C2E" }}
+                    onClick={() => setSelectedStudents([])}
+                  >
+                    Cancelar
+                  </Button>
+                  <Button
+                    size="sm"
+                    style={{ backgroundColor: "#3D2C2E", color: "#F5F0EB" }}
+                    onClick={() => {
+                      showToast(`${selectedStudents.length} aluno(s) excluído(s) com sucesso!`)
+                      setSelectedStudents([])
+                    }}
+                  >
+                    <Trash2 className="w-4 h-4 mr-1" />
+                    Excluir Selecionados
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           {/* Students List */}
           <Card style={{ backgroundColor: "#E5D6CD" }}>
             <CardContent className="p-0">
               <div className="overflow-x-auto">
-                <table className="w-full min-w-[600px]">
+                <table className="w-full min-w-[700px]">
                   <thead className="border-b" style={{ borderColor: "#CFB2A8" }}>
                     <tr>
+                      <th className="p-4 w-12">
+                        <Checkbox
+                          checked={selectedStudents.length === filteredStudents.length && filteredStudents.length > 0}
+                          onCheckedChange={(checked) => {
+                            if (checked) {
+                              setSelectedStudents(filteredStudents.map((s) => s.id))
+                            } else {
+                              setSelectedStudents([])
+                            }
+                          }}
+                        />
+                      </th>
                       <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
                         Aluno
                       </th>
@@ -2961,11 +3007,26 @@ export default function SissoneResponsivePrototype() {
                       <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
                         Situação
                       </th>
+                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
+                        Ações
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
-                    {mockStudents.map((student) => (
+                    {filteredStudents.map((student) => (
                       <tr key={student.id} className="border-b hover:bg-white/30" style={{ borderColor: "#CFB2A8" }}>
+                        <td className="p-4">
+                          <Checkbox
+                            checked={selectedStudents.includes(student.id)}
+                            onCheckedChange={(checked) => {
+                              if (checked) {
+                                setSelectedStudents([...selectedStudents, student.id])
+                              } else {
+                                setSelectedStudents(selectedStudents.filter((id) => id !== student.id))
+                              }
+                            }}
+                          />
+                        </td>
                         <td className="p-4">
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full" style={{ backgroundColor: "#CFB2A8" }}>
@@ -3036,6 +3097,31 @@ export default function SissoneResponsivePrototype() {
                           >
                             {student.paymentStatus === "current" ? "Em dia" : "Inadimplente"}
                           </span>
+                        </td>
+                        <td className="p-4">
+                          <div className="flex gap-1">
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              className="hover:bg-white/50"
+                              onClick={() => {
+                                setSelectedStudent(student)
+                                navigateTo("student-profile")
+                              }}
+                            >
+                              <Edit className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
+                              <span className="text-xs" style={{ color: "#3D2C2E" }}>Editar</span>
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              className="hover:bg-white/50"
+                              onClick={() => showToast("Aluno excluído com sucesso!")}
+                            >
+                              <Trash2 className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
+                              <span className="text-xs" style={{ color: "#3D2C2E" }}>Excluir</span>
+                            </Button>
+                          </div>
                         </td>
                       </tr>
                     ))}
