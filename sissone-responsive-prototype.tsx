@@ -3092,7 +3092,7 @@ export default function SissoneResponsivePrototype() {
             <Button
               variant="outline"
               onClick={() => showToast("Rascunho salvo com sucesso!")}
-              className="lg:flex-1 h-10 lg:h-12"
+              className="lg:flex-1 h-10 lg:h-12 bg-transparent"
               style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
             >
               Salvar Rascunho
