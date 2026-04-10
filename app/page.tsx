@@ -4838,25 +4838,32 @@ const SissonePrototype = () => {
               </div>
 
               {selectedClass && (
-                // Using semantic background token
-                <div className="bg-background rounded-lg p-4 space-y-2 text-left">
-                  <div className="flex justify-between">
-                    <span className="text-sm font-medium text-foreground">Aula:</span>
-                    <span className="text-sm text-foreground">{selectedClass.name}</span>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-left">
+                  <div className="bg-background rounded-lg p-4 border border-border">
+                    <span className="text-xs text-foreground opacity-60 block mb-1">Aula</span>
+                    <span className="text-sm font-medium text-foreground">{selectedClass.name}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm font-medium text-foreground">Escola:</span>
-                    <span className="text-sm text-foreground">{selectedClass.school}</span>
+                  <div className="bg-background rounded-lg p-4 border border-border">
+                    <span className="text-xs text-foreground opacity-60 block mb-1">Escola</span>
+                    <span className="text-sm font-medium text-foreground">{selectedClass.school}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm font-medium text-foreground">Data:</span>
-                    <span className="text-sm text-foreground">
+                  <div className="bg-background rounded-lg p-4 border border-border">
+                    <span className="text-xs text-foreground opacity-60 block mb-1">Local</span>
+                    <span className="text-sm font-medium text-foreground">{selectedClass.location}</span>
+                  </div>
+                  <div className="bg-background rounded-lg p-4 border border-border">
+                    <span className="text-xs text-foreground opacity-60 block mb-1">Nível</span>
+                    <span className="text-sm font-medium text-foreground">{selectedClass.level || "Todos os níveis"}</span>
+                  </div>
+                  <div className="bg-background rounded-lg p-4 border border-border">
+                    <span className="text-xs text-foreground opacity-60 block mb-1">Data</span>
+                    <span className="text-sm font-medium text-foreground">
                       {selectedDate && `${getNextDateForDay(selectedDate)} - ${selectedDate}`}
                     </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm font-medium text-foreground">Horário:</span>
-                    <span className="text-sm text-foreground">{selectedTime || selectedClass.time}</span>
+                  <div className="bg-background rounded-lg p-4 border border-border">
+                    <span className="text-xs text-foreground opacity-60 block mb-1">Horário</span>
+                    <span className="text-sm font-medium text-foreground">{selectedTime || selectedClass.time}</span>
                   </div>
                 </div>
               )}
