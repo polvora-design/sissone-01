@@ -3249,7 +3249,7 @@ export default function SissoneResponsivePrototype() {
             <div className="space-y-3 lg:space-y-4">
               <Button
                 className="w-full h-10 lg:h-12"
-                onClick={() => showToast("Aula byla publiée com sucesso!")}
+                onClick={() => showToast("Aula publicada com sucesso!")}
                 style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
               >
                 Publicar Aula
