@@ -293,10 +293,7 @@ export default function SissonePrototype() {
                       Ver Detalhes
                     </Button>
                     <Button
-                      onClick={() => {
-                        goToDetails("today")
-                        setTimeout(() => setCurrentScreen(3), 100)
-                      }}
+                      onClick={() => setCurrentScreen(3)}
                       className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
                     >
                       Check-in
