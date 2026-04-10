@@ -777,11 +777,20 @@ export default function SissoneResponsivePrototype() {
     endDate: "",
     time: "",
     endTime: "",
+    room: "",
     price: "",
     hasEndDate: false,
     description: "",
     images: [] as string[],
   })
+
+  const mockRooms = [
+    { id: "room-1", name: "Sala A", unitId: "unit-1" },
+    { id: "room-2", name: "Sala B", unitId: "unit-1" },
+    { id: "room-3", name: "Sala Principal", unitId: "unit-2" },
+    { id: "room-4", name: "Sala de Ensaio", unitId: "unit-2" },
+    { id: "room-5", name: "Sala 1", unitId: "unit-3" },
+  ]
 
   const showToast = (message: string, type: ToastType = "success") => {
     const id = Date.now()
@@ -1971,6 +1980,7 @@ export default function SissoneResponsivePrototype() {
                     date: classItem.date || "",
                     time: classItem.time,
                     endTime: classItem.endTime || "19:30",
+                    room: "room-1",
                     price: classItem.price.toString(),
                     description: classItem.description || "",
                     unit: classItem.unitId,
@@ -3125,6 +3135,31 @@ export default function SissoneResponsivePrototype() {
                 </div>
               </div>
               <div>
+                <Label className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                  Sala
+                </Label>
+                <Select
+                  value={classData.room}
+                  onValueChange={(value) => setClassData({ ...classData, room: value })}
+                >
+                  <SelectTrigger
+                    className="mt-1 h-10 lg:h-12"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                  >
+                    <SelectValue placeholder="Selecione a sala" />
+                  </SelectTrigger>
+                  <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                    {mockRooms
+                      .filter((room) => !classData.unit || room.unitId === classData.unit)
+                      .map((room) => (
+                        <SelectItem key={room.id} value={room.id}>
+                          {room.name}
+                        </SelectItem>
+                      ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
                 <Label htmlFor="price" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
                   Preço (R$)
                 </Label>
@@ -3334,9 +3369,9 @@ export default function SissoneResponsivePrototype() {
               </div>
 
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
+<MapPin className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
                 <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                  Estúdio A
+                  {classData.room ? mockRooms.find((r) => r.id === classData.room)?.name : "Sala A"}
                 </span>
               </div>
 
