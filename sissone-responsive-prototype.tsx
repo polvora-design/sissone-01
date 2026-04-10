@@ -1173,63 +1173,66 @@ export default function SissoneResponsivePrototype() {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-base font-semibold mb-4" style={{ color: "#3D2C2E" }}>
+          <h2 className="text-lg lg:text-xl font-semibold mb-4" style={{ color: "#3D2C2E" }}>
             Unidades
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
             {mockUnits
               .sort((a, b) => b.rating - a.rating)
               .map((unit, index) => (
                 <Card
                   key={unit.id}
                   style={{ backgroundColor: "#E5D6CD" }}
-                  className="hover:shadow-md transition-shadow"
+                  className="hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer"
+                  onClick={() => {
+                    navigateTo("school-units")
+                  }}
                 >
-                  <CardContent className="p-4">
-                    <div className="flex items-center gap-3 mb-3">
+                  <CardContent className="p-5 lg:p-6">
+                    <div className="flex items-center gap-4 mb-4">
                       <div
-                        className="flex items-center justify-center w-8 h-8 rounded-full flex-shrink-0"
+                        className="flex items-center justify-center w-12 h-12 lg:w-14 lg:h-14 rounded-full flex-shrink-0"
                         style={{ backgroundColor: index === 0 ? "#CFB2A8" : "#F5F0EB" }}
                       >
                         {index === 0 ? (
-                          <Trophy className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+                          <Trophy className="w-6 h-6 lg:w-7 lg:h-7" style={{ color: "#3D2C2E" }} />
                         ) : (
-                          <span className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
+                          <span className="text-lg lg:text-xl font-bold" style={{ color: "#3D2C2E" }}>
                             {index + 1}
                           </span>
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-sm font-medium truncate" style={{ color: "#3D2C2E" }}>
+                        <h3 className="text-base lg:text-lg font-semibold truncate" style={{ color: "#3D2C2E" }}>
                           {unit.name}
                         </h3>
-                        <p className="text-xs truncate" style={{ color: "#3D2C2E" }}>
+                        <p className="text-sm truncate" style={{ color: "#3D2C2E", opacity: 0.8 }}>
                           {unit.address}
                         </p>
                       </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 text-center">
+                    <div className="grid grid-cols-3 gap-3 text-center pt-3 border-t" style={{ borderColor: "#CFB2A8" }}>
                       <div>
-                        <div className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
+                        <div className="text-lg lg:text-xl font-bold" style={{ color: "#3D2C2E" }}>
                           {unit.rating}
                         </div>
-                        <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                        <div className="text-xs lg:text-sm" style={{ color: "#3D2C2E", opacity: 0.7 }}>
                           Rating
                         </div>
                       </div>
                       <div>
-                        <div className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
+                        <div className="text-lg lg:text-xl font-bold" style={{ color: "#3D2C2E" }}>
                           {unit.students}
                         </div>
-                        <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                        <div className="text-xs lg:text-sm" style={{ color: "#3D2C2E", opacity: 0.7 }}>
                           Alunos
                         </div>
                       </div>
                       <div>
-                        <div className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
+                        <div className="text-lg lg:text-xl font-bold" style={{ color: "#3D2C2E" }}>
                           R${unit.revenue}
                         </div>
-                        <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                        <div className="text-xs lg:text-sm" style={{ color: "#3D2C2E", opacity: 0.7 }}>
                           Receita
                         </div>
                       </div>
