@@ -682,19 +682,9 @@ export default function SissonePrototype() {
           </div>
 
           <div className="space-y-3">
-            {!isCheckedIn ? (
-              <Button onClick={handleCheckIn} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
-                Confirmar Check-in
-              </Button>
-            ) : (
-              <Button
-                onClick={handleCancelCheckIn}
-                variant="outline"
-                className="w-full border-[#CFB2A8] text-[#CFB2A8] bg-transparent hover:bg-[#CFB2A8]/10"
-              >
-                Cancelar Check-in
-              </Button>
-            )}
+            <Button onClick={handleCheckIn} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+              Confirmar Check-in
+            </Button>
 
             <Button onClick={prevScreen} variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white">
               Voltar
