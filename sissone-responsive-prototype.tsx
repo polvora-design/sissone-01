@@ -1024,7 +1024,7 @@ export default function SissoneResponsivePrototype() {
                 onClick={() => setShowShareLinkModal(true)}
               >
                 <Share2 className="w-4 h-4 mr-2" />
-                Compartilhar Link
+                Compartilhar Escola
               </Button>
               <Button
                 variant="outline"
