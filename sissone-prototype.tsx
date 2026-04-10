@@ -25,6 +25,7 @@ export default function SissonePrototype() {
   const [selectedStyles, setSelectedStyles] = useState<string[]>(["Contemporâneo", "Jazz", "Ballet"])
   const [selectedLevels, setSelectedLevels] = useState<string[]>(["Intermediário"])
   const [customStyle, setCustomStyle] = useState("")
+  const [showStyleAddedNotification, setShowStyleAddedNotification] = useState(false)
 
   const screens = ["Login", "Dashboard", "Detalhes", "Check-in", "Feedback", "Reviews", "Perfil"]
 
@@ -293,7 +294,10 @@ export default function SissonePrototype() {
                       Ver Detalhes
                     </Button>
                     <Button
-                      onClick={() => setCurrentScreen(3)}
+                      onClick={() => {
+                        goToDetails("today")
+                        setTimeout(() => setCurrentScreen(3), 100)
+                      }}
                       className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
                     >
                       Check-in
@@ -882,6 +886,16 @@ export default function SissonePrototype() {
           </div>
         </div>
       )}
+      {showStyleAddedNotification && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
+          <div className="bg-[#3D2C2E] text-white rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
+            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+              <Check className="w-5 h-5 text-green-600" />
+            </div>
+            <p className="text-sm font-medium">Estilo adicionado</p>
+          </div>
+        </div>
+      )}
       <div className="mx-auto max-w-[1440px]">
         <div className="bg-white border-b border-[#E5D6CD] p-4">
           <div className="flex items-center justify-between">
@@ -1017,6 +1031,8 @@ export default function SissonePrototype() {
                             if (customStyle.trim()) {
                               setSelectedStyles([...selectedStyles, customStyle.trim()])
                               setCustomStyle("")
+                              setShowStyleAddedNotification(true)
+                              setTimeout(() => setShowStyleAddedNotification(false), 2000)
                             }
                           }}
                           className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white px-4"
