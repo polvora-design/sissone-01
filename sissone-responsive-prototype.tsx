@@ -3260,7 +3260,7 @@ export default function SissoneResponsivePrototype() {
                 onClick={() => navigateTo("create-class")}
                 style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
               >
-                Editar Aula
+                Editar Rascunho
               </Button>
             </div>
           </div>
