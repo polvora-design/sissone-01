@@ -1021,15 +1021,6 @@ export default function SissoneResponsivePrototype() {
                 variant="outline"
                 className="w-full justify-start h-10 px-3 text-sm"
                 style={{ borderColor: "#CFB2A8", color: "#3D2C2E", backgroundColor: "transparent" }}
-                onClick={() => setShowShareLinkModal(true)}
-              >
-                <Share2 className="w-4 h-4 mr-2" />
-                Compartilhar Escola
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full justify-start h-10 px-3 text-sm"
-                style={{ borderColor: "#CFB2A8", color: "#3D2C2E", backgroundColor: "transparent" }}
                 onClick={() => {
                   setEditingUnit(null)
                   setUnitForm({ name: "", address: "", phone: "", email: "", description: "" })
@@ -1038,6 +1029,15 @@ export default function SissoneResponsivePrototype() {
               >
                 <Building2 className="w-4 h-4 mr-2" />
                 Nova Unidade
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full justify-start h-10 px-3 text-sm"
+                style={{ borderColor: "#CFB2A8", color: "#3D2C2E", backgroundColor: "transparent" }}
+                onClick={() => setShowShareLinkModal(true)}
+              >
+                <Share2 className="w-4 h-4 mr-2" />
+                Compartilhar Escola
               </Button>
             </div>
           </div>
@@ -1367,7 +1367,7 @@ export default function SissoneResponsivePrototype() {
               >
                 <Share2 className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: "#3D2C2E" }} />
                 <span className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
-                  Compartilhar Link
+                  Compartilhar Escola
                 </span>
               </Button>
             </div>
