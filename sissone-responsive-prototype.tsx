@@ -3091,18 +3091,18 @@ export default function SissoneResponsivePrototype() {
           <div className="flex flex-col lg:flex-row gap-3 lg:gap-4 pt-4">
             <Button
               variant="outline"
-              onClick={() => navigateTo("class-preview")}
+              onClick={() => showToast("Rascunho salvo com sucesso!")}
               className="lg:flex-1 h-10 lg:h-12"
               style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
             >
-              Visualizar
+              Salvar Rascunho
             </Button>
             <Button
               className="lg:flex-1 h-10 lg:h-12"
-              onClick={() => showToast("Rascunho salvo com sucesso!")}
+              onClick={() => navigateTo("class-preview")}
               style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
             >
-              Salvar Rascunho
+              Visualizar Aula
             </Button>
           </div>
         </div>
