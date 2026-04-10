@@ -722,7 +722,21 @@ export default function SissoneResponsivePrototype() {
   ])
   const [editingPlan, setEditingPlan] = useState<Plan | null>(null)
   const [editingCombo, setEditingCombo] = useState<Combo | null>(null)
-  const [newPlan, setNewPlan] = useState<{ name: string; discount: string }>({ name: "", discount: "" })
+  const [newPlan, setNewPlan] = useState<{
+    name: string
+    discount: string
+    duration: string
+    paymentMethod: string
+    isAutomatic: boolean
+    basePrice: string
+  }>({
+    name: "",
+    discount: "",
+    duration: "mensal",
+    paymentMethod: "credit",
+    isAutomatic: true,
+    basePrice: "150",
+  })
   const [newCombo, setNewCombo] = useState<{ name: string; classes: string[]; price: string }>({
     name: "",
     classes: [],
@@ -2091,56 +2105,259 @@ export default function SissoneResponsivePrototype() {
   }
 
   const renderPricing = () => {
+    const paymentFees: Record<string, number> = {
+      credit: 0,
+      debit: 0,
+      boleto: 2.5,
+    }
+
+    const durationMonths: Record<string, number> = {
+      semanal: 0.25,
+      mensal: 1,
+      trimestral: 3,
+      semestral: 6,
+      anual: 12,
+    }
+
+    const calculateFinalPrice = () => {
+      const basePrice = parseFloat(newPlan.basePrice) || 150
+      const discount = parseFloat(newPlan.discount) || 0
+      const months = durationMonths[newPlan.duration] || 1
+      const fee = paymentFees[newPlan.paymentMethod] || 0
+
+      const priceWithDiscount = basePrice * (1 - discount / 100)
+      const totalBeforeFee = priceWithDiscount * months
+      const feeAmount = totalBeforeFee * (fee / 100)
+      const finalTotal = totalBeforeFee + feeAmount
+
+      return {
+        basePrice,
+        discount,
+        months,
+        fee,
+        priceWithDiscount,
+        totalBeforeFee,
+        feeAmount,
+        finalTotal,
+        monthlyPrice: finalTotal / months,
+      }
+    }
+
     if (currentScreen === "create-plan" || currentScreen === "edit-plan") {
+      const calc = calculateFinalPrice()
+
       return (
         <div className="p-4 lg:p-6 pb-24 lg:pb-6">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <Card style={{ backgroundColor: "#E5D6CD" }}>
               <CardHeader>
                 <CardTitle style={{ color: "#3D2C2E" }}>
                   {currentScreen === "create-plan" ? "Novo Plano" : "Editar Plano"}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <Label htmlFor="plan-name" style={{ color: "#3D2C2E" }}>
-                    Nome do Plano
-                  </Label>
-                  <Input
-                    id="plan-name"
-                    placeholder="ex: Trimestral"
-                    value={currentScreen === "edit-plan" && editingPlan ? editingPlan.name : newPlan.name}
-                    onChange={(e) => {
-                      if (currentScreen === "edit-plan" && editingPlan) {
-                        setEditingPlan({ ...editingPlan, name: e.target.value })
-                      } else {
-                        setNewPlan({ ...newPlan, name: e.target.value })
-                      }
-                    }}
-                    className="mt-1"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
-                  />
+              <CardContent className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="plan-name" style={{ color: "#3D2C2E" }}>
+                      Nome do Plano
+                    </Label>
+                    <Input
+                      id="plan-name"
+                      placeholder="ex: Trimestral"
+                      value={currentScreen === "edit-plan" && editingPlan ? editingPlan.name : newPlan.name}
+                      onChange={(e) => {
+                        if (currentScreen === "edit-plan" && editingPlan) {
+                          setEditingPlan({ ...editingPlan, name: e.target.value })
+                        } else {
+                          setNewPlan({ ...newPlan, name: e.target.value })
+                        }
+                      }}
+                      className="mt-1"
+                      style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="base-price" style={{ color: "#3D2C2E" }}>
+                      Valor Base Mensal (R$)
+                    </Label>
+                    <Input
+                      id="base-price"
+                      placeholder="ex: 150"
+                      type="number"
+                      value={newPlan.basePrice}
+                      onChange={(e) => setNewPlan({ ...newPlan, basePrice: e.target.value })}
+                      className="mt-1"
+                      style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div>
+                    <Label style={{ color: "#3D2C2E" }}>Duração</Label>
+                    <Select
+                      value={newPlan.duration}
+                      onValueChange={(value) => setNewPlan({ ...newPlan, duration: value })}
+                    >
+                      <SelectTrigger
+                        className="mt-1"
+                        style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                      >
+                        <SelectValue placeholder="Selecione a duração" />
+                      </SelectTrigger>
+                      <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                        <SelectItem value="semanal">Semanal</SelectItem>
+                        <SelectItem value="mensal">Mensal</SelectItem>
+                        <SelectItem value="trimestral">Trimestral (3 meses)</SelectItem>
+                        <SelectItem value="semestral">Semestral (6 meses)</SelectItem>
+                        <SelectItem value="anual">Anual (12 meses)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="plan-discount" style={{ color: "#3D2C2E" }}>
+                      Desconto (%)
+                    </Label>
+                    <Input
+                      id="plan-discount"
+                      placeholder="ex: 10"
+                      type="number"
+                      value={currentScreen === "edit-plan" && editingPlan ? editingPlan.discount : newPlan.discount}
+                      onChange={(e) => {
+                        if (currentScreen === "edit-plan" && editingPlan) {
+                          setEditingPlan({ ...editingPlan, discount: Number(e.target.value) })
+                        } else {
+                          setNewPlan({ ...newPlan, discount: e.target.value })
+                        }
+                      }}
+                      className="mt-1"
+                      style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="plan-discount" style={{ color: "#3D2C2E" }}>
-                    Porcentagem de Desconto (%)
-                  </Label>
-                  <Input
-                    id="plan-discount"
-                    placeholder="ex: 10"
-                    type="number"
-                    value={currentScreen === "edit-plan" && editingPlan ? editingPlan.discount : newPlan.discount}
-                    onChange={(e) => {
-                      if (currentScreen === "edit-plan" && editingPlan) {
-                        setEditingPlan({ ...editingPlan, discount: Number(e.target.value) })
-                      } else {
-                        setNewPlan({ ...newPlan, discount: e.target.value })
-                      }
-                    }}
-                    className="mt-1"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                  <Label style={{ color: "#3D2C2E" }}>Forma de Pagamento</Label>
+                  <Select
+                    value={newPlan.paymentMethod}
+                    onValueChange={(value) => setNewPlan({ ...newPlan, paymentMethod: value })}
+                  >
+                    <SelectTrigger
+                      className="mt-1"
+                      style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    >
+                      <SelectValue placeholder="Selecione a forma de pagamento" />
+                    </SelectTrigger>
+                    <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                      <SelectItem value="credit">Cartão de Crédito (sem taxa)</SelectItem>
+                      <SelectItem value="debit">Cartão de Débito (sem taxa)</SelectItem>
+                      <SelectItem value="boleto">Boleto Bancário (+2,5% de taxa)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="flex items-center gap-3 p-3 rounded" style={{ backgroundColor: "#F5F0EB" }}>
+                  <Checkbox
+                    id="automatic-discount"
+                    checked={newPlan.isAutomatic}
+                    onCheckedChange={(checked) => setNewPlan({ ...newPlan, isAutomatic: checked as boolean })}
                   />
+                  <div>
+                    <Label htmlFor="automatic-discount" className="cursor-pointer" style={{ color: "#3D2C2E" }}>
+                      Desconto automático
+                    </Label>
+                    <p className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                      {newPlan.isAutomatic
+                        ? "O desconto será aplicado automaticamente na matrícula"
+                        : "O aluno precisará inserir um código promocional"}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Calculation Preview */}
+                <Card style={{ backgroundColor: "#F5F0EB", border: "2px dashed #CFB2A8" }}>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-base" style={{ color: "#3D2C2E" }}>
+                      Prévia do Cálculo
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex justify-between text-sm" style={{ color: "#3D2C2E" }}>
+                      <span>Valor base mensal:</span>
+                      <span>R$ {calc.basePrice.toFixed(2)}</span>
+                    </div>
+                    {calc.discount > 0 && (
+                      <div className="flex justify-between text-sm" style={{ color: "#3D2C2E" }}>
+                        <span>Desconto ({calc.discount}%):</span>
+                        <span className="text-green-600">- R$ {(calc.basePrice * calc.discount / 100).toFixed(2)}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between text-sm" style={{ color: "#3D2C2E" }}>
+                      <span>Valor mensal com desconto:</span>
+                      <span>R$ {calc.priceWithDiscount.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm" style={{ color: "#3D2C2E" }}>
+                      <span>Duração ({newPlan.duration}):</span>
+                      <span>x {calc.months} {calc.months === 1 ? "mês" : "meses"}</span>
+                    </div>
+                    {calc.fee > 0 && (
+                      <div className="flex justify-between text-sm" style={{ color: "#3D2C2E" }}>
+                        <span>Taxa boleto ({calc.fee}%):</span>
+                        <span className="text-red-600">+ R$ {calc.feeAmount.toFixed(2)}</span>
+                      </div>
+                    )}
+                    <div className="border-t pt-3" style={{ borderColor: "#CFB2A8" }}>
+                      <div className="flex justify-between font-semibold" style={{ color: "#3D2C2E" }}>
+                        <span>Total:</span>
+                        <span>R$ {calc.finalTotal.toFixed(2)}</span>
+                      </div>
+                      <p className="text-xs mt-1" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                        Equivalente a R$ {calc.monthlyPrice.toFixed(2)} / mês
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Summary Table */}
+                <div>
+                  <Label className="mb-2 block" style={{ color: "#3D2C2E" }}>
+                    Tabela Resumo por Forma de Pagamento
+                  </Label>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm" style={{ color: "#3D2C2E" }}>
+                      <thead>
+                        <tr style={{ backgroundColor: "#CFB2A8" }}>
+                          <th className="p-2 text-left rounded-tl">Forma</th>
+                          <th className="p-2 text-center">Taxa</th>
+                          <th className="p-2 text-right rounded-tr">Preço Final</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[
+                          { key: "credit", label: "Cartão de Crédito" },
+                          { key: "debit", label: "Cartão de Débito" },
+                          { key: "boleto", label: "Boleto Bancário" },
+                        ].map((method, index) => {
+                          const fee = paymentFees[method.key]
+                          const total = calc.totalBeforeFee * (1 + fee / 100)
+                          return (
+                            <tr
+                              key={method.key}
+                              style={{
+                                backgroundColor: index % 2 === 0 ? "#F5F0EB" : "#E5D6CD",
+                              }}
+                            >
+                              <td className="p-2">{method.label}</td>
+                              <td className="p-2 text-center">{fee > 0 ? `+${fee}%` : "Sem taxa"}</td>
+                              <td className="p-2 text-right font-medium">R$ {total.toFixed(2)}</td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
 
                 <div className="flex gap-3 pt-4">
@@ -2149,7 +2366,7 @@ export default function SissoneResponsivePrototype() {
                     className="flex-1 bg-transparent"
                     onClick={() => {
                       setCurrentScreen("pricing")
-                      setNewPlan({ name: "", discount: "" })
+                      setNewPlan({ name: "", discount: "", duration: "mensal", paymentMethod: "credit", isAutomatic: true, basePrice: "150" })
                       setEditingPlan(null)
                     }}
                     style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
@@ -2170,12 +2387,12 @@ export default function SissoneResponsivePrototype() {
                         showToast("Plano criado com sucesso!")
                       }
                       setCurrentScreen("pricing")
-                      setNewPlan({ name: "", discount: "" })
+                      setNewPlan({ name: "", discount: "", duration: "mensal", paymentMethod: "credit", isAutomatic: true, basePrice: "150" })
                       setEditingPlan(null)
                     }}
                     style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
                   >
-                    Salvar
+                    Salvar Plano
                   </Button>
                 </div>
               </CardContent>
