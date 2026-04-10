@@ -1974,8 +1974,8 @@ export default function SissoneResponsivePrototype() {
                     isRecurring: classItem.isRecurring || false,
                     hasEndDate: false,
                     endDate: "",
-                    selectedDays: classItem.selectedDays || [],
-                    photos: [],
+                    recurringDays: [],
+                    images: [],
                   })
                   navigateTo("class-preview")
                 }}
