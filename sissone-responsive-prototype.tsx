@@ -1006,7 +1006,7 @@ export default function SissoneResponsivePrototype() {
                 onClick={() => navigateTo("create-class")}
               >
                 <Plus className="w-4 h-4 mr-2" />
-                Nova Aula
+                Criar Aula
               </Button>
               <Button
                 variant="outline"
@@ -1028,7 +1028,7 @@ export default function SissoneResponsivePrototype() {
                 }}
               >
                 <Building2 className="w-4 h-4 mr-2" />
-                Nova Unidade
+                Criar Unidade
               </Button>
               <Button
                 variant="outline"
