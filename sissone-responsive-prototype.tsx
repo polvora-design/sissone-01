@@ -1516,13 +1516,14 @@ export default function SissoneResponsivePrototype() {
                               className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                              <Button
-                                size="sm"
-                                variant="ghost"
-                                className="text-white hover:bg-white/20"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="text-white hover:bg-white/20"
+                      >
+                        <Trash2 className="w-4 h-4 mr-1" />
+                        <span className="text-xs">Excluir</span>
+                      </Button>
                             </div>
                           </div>
                         ))}
@@ -1664,28 +1665,30 @@ export default function SissoneResponsivePrototype() {
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          className="hover:bg-white/50"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            openUnitModal(unit)
-                          }}
-                        >
-                          <Edit className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          className="hover:bg-white/50"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            showToast("Unidade excluída com sucesso!")
-                          }}
-                        >
-                          <Trash2 className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-                        </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="hover:bg-white/50"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          openUnitModal(unit)
+                        }}
+                      >
+                        <Edit className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
+                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Editar</span>
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="hover:bg-white/50"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          showToast("Unidade excluída com sucesso!")
+                        }}
+                      >
+                        <Trash2 className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
+                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Excluir</span>
+                      </Button>
                       </div>
                     </div>
 
@@ -2046,7 +2049,8 @@ export default function SissoneResponsivePrototype() {
                           navigateTo("create-class")
                         }}
                       >
-                        <Edit className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+                        <Edit className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
+                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Editar</span>
                       </Button>
                       <Button
                         size="sm"
@@ -2057,7 +2061,8 @@ export default function SissoneResponsivePrototype() {
                           showToast("Aula excluída com sucesso!")
                         }}
                       >
-                        <Trash2 className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+                        <Trash2 className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
+                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Excluir</span>
                       </Button>
                     </div>
                   </div>
@@ -2618,7 +2623,8 @@ export default function SissoneResponsivePrototype() {
                           setCurrentScreen("edit-plan")
                         }}
                       >
-                        <Edit className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+                        <Edit className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
+                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Editar</span>
                       </Button>
                       <Button
                         size="sm"
@@ -2629,7 +2635,8 @@ export default function SissoneResponsivePrototype() {
                           showToast("Plano excluído com sucesso!")
                         }}
                       >
-                        <Trash2 className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+                        <Trash2 className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
+                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Excluir</span>
                       </Button>
                     </div>
                   </CardContent>
@@ -2674,28 +2681,30 @@ export default function SissoneResponsivePrototype() {
                         </p>
                       </div>
                       <div className="flex gap-2">
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          className="hover:bg-white/50"
-                          onClick={() => {
-                            setEditingCombo(combo)
-                            setCurrentScreen("edit-combo")
-                          }}
-                        >
-                          <Edit className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          className="hover:bg-white/50"
-                          onClick={() => {
-                            setCombos(combos.filter((c) => c.id !== combo.id))
-                            showToast("Combo excluído com sucesso!")
-                          }}
-                        >
-                          <Trash2 className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-                        </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="hover:bg-white/50"
+                        onClick={() => {
+                          setEditingCombo(combo)
+                          setCurrentScreen("edit-combo")
+                        }}
+                      >
+                        <Edit className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
+                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Editar</span>
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="hover:bg-white/50"
+                        onClick={() => {
+                          setCombos(combos.filter((c) => c.id !== combo.id))
+                          showToast("Combo excluído com sucesso!")
+                        }}
+                      >
+                        <Trash2 className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
+                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Excluir</span>
+                      </Button>
                       </div>
                     </div>
                   ))}
