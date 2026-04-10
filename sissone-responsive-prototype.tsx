@@ -1962,7 +1962,23 @@ export default function SissoneResponsivePrototype() {
               <Card
                 key={classItem.id}
                 style={{ backgroundColor: "#E5D6CD" }}
-                className="hover:shadow-lg transition-all hover:scale-[1.02]"
+                className="hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer"
+                onClick={() => {
+                  setClassData({
+                    title: classItem.title,
+                    date: classItem.date || "",
+                    time: classItem.time,
+                    price: classItem.price.toString(),
+                    description: classItem.description || "",
+                    unit: classItem.unitId,
+                    isRecurring: classItem.isRecurring || false,
+                    hasEndDate: false,
+                    endDate: "",
+                    selectedDays: classItem.selectedDays || [],
+                    photos: [],
+                  })
+                  navigateTo("class-preview")
+                }}
               >
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-4">
@@ -1983,10 +1999,26 @@ export default function SissoneResponsivePrototype() {
                       )}
                     </div>
                     <div className="flex gap-2">
-                      <Button size="sm" variant="ghost" className="hover:bg-white/50">
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="hover:bg-white/50"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          navigateTo("create-class")
+                        }}
+                      >
                         <Edit className="w-4 h-4" style={{ color: "#3D2C2E" }} />
                       </Button>
-                      <Button size="sm" variant="ghost" className="hover:bg-white/50">
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="hover:bg-white/50"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          showToast("Aula excluída com sucesso!")
+                        }}
+                      >
                         <Trash2 className="w-4 h-4" style={{ color: "#3D2C2E" }} />
                       </Button>
                     </div>
