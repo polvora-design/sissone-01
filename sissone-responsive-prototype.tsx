@@ -776,6 +776,7 @@ export default function SissoneResponsivePrototype() {
     date: "",
     endDate: "",
     time: "",
+    endTime: "",
     price: "",
     hasEndDate: false,
     description: "",
@@ -1969,6 +1970,7 @@ export default function SissoneResponsivePrototype() {
                     title: classItem.title,
                     date: classItem.date || "",
                     time: classItem.time,
+                    endTime: classItem.endTime || "19:30",
                     price: classItem.price.toString(),
                     description: classItem.description || "",
                     unit: classItem.unitId,
@@ -3055,17 +3057,30 @@ export default function SissoneResponsivePrototype() {
                 </div>
               </div>
               <div>
-                <Label htmlFor="time" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                <Label className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
                   Horário
                 </Label>
-                <Input
-                  id="time"
-                  type="time"
-                  value={classData.time}
-                  onChange={(e) => setClassData({ ...classData, time: e.target.value })}
-                  className="mt-1 h-10 lg:h-12"
-                  style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
-                />
+                <div className="flex items-center gap-2 mt-1">
+                  <Input
+                    id="time"
+                    type="time"
+                    value={classData.time}
+                    onChange={(e) => setClassData({ ...classData, time: e.target.value })}
+                    className="h-10 lg:h-12 flex-1"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    placeholder="Início"
+                  />
+                  <span style={{ color: "#3D2C2E" }}>às</span>
+                  <Input
+                    id="endTime"
+                    type="time"
+                    value={classData.endTime}
+                    onChange={(e) => setClassData({ ...classData, endTime: e.target.value })}
+                    className="h-10 lg:h-12 flex-1"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    placeholder="Término"
+                  />
+                </div>
               </div>
             </div>
           ) : (
@@ -3083,18 +3098,31 @@ export default function SissoneResponsivePrototype() {
                   style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
                 />
               </div>
-              <div>
-                <Label htmlFor="time" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+              <div className="col-span-2 lg:col-span-1">
+                <Label className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
                   Horário
                 </Label>
-                <Input
-                  id="time"
-                  type="time"
-                  value={classData.time}
-                  onChange={(e) => setClassData({ ...classData, time: e.target.value })}
-                  className="mt-1 h-10 lg:h-12"
-                  style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
-                />
+                <div className="flex items-center gap-2 mt-1">
+                  <Input
+                    id="time-single"
+                    type="time"
+                    value={classData.time}
+                    onChange={(e) => setClassData({ ...classData, time: e.target.value })}
+                    className="h-10 lg:h-12 flex-1"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    placeholder="Início"
+                  />
+                  <span style={{ color: "#3D2C2E" }}>às</span>
+                  <Input
+                    id="endTime-single"
+                    type="time"
+                    value={classData.endTime}
+                    onChange={(e) => setClassData({ ...classData, endTime: e.target.value })}
+                    className="h-10 lg:h-12 flex-1"
+                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    placeholder="Término"
+                  />
+                </div>
               </div>
               <div>
                 <Label htmlFor="price" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
@@ -3301,7 +3329,7 @@ export default function SissoneResponsivePrototype() {
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
                 <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
-                  {classData.time || "18:00"} - 19:30
+                  {classData.time || "18:00"} às {classData.endTime || "19:30"}
                 </span>
               </div>
 
