@@ -77,7 +77,10 @@ export default function SissonePrototype() {
   const handleCheckIn = () => {
     setIsCheckedIn(true)
     setShowCheckInNotification(true)
-    setTimeout(() => setShowCheckInNotification(false), 3000)
+    setTimeout(() => {
+      setShowCheckInNotification(false)
+      goHome()
+    }, 2000)
   }
 
   const handleCancelCheckIn = () => {
