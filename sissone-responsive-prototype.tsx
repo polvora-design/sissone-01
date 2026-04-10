@@ -703,7 +703,8 @@ export default function SissoneResponsivePrototype() {
   const [frequencyFilter, setFrequencyFilter] = useState("all") // Added for students section filter
   const [unitFilter, setUnitFilter] = useState("all") // Added for students section filter
   const [classFilter, setClassFilter] = useState("all") // Added for students section filter
-
+  const [studentSortBy, setStudentSortBy] = useState("name-asc") // Added for students sorting
+  
   const [toasts, setToasts] = useState<Toast[]>([])
 
   const [classUnitFilter, setClassUnitFilter] = useState<string>("all")
@@ -2463,19 +2464,38 @@ export default function SissoneResponsivePrototype() {
   }
 
   const renderStudents = () => {
-    const filteredStudents = mockStudents.filter((student) => {
-      const matchesSearch =
-        student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        student.email.toLowerCase().includes(searchTerm.toLowerCase())
-      const matchesUnit = unitFilter === "all" || student.unitId === unitFilter // Corrected to use unitFilter
-      const matchesFrequency =
-        frequencyFilter === "all" ||
-        (frequencyFilter === "high" && student.frequency >= 80) ||
-        (frequencyFilter === "medium" && student.frequency >= 50 && student.frequency < 80) ||
-        (frequencyFilter === "low" && student.frequency < 50)
+    const filteredStudents = mockStudents
+      .filter((student) => {
+        const matchesSearch =
+          student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          student.email.toLowerCase().includes(searchTerm.toLowerCase())
+        const matchesUnit = unitFilter === "all" || student.unitId === unitFilter
+        const matchesFrequency =
+          frequencyFilter === "all" ||
+          (frequencyFilter === "high" && student.frequency >= 80) ||
+          (frequencyFilter === "medium" && student.frequency >= 50 && student.frequency < 80) ||
+          (frequencyFilter === "low" && student.frequency < 50)
 
-      return matchesSearch && matchesUnit && matchesFrequency
-    })
+        return matchesSearch && matchesUnit && matchesFrequency
+      })
+      .sort((a, b) => {
+        switch (studentSortBy) {
+          case "name-asc":
+            return a.name.localeCompare(b.name)
+          case "name-desc":
+            return b.name.localeCompare(a.name)
+          case "frequency-high":
+            return b.frequency - a.frequency
+          case "frequency-low":
+            return a.frequency - b.frequency
+          case "payment-current":
+            return a.paymentStatus === "current" ? -1 : 1
+          case "payment-pending":
+            return a.paymentStatus === "pending" ? -1 : 1
+          default:
+            return 0
+        }
+      })
 
     return (
       <div className="p-4 lg:p-6 pb-24 lg:pb-6">
@@ -2538,7 +2558,7 @@ export default function SissoneResponsivePrototype() {
           </div>
 
           {/* Filters and Search */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
             <div className="relative">
               <Search
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4"
@@ -2623,6 +2643,35 @@ export default function SissoneResponsivePrototype() {
                 <SelectItem value="high">Alta (&gt;80%)</SelectItem>
                 <SelectItem value="medium">Média (50-80%)</SelectItem>
                 <SelectItem value="low">Baixa (&lt;50%)</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select defaultValue="name-asc" onValueChange={setStudentSortBy}>
+              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectValue>
+                  <span className="text-sm">
+                    Ordenar:{" "}
+                    {studentSortBy === "name-asc"
+                      ? "Nome A-Z"
+                      : studentSortBy === "name-desc"
+                        ? "Nome Z-A"
+                        : studentSortBy === "frequency-high"
+                          ? "Maior Freq."
+                          : studentSortBy === "frequency-low"
+                            ? "Menor Freq."
+                            : studentSortBy === "payment-current"
+                              ? "Em dia"
+                              : "Pendente"}
+                  </span>
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                <SelectItem value="name-asc">Nome A-Z</SelectItem>
+                <SelectItem value="name-desc">Nome Z-A</SelectItem>
+                <SelectItem value="frequency-high">Maior Frequência</SelectItem>
+                <SelectItem value="frequency-low">Menor Frequência</SelectItem>
+                <SelectItem value="payment-current">Pagamento em dia</SelectItem>
+                <SelectItem value="payment-pending">Pagamento pendente</SelectItem>
               </SelectContent>
             </Select>
           </div>
