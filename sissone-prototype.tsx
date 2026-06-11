@@ -66,7 +66,7 @@ export default function SissonePrototype() {
           <Star
             key={star}
             className={`w-5 h-5 ${
-              star <= count ? "fill-[#CFB2A8] text-[#CFB2A8]" : "text-[#E5D6CD]"
+              star <= count ? "fill-primary text-primary" : "text-secondary"
             } ${interactive ? "cursor-pointer" : ""}`}
             onClick={interactive ? () => setRating(star) : undefined}
           />
@@ -98,12 +98,12 @@ export default function SissonePrototype() {
   }
 
   const ForgotPasswordScreen = () => (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-[#F5F0EB]">
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-background">
       {showEmailSentNotification && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
-          <div className="bg-[#3D2C2E] text-white rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
-            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-              <Check className="w-5 h-5 text-green-600" />
+          <div className="bg-foreground text-background rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
+            <div className="w-8 h-8 bg-background rounded-full flex items-center justify-center flex-shrink-0">
+              <Check className="w-5 h-5 text-success" />
             </div>
             <p className="text-sm font-medium">Email enviado</p>
           </div>
@@ -114,32 +114,32 @@ export default function SissonePrototype() {
           <div className="mx-auto mb-4 flex items-center justify-center">
             <Image src="/sissone-logo.svg" alt="Sissone" width={200} height={62} className="h-auto" />
           </div>
-          <h2 className="text-2xl font-semibold text-[#3D2C2E] mb-2">Redefinir Senha</h2>
-          <p className="text-[#3D2C2E] opacity-70 text-sm">
+          <h2 className="text-2xl font-semibold text-foreground mb-2">Redefinir Senha</h2>
+          <p className="text-foreground opacity-70 text-sm">
             Digite seu e-mail para receber instruções de redefinição de senha
           </p>
         </div>
 
         <div className="space-y-4">
           <div>
-            <Label htmlFor="reset-email" className="text-[#3D2C2E]">
+            <Label htmlFor="reset-email" className="text-foreground">
               E-mail
             </Label>
-            <Input id="reset-email" type="email" placeholder="seu@email.com" className="bg-white border-[#E5D6CD]" />
+            <Input id="reset-email" type="email" placeholder="seu@email.com" className="bg-card border-border" />
           </div>
           <Button 
             onClick={() => {
               setShowEmailSentNotification(true)
               setTimeout(() => setShowEmailSentNotification(false), 2000)
             }}
-            className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
           >
             Criar nova senha
           </Button>
           <Button
             variant="outline"
             onClick={() => setShowForgotPassword(false)}
-            className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white hover:bg-white/90"
+            className="w-full border-border text-foreground bg-card hover:bg-card/90"
           >
             Voltar ao Login
           </Button>
@@ -149,7 +149,7 @@ export default function SissonePrototype() {
   )
 
   const LoginScreen = () => (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-[#F5F0EB]">
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-background">
       {showForgotPassword ? (
         <ForgotPasswordScreen />
       ) : (
@@ -158,39 +158,39 @@ export default function SissonePrototype() {
             <div className="mx-auto mb-4 flex items-center justify-center">
               <Image src="/sissone-logo.svg" alt="Sissone" width={200} height={62} className="h-auto" />
             </div>
-            <p className="text-[#3D2C2E] opacity-70">Descubra dança, conecte-se com o movimento</p>
+            <p className="text-foreground opacity-70">Descubra dança, conecte-se com o movimento</p>
           </div>
 
           <div className="space-y-4">
             <div>
-              <Label htmlFor="email" className="text-[#3D2C2E]">
+              <Label htmlFor="email" className="text-foreground">
                 E-mail
               </Label>
-              <Input id="email" type="email" placeholder="seu@email.com" className="bg-white border-[#E5D6CD]" />
+              <Input id="email" type="email" placeholder="seu@email.com" className="bg-card border-border" />
             </div>
             <div>
-              <Label htmlFor="password" className="text-[#3D2C2E]">
+              <Label htmlFor="password" className="text-foreground">
                 Senha
               </Label>
-              <Input id="password" type="password" placeholder="••••••••" className="bg-white border-[#E5D6CD]" />
+              <Input id="password" type="password" placeholder="••••••••" className="bg-card border-border" />
             </div>
-            <Button onClick={nextScreen} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+            <Button onClick={nextScreen} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
               Entrar
             </Button>
 
             <div className="relative">
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="w-full border-t border-[#E5D6CD]" />
+                <span className="w-full border-t border-border" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-[#F5F0EB] px-2 text-[#3D2C2E] opacity-70">ou</span>
+                <span className="bg-background px-2 text-foreground opacity-70">ou</span>
               </div>
             </div>
 
             <Button
               variant="outline"
               onClick={nextScreen}
-              className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white hover:bg-white/90"
+              className="w-full border-border text-foreground bg-card hover:bg-card/90"
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                 <path
@@ -217,7 +217,7 @@ export default function SissonePrototype() {
           <div className="text-center">
             <button
               onClick={() => setShowForgotPassword(true)}
-              className="text-[#3D2C2E] opacity-70 text-sm underline"
+              className="text-foreground opacity-70 text-sm underline"
             >
               Esqueci minha senha
             </button>
@@ -228,9 +228,9 @@ export default function SissonePrototype() {
   )
 
   const DashboardScreen = () => (
-    <div className="min-h-screen bg-[#F5F0EB]">
+    <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-[1440px]">
-        <div className="bg-white border-b border-[#E5D6CD] p-4">
+        <div className="bg-card border-b border-border p-4">
           <div className="flex items-center justify-between">
             <Image src="/sissone-logo.svg" alt="Sissone" width={120} height={37} className="h-auto" />
             <div className="flex items-center gap-3">
@@ -240,7 +240,7 @@ export default function SissonePrototype() {
                 onClick={() =>
                   window.open("https://v0-sissone-wireframes-git-usurio-b-lead-sissone-mvp.vercel.app/", "_blank")
                 }
-                className="border-[#CFB2A8] text-[#3D2C2E] hover:bg-[#CFB2A8] hover:text-white"
+                className="border-primary text-foreground hover:bg-primary hover:text-primary-foreground"
               >
                 Cadastrar minha escola
               </Button>
@@ -250,13 +250,13 @@ export default function SissonePrototype() {
                 onClick={() =>
                   window.open("https://v0-sissone-wireframes-git-usurio-a-lead-sissone-mvp.vercel.app/", "_blank")
                 }
-                className="border-[#CFB2A8] text-[#3D2C2E] hover:bg-[#CFB2A8] hover:text-white"
+                className="border-primary text-foreground hover:bg-primary hover:text-primary-foreground"
               >
                 Buscar aula
               </Button>
               <Button variant="ghost" size="sm" onClick={goToProfile} className="p-0 h-auto">
-                <div className="w-10 h-10 bg-[#CFB2A8] rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-bold">S</span>
+                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+              <span className="text-primary-foreground text-sm font-bold">S</span>
                 </div>
               </Button>
             </div>
@@ -265,22 +265,22 @@ export default function SissonePrototype() {
 
         <div className="p-4 md:p-8 lg:p-12 space-y-8">
           <div>
-            <h2 className="text-xl md:text-2xl font-bold text-[#3D2C2E] mb-1">Bem-vinda, Sarah!</h2>
-            <p className="text-[#3D2C2E] opacity-70">Pronta para dançar hoje?</p>
+            <h2 className="text-xl md:text-2xl font-bold text-foreground mb-1">Bem-vinda, Sarah!</h2>
+            <p className="text-foreground opacity-70">Pronta para dançar hoje?</p>
           </div>
 
           <div>
-            <h3 className="text-lg md:text-xl font-semibold text-[#3D2C2E] mb-4">Aulas de Hoje</h3>
+            <h3 className="text-lg md:text-xl font-semibold text-foreground mb-4">Aulas de Hoje</h3>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="bg-white border-[#E5D6CD]">
+              <Card className="bg-card border-border">
                 <CardContent className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h4 className="font-semibold text-[#3D2C2E] text-lg">Fluxo Contemporâneo</h4>
-                      <p className="text-[#3D2C2E] opacity-70 text-sm">Estúdio Movement</p>
+                      <h4 className="font-semibold text-foreground text-lg">Fluxo Contemporâneo</h4>
+                      <p className="text-foreground opacity-70 text-sm">Estúdio Movement</p>
                     </div>
-                    <div className="text-right text-sm text-[#3D2C2E] opacity-70">
+                    <div className="text-right text-sm text-foreground opacity-70">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
                         Hoje
@@ -292,14 +292,14 @@ export default function SissonePrototype() {
                     </div>
                   </div>
                   <div className="flex items-center gap-1 mb-4">
-                    <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
-                    <span className="text-sm text-[#3D2C2E] opacity-70">Centro - Sala A</span>
+                    <MapPin className="w-4 h-4 text-foreground opacity-70" />
+                    <span className="text-sm text-foreground opacity-70">Centro - Sala A</span>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <Button
                       onClick={() => goToDetails("today")}
                       variant="outline"
-                      className="border-[#E5D6CD] text-[#3D2C2E] bg-white"
+                      className="border-border text-foreground bg-card"
                     >
                       Ver Detalhes
                     </Button>
@@ -308,7 +308,7 @@ export default function SissonePrototype() {
                         goToDetails("today")
                         setTimeout(() => setCurrentScreen(3), 100)
                       }}
-                      className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground"
                     >
                       Check-in
                     </Button>
@@ -319,17 +319,17 @@ export default function SissonePrototype() {
           </div>
 
           <div>
-            <h3 className="text-lg md:text-xl font-semibold text-[#3D2C2E] mb-4">Aulas da Semana</h3>
+            <h3 className="text-lg md:text-xl font-semibold text-foreground mb-4">Aulas da Semana</h3>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="bg-white border-[#E5D6CD]">
+              <Card className="bg-card border-border">
                 <CardContent className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h4 className="font-semibold text-[#3D2C2E] text-lg">Fundamentos de Jazz</h4>
-                      <p className="text-[#3D2C2E] opacity-70 text-sm">Academia Rhythm Dance</p>
+                      <h4 className="font-semibold text-foreground text-lg">Fundamentos de Jazz</h4>
+                      <p className="text-foreground opacity-70 text-sm">Academia Rhythm Dance</p>
                     </div>
-                    <div className="text-right text-sm text-[#3D2C2E] opacity-70">
+                    <div className="text-right text-sm text-foreground opacity-70">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
                         Amanhã
@@ -341,27 +341,27 @@ export default function SissonePrototype() {
                     </div>
                   </div>
                   <div className="flex items-center gap-1 mb-4">
-                    <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
-                    <span className="text-sm text-[#3D2C2E] opacity-70">Zona Sul - Sala Principal</span>
+                    <MapPin className="w-4 h-4 text-foreground opacity-70" />
+                    <span className="text-sm text-foreground opacity-70">Zona Sul - Sala Principal</span>
                   </div>
                   <Button
                     onClick={() => goToDetails("future")}
                     variant="outline"
-                    className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white"
+                    className="w-full border-border text-foreground bg-card"
                   >
                     Ver Detalhes
                   </Button>
                 </CardContent>
               </Card>
 
-              <Card className="bg-white border-[#E5D6CD]">
+              <Card className="bg-card border-border">
                 <CardContent className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h4 className="font-semibold text-[#3D2C2E] text-lg">Dança de Salão</h4>
-                      <p className="text-[#3D2C2E] opacity-70 text-sm">Estúdio Harmonia</p>
+                      <h4 className="font-semibold text-foreground text-lg">Dança de Salão</h4>
+                      <p className="text-foreground opacity-70 text-sm">Estúdio Harmonia</p>
                     </div>
-                    <div className="text-right text-sm text-[#3D2C2E] opacity-70">
+                    <div className="text-right text-sm text-foreground opacity-70">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
                         Sábado
@@ -373,13 +373,13 @@ export default function SissonePrototype() {
                     </div>
                   </div>
                   <div className="flex items-center gap-1 mb-4">
-                    <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
-                    <span className="text-sm text-[#3D2C2E] opacity-70">Bairro Novo - Salão 2</span>
+                    <MapPin className="w-4 h-4 text-foreground opacity-70" />
+                    <span className="text-sm text-foreground opacity-70">Bairro Novo - Salão 2</span>
                   </div>
                   <Button
                     onClick={() => goToDetails("future")}
                     variant="outline"
-                    className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white"
+                    className="w-full border-border text-foreground bg-card"
                   >
                     Ver Detalhes
                   </Button>
@@ -389,17 +389,17 @@ export default function SissonePrototype() {
           </div>
 
           <div>
-            <h3 className="text-lg md:text-xl font-semibold text-[#3D2C2E] mb-4">Aulas Anteriores</h3>
+            <h3 className="text-lg md:text-xl font-semibold text-foreground mb-4">Aulas Anteriores</h3>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="bg-white border-[#E5D6CD]">
+              <Card className="bg-card border-border">
                 <CardContent className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h4 className="font-semibold text-[#3D2C2E] text-lg">Hip Hop Iniciante</h4>
-                      <p className="text-[#3D2C2E] opacity-70 text-sm">Urban Move Studio</p>
+                      <h4 className="font-semibold text-foreground text-lg">Hip Hop Iniciante</h4>
+                      <p className="text-foreground opacity-70 text-sm">Urban Move Studio</p>
                     </div>
-                    <div className="text-right text-sm text-[#3D2C2E] opacity-70">
+                    <div className="text-right text-sm text-foreground opacity-70">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
                         12 de Janeiro
@@ -411,24 +411,24 @@ export default function SissonePrototype() {
                     </div>
                   </div>
                   <div className="flex items-center gap-1 mb-3">
-                    <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
-                    <span className="text-sm text-[#3D2C2E] opacity-70">Centro Urbano - Sala Hip Hop</span>
+                    <MapPin className="w-4 h-4 text-foreground opacity-70" />
+                    <span className="text-sm text-foreground opacity-70">Centro Urbano - Sala Hip Hop</span>
                   </div>
-                  <div className="flex items-center gap-2 mb-4 p-2 bg-[#E5D6CD]/30 rounded">
-                    <AlertCircle className="w-4 h-4 text-[#CFB2A8]" />
-                    <span className="text-sm text-[#3D2C2E]">Avaliação pendente</span>
+                  <div className="flex items-center gap-2 mb-4 p-2 bg-secondary/30 rounded">
+                    <AlertCircle className="w-4 h-4 text-primary" />
+                    <span className="text-sm text-foreground">Avaliação pendente</span>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <Button
                       onClick={() => goToDetails("past-not-reviewed")}
                       variant="outline"
-                      className="border-[#E5D6CD] text-[#3D2C2E] bg-white"
+                      className="border-border text-foreground bg-card"
                     >
                       Ver Detalhes
                     </Button>
                     <Button
                       onClick={() => goToFeedback("past-not-reviewed")}
-                      className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground"
                     >
                       Avaliar
                     </Button>
@@ -436,14 +436,14 @@ export default function SissonePrototype() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-white border-[#E5D6CD]">
+              <Card className="bg-card border-border">
                 <CardContent className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h4 className="font-semibold text-[#3D2C2E] text-lg">Ballet Clássico</h4>
-                      <p className="text-[#3D2C2E] opacity-70 text-sm">Estúdio Elegance</p>
+                      <h4 className="font-semibold text-foreground text-lg">Ballet Clássico</h4>
+                      <p className="text-foreground opacity-70 text-sm">Estúdio Elegance</p>
                     </div>
-                    <div className="text-right text-sm text-[#3D2C2E] opacity-70">
+                    <div className="text-right text-sm text-foreground opacity-70">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
                         15 de Janeiro
@@ -455,25 +455,25 @@ export default function SissonePrototype() {
                     </div>
                   </div>
                   <div className="flex items-center gap-1 mb-3">
-                    <MapPin className="w-4 h-4 text-[#3D2C2E] opacity-70" />
-                    <span className="text-sm text-[#3D2C2E] opacity-70">Bairro Clássico - Estúdio Principal</span>
+                    <MapPin className="w-4 h-4 text-foreground opacity-70" />
+                    <span className="text-sm text-foreground opacity-70">Bairro Clássico - Estúdio Principal</span>
                   </div>
                   <div className="flex items-center gap-2 mb-4">
                     <div className="flex">{renderStars(5, false)}</div>
-                    <span className="text-sm text-[#3D2C2E] font-medium">Você avaliou</span>
+                    <span className="text-sm text-foreground font-medium">Você avaliou</span>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <Button
                       onClick={() => goToDetails("past-reviewed")}
                       variant="outline"
-                      className="border-[#E5D6CD] text-[#3D2C2E] bg-white"
+                      className="border-border text-foreground bg-card"
                     >
                       Ver Detalhes
                     </Button>
                     <Button
                       onClick={() => goToFeedback("past-reviewed")}
                       variant="outline"
-                      className="border-[#CFB2A8] text-[#CFB2A8] bg-transparent hover:bg-[#CFB2A8]/10"
+                      className="border-primary text-primary bg-transparent hover:bg-primary/10"
                     >
                       Editar Avaliação
                     </Button>
@@ -529,78 +529,78 @@ export default function SissonePrototype() {
     const classInfo = getTitleAndClass()
 
     return (
-      <div className="min-h-screen bg-[#F5F0EB]">
+      <div className="min-h-screen bg-background">
         <div className="mx-auto max-w-[1440px]">
-          <div className="bg-white border-b border-[#E5D6CD] p-4">
+          <div className="bg-card border-b border-border p-4">
             <div className="flex items-center gap-3">
-              <Button variant="ghost" size="sm" onClick={prevScreen} className="text-[#3D2C2E]">
+              <Button variant="ghost" size="sm" onClick={prevScreen} className="text-foreground">
                 <ArrowLeft className="w-4 h-4" />
               </Button>
-              <h1 className="text-lg font-bold text-[#3D2C2E]">Detalhes da Aula</h1>
+              <h1 className="text-lg font-bold text-foreground">Detalhes da Aula</h1>
             </div>
           </div>
 
           <div className="p-4 md:p-8 lg:p-12 space-y-6 max-w-4xl mx-auto">
-            <Card className="bg-white border-[#E5D6CD]">
+            <Card className="bg-card border-border">
               <CardContent className="p-8 space-y-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-[#3D2C2E] mb-2">{classInfo.title}</h2>
-                  <p className="text-[#3D2C2E] opacity-70 font-medium">{classInfo.studio}</p>
+                  <h2 className="text-2xl font-bold text-foreground mb-2">{classInfo.title}</h2>
+                  <p className="text-foreground opacity-70 font-medium">{classInfo.studio}</p>
 
                   {classInfo.hasUserReview && (
-                    <div className="mt-3 p-3 bg-[#CFB2A8]/10 border border-[#CFB2A8]/30 rounded-lg">
-                      <p className="text-[#3D2C2E] text-xs font-medium mb-1">Sua Avaliação</p>
+                  <div className="mt-3 p-3 bg-primary/10 border border-primary/30 rounded-lg">
+                      <p className="text-foreground text-xs font-medium mb-1">Sua Avaliação</p>
                       <div className="flex items-center justify-center gap-2">{renderStars(classInfo.userRating!)}</div>
                     </div>
                   )}
 
-                  <div className="flex items-center gap-2 mt-3 pt-3 border-t border-[#E5D6CD] justify-start">
+                  <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border justify-start">
                     {renderStars(4)}
-                    <span className="text-[#3D2C2E] font-semibold">4.0</span>
-                    <span className="text-[#3D2C2E] opacity-70 text-sm">(24 avaliações)</span>
+                    <span className="text-foreground font-semibold">4.0</span>
+                    <span className="text-foreground opacity-70 text-sm">(24 avaliações)</span>
                   </div>
                 </div>
 
-                <div className="space-y-2 pt-2 border-t border-[#E5D6CD]">
+                <div className="space-y-2 pt-2 border-t border-border">
                   <div className="flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-[#3D2C2E] opacity-70" />
+                    <Calendar className="w-5 h-5 text-foreground opacity-70" />
                     <div>
-                      <p className="text-[#3D2C2E] font-medium">{classInfo.date}</p>
+                      <p className="text-foreground font-medium">{classInfo.date}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-[#3D2C2E] opacity-70" />
+                    <Clock className="w-5 h-5 text-foreground opacity-70" />
                     <div>
-                      <p className="text-[#3D2C2E] font-medium">{classInfo.time}</p>
+                      <p className="text-foreground font-medium">{classInfo.time}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-[#3D2C2E] opacity-70" />
+                    <MapPin className="w-5 h-5 text-foreground opacity-70" />
                     <div>
-                      <p className="text-[#3D2C2E] font-medium">Centro - Sala A</p>
-                      <p className="text-sm text-[#3D2C2E] opacity-70">Rua da Dança, 123</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-2 border-t border-[#E5D6CD]">
-                  <h3 className="text-lg font-semibold text-[#3D2C2E] mb-2">Instrutor</h3>
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-[#CFB2A8] rounded-full flex items-center justify-center">
-                      <span className="text-white text-lg font-bold">M</span>
-                    </div>
-                    <div>
-                      <p className="text-[#3D2C2E] font-medium">Maria Silva</p>
-                      <p className="text-sm text-[#3D2C2E] opacity-70">10 anos de experiência</p>
+                      <p className="text-foreground font-medium">Centro - Sala A</p>
+                      <p className="text-sm text-foreground opacity-70">Rua da Dança, 123</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-[#E5D6CD]">
-                  <h3 className="text-lg font-semibold text-[#3D2C2E] mb-2">Sobre a Aula</h3>
-                  <p className="text-[#3D2C2E] opacity-70 text-sm leading-relaxed">
+                <div className="pt-2 border-t border-border">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">Instrutor</h3>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                      <span className="text-primary-foreground text-lg font-bold">M</span>
+                    </div>
+                    <div>
+                      <p className="text-foreground font-medium">Maria Silva</p>
+                      <p className="text-sm text-foreground opacity-70">10 anos de experiência</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-border">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">Sobre a Aula</h3>
+                  <p className="text-foreground opacity-70 text-sm leading-relaxed">
                     Uma experiência imersiva de dança contemporânea focada em fluidez e expressão corporal. Perfeita
                     para todos os níveis que querem explorar movimento criativo.
                   </p>
@@ -612,7 +612,7 @@ export default function SissonePrototype() {
               {currentClassStatus === "today" && (
                 <Button
                   onClick={() => setCurrentScreen(3)}
-                  className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white w-full"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground w-full"
                 >
                   Fazer Check-in
                 </Button>
@@ -621,7 +621,7 @@ export default function SissonePrototype() {
               {currentClassStatus === "past-not-reviewed" && (
                 <Button
                   onClick={() => goToFeedback("past-not-reviewed")}
-                  className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white w-full"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground w-full"
                 >
                   Avaliar Aula
                 </Button>
@@ -630,7 +630,7 @@ export default function SissonePrototype() {
               {currentClassStatus === "past-reviewed" && (
                 <Button
                   onClick={() => goToFeedback("past-reviewed")}
-                  className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white w-full"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground w-full"
                 >
                   <Edit2 className="w-4 h-4 mr-2" />
                   Editar Avaliação
@@ -640,7 +640,7 @@ export default function SissonePrototype() {
               <Button
                 onClick={() => setCurrentScreen(5)}
                 variant="outline"
-                className="border-[#E5D6CD] text-[#3D2C2E] bg-white w-full"
+                className="border-border text-foreground bg-card w-full"
               >
                 Ver Avaliações da Comunidade
               </Button>
@@ -652,12 +652,12 @@ export default function SissonePrototype() {
   }
 
   const CheckInScreen = () => (
-    <div className="min-h-screen bg-[#F5F0EB]">
+    <div className="min-h-screen bg-background">
       {showCheckInNotification && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
-          <div className="bg-[#3D2C2E] text-white rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
-            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-              {isCheckedIn ? <Check className="w-5 h-5 text-green-600" /> : <X className="w-5 h-5 text-red-600" />}
+          <div className="bg-foreground text-background rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
+            <div className="w-8 h-8 bg-background rounded-full flex items-center justify-center flex-shrink-0">
+              {isCheckedIn ? <Check className="w-5 h-5 text-success" /> : <X className="w-5 h-5 text-destructive" />}
             </div>
             <p className="text-sm font-medium">
               {isCheckedIn ? "Check-in confirmado com sucesso!" : "Check-in cancelado"}
@@ -667,37 +667,37 @@ export default function SissonePrototype() {
       )}
 
       <div className="mx-auto max-w-[1440px]">
-        <div className="bg-white border-b border-[#E5D6CD] p-4">
+        <div className="bg-card border-b border-border p-4">
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" onClick={prevScreen} className="text-[#3D2C2E]">
+            <Button variant="ghost" size="sm" onClick={prevScreen} className="text-foreground">
               <ArrowLeft className="w-4 h-4" />
             </Button>
-            <h1 className="text-lg font-bold text-[#3D2C2E]">Check-in</h1>
+            <h1 className="text-lg font-bold text-foreground">Check-in</h1>
           </div>
         </div>
 
         <div className="p-4 md:p-8 lg:p-12 space-y-6 max-w-3xl mx-auto">
           <div>
-            <h2 className="text-xl font-bold text-[#3D2C2E] mb-2">Fluxo Contemporâneo</h2>
-            <p className="text-[#3D2C2E] opacity-70">Estúdio Movement</p>
-            <p className="text-[#3D2C2E] opacity-70 text-sm">Hoje • 18:00 • Sala A</p>
+            <h2 className="text-xl font-bold text-foreground mb-2">Fluxo Contemporâneo</h2>
+            <p className="text-foreground opacity-70">Estúdio Movement</p>
+            <p className="text-foreground opacity-70 text-sm">Hoje • 18:00 • Sala A</p>
           </div>
 
-          <div className="bg-white rounded-lg p-8 border border-[#E5D6CD]">
-            <div className="w-32 h-32 mx-auto bg-[#E5D6CD] rounded-lg flex items-center justify-center mb-4">
-              <QrCode className="w-16 h-16 text-[#3D2C2E]" />
+          <div className="bg-card rounded-lg p-8 border border-border">
+            <div className="w-32 h-32 mx-auto bg-secondary rounded-lg flex items-center justify-center mb-4">
+              <QrCode className="w-16 h-16 text-foreground" />
             </div>
-            <p className="text-center text-[#3D2C2E] opacity-70 text-sm">
+            <p className="text-center text-foreground opacity-70 text-sm">
               Mostre este QR code ao seu instrutor ou toque no botão abaixo
             </p>
           </div>
 
           <div className="space-y-3">
-            <Button onClick={handleCheckIn} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+            <Button onClick={handleCheckIn} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
               Confirmar Check-in
             </Button>
 
-            <Button onClick={prevScreen} variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white">
+            <Button onClick={prevScreen} variant="outline" className="w-full border-border text-foreground bg-card">
               Voltar
             </Button>
           </div>
@@ -707,24 +707,24 @@ export default function SissonePrototype() {
   )
 
   const FeedbackScreen = () => (
-    <div className="min-h-screen bg-[#F5F0EB]">
+    <div className="min-h-screen bg-background">
       {showReviewSentNotification && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
-          <div className="bg-[#3D2C2E] text-white rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
-            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-              <Check className="w-5 h-5 text-green-600" />
+          <div className="bg-foreground text-background rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
+            <div className="w-8 h-8 bg-background rounded-full flex items-center justify-center flex-shrink-0">
+              <Check className="w-5 h-5 text-success" />
             </div>
             <p className="text-sm font-medium">Avaliação enviada</p>
           </div>
         </div>
       )}
       <div className="mx-auto max-w-[1440px]">
-        <div className="bg-white border-b border-[#E5D6CD] p-4">
+        <div className="bg-card border-b border-border p-4">
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" onClick={prevScreen} className="text-[#3D2C2E]">
+            <Button variant="ghost" size="sm" onClick={prevScreen} className="text-foreground">
               <ArrowLeft className="w-4 h-4" />
             </Button>
-            <h1 className="text-lg font-bold text-[#3D2C2E]">
+            <h1 className="text-lg font-bold text-foreground">
               {currentClassStatus === "past-reviewed" ? "Editar Avaliação" : "Avaliar Aula"}
             </h1>
           </div>
@@ -732,32 +732,32 @@ export default function SissonePrototype() {
 
         <div className="p-4 md:p-8 lg:p-12 space-y-6 max-w-3xl mx-auto">
           <div>
-            <h2 className="text-xl font-bold text-[#3D2C2E] mb-2">
+            <h2 className="text-xl font-bold text-foreground mb-2">
               {currentClassStatus === "past-reviewed" ? "Ballet Clássico" : "Hip Hop Iniciante"}
             </h2>
-            <p className="text-[#3D2C2E] opacity-70">
+            <p className="text-foreground opacity-70">
               {currentClassStatus === "past-reviewed" ? "Estúdio Elegance" : "Urban Move Studio"}
             </p>
-            <p className="text-[#3D2C2E] opacity-70 text-sm">
+            <p className="text-foreground opacity-70 text-sm">
               {currentClassStatus === "past-reviewed" ? "15 de Janeiro • 17:00" : "12 de Janeiro • 20:00"}
             </p>
           </div>
 
-          <Card className="bg-white border-[#E5D6CD]">
+          <Card className="bg-card border-border">
             <CardContent className="p-8 space-y-6">
               <div className="text-center">
-                <Label className="text-lg font-semibold text-[#3D2C2E] mb-4 block">Como foi sua experiência?</Label>
+                <Label className="text-lg font-semibold text-foreground mb-4 block">Como foi sua experiência?</Label>
                 <div className="flex justify-center">{renderStars(rating, true)}</div>
               </div>
 
               <div>
-                <Label htmlFor="comment" className="text-[#3D2C2E] mb-2 block">
+                <Label htmlFor="comment" className="text-foreground mb-2 block">
                   Comentário (opcional)
                 </Label>
                 <Textarea
                   id="comment"
                   placeholder="Compartilhe sua experiência..."
-                  className="min-h-32 bg-white border-[#E5D6CD] resize-none"
+                  className="min-h-32 bg-card border-border resize-none"
                   defaultValue={
                     currentClassStatus === "past-reviewed"
                       ? "Aula maravilhosa! A professora é extremamente atenciosa e o conteúdo foi muito bem estruturado."
@@ -777,11 +777,11 @@ export default function SissonePrototype() {
                   nextScreen()
                 }, 2000)
               }}
-              className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               {currentClassStatus === "past-reviewed" ? "Atualizar Avaliação" : "Enviar Avaliação"}
             </Button>
-            <Button onClick={nextScreen} variant="outline" className="w-full border-[#E5D6CD] text-[#3D2C2E] bg-white">
+            <Button onClick={nextScreen} variant="outline" className="w-full border-border text-foreground bg-card">
               Pular por Enquanto
             </Button>
           </div>
@@ -791,92 +791,92 @@ export default function SissonePrototype() {
   )
 
   const ReviewsScreen = () => (
-    <div className="min-h-screen bg-[#F5F0EB]">
+    <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-[1440px]">
-        <div className="bg-white border-b border-[#E5D6CD] p-4">
+        <div className="bg-card border-b border-border p-4">
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" onClick={() => setCurrentScreen(2)} className="text-[#3D2C2E]">
+            <Button variant="ghost" size="sm" onClick={() => setCurrentScreen(2)} className="text-foreground">
               <ArrowLeft className="w-4 h-4" />
             </Button>
-            <h1 className="text-lg font-bold text-[#3D2C2E]">Avaliações da Comunidade</h1>
+            <h1 className="text-lg font-bold text-foreground">Avaliações da Comunidade</h1>
           </div>
         </div>
 
         <div className="p-4 md:p-8 lg:p-12 space-y-6 max-w-4xl mx-auto">
           <div>
-            <h2 className="text-xl font-bold text-[#3D2C2E] mb-2">Fluxo Contemporâneo</h2>
-            <p className="text-[#3D2C2E] opacity-70">Estúdio Movement</p>
+            <h2 className="text-xl font-bold text-foreground mb-2">Fluxo Contemporâneo</h2>
+            <p className="text-foreground opacity-70">Estúdio Movement</p>
 
-            <div className="flex items-center gap-3 mt-3 pt-3 border-t border-[#E5D6CD]">
+            <div className="flex items-center gap-3 mt-3 pt-3 border-t border-border">
               {renderStars(4)}
-              <span className="text-[#3D2C2E] font-semibold">4.0</span>
-              <span className="text-[#3D2C2E] opacity-70 text-sm">(24 avaliações)</span>
+              <span className="text-foreground font-semibold">4.0</span>
+              <span className="text-foreground opacity-70 text-sm">(24 avaliações)</span>
             </div>
           </div>
 
           <div className="space-y-4">
-            <Card className="bg-white border-[#E5D6CD]">
+            <Card className="bg-card border-border">
               <CardContent className="p-6">
                 <div className="flex justify-between items-start mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#CFB2A8] rounded-full flex items-center justify-center">
-                      <span className="text-white text-sm font-bold">J</span>
+                    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                      <span className="text-primary-foreground text-sm font-bold">J</span>
                     </div>
                     <div>
-                      <p className="text-[#3D2C2E] font-medium">João Silva</p>
-                      <p className="text-sm text-[#3D2C2E] opacity-70">Há 2 dias</p>
+                      <p className="text-foreground font-medium">João Silva</p>
+                      <p className="text-sm text-foreground opacity-70">Há 2 dias</p>
                     </div>
                   </div>
                   {renderStars(5)}
                 </div>
-                <p className="text-[#3D2C2E] opacity-70 text-sm">
+                <p className="text-foreground opacity-70 text-sm">
                   Experiência incrível! A professora é super atenciosa e o ambiente é acolhedor. Recomendo muito!
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-white border-[#E5D6CD]">
+            <Card className="bg-card border-border">
               <CardContent className="p-6">
                 <div className="flex justify-between items-start mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#CFB2A8] rounded-full flex items-center justify-center">
-                      <span className="text-white text-sm font-bold">A</span>
+                    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                      <span className="text-primary-foreground text-sm font-bold">A</span>
                     </div>
                     <div>
-                      <p className="text-[#3D2C2E] font-medium">Ana Costa</p>
-                      <p className="text-sm text-[#3D2C2E] opacity-70">Há 1 semana</p>
+                      <p className="text-foreground font-medium">Ana Costa</p>
+                      <p className="text-sm text-foreground opacity-70">Há 1 semana</p>
                     </div>
                   </div>
                   {renderStars(4)}
                 </div>
-                <p className="text-[#3D2C2E] opacity-70 text-sm">
+                <p className="text-foreground opacity-70 text-sm">
                   Ótima aula, aprendi muito sobre técnicas de fluxo. O único ponto é que estava um pouco cheia.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-white border-[#E5D6CD]">
+            <Card className="bg-card border-border">
               <CardContent className="p-6">
                 <div className="flex justify-between items-start mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#CFB2A8] rounded-full flex items-center justify-center">
-                      <span className="text-white text-sm font-bold">C</span>
+                    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                      <span className="text-primary-foreground text-sm font-bold">C</span>
                     </div>
                     <div>
-                      <p className="text-[#3D2C2E] font-medium">Carlos Mendes</p>
-                      <p className="text-sm text-[#3D2C2E] opacity-70">Há 2 semanas</p>
+                      <p className="text-foreground font-medium">Carlos Mendes</p>
+                      <p className="text-sm text-foreground opacity-70">Há 2 semanas</p>
                     </div>
                   </div>
                   {renderStars(3)}
                 </div>
-                <p className="text-[#3D2C2E] opacity-70 text-sm">
+                <p className="text-foreground opacity-70 text-sm">
                   Boa aula, mas esperava um pouco mais de desafio. Talvez seja melhor para iniciantes.
                 </p>
               </CardContent>
             </Card>
           </div>
 
-          <Button onClick={goHome} className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white">
+          <Button onClick={goHome} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
             Concluir
           </Button>
         </div>
@@ -885,12 +885,12 @@ export default function SissonePrototype() {
   )
 
   const ProfileScreen = () => (
-    <div className="min-h-screen bg-[#F5F0EB]">
+    <div className="min-h-screen bg-background">
       {showProfileSaveNotification && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
-          <div className="bg-[#3D2C2E] text-white rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
-            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-              <Check className="w-5 h-5 text-green-600" />
+          <div className="bg-foreground text-background rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
+            <div className="w-8 h-8 bg-background rounded-full flex items-center justify-center flex-shrink-0">
+              <Check className="w-5 h-5 text-success" />
             </div>
             <p className="text-sm font-medium">Alterações salvas com sucesso</p>
           </div>
@@ -898,22 +898,22 @@ export default function SissonePrototype() {
       )}
       {showStyleAddedNotification && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
-          <div className="bg-[#3D2C2E] text-white rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
-            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-              <Check className="w-5 h-5 text-green-600" />
+          <div className="bg-foreground text-background rounded-lg p-4 shadow-lg flex items-center gap-3 animate-in slide-in-from-top">
+            <div className="w-8 h-8 bg-background rounded-full flex items-center justify-center flex-shrink-0">
+              <Check className="w-5 h-5 text-success" />
             </div>
             <p className="text-sm font-medium">Estilo adicionado</p>
           </div>
         </div>
       )}
       <div className="mx-auto max-w-[1440px]">
-        <div className="bg-white border-b border-[#E5D6CD] p-4">
+        <div className="bg-card border-b border-border p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Button variant="ghost" size="sm" onClick={() => setCurrentScreen(1)} className="text-[#3D2C2E]">
+              <Button variant="ghost" size="sm" onClick={() => setCurrentScreen(1)} className="text-foreground">
                 <ArrowLeft className="w-4 h-4" />
               </Button>
-              <h1 className="text-lg font-bold text-[#3D2C2E]">Perfil e Configurações</h1>
+              <h1 className="text-lg font-bold text-foreground">Perfil e Configurações</h1>
             </div>
           </div>
         </div>
@@ -921,64 +921,64 @@ export default function SissonePrototype() {
         <div className="p-4 md:p-8 lg:p-12 space-y-6">
           <div className="max-w-5xl mx-auto">
             <div className="flex items-center gap-4 mb-8">
-              <div className="w-20 h-20 bg-[#CFB2A8] rounded-full flex items-center justify-center">
-                <span className="text-white text-2xl font-bold">S</span>
+              <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center">
+                <span className="text-primary-foreground text-2xl font-bold">S</span>
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-[#3D2C2E]">Sarah Oliveira</h2>
-                <p className="text-[#3D2C2E] opacity-70">sarah@email.com</p>
+                <h2 className="text-2xl font-bold text-foreground">Sarah Oliveira</h2>
+                <p className="text-foreground opacity-70">sarah@email.com</p>
               </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card className="bg-white border-[#E5D6CD]">
+              <Card className="bg-card border-border">
                 <CardHeader>
-                  <h3 className="text-lg font-semibold text-[#3D2C2E]">Informações Pessoais</h3>
+                  <h3 className="text-lg font-semibold text-foreground">Informações Pessoais</h3>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <Label htmlFor="name" className="text-[#3D2C2E]">
+                    <Label htmlFor="name" className="text-foreground">
                       Nome Completo
                     </Label>
-                    <Input id="name" defaultValue="Sarah Oliveira" className="bg-white border-[#E5D6CD]" />
+                    <Input id="name" defaultValue="Sarah Oliveira" className="bg-card border-border" />
                   </div>
                   <div>
-                    <Label htmlFor="email" className="text-[#3D2C2E]">
+                    <Label htmlFor="email" className="text-foreground">
                       E-mail
                     </Label>
                     <Input
                       id="email"
                       type="email"
                       defaultValue="sarah@email.com"
-                      className="bg-white border-[#E5D6CD]"
+                      className="bg-card border-border"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="phone" className="text-[#3D2C2E]">
+                    <Label htmlFor="phone" className="text-foreground">
                       Telefone
                     </Label>
-                    <Input id="phone" type="tel" defaultValue="(11) 98765-4321" className="bg-white border-[#E5D6CD]" />
+                    <Input id="phone" type="tel" defaultValue="(11) 98765-4321" className="bg-card border-border" />
                   </div>
                   <div>
-                    <Label htmlFor="bio" className="text-[#3D2C2E]">
+                    <Label htmlFor="bio" className="text-foreground">
                       Sobre Você
                     </Label>
                     <Textarea
                       id="bio"
-                      className="min-h-24 bg-white border-[#E5D6CD] resize-none"
+                      className="min-h-24 bg-card border-border resize-none"
                       defaultValue="Apaixonada por dança há 5 anos. Sempre em busca de novas experiências e desafios!"
                     />
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-white border-[#E5D6CD]">
+              <Card className="bg-card border-border">
                 <CardHeader>
-                  <h3 className="text-lg font-semibold text-[#3D2C2E]">Preferências de Dança</h3>
+                  <h3 className="text-lg font-semibold text-foreground">Preferências de Dança</h3>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div>
-                    <Label className="text-[#3D2C2E] mb-3 block">
+                    <Label className="text-foreground mb-3 block">
                       Estilos de Dança
                     </Label>
                     <div className="space-y-3">
@@ -994,9 +994,9 @@ export default function SissonePrototype() {
                                 setSelectedStyles(selectedStyles.filter((s) => s !== style))
                               }
                             }}
-                            className="border-[#CFB2A8] data-[state=checked]:bg-[#CFB2A8] data-[state=checked]:border-[#CFB2A8]"
+                            className="border-primary data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                           />
-                          <Label htmlFor={`style-${style}`} className="text-[#3D2C2E] cursor-pointer font-normal">
+                          <Label htmlFor={`style-${style}`} className="text-foreground cursor-pointer font-normal">
                             {style}
                           </Label>
                         </div>
@@ -1016,9 +1016,9 @@ export default function SissonePrototype() {
                               onCheckedChange={() => {
                                 setSelectedStyles(selectedStyles.filter((s) => s !== style))
                               }}
-                              className="border-[#CFB2A8] data-[state=checked]:bg-[#CFB2A8] data-[state=checked]:border-[#CFB2A8]"
+                              className="border-primary data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                             />
-                            <Label htmlFor={`style-${style}`} className="text-[#3D2C2E] cursor-pointer font-normal">
+                            <Label htmlFor={`style-${style}`} className="text-foreground cursor-pointer font-normal">
                               {style}
                             </Label>
                           </div>
@@ -1028,7 +1028,7 @@ export default function SissonePrototype() {
                           value={customStyle}
                           onChange={(e) => setCustomStyle(e.target.value)}
                           placeholder="Adicionar outro estilo..."
-                          className="bg-white border-[#E5D6CD] flex-1"
+                          className="bg-card border-border flex-1"
                           onKeyDown={(e) => {
                             if (e.key === "Enter" && customStyle.trim()) {
                               setSelectedStyles([...selectedStyles, customStyle.trim()])
@@ -1045,7 +1045,7 @@ export default function SissonePrototype() {
                               setTimeout(() => setShowStyleAddedNotification(false), 2000)
                             }
                           }}
-                          className="bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white px-4"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground px-4"
                         >
                           Adicionar
                         </Button>
@@ -1053,7 +1053,7 @@ export default function SissonePrototype() {
                     </div>
                   </div>
                   <div>
-                    <Label className="text-[#3D2C2E] mb-3 block">
+                    <Label className="text-foreground mb-3 block">
                       Nível de Experiência
                     </Label>
                     <div className="space-y-3">
@@ -1069,9 +1069,9 @@ export default function SissonePrototype() {
                                 setSelectedLevels(selectedLevels.filter((l) => l !== level))
                               }
                             }}
-                            className="border-[#CFB2A8] data-[state=checked]:bg-[#CFB2A8] data-[state=checked]:border-[#CFB2A8]"
+                            className="border-primary data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                           />
-                          <Label htmlFor={`level-${level}`} className="text-[#3D2C2E] cursor-pointer font-normal">
+                          <Label htmlFor={`level-${level}`} className="text-foreground cursor-pointer font-normal">
                             {level}
                           </Label>
                         </div>
@@ -1091,7 +1091,7 @@ export default function SissonePrototype() {
                     goHome()
                   }, 2000)
                 }}
-                className="w-full bg-[#CFB2A8] hover:bg-[#CFB2A8]/90 text-white"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 Salvar e fechar
               </Button>
