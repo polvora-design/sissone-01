@@ -41,7 +41,7 @@ export default function SissonePrototype() {
   }
 
   return (
-    <div className="w-full min-h-screen bg-[#F5F0EB]">
+    <div className="w-full min-h-screen bg-background">
       {/* Navigation dots */}
       <div className="px-4 py-8 md:px-8 lg:px-12 xl:px-16">
         {currentScreen === "landing" && <LandingScreen onNext={nextScreen} />}
@@ -185,13 +185,13 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
       {/* Hero section */}
       <div className="text-center space-y-6 md:space-y-8">
         <div className="space-y-4">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#3D2C2E]">Compartilhe Suas Aulas de Dança</h1>
-          <p className="text-lg md:text-xl text-[#3D2C2E] opacity-80">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">Compartilhe Suas Aulas de Dança</h1>
+          <p className="text-lg md:text-xl text-foreground/80">
             Para quem quer aprender, ensinar e viver a dança.
           </p>
         </div>
 
-        <div className="w-full h-64 md:h-80 lg:h-96 bg-[#E5D6CD] rounded-lg flex items-center justify-center overflow-hidden">
+        <div className="w-full h-64 md:h-80 lg:h-96 bg-muted rounded-lg flex items-center justify-center overflow-hidden">
           <img
             src="/images/image-201.png"
             alt="Grupo de dançarinos praticando em estúdio de dança"
@@ -199,23 +199,23 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
           />
         </div>
 
-        <p className="text-lg md:text-xl text-[#3D2C2E]">Conecte-se com alunos e expanda sua comunidade de dança</p>
+        <p className="text-lg md:text-xl text-foreground">Conecte-se com alunos e expanda sua comunidade de dança</p>
       </div>
 
       {/* Benefits section */}
       <div className="space-y-6 md:space-y-8">
-        <h2 className="text-2xl md:text-3xl font-bold text-[#3D2C2E] text-center">Por Que Entrar na Sissone?</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center">Por Que Entrar na Sissone?</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           {benefits.map((benefit, index) => (
-            <Card key={index} className="bg-white border-[#E5D6CD]">
+            <Card key={index} className="bg-card border-border">
               <CardContent className="p-6 flex flex-col items-center text-center space-y-3">
-                <div className="bg-[#E5D6CD] p-3 rounded-lg">
-                  <benefit.icon className="h-6 w-6 text-[#3D2C2E]" />
+                <div className="bg-muted p-3 rounded-lg">
+                  <benefit.icon className="h-6 w-6 text-foreground" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[#3D2C2E] text-lg">{benefit.title}</h3>
-                  <p className="text-sm text-[#3D2C2E] opacity-80 mt-2">{benefit.description}</p>
+                  <h3 className="font-semibold text-foreground text-lg">{benefit.title}</h3>
+                  <p className="text-sm text-foreground/80 mt-2">{benefit.description}</p>
                 </div>
               </CardContent>
             </Card>
@@ -225,21 +225,21 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
 
       <div className="space-y-6 md:space-y-8">
         <div className="text-center space-y-3">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#3D2C2E]">Veja Como Seu Perfil Ficará</h2>
-          <p className="text-base md:text-lg text-[#3D2C2E] opacity-80">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground">Veja Como Seu Perfil Ficará</h2>
+          <p className="text-base md:text-lg text-foreground/80">
             Mostre sua escola, aulas e horários de forma profissional
           </p>
         </div>
 
-        <Card className="bg-white border-[#E5D6CD] overflow-hidden shadow-lg">
+        <Card className="bg-card border-border overflow-hidden shadow-lg">
           {/* Header com foto de capa grande */}
           <div className="relative h-48 md:h-64 lg:h-80">
             <img src="/images/image.png" alt="Capa da escola" className="w-full h-full object-cover object-top" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#3D2C2E]/20 to-[#3D2C2E]/60" />
+            <div className="absolute inset-0 bg-gradient-to-b from-foreground/20 to-foreground/60" />
 
             {/* Foto de perfil sobreposta */}
             <div className="absolute -bottom-16 md:-bottom-20 left-6 md:left-8">
-              <div className="w-32 h-32 md:w-40 md:h-40 bg-white rounded-full p-2 shadow-xl">
+              <div className="w-32 h-32 md:w-40 md:h-40 bg-card rounded-full p-2 shadow-xl">
                 <img
                   src="/dance-instructor-profile-photo.jpg"
                   alt="Foto do perfil"
@@ -253,8 +253,8 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
             {/* Informações do perfil */}
             <div className="space-y-4 mb-8">
               <div>
-                <h3 className="text-2xl md:text-3xl font-bold text-[#3D2C2E]">Escola de Ballet Maria Clara</h3>
-                <p className="text-base text-[#3D2C2E] opacity-70 mt-2">
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground">Escola de Ballet Maria Clara</h3>
+                <p className="text-base text-foreground/70 mt-2">
                   Ballet Clássico • Contemporâneo • Jazz • Hip Hop
                 </p>
               </div>
@@ -262,24 +262,24 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
               <div className="flex flex-wrap items-center gap-4">
                 <div className="flex items-center gap-1">
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} className="h-5 w-5 fill-[#CFB2A8] text-[#CFB2A8]" />
+                    <Star key={star} className="h-5 w-5 fill-secondary text-secondary" />
                   ))}
-                  <span className="text-base text-[#3D2C2E] ml-2 font-semibold">4.9</span>
-                  <span className="text-sm text-[#3D2C2E] opacity-70 ml-1">(127 avaliações)</span>
+                  <span className="text-base text-foreground ml-2 font-semibold">4.9</span>
+                  <span className="text-sm text-foreground/70 ml-1">(127 avaliações)</span>
                 </div>
-                <span className="text-sm text-[#3D2C2E] opacity-70">•</span>
+                <span className="text-sm text-foreground/70">•</span>
                 <div className="flex items-center gap-1.5">
-                  <Users className="h-4 w-4 text-[#3D2C2E] opacity-70" />
-                  <span className="text-sm text-[#3D2C2E] opacity-70">320 alunos</span>
+                  <Users className="h-4 w-4 text-foreground/70" />
+                  <span className="text-sm text-foreground/70">320 alunos</span>
                 </div>
-                <span className="text-sm text-[#3D2C2E] opacity-70">•</span>
+                <span className="text-sm text-foreground/70">•</span>
                 <div className="flex items-center gap-1.5">
-                  <MapPin className="h-4 w-4 text-[#3D2C2E] opacity-70" />
-                  <span className="text-sm text-[#3D2C2E] opacity-70">São Paulo, SP</span>
+                  <MapPin className="h-4 w-4 text-foreground/70" />
+                  <span className="text-sm text-foreground/70">São Paulo, SP</span>
                 </div>
               </div>
 
-              <p className="text-base text-[#3D2C2E] opacity-80 leading-relaxed">
+              <p className="text-base text-foreground/80 leading-relaxed">
                 Escola especializada em ballet clássico e danças modernas com mais de 15 anos de tradição. Nossa missão
                 é formar dançarinos técnicos e expressivos em um ambiente acolhedor, profissional e inspirador.
                 Oferecemos aulas para todas as idades e níveis.
@@ -287,14 +287,14 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
             </div>
 
             {/* Divider */}
-            <div className="border-t border-[#E5D6CD] my-8" />
+            <div className="border-t border-border my-8" />
 
             {/* QR code and shareable link section */}
-            <div className="bg-[#F5F0EB] rounded-lg p-6 mb-8">
+            <div className="bg-background rounded-lg p-6 mb-8">
               <div className="flex flex-col lg:flex-row gap-6 items-center">
                 {/* QR Code */}
                 <div className="flex-shrink-0">
-                  <div className="bg-white p-4 rounded-lg shadow-md">
+                  <div className="bg-card p-4 rounded-lg shadow-md">
                     <img src="/qr-code-for-dance-school-profile.jpg" alt="QR Code do perfil" className="w-40 h-40" />
                   </div>
                 </div>
@@ -303,24 +303,24 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
                 <div className="flex-1 space-y-4 text-center lg:text-left">
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 justify-center lg:justify-start">
-                      <Share2 className="h-5 w-5 text-[#3D2C2E]" />
-                      <h4 className="text-lg font-bold text-[#3D2C2E]">Compartilhe Seu Perfil</h4>
+                      <Share2 className="h-5 w-5 text-foreground" />
+                      <h4 className="text-lg font-bold text-foreground">Compartilhe Seu Perfil</h4>
                     </div>
-                    <p className="text-sm text-[#3D2C2E] opacity-80">
+                    <p className="text-sm text-foreground/80">
                       Use este link único e QR code em suas ações de marketing, redes sociais e materiais impressos
                     </p>
                   </div>
 
                   {/* Copyable link */}
                   <div className="flex flex-col sm:flex-row gap-2">
-                    <div className="flex-1 bg-white border border-[#E5D6CD] rounded-lg px-4 py-3 flex items-center justify-between">
-                      <span className="text-sm text-[#3D2C2E] font-mono truncate">
+                    <div className="flex-1 bg-card border border-border rounded-lg px-4 py-3 flex items-center justify-between">
+                      <span className="text-sm text-foreground font-mono truncate">
                         sissone.com.br/escola-ballet-maria-clara
                       </span>
                     </div>
                     <Button
                       onClick={handleCopyLink}
-                      className="bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white px-4 whitespace-nowrap"
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground px-4 whitespace-nowrap"
                     >
                       {copied ? (
                         <>
@@ -336,7 +336,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
                     </Button>
                   </div>
 
-                  <p className="text-xs text-[#3D2C2E] opacity-70">
+                  <p className="text-xs text-foreground/70">
                     💡 Dica: Adicione o QR code em seus flyers, cartões de visita e na recepção da sua escola
                   </p>
                 </div>
@@ -347,8 +347,8 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="text-xl md:text-2xl font-bold text-[#3D2C2E]">Cronograma de Aulas</h4>
-                  <p className="text-sm text-[#3D2C2E] opacity-70 mt-1">{classSchedule.length} aulas disponíveis</p>
+                  <h4 className="text-xl md:text-2xl font-bold text-foreground">Cronograma de Aulas</h4>
+                  <p className="text-sm text-foreground/70 mt-1">{classSchedule.length} aulas disponíveis</p>
                 </div>
               </div>
 
@@ -356,11 +356,11 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
                 {classSchedule.map((classItem) => (
                   <Card
                     key={classItem.id}
-                    className="bg-[#F5F0EB] border-[#E5D6CD] overflow-hidden hover:shadow-md transition-shadow"
+                    className="bg-background border-border overflow-hidden hover:shadow-md transition-shadow"
                   >
                     <div className="flex flex-col sm:flex-row">
                       {/* Imagem da aula */}
-                      <div className="w-full sm:w-40 h-40 sm:h-auto bg-[#E5D6CD] flex-shrink-0 overflow-hidden">
+                      <div className="w-full sm:w-40 h-40 sm:h-auto bg-muted flex-shrink-0 overflow-hidden">
                         <img
                           src={classItem.image || "/placeholder.svg"}
                           alt={classItem.name}
@@ -372,24 +372,24 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
                       <CardContent className="p-4 flex-1 flex flex-col justify-between">
                         <div className="space-y-2">
                           <div>
-                            <h5 className="font-bold text-[#3D2C2E] text-base leading-tight">{classItem.name}</h5>
-                            <p className="text-xs text-[#3D2C2E] opacity-70 mt-0.5">{classItem.level}</p>
+                            <h5 className="font-bold text-foreground text-base leading-tight">{classItem.name}</h5>
+                            <p className="text-xs text-foreground/70 mt-0.5">{classItem.level}</p>
                           </div>
 
                           <div className="space-y-1">
-                            <div className="flex items-center gap-1.5 text-xs text-[#3D2C2E] opacity-80">
+                            <div className="flex items-center gap-1.5 text-xs text-foreground/80">
                               <Calendar className="h-3.5 w-3.5" />
                               <span>{classItem.schedule}</span>
                             </div>
-                            <div className="flex items-center gap-1.5 text-xs text-[#3D2C2E] opacity-80">
+                            <div className="flex items-center gap-1.5 text-xs text-foreground/80">
                               <Clock className="h-3.5 w-3.5" />
                               <span>{classItem.duration}</span>
                             </div>
-                            <div className="flex items-center gap-1.5 text-xs text-[#3D2C2E] opacity-80">
+                            <div className="flex items-center gap-1.5 text-xs text-foreground/80">
                               <MapPin className="h-3.5 w-3.5" />
                               <span>{classItem.location}</span>
                             </div>
-                            <div className="flex items-center gap-1.5 text-xs text-[#3D2C2E] opacity-80">
+                            <div className="flex items-center gap-1.5 text-xs text-foreground/80">
                               <Users className="h-3.5 w-3.5" />
                               <span>
                                 {classItem.students}/{classItem.maxStudents} alunos
@@ -398,11 +398,11 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
                           </div>
                         </div>
 
-                        <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#E5D6CD]">
-                          <p className="text-lg font-bold text-[#3D2C2E]">{classItem.price}</p>
+                        <div className="flex items-center justify-between mt-3 pt-3 border-t border-border">
+                          <p className="text-lg font-bold text-foreground">{classItem.price}</p>
                           <Button
                             size="sm"
-                            className="bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white text-xs px-4 py-1.5 h-auto"
+                            className="bg-primary hover:bg-primary/90 text-primary-foreground text-xs px-4 py-1.5 h-auto"
                           >
                             Ver Detalhes
                           </Button>
@@ -419,11 +419,11 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
 
       {/* CTA section */}
       <div className="text-center space-y-6 py-8">
-        <h2 className="text-2xl md:text-3xl font-bold text-[#3D2C2E]">Pronto Para Começar?</h2>
-        <p className="text-lg text-[#3D2C2E] opacity-80">Junte-se a centenas de instrutores que já estão na Sissone</p>
+        <h2 className="text-2xl md:text-3xl font-bold text-foreground">Pronto Para Começar?</h2>
+        <p className="text-lg text-foreground/80">Junte-se a centenas de instrutores que já estão na Sissone</p>
         <Button
           onClick={onNext}
-          className="w-full md:w-auto md:px-12 bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white font-semibold text-lg py-6"
+          className="w-full md:w-auto md:px-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg py-6"
         >
           Começar Agora
           <ArrowRight className="ml-2 h-5 w-5" />
@@ -439,7 +439,7 @@ function LandingScreen({ onNext }: { onNext: () => void }) {
     >
       <Button
         onClick={onNext}
-        className="bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white font-semibold text-base px-6 py-6 shadow-xl hover:shadow-2xl transition-shadow rounded-full"
+        className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base px-6 py-6 shadow-xl hover:shadow-2xl transition-shadow rounded-full"
       >
         Começar Agora
         <ArrowRight className="ml-2 h-5 w-5" />
@@ -456,42 +456,42 @@ function RegistrationScreen({ onNext, onPrev }: { onNext: () => void; onPrev: ()
         <Button variant="ghost" size="sm" onClick={onPrev} className="p-1">
           <ArrowLeft className="h-4 w-4" />
         </Button>
-        <h2 className="text-xl md:text-2xl font-bold text-[#3D2C2E]">Crie Sua Conta</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-foreground">Crie Sua Conta</h2>
       </div>
 
       <div className="space-y-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-[#3D2C2E]">Nome Completo</label>
-          <Input placeholder="Digite seu nome completo" className="border-[#E5D6CD] focus:border-[#CFB2A8]" />
+          <label className="text-sm font-medium text-foreground">Nome Completo</label>
+          <Input placeholder="Digite seu nome completo" className="border-border focus:border-ring" />
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-[#3D2C2E]">Email</label>
-          <Input type="email" placeholder="Digite seu email" className="border-[#E5D6CD] focus:border-[#CFB2A8]" />
+          <label className="text-sm font-medium text-foreground">Email</label>
+          <Input type="email" placeholder="Digite seu email" className="border-border focus:border-ring" />
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-[#3D2C2E]">Senha</label>
-          <Input type="password" placeholder="Crie uma senha" className="border-[#E5D6CD] focus:border-[#CFB2A8]" />
+          <label className="text-sm font-medium text-foreground">Senha</label>
+          <Input type="password" placeholder="Crie uma senha" className="border-border focus:border-ring" />
         </div>
 
-        <Button onClick={onNext} className="w-full bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white font-semibold">
+        <Button onClick={onNext} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
           Criar Conta
         </Button>
 
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-[#E5D6CD]" />
+            <div className="w-full border-t border-border" />
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="bg-[#F5F0EB] px-2 text-[#3D2C2E] opacity-80">ou</span>
+            <span className="bg-background px-2 text-foreground/80">ou</span>
           </div>
         </div>
 
         <Button
           onClick={onNext}
           variant="outline"
-          className="w-full border-[#E5D6CD] text-[#3D2C2E] hover:bg-[#E5D6CD] bg-transparent"
+          className="w-full border-border text-foreground hover:bg-accent bg-transparent"
         >
           Continuar com Google
         </Button>
@@ -521,29 +521,29 @@ function OnboardingScreen() {
 
   return (
     <div className="max-w-md mx-auto space-y-6 md:space-y-8">
-      <h2 className="text-xl md:text-2xl font-bold text-[#3D2C2E] text-center">Bem-vindo à Sissone!</h2>
+      <h2 className="text-xl md:text-2xl font-bold text-foreground text-center">Bem-vindo à Sissone!</h2>
 
       <div className="text-center">
-        <p className="text-[#3D2C2E] opacity-80">Você está pronto! Veja o que fazer a seguir:</p>
+        <p className="text-foreground/80">Você está pronto! Veja o que fazer a seguir:</p>
       </div>
 
       <div className="space-y-4">
         {steps.map((step, index) => (
-          <Card key={index} className="bg-white border-[#E5D6CD]">
+          <Card key={index} className="bg-card border-border">
             <CardContent className="p-4 flex items-center gap-3">
-              <div className="bg-[#E5D6CD] p-2 rounded-lg">
-                <step.icon className="h-5 w-5 text-[#3D2C2E]" />
+              <div className="bg-muted p-2 rounded-lg">
+                <step.icon className="h-5 w-5 text-foreground" />
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold text-[#3D2C2E]">{step.title}</h3>
-                <p className="text-sm text-[#3D2C2E] opacity-80">{step.description}</p>
+                <h3 className="font-semibold text-foreground">{step.title}</h3>
+                <p className="text-sm text-foreground/80">{step.description}</p>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      <Button asChild className="w-full bg-[#3D2C2E] hover:bg-[#3D2C2E]/90 text-white font-semibold">
+      <Button asChild className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
         <a
           href="https://v0-sissone-wireframes-git-usurio-b-logado-sissone-mvp.vercel.app/"
           target="_blank"

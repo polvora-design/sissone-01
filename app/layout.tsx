@@ -1,12 +1,22 @@
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
+import { Karla, Source_Code_Pro } from 'next/font/google'
 import { GeistMono } from 'geist/font/mono'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
+const karla = Karla({
+  subsets: ['latin'],
+  variable: '--font-sans',
+})
+
+const sourceCodePro = Source_Code_Pro({
+  subsets: ['latin'],
+  variable: '--font-serif',
+})
+
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'Sissone',
+  description: 'For those who want to learn, teach, and live dance.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -33,17 +43,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <style>{`
-html {
-  font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
-  --font-mono: ${GeistMono.variable};
-}
-        `}</style>
-      </head>
-      <body>
+    <html
+      lang="pt-BR"
+      className={`${karla.variable} ${sourceCodePro.variable} ${GeistMono.variable} antialiased`}
+    >
+      <body className="font-sans bg-background text-foreground">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
