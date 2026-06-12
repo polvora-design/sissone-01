@@ -963,10 +963,10 @@ export default function SissoneResponsivePrototype() {
 
   const renderUnitFilter = () => (
     <div className="flex gap-2 mb-4 items-center flex-wrap">
-      <Filter className="w-4 h-4 flex-shrink-0" style={{ color: "#3D2C2E" }} />
+      <Filter className="w-4 h-4 flex-shrink-0" style={{ color: "var(--foreground)" }} />
       <div className="flex-1 min-w-[200px]">
         <Select value={selectedUnit} onValueChange={setSelectedUnit}>
-          <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+          <SelectTrigger style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
             <SelectValue>
               <span className="text-sm">
                 <strong>Unidade:</strong>{" "}
@@ -974,7 +974,7 @@ export default function SissoneResponsivePrototype() {
               </span>
             </SelectValue>
           </SelectTrigger>
-          <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+          <SelectContent style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
             <SelectItem value="all">Todas as Unidades</SelectItem>
             {mockUnits.map((unit) => (
               <SelectItem key={unit.id} value={unit.id}>
@@ -998,9 +998,9 @@ export default function SissoneResponsivePrototype() {
 
         <div
           className="hidden lg:block lg:w-64"
-          style={{ backgroundColor: "#F5F0EB", borderRight: "1px solid #E5D6CD" }}
+          style={{ backgroundColor: "var(--background)", borderRight: "1px solid var(--secondary)" }}
         >
-          <div className="p-6 border-b" style={{ borderColor: "#E5D6CD" }}>
+          <div className="p-6 border-b" style={{ borderColor: "var(--secondary)" }}>
             <div className="flex items-center justify-between">
               <div>
                 <img src="/images/svgexport-1.svg" alt="Sissone" className="h-8" />
@@ -1020,8 +1020,8 @@ export default function SissoneResponsivePrototype() {
                     className={`w-full justify-start h-12 px-4 ${isActive ? "font-medium" : ""}`}
                     onClick={() => navigateTo(item.id as Screen)}
                     style={{
-                      backgroundColor: isActive ? "#CFB2A8" : "transparent",
-                      color: "#3D2C2E",
+                      backgroundColor: isActive ? "var(--primary)" : "transparent",
+                      color: "var(--foreground)",
                     }}
                   >
                     <Icon className="w-5 h-5 mr-3" />
@@ -1032,15 +1032,15 @@ export default function SissoneResponsivePrototype() {
             </div>
           </nav>
 
-          <div className="p-4 border-t" style={{ borderColor: "#E5D6CD" }}>
-            <h3 className="text-sm font-semibold mb-3" style={{ color: "#3D2C2E" }}>
+          <div className="p-4 border-t" style={{ borderColor: "var(--secondary)" }}>
+            <h3 className="text-sm font-semibold mb-3" style={{ color: "var(--foreground)" }}>
               Ações Rápidas
             </h3>
             <div className="space-y-2">
               <Button
                 variant="outline"
                 className="w-full justify-start h-10 px-3 text-sm"
-                style={{ borderColor: "#CFB2A8", color: "#3D2C2E", backgroundColor: "transparent" }}
+                style={{ borderColor: "var(--primary)", color: "var(--foreground)", backgroundColor: "transparent" }}
                 onClick={() => navigateTo("create-class")}
               >
                 <Plus className="w-4 h-4 mr-2" />
@@ -1049,7 +1049,7 @@ export default function SissoneResponsivePrototype() {
               <Button
                 variant="outline"
                 className="w-full justify-start h-10 px-3 text-sm"
-                style={{ borderColor: "#CFB2A8", color: "#3D2C2E", backgroundColor: "transparent" }}
+                style={{ borderColor: "var(--primary)", color: "var(--foreground)", backgroundColor: "transparent" }}
                 onClick={() => setShowInviteModal(true)}
               >
                 <UserPlus className="w-4 h-4 mr-2" />
@@ -1058,7 +1058,7 @@ export default function SissoneResponsivePrototype() {
               <Button
                 variant="outline"
                 className="w-full justify-start h-10 px-3 text-sm"
-                style={{ borderColor: "#CFB2A8", color: "#3D2C2E", backgroundColor: "transparent" }}
+                style={{ borderColor: "var(--primary)", color: "var(--foreground)", backgroundColor: "transparent" }}
                 onClick={() => {
                   setEditingUnit(null)
                   setUnitForm({ name: "", address: "", phone: "", email: "", description: "" })
@@ -1071,7 +1071,7 @@ export default function SissoneResponsivePrototype() {
               <Button
                 variant="outline"
                 className="w-full justify-start h-10 px-3 text-sm"
-                style={{ borderColor: "#CFB2A8", color: "#3D2C2E", backgroundColor: "transparent" }}
+                style={{ borderColor: "var(--primary)", color: "var(--foreground)", backgroundColor: "transparent" }}
                 onClick={() => setShowShareLinkModal(true)}
               >
                 <Share2 className="w-4 h-4 mr-2" />
@@ -1081,31 +1081,31 @@ export default function SissoneResponsivePrototype() {
           </div>
 
           <div className="p-4 mt-4">
-            <h3 className="text-sm font-semibold mb-3" style={{ color: "#3D2C2E" }}>
+            <h3 className="text-sm font-semibold mb-3" style={{ color: "var(--foreground)" }}>
               Resumo Rápido
             </h3>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-xs" style={{ color: "#3D2C2E" }}>
+                <span className="text-xs" style={{ color: "var(--foreground)" }}>
                   Aulas Ativas
                 </span>
-                <span className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
+                <span className="text-sm font-bold" style={{ color: "var(--foreground)" }}>
                   {totalStats.classes}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-xs" style={{ color: "#3D2C2E" }}>
+                <span className="text-xs" style={{ color: "var(--foreground)" }}>
                   Total de Alunos
                 </span>
-                <span className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
+                <span className="text-sm font-bold" style={{ color: "var(--foreground)" }}>
                   {totalStats.students}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-xs" style={{ color: "#3D2C2E" }}>
+                <span className="text-xs" style={{ color: "var(--foreground)" }}>
                   Avaliação
                 </span>
-                <span className="text-sm font-bold" style={{ color: "#3D2C2E" }}>
+                <span className="text-sm font-bold" style={{ color: "var(--foreground)" }}>
                   {totalStats.rating}
                 </span>
               </div>
@@ -1117,14 +1117,14 @@ export default function SissoneResponsivePrototype() {
   }
 
   const renderHeader = (title: string, showBack = true) => (
-    <div className="flex items-center justify-between p-4 lg:p-6 border-b" style={{ borderColor: "#E5D6CD" }}>
+    <div className="flex items-center justify-between p-4 lg:p-6 border-b" style={{ borderColor: "var(--secondary)" }}>
       <div className="flex items-center gap-4">
         {showBack && (
           <Button variant="ghost" size="sm" onClick={() => navigateTo("dashboard")} className="lg:hidden">
-            <ArrowLeft className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+            <ArrowLeft className="w-4 h-4" style={{ color: "var(--foreground)" }} />
           </Button>
         )}
-        <h1 className="text-lg lg:text-2xl font-semibold" style={{ color: "#3D2C2E" }}>
+        <h1 className="text-lg lg:text-2xl font-semibold" style={{ color: "var(--foreground)" }}>
           {title}
         </h1>
       </div>
@@ -1135,7 +1135,7 @@ export default function SissoneResponsivePrototype() {
           target="_blank"
           rel="noopener noreferrer"
           className="hidden lg:block text-sm hover:opacity-80 transition-opacity"
-          style={{ color: "#3D2C2E" }}
+          style={{ color: "var(--foreground)" }}
         >
           Meu perfil de Aluno
         </a>
@@ -1144,13 +1144,13 @@ export default function SissoneResponsivePrototype() {
           className="flex items-center gap-2 lg:gap-3 hover:opacity-80 transition-opacity"
         >
           <div className="hidden lg:block text-right">
-            <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+            <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
               {userProfile.name}
             </p>
           </div>
-          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full flex-shrink-0" style={{ backgroundColor: "#CFB2A8" }}>
+          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full flex-shrink-0" style={{ backgroundColor: "var(--primary)" }}>
             <div className="flex items-center justify-center h-full">
-              <User className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#3D2C2E" }} />
+              <User className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "var(--foreground)" }} />
             </div>
           </div>
         </button>
@@ -1164,75 +1164,72 @@ export default function SissoneResponsivePrototype() {
     return (
       <div className="p-4 lg:p-6 pb-24 lg:pb-6">
         <div className="hidden lg:block mb-8">
-          <h2 className="text-xl font-semibold mb-2" style={{ color: "#3D2C2E" }}>
+          <h2 className="text-xl font-semibold mb-2" style={{ color: "var(--foreground)" }}>
             Bem-vindo de volta, Gestor!
           </h2>
-          <p className="text-sm" style={{ color: "#3D2C2E" }}>
+          <p className="text-sm" style={{ color: "var(--foreground)" }}>
             Aproveite os nossos dados para tomar as melhores decisões!
           </p>
         </div>
 
         <div className="mb-8">
-          <h2 className="text-lg lg:text-xl font-semibold mb-4" style={{ color: "#3D2C2E" }}>
+          <h2 className="text-base font-semibold mb-4" style={{ color: "var(--foreground)" }}>
             Unidades
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {mockUnits
               .sort((a, b) => b.rating - a.rating)
               .map((unit, index) => (
                 <Card
                   key={unit.id}
-                  style={{ backgroundColor: "#E5D6CD" }}
-                  className="hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer"
-                  onClick={() => {
-                    navigateTo("school-units")
-                  }}
+                  style={{ backgroundColor: "var(--secondary)" }}
+                  className="hover:shadow-md transition-shadow"
                 >
-                  <CardContent className="p-5 lg:p-6">
-                    <div className="flex items-center gap-4 mb-4">
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3 mb-3">
                       <div
-                        className="flex items-center justify-center w-12 h-12 lg:w-14 lg:h-14 rounded-full flex-shrink-0"
-                        style={{ backgroundColor: index === 0 ? "#CFB2A8" : "#F5F0EB" }}
+                        className="flex items-center justify-center w-8 h-8 rounded-full flex-shrink-0"
+                        style={{ backgroundColor: index === 0 ? "var(--primary)" : "var(--background)" }}
                       >
                         {index === 0 ? (
-                          <Trophy className="w-6 h-6 lg:w-7 lg:h-7" style={{ color: "#3D2C2E" }} />
+                          <Trophy className="w-4 h-4" style={{ color: "var(--foreground)" }} />
                         ) : (
-                          <span className="text-lg lg:text-xl font-bold" style={{ color: "#3D2C2E" }}>
+                          <span className="text-sm font-bold" style={{ color: "var(--foreground)" }}>
                             {index + 1}
                           </span>
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-base lg:text-lg font-semibold truncate" style={{ color: "#3D2C2E" }}>
+                        <h3 className="text-sm font-medium truncate" style={{ color: "var(--foreground)" }}>
                           {unit.name}
                         </h3>
-                        <p className="text-sm truncate" style={{ color: "#3D2C2E", opacity: 0.8 }}>
+                        <p className="text-xs truncate" style={{ color: "var(--foreground)" }}>
                           {unit.address}
                         </p>
                       </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-3 text-center pt-3 border-t" style={{ borderColor: "#CFB2A8" }}>
+                    <div className="grid grid-cols-3 gap-2 text-center">
                       <div>
-                        <div className="text-lg lg:text-xl font-bold" style={{ color: "#3D2C2E" }}>
+                        <div className="text-sm font-bold" style={{ color: "var(--foreground)" }}>
                           {unit.rating}
                         </div>
-                        <div className="text-xs lg:text-sm" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                        <div className="text-xs" style={{ color: "var(--foreground)" }}>
                           Rating
                         </div>
                       </div>
                       <div>
-                        <div className="text-lg lg:text-xl font-bold" style={{ color: "#3D2C2E" }}>
+                        <div className="text-sm font-bold" style={{ color: "var(--foreground)" }}>
                           {unit.students}
                         </div>
-                        <div className="text-xs lg:text-sm" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                        <div className="text-xs" style={{ color: "var(--foreground)" }}>
                           Alunos
                         </div>
                       </div>
                       <div>
-                        <div className="text-lg lg:text-xl font-bold" style={{ color: "#3D2C2E" }}>
+                        <div className="text-sm font-bold" style={{ color: "var(--foreground)" }}>
                           R${unit.revenue}
                         </div>
-                        <div className="text-xs lg:text-sm" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                        <div className="text-xs" style={{ color: "var(--foreground)" }}>
                           Receita
                         </div>
                       </div>
@@ -1246,42 +1243,42 @@ export default function SissoneResponsivePrototype() {
         {renderUnitFilter()}
 
         <div className="grid grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-6 mb-6 lg:mb-8">
-          <Card style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-shadow">
+          <Card style={{ backgroundColor: "var(--secondary)" }} className="hover:shadow-md transition-shadow">
             <CardContent className="p-3 lg:p-6 text-center">
-              <div className="text-lg lg:text-3xl font-bold" style={{ color: "#3D2C2E" }}>
+              <div className="text-lg lg:text-3xl font-bold" style={{ color: "var(--foreground)" }}>
                 {stats.classes}
               </div>
-              <div className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
+              <div className="text-xs lg:text-sm" style={{ color: "var(--foreground)" }}>
                 Aulas Ativas
               </div>
             </CardContent>
           </Card>
-          <Card style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-shadow">
+          <Card style={{ backgroundColor: "var(--secondary)" }} className="hover:shadow-md transition-shadow">
             <CardContent className="p-3 lg:p-6 text-center">
-              <div className="text-lg lg:text-3xl font-bold" style={{ color: "#3D2C2E" }}>
+              <div className="text-lg lg:text-3xl font-bold" style={{ color: "var(--foreground)" }}>
                 {stats.students}
               </div>
-              <div className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
+              <div className="text-xs lg:text-sm" style={{ color: "var(--foreground)" }}>
                 Alunos
               </div>
             </CardContent>
           </Card>
-          <Card style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-shadow">
+          <Card style={{ backgroundColor: "var(--secondary)" }} className="hover:shadow-md transition-shadow">
             <CardContent className="p-3 lg:p-6 text-center">
-              <div className="text-lg lg:text-3xl font-bold" style={{ color: "#3D2C2E" }}>
+              <div className="text-lg lg:text-3xl font-bold" style={{ color: "var(--foreground)" }}>
                 {stats.rating}
               </div>
-              <div className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
+              <div className="text-xs lg:text-sm" style={{ color: "var(--foreground)" }}>
                 Avaliação
               </div>
             </CardContent>
           </Card>
-          <Card style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-shadow hidden lg:block">
+          <Card style={{ backgroundColor: "var(--secondary)" }} className="hover:shadow-md transition-shadow hidden lg:block">
             <CardContent className="p-6 text-center">
-              <div className="text-3xl font-bold" style={{ color: "#3D2C2E" }}>
+              <div className="text-3xl font-bold" style={{ color: "var(--foreground)" }}>
                 R$ {stats.revenue}
               </div>
-              <div className="text-sm" style={{ color: "#3D2C2E" }}>
+              <div className="text-sm" style={{ color: "var(--foreground)" }}>
                 Este Mês
               </div>
             </CardContent>
@@ -1289,9 +1286,9 @@ export default function SissoneResponsivePrototype() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-6">
-          <Card style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-shadow">
+          <Card style={{ backgroundColor: "var(--secondary)" }} className="hover:shadow-md transition-shadow">
             <CardHeader>
-              <CardTitle className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+              <CardTitle className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                 Dias mais movimentados
               </CardTitle>
             </CardHeader>
@@ -1303,13 +1300,13 @@ export default function SissoneResponsivePrototype() {
                     className="flex-1 rounded-t transition-all hover:opacity-80"
                     style={{
                       height: `${height}%`,
-                      backgroundColor: "#CFB2A8",
+                      backgroundColor: "var(--primary)",
                       minHeight: "8px",
                     }}
                   />
                 ))}
               </div>
-              <div className="flex justify-between mt-2 text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
+              <div className="flex justify-between mt-2 text-xs lg:text-sm" style={{ color: "var(--foreground)" }}>
                 <span>Seg</span>
                 <span>Ter</span>
                 <span>Qua</span>
@@ -1321,9 +1318,9 @@ export default function SissoneResponsivePrototype() {
             </CardContent>
           </Card>
 
-          <Card style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-shadow">
+          <Card style={{ backgroundColor: "var(--secondary)" }} className="hover:shadow-md transition-shadow">
             <CardHeader>
-              <CardTitle className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+              <CardTitle className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                 Avaliações Recentes
               </CardTitle>
             </CardHeader>
@@ -1345,25 +1342,25 @@ export default function SissoneResponsivePrototype() {
                   unit: selectedUnit === "all" ? "Unidade Norte" : "",
                 },
               ].map((feedback, i) => (
-                <div key={i} className="border-b pb-2 lg:pb-3" style={{ borderColor: "#CFB2A8" }}>
+                <div key={i} className="border-b pb-2 lg:pb-3" style={{ borderColor: "var(--primary)" }}>
                   <div className="flex items-center gap-1 mb-1">
                     {[...Array(5)].map((_, starIdx) => (
                       <Star
                         key={starIdx}
                         className="w-3 h-3 lg:w-4 lg:h-4"
                         style={{
-                          color: starIdx < feedback.rating ? "#CFB2A8" : "#E5D6CD",
-                          fill: starIdx < feedback.rating ? "#CFB2A8" : "none",
+                          color: starIdx < feedback.rating ? "var(--primary)" : "var(--secondary)",
+                          fill: starIdx < feedback.rating ? "var(--primary)" : "none",
                         }}
                       />
                     ))}
                     {feedback.unit && (
-                      <span className="text-xs ml-2" style={{ color: "#CFB2A8" }}>
+                      <span className="text-xs ml-2" style={{ color: "var(--primary)" }}>
                         {feedback.unit}
                       </span>
                     )}
                   </div>
-                  <p className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
+                  <p className="text-xs lg:text-sm" style={{ color: "var(--foreground)" }}>
                     {feedback.comment}
                   </p>
                 </div>
@@ -1374,7 +1371,7 @@ export default function SissoneResponsivePrototype() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           <div className="lg:col-span-1">
-            <h2 className="text-sm lg:text-base font-semibold mb-3 lg:mb-4" style={{ color: "#3D2C2E" }}>
+            <h2 className="text-sm lg:text-base font-semibold mb-3 lg:mb-4" style={{ color: "var(--foreground)" }}>
               Ações Rápidas
             </h2>
             <div className="grid grid-cols-2 lg:grid-cols-1 gap-3">
@@ -1382,10 +1379,10 @@ export default function SissoneResponsivePrototype() {
                 variant="outline"
                 className="h-16 lg:h-20 flex flex-col gap-1 bg-transparent hover:shadow-md transition-all"
                 onClick={() => navigateTo("create-class")}
-                style={{ borderColor: "#CFB2A8", backgroundColor: "#F5F0EB" }}
+                style={{ borderColor: "var(--primary)", backgroundColor: "var(--background)" }}
               >
-                <Plus className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: "#3D2C2E" }} />
-                <span className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
+                <Plus className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: "var(--foreground)" }} />
+                <span className="text-xs lg:text-sm" style={{ color: "var(--foreground)" }}>
                   Nova Aula
                 </span>
               </Button>
@@ -1393,10 +1390,10 @@ export default function SissoneResponsivePrototype() {
                 variant="outline"
                 className="h-16 lg:h-20 flex flex-col gap-1 bg-transparent hover:shadow-md transition-all"
                 onClick={() => navigateTo("invite-student")}
-                style={{ borderColor: "#CFB2A8", backgroundColor: "#F5F0EB" }}
+                style={{ borderColor: "var(--primary)", backgroundColor: "var(--background)" }}
               >
-                <UserPlus className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: "#3D2C2E" }} />
-                <span className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
+                <UserPlus className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: "var(--foreground)" }} />
+                <span className="text-xs lg:text-sm" style={{ color: "var(--foreground)" }}>
                   Cadastrar Aluno
                 </span>
               </Button>
@@ -1404,10 +1401,10 @@ export default function SissoneResponsivePrototype() {
                 variant="outline"
                 className="h-16 lg:h-20 flex flex-col gap-1 bg-transparent hover:shadow-md transition-all"
                 onClick={() => setShowShareLinkModal(true)}
-                style={{ borderColor: "#CFB2A8", backgroundColor: "#F5F0EB" }}
+                style={{ borderColor: "var(--primary)", backgroundColor: "var(--background)" }}
               >
-                <Share2 className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: "#3D2C2E" }} />
-                <span className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
+                <Share2 className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: "var(--foreground)" }} />
+                <span className="text-xs lg:text-sm" style={{ color: "var(--foreground)" }}>
                   Compartilhar Escola
                 </span>
               </Button>
@@ -1415,14 +1412,14 @@ export default function SissoneResponsivePrototype() {
           </div>
 
           <div className="lg:col-span-2">
-            <h2 className="text-sm lg:text-base font-semibold mb-3 lg:mb-4" style={{ color: "#3D2C2E" }}>
+            <h2 className="text-sm lg:text-base font-semibold mb-3 lg:mb-4" style={{ color: "var(--foreground)" }}>
               Aulas Recentes
             </h2>
             <div className="space-y-3 lg:space-y-4">
               {mockClasses.slice(0, 3).map((classItem) => (
                 <Card
                   key={classItem.id}
-                  style={{ backgroundColor: "#E5D6CD" }}
+                  style={{ backgroundColor: "var(--secondary)" }}
                   className="hover:shadow-md transition-shadow cursor-pointer hover:scale-[1.01]"
                   onClick={() => {
                     setClassData({
@@ -1447,14 +1444,14 @@ export default function SissoneResponsivePrototype() {
                   <CardContent className="p-3 lg:p-4">
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
-                        <h3 className="text-sm lg:text-base font-medium" style={{ color: "#3D2C2E" }}>
+                        <h3 className="text-sm lg:text-base font-medium" style={{ color: "var(--foreground)" }}>
                           {classItem.title}
                         </h3>
                         <div className="flex flex-col lg:flex-row lg:items-center lg:gap-4 mt-1">
-                          <p className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
+                          <p className="text-xs lg:text-sm" style={{ color: "var(--foreground)" }}>
                             {selectedUnit === "all" ? classItem.unitName : `${classItem.time}`}
                           </p>
-                          <p className="text-xs lg:text-sm" style={{ color: "#3D2C2E" }}>
+                          <p className="text-xs lg:text-sm" style={{ color: "var(--foreground)" }}>
                             {classItem.enrolled} alunos inscritos
                           </p>
                         </div>
@@ -1476,16 +1473,16 @@ export default function SissoneResponsivePrototype() {
         <div className="max-w-6xl mx-auto space-y-8">
           {/* School Profile Section */}
           <div>
-            <h2 className="text-lg lg:text-xl font-semibold mb-4" style={{ color: "#3D2C2E" }}>
+            <h2 className="text-lg lg:text-xl font-semibold mb-4" style={{ color: "var(--foreground)" }}>
               Perfil da Escola
             </h2>
-            <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <Card style={{ backgroundColor: "var(--secondary)" }}>
               <CardContent className="p-6">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   <div className="text-center">
-                    <div className="w-32 h-32 mx-auto rounded-full mb-3" style={{ backgroundColor: "#CFB2A8" }}>
+                    <div className="w-32 h-32 mx-auto rounded-full mb-3" style={{ backgroundColor: "var(--primary)" }}>
                       <div className="flex items-center justify-center h-full">
-                        <Building2 className="w-12 h-12" style={{ color: "#3D2C2E" }} />
+                        <Building2 className="w-12 h-12" style={{ color: "var(--foreground)" }} />
                       </div>
                     </div>
                     <Button
@@ -1494,24 +1491,24 @@ export default function SissoneResponsivePrototype() {
                       className="hover:bg-white/50"
                       onClick={() => showToast("Logo atualizado com sucesso!")}
                     >
-                      <span style={{ color: "#CFB2A8" }}>Alterar Logo</span>
+                      <span style={{ color: "var(--primary)" }}>Alterar Logo</span>
                     </Button>
                   </div>
 
                   <div className="lg:col-span-2 space-y-4">
                     <div>
-                      <Label htmlFor="school-name" className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                      <Label htmlFor="school-name" className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                         Nome da Escola
                       </Label>
                       <Input
                         id="school-name"
                         placeholder="Sissone Dance Studio"
                         className="mt-1"
-                        style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                        style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                       />
                     </div>
                     <div>
-                      <Label htmlFor="school-photos" className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                      <Label htmlFor="school-photos" className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                         Galeria de Fotos
                       </Label>
                       <div className="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
@@ -1523,7 +1520,7 @@ export default function SissoneResponsivePrototype() {
                           <div
                             key={index}
                             className="relative aspect-square rounded-lg overflow-hidden group"
-                            style={{ backgroundColor: "#CFB2A8" }}
+                            style={{ backgroundColor: "var(--primary)" }}
                           >
                             <img
                               src={photo}
@@ -1545,11 +1542,11 @@ export default function SissoneResponsivePrototype() {
                         <Button
                           variant="outline"
                           className="aspect-square flex flex-col items-center justify-center gap-2 bg-transparent"
-                          style={{ borderColor: "#CFB2A8", borderStyle: "dashed" }}
+                          style={{ borderColor: "var(--primary)", borderStyle: "dashed" }}
                           onClick={() => showToast("Foto adicionada com sucesso!")}
                         >
-                          <Upload className="w-6 h-6" style={{ color: "#3D2C2E" }} />
-                          <span className="text-xs" style={{ color: "#3D2C2E" }}>
+                          <Upload className="w-6 h-6" style={{ color: "var(--foreground)" }} />
+                          <span className="text-xs" style={{ color: "var(--foreground)" }}>
                             Adicionar
                           </span>
                         </Button>
@@ -1557,7 +1554,7 @@ export default function SissoneResponsivePrototype() {
                     </div>
                     <Button
                       className="w-full"
-                      style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                      style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
                       onClick={() => showToast("Perfil da escola salvo com sucesso!")}
                     >
                       Salvar Perfil da Escola
@@ -1569,19 +1566,19 @@ export default function SissoneResponsivePrototype() {
           </div>
 
           <div>
-            <h2 className="text-lg lg:text-xl font-semibold mb-4" style={{ color: "#3D2C2E" }}>
+            <h2 className="text-lg lg:text-xl font-semibold mb-4" style={{ color: "var(--foreground)" }}>
               Link da Página da Escola
             </h2>
-            <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <Card style={{ backgroundColor: "var(--secondary)" }}>
               <CardContent className="p-6">
-                <p className="text-sm mb-4" style={{ color: "#3D2C2E" }}>
+                <p className="text-sm mb-4" style={{ color: "var(--foreground)" }}>
                   Compartilhe o link único da sua escola em redes sociais, materiais de marketing e com potenciais
                   alunos.
                 </p>
 
                 <div className="flex flex-col lg:flex-row gap-4">
                   <div className="flex-1">
-                    <Label className="text-sm font-medium mb-2 block" style={{ color: "#3D2C2E" }}>
+                    <Label className="text-sm font-medium mb-2 block" style={{ color: "var(--foreground)" }}>
                       Link da Escola
                     </Label>
                     <div className="flex gap-2">
@@ -1589,11 +1586,11 @@ export default function SissoneResponsivePrototype() {
                         value={schoolLink}
                         readOnly
                         className="flex-1"
-                        style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD", color: "#3D2C2E" }}
+                        style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)", color: "var(--foreground)" }}
                       />
                       <Button
                         onClick={copySchoolLink}
-                        style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                        style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
                         className="flex-shrink-0"
                       >
                         <Copy className="w-4 h-4 mr-2" />
@@ -1603,14 +1600,14 @@ export default function SissoneResponsivePrototype() {
                   </div>
 
                   <div className="text-center lg:text-left">
-                    <Label className="text-sm font-medium mb-2 block" style={{ color: "#3D2C2E" }}>
+                    <Label className="text-sm font-medium mb-2 block" style={{ color: "var(--foreground)" }}>
                       QR Code
                     </Label>
                     <Button
                       onClick={() => setShowShareLinkModal(true)}
                       variant="outline"
                       className="bg-transparent"
-                      style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                      style={{ borderColor: "var(--primary)", color: "var(--foreground)" }}
                     >
                       <QrCode className="w-4 h-4 mr-2" />
                       Ver QR Code
@@ -1624,13 +1621,13 @@ export default function SissoneResponsivePrototype() {
           {/* Units Section */}
           <div>
             <div className="flex items-center justify-between mb-4 gap-2">
-              <h2 className="text-lg lg:text-xl font-semibold" style={{ color: "#3D2C2E" }}>
+              <h2 className="text-lg lg:text-xl font-semibold" style={{ color: "var(--foreground)" }}>
                 Unidades
               </h2>
               <Button
                 className="flex-shrink-0"
                 onClick={() => openUnitModal()}
-                style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
               >
                 <Plus className="w-4 h-4 mr-2" />
                 <span className="hidden sm:inline">Criar Unidade</span>
@@ -1642,14 +1639,14 @@ export default function SissoneResponsivePrototype() {
             <div className="relative mb-4">
               <Search
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4"
-                style={{ color: "#3D2C2E" }}
+                style={{ color: "var(--foreground)" }}
               />
               <Input
                 placeholder="Buscar unidades..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
-                style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
               />
             </div>
 
@@ -1658,23 +1655,23 @@ export default function SissoneResponsivePrototype() {
               {mockUnits.map((unit) => (
                 <Card
                   key={unit.id}
-                  style={{ backgroundColor: "#E5D6CD" }}
+                  style={{ backgroundColor: "var(--secondary)" }}
                   className="hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer"
                   onClick={() => openUnitModal(unit)}
                 >
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-full" style={{ backgroundColor: "#CFB2A8" }}>
+                        <div className="w-12 h-12 rounded-full" style={{ backgroundColor: "var(--primary)" }}>
                           <div className="flex items-center justify-center h-full">
-                            <Building2 className="w-6 h-6" style={{ color: "#3D2C2E" }} />
+                            <Building2 className="w-6 h-6" style={{ color: "var(--foreground)" }} />
                           </div>
                         </div>
                         <div>
-                          <h3 className="text-base font-semibold" style={{ color: "#3D2C2E" }}>
+                          <h3 className="text-base font-semibold" style={{ color: "var(--foreground)" }}>
                             {unit.name}
                           </h3>
-                          <p className="text-xs" style={{ color: "#3D2C2E" }}>
+                          <p className="text-xs" style={{ color: "var(--foreground)" }}>
                             {unit.address}
                           </p>
                         </div>
@@ -1689,8 +1686,8 @@ export default function SissoneResponsivePrototype() {
                           openUnitModal(unit)
                         }}
                       >
-                        <Edit className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
-                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Editar</span>
+                        <Edit className="w-4 h-4 mr-1" style={{ color: "var(--foreground)" }} />
+                        <span className="text-xs" style={{ color: "var(--foreground)" }}>Editar</span>
                       </Button>
                       <Button
                         size="sm"
@@ -1701,46 +1698,46 @@ export default function SissoneResponsivePrototype() {
                           showToast("Unidade excluída com sucesso!")
                         }}
                       >
-                        <Trash2 className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
-                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Excluir</span>
+                        <Trash2 className="w-4 h-4 mr-1" style={{ color: "var(--foreground)" }} />
+                        <span className="text-xs" style={{ color: "var(--foreground)" }}>Excluir</span>
                       </Button>
                       </div>
                     </div>
 
                     <div className="space-y-2 mb-4">
-                      <p className="text-sm" style={{ color: "#3D2C2E" }}>
+                      <p className="text-sm" style={{ color: "var(--foreground)" }}>
                         <strong>Telefone:</strong> {unit.phone}
                       </p>
-                      <p className="text-sm" style={{ color: "#3D2C2E" }}>
+                      <p className="text-sm" style={{ color: "var(--foreground)" }}>
                         <strong>Email:</strong> {unit.email}
                       </p>
-                      <p className="text-sm" style={{ color: "#3D2C2E" }}>
+                      <p className="text-sm" style={{ color: "var(--foreground)" }}>
                         {unit.description}
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-3 pt-3 border-t" style={{ borderColor: "#CFB2A8" }}>
+                    <div className="grid grid-cols-3 gap-3 pt-3 border-t" style={{ borderColor: "var(--primary)" }}>
                       <div className="text-center">
-                        <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                        <div className="text-lg font-bold" style={{ color: "var(--foreground)" }}>
                           {unit.rating}
                         </div>
-                        <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                        <div className="text-xs" style={{ color: "var(--foreground)" }}>
                           Rating
                         </div>
                       </div>
                       <div className="text-center">
-                        <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                        <div className="text-lg font-bold" style={{ color: "var(--foreground)" }}>
                           {unit.students}
                         </div>
-                        <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                        <div className="text-xs" style={{ color: "var(--foreground)" }}>
                           Alunos
                         </div>
                       </div>
                       <div className="text-center">
-                        <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                        <div className="text-lg font-bold" style={{ color: "var(--foreground)" }}>
                           R${unit.revenue}
                         </div>
-                        <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                        <div className="text-xs" style={{ color: "var(--foreground)" }}>
                           Receita
                         </div>
                       </div>
@@ -1755,15 +1752,15 @@ export default function SissoneResponsivePrototype() {
 
       {showUnitModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto" style={{ backgroundColor: "#E5D6CD" }}>
+          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto" style={{ backgroundColor: "var(--secondary)" }}>
             <CardHeader>
-              <CardTitle style={{ color: "#3D2C2E" }}>
+              <CardTitle style={{ color: "var(--foreground)" }}>
                 {editingUnit ? "Editar Unidade" : "Criar Nova Unidade"}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <Label htmlFor="unit-name" className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                <Label htmlFor="unit-name" className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                   Nome da Unidade *
                 </Label>
                 <Input
@@ -1772,12 +1769,12 @@ export default function SissoneResponsivePrototype() {
                   value={unitFormData.name}
                   onChange={(e) => setUnitFormData({ ...unitFormData, name: e.target.value })}
                   className="mt-1"
-                  style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                  style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                 />
               </div>
 
               <div>
-                <Label htmlFor="unit-address" className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                <Label htmlFor="unit-address" className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                   Endereço *
                 </Label>
                 <Input
@@ -1786,13 +1783,13 @@ export default function SissoneResponsivePrototype() {
                   value={unitFormData.address}
                   onChange={(e) => setUnitFormData({ ...unitFormData, address: e.target.value })}
                   className="mt-1"
-                  style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                  style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="unit-phone" className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                  <Label htmlFor="unit-phone" className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                     Telefone *
                   </Label>
                   <Input
@@ -1801,12 +1798,12 @@ export default function SissoneResponsivePrototype() {
                     value={unitFormData.phone}
                     onChange={(e) => setUnitFormData({ ...unitFormData, phone: e.target.value })}
                     className="mt-1"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="unit-email" className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                  <Label htmlFor="unit-email" className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                     Email *
                   </Label>
                   <Input
@@ -1816,13 +1813,13 @@ export default function SissoneResponsivePrototype() {
                     value={unitFormData.email}
                     onChange={(e) => setUnitFormData({ ...unitFormData, email: e.target.value })}
                     className="mt-1"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                   />
                 </div>
               </div>
 
               <div>
-                <Label htmlFor="unit-description" className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                <Label htmlFor="unit-description" className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                   Descrição
                 </Label>
                 <textarea
@@ -1831,7 +1828,7 @@ export default function SissoneResponsivePrototype() {
                   value={unitFormData.description}
                   onChange={(e) => setUnitFormData({ ...unitFormData, description: e.target.value })}
                   className="mt-1 w-full min-h-[100px] p-3 rounded-md border text-sm"
-                  style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD", color: "#3D2C2E" }}
+                  style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)", color: "var(--foreground)" }}
                 />
               </div>
 
@@ -1840,7 +1837,7 @@ export default function SissoneResponsivePrototype() {
                   variant="outline"
                   className="flex-1 bg-transparent"
                   onClick={closeUnitModal}
-                  style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                  style={{ borderColor: "var(--primary)", color: "var(--foreground)" }}
                 >
                   Cancelar
                 </Button>
@@ -1848,7 +1845,7 @@ export default function SissoneResponsivePrototype() {
                   className="flex-1"
                   onClick={saveUnit}
                   disabled={!unitFormData.name || !unitFormData.address || !unitFormData.phone || !unitFormData.email}
-                  style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                  style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
                 >
                   {editingUnit ? "Salvar Alterações" : "Criar Unidade"}
                 </Button>
@@ -1867,12 +1864,12 @@ export default function SissoneResponsivePrototype() {
       <div className="p-4 lg:p-6 pb-24 lg:pb-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-6 gap-2">
-            <h2 className="text-lg lg:text-xl font-semibold" style={{ color: "#3D2C2E" }}>
+            <h2 className="text-lg lg:text-xl font-semibold" style={{ color: "var(--foreground)" }}>
               Gerenciar Aulas
             </h2>
             <Button
               className="flex-shrink-0"
-              style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+              style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
               onClick={() => navigateTo("create-class")}
             >
               <Plus className="w-4 h-4 mr-2" />
@@ -1883,48 +1880,48 @@ export default function SissoneResponsivePrototype() {
 
           {/* Quick Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <Card style={{ backgroundColor: "var(--secondary)" }}>
               <CardContent className="p-4 text-center">
                 <div className="flex items-center justify-center gap-2 mb-1">
-                  <TrendingUp className="w-4 h-4" style={{ color: "#CFB2A8" }} />
-                  <span className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                  <TrendingUp className="w-4 h-4" style={{ color: "var(--primary)" }} />
+                  <span className="text-lg font-bold" style={{ color: "var(--foreground)" }}>
                     Jazz Avançado
                   </span>
                 </div>
-                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                <div className="text-xs" style={{ color: "var(--foreground)" }}>
                   Aula Mais Cheia
                 </div>
               </CardContent>
             </Card>
-            <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <Card style={{ backgroundColor: "var(--secondary)" }}>
               <CardContent className="p-4 text-center">
                 <div className="flex items-center justify-center gap-2 mb-1">
-                  <TrendingDown className="w-4 h-4" style={{ color: "#CFB2A8" }} />
-                  <span className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                  <TrendingDown className="w-4 h-4" style={{ color: "var(--primary)" }} />
+                  <span className="text-lg font-bold" style={{ color: "var(--foreground)" }}>
                     Hip Hop Kids
                   </span>
                 </div>
-                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                <div className="text-xs" style={{ color: "var(--foreground)" }}>
                   Aula Mais Vazia
                 </div>
               </CardContent>
             </Card>
-            <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <Card style={{ backgroundColor: "var(--secondary)" }}>
               <CardContent className="p-4 text-center">
-                <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                <div className="text-lg font-bold" style={{ color: "var(--foreground)" }}>
                   Ballet Iniciante
                 </div>
-                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                <div className="text-xs" style={{ color: "var(--foreground)" }}>
                   Próxima Aula
                 </div>
               </CardContent>
             </Card>
-            <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <Card style={{ backgroundColor: "var(--secondary)" }}>
               <CardContent className="p-4 text-center">
-                <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                <div className="text-lg font-bold" style={{ color: "var(--foreground)" }}>
                   Jazz Avançado
                 </div>
-                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                <div className="text-xs" style={{ color: "var(--foreground)" }}>
                   Última Aula
                 </div>
               </CardContent>
@@ -1935,19 +1932,19 @@ export default function SissoneResponsivePrototype() {
             <div className="relative">
               <Search
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4"
-                style={{ color: "#3D2C2E" }}
+                style={{ color: "var(--foreground)" }}
               />
               <Input
                 placeholder="Buscar aulas..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
-                style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
               />
             </div>
 
             <Select value={classUnitFilter} onValueChange={setClassUnitFilter}>
-              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectTrigger style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 <SelectValue>
                   <span className="text-sm">
                     Unidade:{" "}
@@ -1955,7 +1952,7 @@ export default function SissoneResponsivePrototype() {
                   </span>
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectContent style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 <SelectItem value="all">Todas as Unidades</SelectItem>
                 {mockUnits.map((unit) => (
                   <SelectItem key={unit.id} value={unit.id}>
@@ -1966,7 +1963,7 @@ export default function SissoneResponsivePrototype() {
             </Select>
 
             <Select value={classFrequencyFilter} onValueChange={setClassFrequencyFilter}>
-              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectTrigger style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 <SelectValue>
                   <span className="text-sm">
                     Frequência:{" "}
@@ -1978,7 +1975,7 @@ export default function SissoneResponsivePrototype() {
                   </span>
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectContent style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 <SelectItem value="all">Todas</SelectItem>
                 <SelectItem value="recurring">Recorrentes</SelectItem>
                 <SelectItem value="single">Únicas</SelectItem>
@@ -1986,7 +1983,7 @@ export default function SissoneResponsivePrototype() {
             </Select>
 
             <Select value={classRentabilityFilter} onValueChange={setClassRentabilityFilter}>
-              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectTrigger style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 <SelectValue>
                   <span className="text-sm">
                     Rentabilidade:{" "}
@@ -2000,7 +1997,7 @@ export default function SissoneResponsivePrototype() {
                   </span>
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectContent style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 <SelectItem value="all">Todas</SelectItem>
                 <SelectItem value="high">Alta</SelectItem>
                 <SelectItem value="medium">Média</SelectItem>
@@ -2014,7 +2011,7 @@ export default function SissoneResponsivePrototype() {
             {filteredClasses.map((classItem) => (
               <Card
                 key={classItem.id}
-                style={{ backgroundColor: "#E5D6CD" }}
+                style={{ backgroundColor: "var(--secondary)" }}
                 className="hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer"
                 onClick={() => {
                   setClassData({
@@ -2039,16 +2036,16 @@ export default function SissoneResponsivePrototype() {
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h3 className="text-lg font-semibold mb-1" style={{ color: "#3D2C2E" }}>
+                      <h3 className="text-lg font-semibold mb-1" style={{ color: "var(--foreground)" }}>
                         {classItem.title}
                       </h3>
-                      <p className="text-sm mb-2" style={{ color: "#CFB2A8" }}>
+                      <p className="text-sm mb-2" style={{ color: "var(--primary)" }}>
                         {classItem.unitName}
                       </p>
                       {classItem.isRecurring && (
                         <span
                           className="text-xs px-2 py-1 rounded"
-                          style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                          style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
                         >
                           Recorrente: {classItem.frequency}
                         </span>
@@ -2064,8 +2061,8 @@ export default function SissoneResponsivePrototype() {
                           navigateTo("create-class")
                         }}
                       >
-                        <Edit className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
-                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Editar</span>
+                        <Edit className="w-4 h-4 mr-1" style={{ color: "var(--foreground)" }} />
+                        <span className="text-xs" style={{ color: "var(--foreground)" }}>Editar</span>
                       </Button>
                       <Button
                         size="sm"
@@ -2076,42 +2073,42 @@ export default function SissoneResponsivePrototype() {
                           showToast("Aula excluída com sucesso!")
                         }}
                       >
-                        <Trash2 className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
-                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Excluir</span>
+                        <Trash2 className="w-4 h-4 mr-1" style={{ color: "var(--foreground)" }} />
+                        <span className="text-xs" style={{ color: "var(--foreground)" }}>Excluir</span>
                       </Button>
                     </div>
                   </div>
 
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" style={{ color: "#CFB2A8" }} />
-                      <span className="text-sm" style={{ color: "#3D2C2E" }}>
+                      <Clock className="w-4 h-4" style={{ color: "var(--primary)" }} />
+                      <span className="text-sm" style={{ color: "var(--foreground)" }}>
                         {classItem.time}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <DollarSign className="w-4 h-4" style={{ color: "#CFB2A8" }} />
-                      <span className="text-sm" style={{ color: "#3D2C2E" }}>
+                      <DollarSign className="w-4 h-4" style={{ color: "var(--primary)" }} />
+                      <span className="text-sm" style={{ color: "var(--foreground)" }}>
                         R$ {classItem.price},00
                       </span>
                     </div>
                   </div>
 
-                  <div className="flex justify-between items-center pt-3 border-t" style={{ borderColor: "#CFB2A8" }}>
+                  <div className="flex justify-between items-center pt-3 border-t" style={{ borderColor: "var(--primary)" }}>
                     <div>
-                      <span className="text-sm font-semibold" style={{ color: "#3D2C2E" }}>
+                      <span className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>
                         {classItem.enrolled}/{classItem.capacity}
                       </span>
-                      <span className="text-xs ml-1" style={{ color: "#3D2C2E" }}>
+                      <span className="text-xs ml-1" style={{ color: "var(--foreground)" }}>
                         alunos
                       </span>
                     </div>
-                    <div className="w-24 h-2 rounded-full overflow-hidden" style={{ backgroundColor: "#F5F0EB" }}>
+                    <div className="w-24 h-2 rounded-full overflow-hidden" style={{ backgroundColor: "var(--background)" }}>
                       <div
                         className="h-full"
                         style={{
                           width: `${(classItem.enrolled / classItem.capacity) * 100}%`,
-                          backgroundColor: "#CFB2A8",
+                          backgroundColor: "var(--primary)",
                         }}
                       />
                     </div>
@@ -2123,7 +2120,7 @@ export default function SissoneResponsivePrototype() {
 
           {filteredClasses.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-lg" style={{ color: "#3D2C2E" }}>
+              <p className="text-lg" style={{ color: "var(--foreground)" }}>
                 Nenhuma aula encontrada com os filtros selecionados.
               </p>
             </div>
@@ -2178,16 +2175,16 @@ export default function SissoneResponsivePrototype() {
       return (
         <div className="p-4 lg:p-6 pb-24 lg:pb-6">
           <div className="max-w-3xl mx-auto">
-            <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <Card style={{ backgroundColor: "var(--secondary)" }}>
               <CardHeader>
-                <CardTitle style={{ color: "#3D2C2E" }}>
+                <CardTitle style={{ color: "var(--foreground)" }}>
                   {currentScreen === "create-plan" ? "Novo Plano" : "Editar Plano"}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="plan-name" style={{ color: "#3D2C2E" }}>
+                    <Label htmlFor="plan-name" style={{ color: "var(--foreground)" }}>
                       Nome do Plano
                     </Label>
                     <Input
@@ -2202,12 +2199,12 @@ export default function SissoneResponsivePrototype() {
                         }
                       }}
                       className="mt-1"
-                      style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                      style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                     />
                   </div>
 
                   <div>
-                    <Label htmlFor="base-price" style={{ color: "#3D2C2E" }}>
+                    <Label htmlFor="base-price" style={{ color: "var(--foreground)" }}>
                       Valor Base Mensal (R$)
                     </Label>
                     <Input
@@ -2217,25 +2214,25 @@ export default function SissoneResponsivePrototype() {
                       value={newPlan.basePrice}
                       onChange={(e) => setNewPlan({ ...newPlan, basePrice: e.target.value })}
                       className="mt-1"
-                      style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                      style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <div>
-                    <Label style={{ color: "#3D2C2E" }}>Duração</Label>
+                    <Label style={{ color: "var(--foreground)" }}>Duração</Label>
                     <Select
                       value={newPlan.duration}
                       onValueChange={(value) => setNewPlan({ ...newPlan, duration: value })}
                     >
                       <SelectTrigger
                         className="mt-1"
-                        style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                        style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                       >
                         <SelectValue placeholder="Selecione a duração" />
                       </SelectTrigger>
-                      <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                      <SelectContent style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                         <SelectItem value="semanal">Semanal</SelectItem>
                         <SelectItem value="mensal">Mensal</SelectItem>
                         <SelectItem value="trimestral">Trimestral (3 meses)</SelectItem>
@@ -2246,7 +2243,7 @@ export default function SissoneResponsivePrototype() {
                   </div>
 
                   <div>
-                    <Label htmlFor="plan-discount" style={{ color: "#3D2C2E" }}>
+                    <Label htmlFor="plan-discount" style={{ color: "var(--foreground)" }}>
                       Desconto (%)
                     </Label>
                     <Input
@@ -2262,24 +2259,24 @@ export default function SissoneResponsivePrototype() {
                         }
                       }}
                       className="mt-1"
-                      style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                      style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <Label style={{ color: "#3D2C2E" }}>Forma de Pagamento</Label>
+                  <Label style={{ color: "var(--foreground)" }}>Forma de Pagamento</Label>
                   <Select
                     value={newPlan.paymentMethod}
                     onValueChange={(value) => setNewPlan({ ...newPlan, paymentMethod: value })}
                   >
                     <SelectTrigger
                       className="mt-1"
-                      style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                      style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                     >
                       <SelectValue placeholder="Selecione a forma de pagamento" />
                     </SelectTrigger>
-                    <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                    <SelectContent style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                       <SelectItem value="credit">Cartão de Crédito (sem taxa)</SelectItem>
                       <SelectItem value="debit">Cartão de Débito (sem taxa)</SelectItem>
                       <SelectItem value="boleto">Boleto Bancário (+2,5% de taxa)</SelectItem>
@@ -2287,17 +2284,17 @@ export default function SissoneResponsivePrototype() {
                   </Select>
                 </div>
 
-                <div className="flex items-center gap-3 p-3 rounded" style={{ backgroundColor: "#F5F0EB" }}>
+                <div className="flex items-center gap-3 p-3 rounded" style={{ backgroundColor: "var(--background)" }}>
                   <Checkbox
                     id="automatic-discount"
                     checked={newPlan.isAutomatic}
                     onCheckedChange={(checked) => setNewPlan({ ...newPlan, isAutomatic: checked as boolean })}
                   />
                   <div>
-                    <Label htmlFor="automatic-discount" className="cursor-pointer" style={{ color: "#3D2C2E" }}>
+                    <Label htmlFor="automatic-discount" className="cursor-pointer" style={{ color: "var(--foreground)" }}>
                       Desconto automático
                     </Label>
-                    <p className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                    <p className="text-xs" style={{ color: "var(--foreground)", opacity: 0.7 }}>
                       {newPlan.isAutomatic
                         ? "O desconto será aplicado automaticamente na matrícula"
                         : "O aluno precisará inserir um código promocional"}
@@ -2306,43 +2303,43 @@ export default function SissoneResponsivePrototype() {
                 </div>
 
                 {/* Calculation Preview */}
-                <Card style={{ backgroundColor: "#F5F0EB", border: "2px dashed #CFB2A8" }}>
+                <Card style={{ backgroundColor: "var(--background)", border: "2px dashed var(--primary)" }}>
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-base" style={{ color: "#3D2C2E" }}>
+                    <CardTitle className="text-base" style={{ color: "var(--foreground)" }}>
                       Prévia do Cálculo
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    <div className="flex justify-between text-sm" style={{ color: "#3D2C2E" }}>
+                    <div className="flex justify-between text-sm" style={{ color: "var(--foreground)" }}>
                       <span>Valor base mensal:</span>
                       <span>R$ {calc.basePrice.toFixed(2)}</span>
                     </div>
                     {calc.discount > 0 && (
-                      <div className="flex justify-between text-sm" style={{ color: "#3D2C2E" }}>
+                      <div className="flex justify-between text-sm" style={{ color: "var(--foreground)" }}>
                         <span>Desconto ({calc.discount}%):</span>
                         <span className="text-green-600">- R$ {(calc.basePrice * calc.discount / 100).toFixed(2)}</span>
                       </div>
                     )}
-                    <div className="flex justify-between text-sm" style={{ color: "#3D2C2E" }}>
+                    <div className="flex justify-between text-sm" style={{ color: "var(--foreground)" }}>
                       <span>Valor mensal com desconto:</span>
                       <span>R$ {calc.priceWithDiscount.toFixed(2)}</span>
                     </div>
-                    <div className="flex justify-between text-sm" style={{ color: "#3D2C2E" }}>
+                    <div className="flex justify-between text-sm" style={{ color: "var(--foreground)" }}>
                       <span>Duração ({newPlan.duration}):</span>
                       <span>x {calc.months} {calc.months === 1 ? "mês" : "meses"}</span>
                     </div>
                     {calc.fee > 0 && (
-                      <div className="flex justify-between text-sm" style={{ color: "#3D2C2E" }}>
+                      <div className="flex justify-between text-sm" style={{ color: "var(--foreground)" }}>
                         <span>Taxa boleto ({calc.fee}%):</span>
                         <span className="text-red-600">+ R$ {calc.feeAmount.toFixed(2)}</span>
                       </div>
                     )}
-                    <div className="border-t pt-3" style={{ borderColor: "#CFB2A8" }}>
-                      <div className="flex justify-between font-semibold" style={{ color: "#3D2C2E" }}>
+                    <div className="border-t pt-3" style={{ borderColor: "var(--primary)" }}>
+                      <div className="flex justify-between font-semibold" style={{ color: "var(--foreground)" }}>
                         <span>Total:</span>
                         <span>R$ {calc.finalTotal.toFixed(2)}</span>
                       </div>
-                      <p className="text-xs mt-1" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                      <p className="text-xs mt-1" style={{ color: "var(--foreground)", opacity: 0.7 }}>
                         Equivalente a R$ {calc.monthlyPrice.toFixed(2)} / mês
                       </p>
                     </div>
@@ -2351,13 +2348,13 @@ export default function SissoneResponsivePrototype() {
 
                 {/* Summary Table */}
                 <div>
-                  <Label className="mb-2 block" style={{ color: "#3D2C2E" }}>
+                  <Label className="mb-2 block" style={{ color: "var(--foreground)" }}>
                     Tabela Resumo por Forma de Pagamento
                   </Label>
                   <div className="overflow-x-auto">
-                    <table className="w-full text-sm" style={{ color: "#3D2C2E" }}>
+                    <table className="w-full text-sm" style={{ color: "var(--foreground)" }}>
                       <thead>
-                        <tr style={{ backgroundColor: "#CFB2A8" }}>
+                        <tr style={{ backgroundColor: "var(--primary)" }}>
                           <th className="p-2 text-left rounded-tl">Forma</th>
                           <th className="p-2 text-center">Taxa</th>
                           <th className="p-2 text-right rounded-tr">Preço Final</th>
@@ -2375,7 +2372,7 @@ export default function SissoneResponsivePrototype() {
                             <tr
                               key={method.key}
                               style={{
-                                backgroundColor: index % 2 === 0 ? "#F5F0EB" : "#E5D6CD",
+                                backgroundColor: index % 2 === 0 ? "var(--background)" : "var(--secondary)",
                               }}
                             >
                               <td className="p-2">{method.label}</td>
@@ -2398,7 +2395,7 @@ export default function SissoneResponsivePrototype() {
                       setNewPlan({ name: "", discount: "", duration: "mensal", paymentMethod: "credit", isAutomatic: true, basePrice: "150" })
                       setEditingPlan(null)
                     }}
-                    style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                    style={{ borderColor: "var(--primary)", color: "var(--foreground)" }}
                   >
                     Cancelar
                   </Button>
@@ -2424,7 +2421,7 @@ export default function SissoneResponsivePrototype() {
                         showToast("Preencha o nome do plano")
                       }
                     }}
-                    style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                    style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
                   >
                     Salvar Plano
                   </Button>
@@ -2440,15 +2437,15 @@ export default function SissoneResponsivePrototype() {
       return (
         <div className="p-4 lg:p-6 pb-24 lg:pb-6">
           <div className="max-w-2xl mx-auto">
-            <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <Card style={{ backgroundColor: "var(--secondary)" }}>
               <CardHeader>
-                <CardTitle style={{ color: "#3D2C2E" }}>
+                <CardTitle style={{ color: "var(--foreground)" }}>
                   {currentScreen === "create-combo" ? "Novo Combo" : "Editar Combo"}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <Label htmlFor="combo-name" style={{ color: "#3D2C2E" }}>
+                  <Label htmlFor="combo-name" style={{ color: "var(--foreground)" }}>
                     Nome do Combo
                   </Label>
                   <Input
@@ -2463,12 +2460,12 @@ export default function SissoneResponsivePrototype() {
                       }
                     }}
                     className="mt-1"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                   />
                 </div>
 
                 <div>
-                  <Label style={{ color: "#3D2C2E" }}>Aulas Incluídas</Label>
+                  <Label style={{ color: "var(--foreground)" }}>Aulas Incluídas</Label>
                   <div className="space-y-2 mt-2">
                     {mockClasses.map((classItem) => (
                       <div key={classItem.id} className="flex items-center space-x-2">
@@ -2497,7 +2494,7 @@ export default function SissoneResponsivePrototype() {
                             }
                           }}
                         />
-                        <Label htmlFor={`combo-class-${classItem.id}`} className="text-sm" style={{ color: "#3D2C2E" }}>
+                        <Label htmlFor={`combo-class-${classItem.id}`} className="text-sm" style={{ color: "var(--foreground)" }}>
                           {classItem.title} - R$ {classItem.price}
                         </Label>
                       </div>
@@ -2506,7 +2503,7 @@ export default function SissoneResponsivePrototype() {
                 </div>
 
                 <div>
-                  <Label htmlFor="combo-price" style={{ color: "#3D2C2E" }}>
+                  <Label htmlFor="combo-price" style={{ color: "var(--foreground)" }}>
                     Valor do Combo (R$)
                   </Label>
                   <Input
@@ -2522,7 +2519,7 @@ export default function SissoneResponsivePrototype() {
                       }
                     }}
                     className="mt-1"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                   />
                 </div>
 
@@ -2535,7 +2532,7 @@ export default function SissoneResponsivePrototype() {
                       setNewCombo({ name: "", classes: [], price: "" })
                       setEditingCombo(null)
                     }}
-                    style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                    style={{ borderColor: "var(--primary)", color: "var(--foreground)" }}
                   >
                     Cancelar
                   </Button>
@@ -2561,7 +2558,7 @@ export default function SissoneResponsivePrototype() {
                       setNewCombo({ name: "", classes: [], price: "" })
                       setEditingCombo(null)
                     }}
-                    style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                    style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
                   >
                     Salvar
                   </Button>
@@ -2576,28 +2573,28 @@ export default function SissoneResponsivePrototype() {
     return (
       <div className="p-4 lg:p-6 pb-24 lg:pb-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-lg lg:text-xl font-semibold mb-6" style={{ color: "#3D2C2E" }}>
+          <h2 className="text-lg lg:text-xl font-semibold mb-6" style={{ color: "var(--foreground)" }}>
             Gerenciar Precificação
           </h2>
 
           {/* Base Price */}
-          <Card style={{ backgroundColor: "#E5D6CD" }} className="mb-6">
+          <Card style={{ backgroundColor: "var(--secondary)" }} className="mb-6">
             <CardHeader>
-              <CardTitle style={{ color: "#3D2C2E" }}>Preço Base das Aulas</CardTitle>
+              <CardTitle style={{ color: "var(--foreground)" }}>Preço Base das Aulas</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <div>
-                  <Label style={{ color: "#3D2C2E" }}>Ballet</Label>
-                  <Input placeholder="R$ 80,00" style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }} />
+                  <Label style={{ color: "var(--foreground)" }}>Ballet</Label>
+                  <Input placeholder="R$ 80,00" style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }} />
                 </div>
                 <div>
-                  <Label style={{ color: "#3D2C2E" }}>Jazz</Label>
-                  <Input placeholder="R$ 90,00" style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }} />
+                  <Label style={{ color: "var(--foreground)" }}>Jazz</Label>
+                  <Input placeholder="R$ 90,00" style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }} />
                 </div>
                 <div>
-                  <Label style={{ color: "#3D2C2E" }}>Hip Hop</Label>
-                  <Input placeholder="R$ 70,00" style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }} />
+                  <Label style={{ color: "var(--foreground)" }}>Hip Hop</Label>
+                  <Input placeholder="R$ 70,00" style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }} />
                 </div>
               </div>
             </CardContent>
@@ -2606,11 +2603,11 @@ export default function SissoneResponsivePrototype() {
           {/* Subscription Plans */}
           <div className="mb-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-semibold" style={{ color: "#3D2C2E" }}>
+              <h3 className="text-base font-semibold" style={{ color: "var(--foreground)" }}>
                 Planos de Assinatura
               </h3>
               <Button
-                style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
                 onClick={() => setCurrentScreen("create-plan")}
               >
                 <Plus className="w-4 h-4 mr-2" />
@@ -2620,12 +2617,12 @@ export default function SissoneResponsivePrototype() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {plans.map((plan) => (
-                <Card key={plan.id} style={{ backgroundColor: "#E5D6CD" }} className="hover:shadow-md transition-all">
+                <Card key={plan.id} style={{ backgroundColor: "var(--secondary)" }} className="hover:shadow-md transition-all">
                   <CardContent className="p-6 text-center">
-                    <h4 className="text-lg font-bold mb-2" style={{ color: "#3D2C2E" }}>
+                    <h4 className="text-lg font-bold mb-2" style={{ color: "var(--foreground)" }}>
                       {plan.name}
                     </h4>
-                    <div className="text-2xl font-bold mb-4" style={{ color: "#CFB2A8" }}>
+                    <div className="text-2xl font-bold mb-4" style={{ color: "var(--primary)" }}>
                       {plan.discount}% OFF
                     </div>
                     <div className="flex gap-2 justify-center">
@@ -2638,8 +2635,8 @@ export default function SissoneResponsivePrototype() {
                           setCurrentScreen("edit-plan")
                         }}
                       >
-                        <Edit className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
-                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Editar</span>
+                        <Edit className="w-4 h-4 mr-1" style={{ color: "var(--foreground)" }} />
+                        <span className="text-xs" style={{ color: "var(--foreground)" }}>Editar</span>
                       </Button>
                       <Button
                         size="sm"
@@ -2650,8 +2647,8 @@ export default function SissoneResponsivePrototype() {
                           showToast("Plano excluído com sucesso!")
                         }}
                       >
-                        <Trash2 className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
-                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Excluir</span>
+                        <Trash2 className="w-4 h-4 mr-1" style={{ color: "var(--foreground)" }} />
+                        <span className="text-xs" style={{ color: "var(--foreground)" }}>Excluir</span>
                       </Button>
                     </div>
                   </CardContent>
@@ -2663,11 +2660,11 @@ export default function SissoneResponsivePrototype() {
           {/* Promotional Combos */}
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-semibold" style={{ color: "#3D2C2E" }}>
+              <h3 className="text-base font-semibold" style={{ color: "var(--foreground)" }}>
                 Combos Promocionais
               </h3>
               <Button
-                style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
                 onClick={() => setCurrentScreen("create-combo")}
               >
                 <Plus className="w-4 h-4 mr-2" />
@@ -2675,23 +2672,23 @@ export default function SissoneResponsivePrototype() {
               </Button>
             </div>
 
-            <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <Card style={{ backgroundColor: "var(--secondary)" }}>
               <CardContent className="p-6">
                 <div className="space-y-4">
                   {combos.map((combo) => (
                     <div
                       key={combo.id}
                       className="flex items-center justify-between p-4 rounded"
-                      style={{ backgroundColor: "#F5F0EB" }}
+                      style={{ backgroundColor: "var(--background)" }}
                     >
                       <div>
-                        <h4 className="font-semibold" style={{ color: "#3D2C2E" }}>
+                        <h4 className="font-semibold" style={{ color: "var(--foreground)" }}>
                           {combo.name}
                         </h4>
-                        <p className="text-sm" style={{ color: "#3D2C2E" }}>
+                        <p className="text-sm" style={{ color: "var(--foreground)" }}>
                           {combo.classes.join(", ")}
                         </p>
-                        <p className="text-lg font-bold" style={{ color: "#CFB2A8" }}>
+                        <p className="text-lg font-bold" style={{ color: "var(--primary)" }}>
                           R$ {combo.price},00
                         </p>
                       </div>
@@ -2705,8 +2702,8 @@ export default function SissoneResponsivePrototype() {
                           setCurrentScreen("edit-combo")
                         }}
                       >
-                        <Edit className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
-                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Editar</span>
+                        <Edit className="w-4 h-4 mr-1" style={{ color: "var(--foreground)" }} />
+                        <span className="text-xs" style={{ color: "var(--foreground)" }}>Editar</span>
                       </Button>
                       <Button
                         size="sm"
@@ -2717,8 +2714,8 @@ export default function SissoneResponsivePrototype() {
                           showToast("Combo excluído com sucesso!")
                         }}
                       >
-                        <Trash2 className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
-                        <span className="text-xs" style={{ color: "#3D2C2E" }}>Excluir</span>
+                        <Trash2 className="w-4 h-4 mr-1" style={{ color: "var(--foreground)" }} />
+                        <span className="text-xs" style={{ color: "var(--foreground)" }}>Excluir</span>
                       </Button>
                       </div>
                     </div>
@@ -2769,10 +2766,10 @@ export default function SissoneResponsivePrototype() {
       <div className="p-4 lg:p-6 pb-24 lg:pb-6">
         <div className="max-w-7xl mx-auto space-y-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <h1 className="text-2xl font-bold" style={{ color: "#3D2C2E" }}>
+            <h1 className="text-2xl font-bold" style={{ color: "var(--foreground)" }}>
               Alunos ({filteredStudents.length})
             </h1>
-            <Button onClick={() => setShowInviteModal(true)} style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
+            <Button onClick={() => setShowInviteModal(true)} style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}>
               <UserPlus className="w-4 h-4 mr-2" />
               Novo Aluno
             </Button>
@@ -2780,45 +2777,45 @@ export default function SissoneResponsivePrototype() {
 
           {/* Quick Stats */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <Card style={{ backgroundColor: "var(--secondary)" }}>
               <CardContent className="p-4 text-center">
-                <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                <div className="text-lg font-bold" style={{ color: "var(--foreground)" }}>
                   Maria Silva
                 </div>
-                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                <div className="text-xs" style={{ color: "var(--foreground)" }}>
                   Mais Frequente (95%)
                 </div>
               </CardContent>
             </Card>
-            <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <Card style={{ backgroundColor: "var(--secondary)" }}>
               <CardContent className="p-4 text-center">
-                <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                <div className="text-lg font-bold" style={{ color: "var(--foreground)" }}>
                   Ana Costa
                 </div>
-                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                <div className="text-xs" style={{ color: "var(--foreground)" }}>
                   Menos Frequente (45%)
                 </div>
               </CardContent>
             </Card>
-            <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <Card style={{ backgroundColor: "var(--secondary)" }}>
               <CardContent className="p-4 text-center">
                 <div className="flex items-center justify-center gap-1">
-                  <AlertCircle className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-                  <span className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                  <AlertCircle className="w-4 h-4" style={{ color: "var(--foreground)" }} />
+                  <span className="text-lg font-bold" style={{ color: "var(--foreground)" }}>
                     1
                   </span>
                 </div>
-                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                <div className="text-xs" style={{ color: "var(--foreground)" }}>
                   Inadimplente
                 </div>
               </CardContent>
             </Card>
-            <Card style={{ backgroundColor: "#E5D6CD" }}>
+            <Card style={{ backgroundColor: "var(--secondary)" }}>
               <CardContent className="p-4 text-center">
-                <div className="text-lg font-bold" style={{ color: "#3D2C2E" }}>
+                <div className="text-lg font-bold" style={{ color: "var(--foreground)" }}>
                   {mockStudents.length}
                 </div>
-                <div className="text-xs" style={{ color: "#3D2C2E" }}>
+                <div className="text-xs" style={{ color: "var(--foreground)" }}>
                   Total de Alunos
                 </div>
               </CardContent>
@@ -2830,26 +2827,26 @@ export default function SissoneResponsivePrototype() {
             <div className="relative">
               <Search
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4"
-                style={{ color: "#3D2C2E" }}
+                style={{ color: "var(--foreground)" }}
               />
               <Input
                 placeholder="Buscar alunos..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
-                style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
               />
             </div>
 
             <Select defaultValue="all" onValueChange={setUnitFilter}>
-              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectTrigger style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 <SelectValue>
                   <span className="text-sm">
                     Unidade: {unitFilter === "all" ? "Todas" : mockUnits.find((u) => u.id === unitFilter)?.name}
                   </span>
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectContent style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 <SelectItem value="all">Todas</SelectItem>
                 {mockUnits.map((unit) => (
                   <SelectItem key={unit.id} value={unit.id}>
@@ -2860,14 +2857,14 @@ export default function SissoneResponsivePrototype() {
             </Select>
 
             <Select defaultValue="all" onValueChange={setClassFilter}>
-              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectTrigger style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 <SelectValue>
                   <span className="text-sm">
                     Aula: {classFilter === "all" ? "Todas" : mockClasses.find((c) => c.id === classFilter)?.title}
                   </span>
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectContent style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 <SelectItem value="all">Todas</SelectItem>
                 {mockClasses.map((classItem) => (
                   <SelectItem key={classItem.id} value={classItem.id}>
@@ -2878,7 +2875,7 @@ export default function SissoneResponsivePrototype() {
             </Select>
 
             <Select defaultValue="all" onValueChange={setPaymentFilter}>
-              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectTrigger style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 <SelectValue>
                   <span className="text-sm">
                     Pagamento:{" "}
@@ -2890,7 +2887,7 @@ export default function SissoneResponsivePrototype() {
                   </span>
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectContent style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 <SelectItem value="all">Todos</SelectItem>
                 <SelectItem value="current">Em dia</SelectItem>
                 <SelectItem value="pending">Atrasado</SelectItem>
@@ -2898,7 +2895,7 @@ export default function SissoneResponsivePrototype() {
             </Select>
 
             <Select defaultValue="name-asc" onValueChange={setStudentSortBy}>
-              <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectTrigger style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 <SelectValue>
                   <span className="text-sm">
                     Ordenar:{" "}
@@ -2916,7 +2913,7 @@ export default function SissoneResponsivePrototype() {
                   </span>
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectContent style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 <SelectItem value="name-asc">Nome A-Z</SelectItem>
                 <SelectItem value="name-desc">Nome Z-A</SelectItem>
                 <SelectItem value="frequency-high">Maior Frequência</SelectItem>
@@ -2929,9 +2926,9 @@ export default function SissoneResponsivePrototype() {
 
           {/* Bulk Actions Bar */}
           {selectedStudents.length > 0 && (
-            <Card style={{ backgroundColor: "#CFB2A8" }}>
+            <Card style={{ backgroundColor: "var(--primary)" }}>
               <CardContent className="p-3 flex items-center justify-between">
-                <span className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                <span className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                   {selectedStudents.length} aluno(s) selecionado(s)
                 </span>
                 <div className="flex gap-2">
@@ -2939,14 +2936,14 @@ export default function SissoneResponsivePrototype() {
                     size="sm"
                     variant="outline"
                     className="bg-transparent"
-                    style={{ borderColor: "#3D2C2E", color: "#3D2C2E" }}
+                    style={{ borderColor: "var(--foreground)", color: "var(--foreground)" }}
                     onClick={() => setSelectedStudents([])}
                   >
                     Cancelar
                   </Button>
                   <Button
                     size="sm"
-                    style={{ backgroundColor: "#3D2C2E", color: "#F5F0EB" }}
+                    style={{ backgroundColor: "var(--foreground)", color: "var(--background)" }}
                     onClick={() => {
                       showToast(`${selectedStudents.length} aluno(s) excluído(s) com sucesso!`)
                       setSelectedStudents([])
@@ -2961,11 +2958,11 @@ export default function SissoneResponsivePrototype() {
           )}
 
           {/* Students List */}
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
+          <Card style={{ backgroundColor: "var(--secondary)" }}>
             <CardContent className="p-0">
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[700px]">
-                  <thead className="border-b" style={{ borderColor: "#CFB2A8" }}>
+                  <thead className="border-b" style={{ borderColor: "var(--primary)" }}>
                     <tr>
                       <th className="p-4 w-12">
                         <Checkbox
@@ -2979,44 +2976,44 @@ export default function SissoneResponsivePrototype() {
                           }}
                         />
                       </th>
-                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
+                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "var(--foreground)" }}>
                         Aluno
                       </th>
                       <th
                         className="text-left p-4 text-sm font-semibold hidden lg:table-cell"
-                        style={{ color: "#3D2C2E" }}
+                        style={{ color: "var(--foreground)" }}
                       >
                         Telefone
                       </th>
                       <th
                         className="text-left p-4 text-sm font-semibold hidden lg:table-cell"
-                        style={{ color: "#3D2C2E" }}
+                        style={{ color: "var(--foreground)" }}
                       >
                         Origem
                       </th>
                       <th
                         className="text-left p-4 text-sm font-semibold hidden lg:table-cell"
-                        style={{ color: "#3D2C2E" }}
+                        style={{ color: "var(--foreground)" }}
                       >
                         Idade
                       </th>
-                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
+                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "var(--foreground)" }}>
                         Aulas
                       </th>
-                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
+                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "var(--foreground)" }}>
                         Frequência
                       </th>
-                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
+                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "var(--foreground)" }}>
                         Situação
                       </th>
-                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "#3D2C2E" }}>
+                      <th className="text-left p-4 text-sm font-semibold" style={{ color: "var(--foreground)" }}>
                         Ações
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     {filteredStudents.map((student) => (
-                      <tr key={student.id} className="border-b hover:bg-white/30" style={{ borderColor: "#CFB2A8" }}>
+                      <tr key={student.id} className="border-b hover:bg-white/30" style={{ borderColor: "var(--primary)" }}>
                         <td className="p-4">
                           <Checkbox
                             checked={selectedStudents.includes(student.id)}
@@ -3031,15 +3028,15 @@ export default function SissoneResponsivePrototype() {
                         </td>
                         <td className="p-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full" style={{ backgroundColor: "#CFB2A8" }}>
+                            <div className="w-10 h-10 rounded-full" style={{ backgroundColor: "var(--primary)" }}>
                               <div className="flex items-center justify-center h-full">
-                                <User className="w-5 h-5" style={{ color: "#3D2C2E" }} />
+                                <User className="w-5 h-5" style={{ color: "var(--foreground)" }} />
                               </div>
                             </div>
                             <div>
                               <button
                                 className="text-sm font-medium text-left hover:underline cursor-pointer"
-                                style={{ color: "#3D2C2E" }}
+                                style={{ color: "var(--foreground)" }}
                                 onClick={() => {
                                   setSelectedStudent(student)
                                   navigateTo("student-profile")
@@ -3047,47 +3044,47 @@ export default function SissoneResponsivePrototype() {
                               >
                                 {student.name}
                               </button>
-                              <p className="text-xs lg:hidden" style={{ color: "#3D2C2E" }}>
+                              <p className="text-xs lg:hidden" style={{ color: "var(--foreground)" }}>
                                 {student.phone}
                               </p>
                             </div>
                           </div>
                         </td>
-                        <td className="p-4 text-sm hidden lg:table-cell" style={{ color: "#3D2C2E" }}>
+                        <td className="p-4 text-sm hidden lg:table-cell" style={{ color: "var(--foreground)" }}>
                           {student.phone}
                         </td>
                         <td className="p-4 hidden lg:table-cell">
                           <span
                             className="text-xs px-2 py-1 rounded"
                             style={{
-                              backgroundColor: student.acquisitionType === "platform" ? "#CFB2A8" : "#F5F0EB",
-                              color: "#3D2C2E",
+                              backgroundColor: student.acquisitionType === "platform" ? "var(--primary)" : "var(--background)",
+                              color: "var(--foreground)",
                             }}
                           >
                             {student.acquisitionType === "platform" ? "Plataforma" : "Convite"}
                           </span>
                         </td>
-                        <td className="p-4 text-sm hidden lg:table-cell" style={{ color: "#3D2C2E" }}>
+                        <td className="p-4 text-sm hidden lg:table-cell" style={{ color: "var(--foreground)" }}>
                           {student.age ? `${student.age} anos` : "-"}
                         </td>
-                        <td className="p-4 text-sm" style={{ color: "#3D2C2E" }}>
+                        <td className="p-4 text-sm" style={{ color: "var(--foreground)" }}>
                           {student.classes.join(", ")}
                         </td>
                         <td className="p-4">
                           <div className="flex items-center gap-2">
                             <div
                               className="w-16 h-2 rounded-full overflow-hidden"
-                              style={{ backgroundColor: "#F5F0EB" }}
+                              style={{ backgroundColor: "var(--background)" }}
                             >
                               <div
                                 className="h-full"
                                 style={{
                                   width: `${student.frequency}%`,
-                                  backgroundColor: "#CFB2A8",
+                                  backgroundColor: "var(--primary)",
                                 }}
                               />
                             </div>
-                            <span className="text-sm" style={{ color: "#3D2C2E" }}>
+                            <span className="text-sm" style={{ color: "var(--foreground)" }}>
                               {student.frequency}%
                             </span>
                           </div>
@@ -3096,8 +3093,8 @@ export default function SissoneResponsivePrototype() {
                           <span
                             className="text-xs px-2 py-1 rounded"
                             style={{
-                              backgroundColor: student.paymentStatus === "current" ? "#CFB2A8" : "#F5F0EB",
-                              color: "#3D2C2E",
+                              backgroundColor: student.paymentStatus === "current" ? "var(--primary)" : "var(--background)",
+                              color: "var(--foreground)",
                             }}
                           >
                             {student.paymentStatus === "current" ? "Em dia" : "Inadimplente"}
@@ -3114,8 +3111,8 @@ export default function SissoneResponsivePrototype() {
                                 navigateTo("student-profile")
                               }}
                             >
-                              <Edit className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
-                              <span className="text-xs" style={{ color: "#3D2C2E" }}>Editar</span>
+                              <Edit className="w-4 h-4 mr-1" style={{ color: "var(--foreground)" }} />
+                              <span className="text-xs" style={{ color: "var(--foreground)" }}>Editar</span>
                             </Button>
                             <Button
                               size="sm"
@@ -3123,8 +3120,8 @@ export default function SissoneResponsivePrototype() {
                               className="hover:bg-white/50"
                               onClick={() => showToast("Aluno excluído com sucesso!")}
                             >
-                              <Trash2 className="w-4 h-4 mr-1" style={{ color: "#3D2C2E" }} />
-                              <span className="text-xs" style={{ color: "#3D2C2E" }}>Excluir</span>
+                              <Trash2 className="w-4 h-4 mr-1" style={{ color: "var(--foreground)" }} />
+                              <span className="text-xs" style={{ color: "var(--foreground)" }}>Excluir</span>
                             </Button>
                           </div>
                         </td>
@@ -3139,24 +3136,24 @@ export default function SissoneResponsivePrototype() {
 
         {showInviteModal && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <Card className="w-full max-w-md" style={{ backgroundColor: "#E5D6CD" }}>
+            <Card className="w-full max-w-md" style={{ backgroundColor: "var(--secondary)" }}>
               <CardHeader>
-                <CardTitle style={{ color: "#3D2C2E" }}>Convidar Novo Aluno</CardTitle>
+                <CardTitle style={{ color: "var(--foreground)" }}>Convidar Novo Aluno</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div>
-                  <p className="text-sm mb-4" style={{ color: "#3D2C2E" }}>
+                  <p className="text-sm mb-4" style={{ color: "var(--foreground)" }}>
                     Compartilhe o link abaixo com o aluno para que ele possa se cadastrar:
                   </p>
                   <div
                     className="flex items-center gap-2 p-3 rounded"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD", border: "1px solid" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)", border: "1px solid" }}
                   >
                     <Input
                       value={inviteLink}
                       readOnly
                       className="flex-1 border-0 bg-transparent text-sm"
-                      style={{ color: "#3D2C2E" }}
+                      style={{ color: "var(--foreground)" }}
                     />
                   </div>
                 </div>
@@ -3165,7 +3162,7 @@ export default function SissoneResponsivePrototype() {
                   <Button
                     className="w-full"
                     onClick={copyInviteLink}
-                    style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                    style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
                   >
                     {linkCopied ? (
                       <>
@@ -3184,7 +3181,7 @@ export default function SissoneResponsivePrototype() {
                     variant="outline"
                     className="w-full bg-transparent"
                     onClick={() => setShowInviteModal(false)}
-                    style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                    style={{ borderColor: "var(--primary)", color: "var(--foreground)" }}
                   >
                     Fechar
                   </Button>
@@ -3200,24 +3197,24 @@ export default function SissoneResponsivePrototype() {
   const renderInviteStudent = () => (
     <div className="p-4 lg:p-6 pb-24 lg:pb-6">
       <div className="max-w-2xl mx-auto">
-        <Card style={{ backgroundColor: "#E5D6CD" }}>
+        <Card style={{ backgroundColor: "var(--secondary)" }}>
           <CardHeader>
-            <CardTitle style={{ color: "#3D2C2E" }}>Convidar Novo Aluno</CardTitle>
+            <CardTitle style={{ color: "var(--foreground)" }}>Convidar Novo Aluno</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
-              <p className="text-sm mb-4" style={{ color: "#3D2C2E" }}>
+              <p className="text-sm mb-4" style={{ color: "var(--foreground)" }}>
                 Compartilhe o link abaixo com o aluno para que ele possa se cadastrar:
               </p>
               <div
                 className="flex items-center gap-2 p-3 rounded"
-                style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD", border: "1px solid" }}
+                style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)", border: "1px solid" }}
               >
                 <Input
                   value={inviteLink}
                   readOnly
                   className="flex-1 border-0 bg-transparent"
-                  style={{ color: "#3D2C2E" }}
+                  style={{ color: "var(--foreground)" }}
                 />
               </div>
             </div>
@@ -3226,7 +3223,7 @@ export default function SissoneResponsivePrototype() {
               <Button
                 className="w-full"
                 onClick={copyInviteLink}
-                style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
               >
                 {linkCopied ? (
                   <>
@@ -3247,7 +3244,7 @@ export default function SissoneResponsivePrototype() {
                   window.location.href = `mailto:?subject=Convite Sissone&body=Olá! Você foi convidado para se juntar à nossa escola de dança. Acesse: ${inviteLink}`
                   showToast("Cliente de email aberto!")
                 }}
-                style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                style={{ borderColor: "var(--primary)", color: "var(--foreground)" }}
               >
                 <Mail className="w-4 h-4 mr-2" />
                 Enviar por Email
@@ -3258,7 +3255,7 @@ export default function SissoneResponsivePrototype() {
               variant="outline"
               className="w-full bg-transparent"
               onClick={() => navigateTo("students")}
-              style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+              style={{ borderColor: "var(--primary)", color: "var(--foreground)" }}
             >
               Voltar
             </Button>
@@ -3273,23 +3270,23 @@ export default function SissoneResponsivePrototype() {
       <div className="max-w-4xl mx-auto">
         <div className="space-y-4 lg:space-y-6">
           <div>
-            <Label htmlFor="unit" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+            <Label htmlFor="unit" className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
               Unidade *
             </Label>
             <Select value={classData.unit} onValueChange={(value) => setClassData({ ...classData, unit: value })}>
               <SelectTrigger
                 className="mt-1 h-10 lg:h-12"
-                style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
               >
                 <SelectValue>
                   {classData.unit ? (
                     <span className="text-sm">{mockUnits.find((u) => u.id === classData.unit)?.name}</span>
                   ) : (
-                    <span className="text-sm text-gray-500">Selecione a unidade</span>
+                    <span className="text-sm text-muted-foreground">Selecione a unidade</span>
                   )}
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+              <SelectContent style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                 {mockUnits.map((unit) => (
                   <SelectItem key={unit.id} value={unit.id}>
                     {unit.name}
@@ -3300,7 +3297,7 @@ export default function SissoneResponsivePrototype() {
           </div>
 
           <div>
-            <Label htmlFor="title" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+            <Label htmlFor="title" className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
               Título da Aula
             </Label>
             <Input
@@ -3309,12 +3306,12 @@ export default function SissoneResponsivePrototype() {
               value={classData.title}
               onChange={(e) => setClassData({ ...classData, title: e.target.value })}
               className="mt-1 h-10 lg:h-12"
-              style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+              style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
             />
           </div>
 
           <div className="space-y-3">
-            <Label className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+            <Label className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
               Tipo de Aula
             </Label>
             <div className="flex items-center space-x-2">
@@ -3323,7 +3320,7 @@ export default function SissoneResponsivePrototype() {
                 checked={classData.isRecurring}
                 onCheckedChange={(checked) => setClassData({ ...classData, isRecurring: !!checked })}
               />
-              <Label htmlFor="recurring" className="text-sm" style={{ color: "#3D2C2E" }}>
+              <Label htmlFor="recurring" className="text-sm" style={{ color: "var(--foreground)" }}>
                 Aula Recorrente (múltiplos dias da semana)
               </Label>
             </div>
@@ -3332,7 +3329,7 @@ export default function SissoneResponsivePrototype() {
           {classData.isRecurring ? (
             <div className="space-y-4">
               <div>
-                <Label className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                <Label className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                   Dias da Semana
                 </Label>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 mt-2">
@@ -3355,7 +3352,7 @@ export default function SissoneResponsivePrototype() {
                           }
                         }}
                       />
-                      <Label htmlFor={day.id} className="text-sm" style={{ color: "#3D2C2E" }}>
+                      <Label htmlFor={day.id} className="text-sm" style={{ color: "var(--foreground)" }}>
                         {day.label}
                       </Label>
                     </div>
@@ -3364,7 +3361,7 @@ export default function SissoneResponsivePrototype() {
               </div>
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
                 <div>
-                  <Label htmlFor="start-date" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                  <Label htmlFor="start-date" className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                     Data de Início
                   </Label>
                   <Input
@@ -3373,7 +3370,7 @@ export default function SissoneResponsivePrototype() {
                     value={classData.date}
                     onChange={(e) => setClassData({ ...classData, date: e.target.value })}
                     className="mt-1 h-10 lg:h-12"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                   />
                 </div>
                 <div className="lg:col-span-2">
@@ -3383,7 +3380,7 @@ export default function SissoneResponsivePrototype() {
                       checked={classData.hasEndDate}
                       onCheckedChange={(checked) => setClassData({ ...classData, hasEndDate: !!checked })}
                     />
-                    <Label htmlFor="has-end-date" className="text-sm" style={{ color: "#3D2C2E" }}>
+                    <Label htmlFor="has-end-date" className="text-sm" style={{ color: "var(--foreground)" }}>
                       Adicionar data de término
                     </Label>
                   </div>
@@ -3394,13 +3391,13 @@ export default function SissoneResponsivePrototype() {
                       value={classData.endDate}
                       onChange={(e) => setClassData({ ...classData, endDate: e.target.value })}
                       className="h-10 lg:h-12"
-                      style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                      style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                     />
                   )}
                 </div>
               </div>
               <div>
-                <Label className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                <Label className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                   Horário
                 </Label>
                 <div className="flex items-center gap-2 mt-1">
@@ -3410,17 +3407,17 @@ export default function SissoneResponsivePrototype() {
                     value={classData.time}
                     onChange={(e) => setClassData({ ...classData, time: e.target.value })}
                     className="h-10 lg:h-12 flex-1"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                     placeholder="Início"
                   />
-                  <span style={{ color: "#3D2C2E" }}>às</span>
+                  <span style={{ color: "var(--foreground)" }}>às</span>
                   <Input
                     id="endTime"
                     type="time"
                     value={classData.endTime}
                     onChange={(e) => setClassData({ ...classData, endTime: e.target.value })}
                     className="h-10 lg:h-12 flex-1"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                     placeholder="Término"
                   />
                 </div>
@@ -3429,7 +3426,7 @@ export default function SissoneResponsivePrototype() {
           ) : (
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
               <div>
-                <Label htmlFor="date" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                <Label htmlFor="date" className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                   Data
                 </Label>
                 <Input
@@ -3438,11 +3435,11 @@ export default function SissoneResponsivePrototype() {
                   value={classData.date}
                   onChange={(e) => setClassData({ ...classData, date: e.target.value })}
                   className="mt-1 h-10 lg:h-12"
-                  style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                  style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                 />
               </div>
               <div className="col-span-2 lg:col-span-1">
-                <Label className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                <Label className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                   Horário
                 </Label>
                 <div className="flex items-center gap-2 mt-1">
@@ -3452,23 +3449,23 @@ export default function SissoneResponsivePrototype() {
                     value={classData.time}
                     onChange={(e) => setClassData({ ...classData, time: e.target.value })}
                     className="h-10 lg:h-12 flex-1"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                     placeholder="Início"
                   />
-                  <span style={{ color: "#3D2C2E" }}>às</span>
+                  <span style={{ color: "var(--foreground)" }}>às</span>
                   <Input
                     id="endTime-single"
                     type="time"
                     value={classData.endTime}
                     onChange={(e) => setClassData({ ...classData, endTime: e.target.value })}
                     className="h-10 lg:h-12 flex-1"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                     placeholder="Término"
                   />
                 </div>
               </div>
               <div>
-                <Label className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                <Label className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                   Sala
                 </Label>
                 <Select
@@ -3477,11 +3474,11 @@ export default function SissoneResponsivePrototype() {
                 >
                   <SelectTrigger
                     className="mt-1 h-10 lg:h-12"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                   >
                     <SelectValue placeholder="Selecione a sala" />
                   </SelectTrigger>
-                  <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                  <SelectContent style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                     {mockRooms
                       .filter((room) => !classData.unit || room.unitId === classData.unit)
                       .map((room) => (
@@ -3493,7 +3490,7 @@ export default function SissoneResponsivePrototype() {
                 </Select>
               </div>
               <div>
-                <Label className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                <Label className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                   Nível
                 </Label>
                 <Select
@@ -3502,11 +3499,11 @@ export default function SissoneResponsivePrototype() {
                 >
                   <SelectTrigger
                     className="mt-1 h-10 lg:h-12"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                   >
                     <SelectValue placeholder="Selecione o nível" />
                   </SelectTrigger>
-                  <SelectContent style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}>
+                  <SelectContent style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}>
                     <SelectItem value="iniciante">Iniciante</SelectItem>
                     <SelectItem value="intermediario">Intermediário</SelectItem>
                     <SelectItem value="avancado">Avançado</SelectItem>
@@ -3515,7 +3512,7 @@ export default function SissoneResponsivePrototype() {
                 </Select>
               </div>
               <div>
-                <Label htmlFor="price" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                <Label htmlFor="price" className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                   Preço (R$)
                 </Label>
                 <Input
@@ -3524,21 +3521,21 @@ export default function SissoneResponsivePrototype() {
                   value={classData.price}
                   onChange={(e) => setClassData({ ...classData, price: e.target.value })}
                   className="mt-1 h-10 lg:h-12"
-                  style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                  style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                 />
               </div>
             </div>
           )}
 
           <div>
-            <Label className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+            <Label className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
               Fotos da Aula (Carrossel)
             </Label>
             <div className="mt-2 space-y-3">
               <Button
                 variant="outline"
                 className="w-full h-20 flex flex-col gap-2 bg-transparent"
-                style={{ borderColor: "#CFB2A8", backgroundColor: "#F5F0EB" }}
+                style={{ borderColor: "var(--primary)", backgroundColor: "var(--background)" }}
                 onClick={() => {
                   setClassData({
                     ...classData,
@@ -3546,8 +3543,8 @@ export default function SissoneResponsivePrototype() {
                   })
                 }}
               >
-                <Upload className="w-6 h-6" style={{ color: "#3D2C2E" }} />
-                <span className="text-sm" style={{ color: "#3D2C2E" }}>
+                <Upload className="w-6 h-6" style={{ color: "var(--foreground)" }} />
+                <span className="text-sm" style={{ color: "var(--foreground)" }}>
                   Adicionar Fotos
                 </span>
               </Button>
@@ -3558,7 +3555,7 @@ export default function SissoneResponsivePrototype() {
                     <div
                       key={index}
                       className="aspect-square rounded-lg overflow-hidden"
-                      style={{ backgroundColor: "#E5D6CD" }}
+                      style={{ backgroundColor: "var(--secondary)" }}
                     >
                       <img
                         src={image || "/placeholder.svg"}
@@ -3573,7 +3570,7 @@ export default function SissoneResponsivePrototype() {
           </div>
 
           <div>
-            <Label htmlFor="description" className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+            <Label htmlFor="description" className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
               Descrição
             </Label>
             <Textarea
@@ -3583,7 +3580,7 @@ export default function SissoneResponsivePrototype() {
               value={classData.description}
               onChange={(e) => setClassData({ ...classData, description: e.target.value })}
               className="mt-1"
-              style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+              style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
             />
           </div>
 
@@ -3592,14 +3589,14 @@ export default function SissoneResponsivePrototype() {
               variant="outline"
               onClick={() => showToast("Rascunho salvo com sucesso!")}
               className="lg:flex-1 h-10 lg:h-12 bg-transparent"
-              style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+              style={{ borderColor: "var(--primary)", color: "var(--foreground)" }}
             >
               Salvar Rascunho
             </Button>
             <Button
               className="lg:flex-1 h-10 lg:h-12"
               onClick={() => navigateTo("class-preview")}
-              style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+              style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
             >
               Visualizar Aula
             </Button>
@@ -3616,7 +3613,7 @@ export default function SissoneResponsivePrototype() {
           <div className="space-y-4">
             <div
               className="relative w-full h-48 lg:h-64 rounded-lg overflow-hidden"
-              style={{ backgroundColor: "#E5D6CD" }}
+              style={{ backgroundColor: "var(--secondary)" }}
             >
               {classData.images.length > 0 ? (
                 <>
@@ -3653,7 +3650,7 @@ export default function SissoneResponsivePrototype() {
               ) : (
                 <div
                   className="flex items-center justify-center h-full text-sm lg:text-base"
-                  style={{ color: "#3D2C2E" }}
+                  style={{ color: "var(--foreground)" }}
                 >
                   Imagem da Aula (Placeholder)
                 </div>
@@ -3666,7 +3663,7 @@ export default function SissoneResponsivePrototype() {
                   <button
                     key={index}
                     className={`w-2 h-2 rounded-full transition-all ${index === currentImageIndex ? "w-6" : ""}`}
-                    style={{ backgroundColor: index === currentImageIndex ? "#CFB2A8" : "#E5D6CD" }}
+                    style={{ backgroundColor: index === currentImageIndex ? "var(--primary)" : "var(--secondary)" }}
                     onClick={() => setCurrentImageIndex(index)}
                   />
                 ))}
@@ -3675,14 +3672,14 @@ export default function SissoneResponsivePrototype() {
           </div>
 
           <div className="space-y-4 lg:space-y-6">
-            <h1 className="text-xl lg:text-3xl font-bold" style={{ color: "#3D2C2E" }}>
+            <h1 className="text-xl lg:text-3xl font-bold" style={{ color: "var(--foreground)" }}>
               {classData.title || "Aula de Ballet Iniciante"}
             </h1>
 
             <div className="space-y-3">
               <div className="flex items-center gap-2">
-                <Building2 className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
-                <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                <Building2 className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "var(--primary)" }} />
+                <span className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                   {mockUnits.find((u) => u.id === classData.unit)?.name || "Unidade Centro"}
                 </span>
               </div>
@@ -3690,16 +3687,16 @@ export default function SissoneResponsivePrototype() {
               {classData.isRecurring ? (
                 <>
                   <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
-                    <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                    <Calendar className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "var(--primary)" }} />
+                    <span className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                       {classData.recurringDays.length > 0
                         ? `${classData.recurringDays.map((day) => weekDays.find((d) => d.id === day)?.label).join(", ")}`
                         : "Dias da semana não selecionados"}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
-                    <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                    <Clock className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "var(--primary)" }} />
+                    <span className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                       {classData.date || "15 de março, 2024"}
                       {classData.hasEndDate && classData.endDate
                         ? ` até ${classData.endDate}`
@@ -3709,30 +3706,30 @@ export default function SissoneResponsivePrototype() {
                 </>
               ) : (
                 <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
-                  <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                  <Calendar className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "var(--primary)" }} />
+                  <span className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                     {classData.date || "15 de março, 2024"}
                   </span>
                 </div>
               )}
 
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
-                <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                <Clock className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "var(--primary)" }} />
+                <span className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                   {classData.time || "18:00"} às {classData.endTime || "19:30"}
                 </span>
               </div>
 
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
-                <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                <MapPin className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "var(--primary)" }} />
+                <span className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                   {classData.room ? mockRooms.find((r) => r.id === classData.room)?.name : "Sala A"}
                 </span>
               </div>
 
               <div className="flex items-center gap-2">
-                <Users className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
-                <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                <Users className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "var(--primary)" }} />
+                <span className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                   Nível:{" "}
                   {classData.level === "iniciante"
                     ? "Iniciante"
@@ -3747,15 +3744,15 @@ export default function SissoneResponsivePrototype() {
               </div>
 
               <div className="flex items-center gap-2">
-                <DollarSign className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
-                <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                <DollarSign className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "var(--primary)" }} />
+                <span className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                   R$ {classData.price || "25,00"}
                 </span>
               </div>
 
               <div className="flex items-center gap-2">
-                <Star className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "#CFB2A8" }} />
-                <span className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+                <Star className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: "var(--primary)" }} />
+                <span className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
                   4.8 avaliação
                 </span>
               </div>
@@ -3765,7 +3762,7 @@ export default function SissoneResponsivePrototype() {
               <Button
                 className="w-full h-10 lg:h-12"
                 onClick={() => showToast("Aula publicada com sucesso!")}
-                style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
               >
                 Publicar Aula
               </Button>
@@ -3773,7 +3770,7 @@ export default function SissoneResponsivePrototype() {
                 variant="outline"
                 className="w-full h-10 lg:h-12 bg-transparent"
                 onClick={() => navigateTo("create-class")}
-                style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                style={{ borderColor: "var(--primary)", color: "var(--foreground)" }}
               >
                 Editar Rascunho
               </Button>
@@ -3782,10 +3779,10 @@ export default function SissoneResponsivePrototype() {
         </div>
 
         <div className="mt-6 lg:mt-8">
-          <h3 className="font-semibold mb-2 lg:mb-3 text-base lg:text-lg" style={{ color: "#3D2C2E" }}>
+          <h3 className="font-semibold mb-2 lg:mb-3 text-base lg:text-lg" style={{ color: "var(--foreground)" }}>
             Descrição
           </h3>
-          <p className="text-sm lg:text-base" style={{ color: "#3D2C2E" }}>
+          <p className="text-sm lg:text-base" style={{ color: "var(--foreground)" }}>
             {classData.description ||
               "Perfeito para iniciantes que querem aprender os fundamentos do ballet. Vamos cobrir posições básicas, movimentos e terminologia em um ambiente acolhedor."}
           </p>
@@ -3798,23 +3795,23 @@ export default function SissoneResponsivePrototype() {
     <div className="p-4 lg:p-6 pb-24 lg:pb-6">
       <div className="max-w-6xl mx-auto space-y-8">
         <div>
-          <h2 className="text-lg lg:text-xl font-semibold mb-4" style={{ color: "#3D2C2E" }}>
+          <h2 className="text-lg lg:text-xl font-semibold mb-4" style={{ color: "var(--foreground)" }}>
             Meus Dados de Login
           </h2>
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
+          <Card style={{ backgroundColor: "var(--secondary)" }}>
             <CardContent className="p-6">
               <div className="flex justify-center mb-6">
                 <div
                   className="w-24 h-24 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: "#CFB2A8" }}
+                  style={{ backgroundColor: "var(--primary)" }}
                 >
-                  <User className="w-12 h-12" style={{ color: "#3D2C2E" }} />
+                  <User className="w-12 h-12" style={{ color: "var(--foreground)" }} />
                 </div>
               </div>
 
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="profile-name" style={{ color: "#3D2C2E" }}>
+                  <Label htmlFor="profile-name" style={{ color: "var(--foreground)" }}>
                     Nome Completo *
                   </Label>
                   <Input
@@ -3822,12 +3819,12 @@ export default function SissoneResponsivePrototype() {
                     value={userProfileForm.name}
                     onChange={(e) => setUserProfileForm({ ...userProfileForm, name: e.target.value })}
                     placeholder="Digite seu nome"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="profile-email" style={{ color: "#3D2C2E" }}>
+                  <Label htmlFor="profile-email" style={{ color: "var(--foreground)" }}>
                     Email *
                   </Label>
                   <Input
@@ -3836,12 +3833,12 @@ export default function SissoneResponsivePrototype() {
                     value={userProfileForm.email}
                     onChange={(e) => setUserProfileForm({ ...userProfileForm, email: e.target.value })}
                     placeholder="seu@email.com"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="profile-phone" style={{ color: "#3D2C2E" }}>
+                  <Label htmlFor="profile-phone" style={{ color: "var(--foreground)" }}>
                     Telefone *
                   </Label>
                   <Input
@@ -3850,22 +3847,22 @@ export default function SissoneResponsivePrototype() {
                     value={userProfileForm.phone}
                     onChange={(e) => setUserProfileForm({ ...userProfileForm, phone: e.target.value })}
                     placeholder="+55 (11) 98765-4321"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                   />
                 </div>
               </div>
 
-              <div className="border-t pt-4 mt-6" style={{ borderColor: "#CFB2A8" }}>
-                <h3 className="text-lg font-semibold mb-4" style={{ color: "#3D2C2E" }}>
+              <div className="border-t pt-4 mt-6" style={{ borderColor: "var(--primary)" }}>
+                <h3 className="text-lg font-semibold mb-4" style={{ color: "var(--foreground)" }}>
                   Alterar Senha
                 </h3>
-                <p className="text-sm mb-4" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                <p className="text-sm mb-4" style={{ color: "var(--foreground)", opacity: 0.7 }}>
                   Deixe em branco se não desejar alterar sua senha
                 </p>
 
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-2">
-                    <Label htmlFor="profile-password" style={{ color: "#3D2C2E" }}>
+                    <Label htmlFor="profile-password" style={{ color: "var(--foreground)" }}>
                       Nova Senha
                     </Label>
                     <Input
@@ -3874,12 +3871,12 @@ export default function SissoneResponsivePrototype() {
                       value={userProfileForm.password}
                       onChange={(e) => setUserProfileForm({ ...userProfileForm, password: e.target.value })}
                       placeholder="Digite a nova senha"
-                      style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                      style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="profile-confirm-password" style={{ color: "#3D2C2E" }}>
+                    <Label htmlFor="profile-confirm-password" style={{ color: "var(--foreground)" }}>
                       Confirmar Nova Senha
                     </Label>
                     <Input
@@ -3888,7 +3885,7 @@ export default function SissoneResponsivePrototype() {
                       value={userProfileForm.confirmPassword}
                       onChange={(e) => setUserProfileForm({ ...userProfileForm, confirmPassword: e.target.value })}
                       placeholder="Confirme a nova senha"
-                      style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+                      style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
                     />
                   </div>
                 </div>
@@ -3899,14 +3896,14 @@ export default function SissoneResponsivePrototype() {
                   onClick={() => navigateTo("dashboard")}
                   variant="outline"
                   className="w-full sm:w-auto"
-                  style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                  style={{ borderColor: "var(--primary)", color: "var(--foreground)" }}
                 >
                   Cancelar
                 </Button>
                 <Button
                   onClick={handleUserProfileUpdate}
                   className="w-full sm:w-auto"
-                  style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                  style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
                 >
                   Salvar Alterações
                 </Button>
@@ -3922,11 +3919,11 @@ export default function SissoneResponsivePrototype() {
     if (!selectedStudent) {
       return (
         <div className="p-4 lg:p-6 pb-24 lg:pb-6">
-          <p style={{ color: "#3D2C2E" }}>Nenhum aluno selecionado</p>
+          <p style={{ color: "var(--foreground)" }}>Nenhum aluno selecionado</p>
           <Button
             onClick={() => navigateTo("students")}
             className="mt-4"
-            style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+            style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
           >
             Voltar para Alunos
           </Button>
@@ -3965,7 +3962,7 @@ export default function SissoneResponsivePrototype() {
                 setIsEditingStudent(false)
                 navigateTo("students")
               }}
-              style={{ color: "#3D2C2E" }}
+              style={{ color: "var(--foreground)" }}
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Voltar para Alunos
@@ -3976,7 +3973,7 @@ export default function SissoneResponsivePrototype() {
                 variant="outline"
                 onClick={handleResendInvite}
                 className="text-sm"
-                style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                style={{ borderColor: "var(--primary)", color: "var(--foreground)" }}
               >
                 <Send className="w-4 h-4 mr-2" />
                 <span className="hidden sm:inline">Reenviar Convite</span>
@@ -3986,7 +3983,7 @@ export default function SissoneResponsivePrototype() {
                 <Button
                   onClick={handleStartEdit}
                   className="text-sm"
-                  style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                  style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
                 >
                   <Edit2 className="w-4 h-4 mr-2" />
                   <span className="hidden sm:inline">Editar</span>
@@ -3995,21 +3992,21 @@ export default function SissoneResponsivePrototype() {
             </div>
           </div>
 
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
+          <Card style={{ backgroundColor: "var(--secondary)" }}>
             <CardContent className="p-6">
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex flex-col items-center">
                   <div
                     className="w-24 h-24 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: "#CFB2A8" }}
+                    style={{ backgroundColor: "var(--primary)" }}
                   >
-                    <User className="w-12 h-12" style={{ color: "#3D2C2E" }} />
+                    <User className="w-12 h-12" style={{ color: "var(--foreground)" }} />
                   </div>
                   <span
                     className="text-xs px-2 py-1 rounded mt-3"
                     style={{
-                      backgroundColor: selectedStudent.paymentStatus === "current" ? "#CFB2A8" : "#F5F0EB",
-                      color: "#3D2C2E",
+                      backgroundColor: selectedStudent.paymentStatus === "current" ? "var(--primary)" : "var(--background)",
+                      color: "var(--foreground)",
                     }}
                   >
                     {selectedStudent.paymentStatus === "current" ? "Em dia" : "Pendente"}
@@ -4021,44 +4018,44 @@ export default function SissoneResponsivePrototype() {
                     <>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label style={{ color: "#3D2C2E" }}>Nome Completo *</Label>
+                          <Label style={{ color: "var(--foreground)" }}>Nome Completo *</Label>
                           <Input
                             value={studentEditForm.name}
                             onChange={(e) => setStudentEditForm({ ...studentEditForm, name: e.target.value })}
                             placeholder="Nome do aluno"
-                            style={{ backgroundColor: "#F5F0EB", borderColor: "#CFB2A8" }}
+                            style={{ backgroundColor: "var(--background)", borderColor: "var(--primary)" }}
                           />
                         </div>
 
                         <div className="space-y-2">
-                          <Label style={{ color: "#3D2C2E" }}>Email *</Label>
+                          <Label style={{ color: "var(--foreground)" }}>Email *</Label>
                           <Input
                             type="email"
                             value={studentEditForm.email}
                             onChange={(e) => setStudentEditForm({ ...studentEditForm, email: e.target.value })}
                             placeholder="email@exemplo.com"
-                            style={{ backgroundColor: "#F5F0EB", borderColor: "#CFB2A8" }}
+                            style={{ backgroundColor: "var(--background)", borderColor: "var(--primary)" }}
                           />
                         </div>
 
                         <div className="space-y-2">
-                          <Label style={{ color: "#3D2C2E" }}>Telefone *</Label>
+                          <Label style={{ color: "var(--foreground)" }}>Telefone *</Label>
                           <Input
                             type="tel"
                             value={studentEditForm.phone}
                             onChange={(e) => setStudentEditForm({ ...studentEditForm, phone: e.target.value })}
                             placeholder="(11) 99999-9999"
-                            style={{ backgroundColor: "#F5F0EB", borderColor: "#CFB2A8" }}
+                            style={{ backgroundColor: "var(--background)", borderColor: "var(--primary)" }}
                           />
                         </div>
 
                         <div className="space-y-2">
-                          <Label style={{ color: "#3D2C2E" }}>Unidade *</Label>
+                          <Label style={{ color: "var(--foreground)" }}>Unidade *</Label>
                           <Select
                             value={studentEditForm.unitId}
                             onValueChange={(value) => setStudentEditForm({ ...studentEditForm, unitId: value })}
                           >
-                            <SelectTrigger style={{ backgroundColor: "#F5F0EB", borderColor: "#CFB2A8" }}>
+                            <SelectTrigger style={{ backgroundColor: "var(--background)", borderColor: "var(--primary)" }}>
                               <SelectValue placeholder="Selecione a unidade" />
                             </SelectTrigger>
                             <SelectContent>
@@ -4076,13 +4073,13 @@ export default function SissoneResponsivePrototype() {
                         <Button
                           variant="outline"
                           onClick={() => setIsEditingStudent(false)}
-                          style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                          style={{ borderColor: "var(--primary)", color: "var(--foreground)" }}
                         >
                           Cancelar
                         </Button>
                         <Button
                           onClick={handleSaveStudent}
-                          style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                          style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
                         >
                           Salvar Alterações
                         </Button>
@@ -4091,47 +4088,47 @@ export default function SissoneResponsivePrototype() {
                   ) : (
                     <>
                       <div>
-                        <h2 className="text-xl lg:text-2xl font-semibold" style={{ color: "#3D2C2E" }}>
+                        <h2 className="text-xl lg:text-2xl font-semibold" style={{ color: "var(--foreground)" }}>
                           {selectedStudent.name}
                         </h2>
-                        <p className="text-sm" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                        <p className="text-sm" style={{ color: "var(--foreground)", opacity: 0.7 }}>
                           Aluno desde Janeiro 2024
                         </p>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                          <Label className="text-xs" style={{ color: "var(--foreground)", opacity: 0.7 }}>
                             Email
                           </Label>
-                          <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                          <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                             {selectedStudent.email}
                           </p>
                         </div>
 
                         <div className="space-y-1">
-                          <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                          <Label className="text-xs" style={{ color: "var(--foreground)", opacity: 0.7 }}>
                             Telefone
                           </Label>
-                          <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                          <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                             {selectedStudent.phone}
                           </p>
                         </div>
 
                         <div className="space-y-1">
-                          <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                          <Label className="text-xs" style={{ color: "var(--foreground)", opacity: 0.7 }}>
                             Unidade
                           </Label>
-                          <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                          <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                             {studentUnit?.name || "Não definida"}
                           </p>
                         </div>
 
                         <div className="space-y-1">
-                          <Label className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                          <Label className="text-xs" style={{ color: "var(--foreground)", opacity: 0.7 }}>
                             Origem
                           </Label>
-                          <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                          <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                             {selectedStudent.acquisitionType === "platform" ? "Plataforma" : "Convite"}
                           </p>
                         </div>
@@ -4143,38 +4140,38 @@ export default function SissoneResponsivePrototype() {
             </CardContent>
           </Card>
 
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
+          <Card style={{ backgroundColor: "var(--secondary)" }}>
             <CardHeader>
-              <CardTitle className="text-lg" style={{ color: "#3D2C2E" }}>
+              <CardTitle className="text-lg" style={{ color: "var(--foreground)" }}>
                 Frequência
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center gap-4">
                 <div className="flex-1">
-                  <div className="w-full h-4 rounded-full overflow-hidden" style={{ backgroundColor: "#F5F0EB" }}>
+                  <div className="w-full h-4 rounded-full overflow-hidden" style={{ backgroundColor: "var(--background)" }}>
                     <div
                       className="h-full rounded-full"
                       style={{
                         width: `${selectedStudent.frequency}%`,
-                        backgroundColor: "#CFB2A8",
+                        backgroundColor: "var(--primary)",
                       }}
                     />
                   </div>
                 </div>
-                <span className="text-lg font-semibold" style={{ color: "#3D2C2E" }}>
+                <span className="text-lg font-semibold" style={{ color: "var(--foreground)" }}>
                   {selectedStudent.frequency}%
                 </span>
               </div>
-              <p className="text-sm mt-2" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+              <p className="text-sm mt-2" style={{ color: "var(--foreground)", opacity: 0.7 }}>
                 Taxa de presença nas aulas
               </p>
             </CardContent>
           </Card>
 
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
+          <Card style={{ backgroundColor: "var(--secondary)" }}>
             <CardHeader>
-              <CardTitle className="text-lg" style={{ color: "#3D2C2E" }}>
+              <CardTitle className="text-lg" style={{ color: "var(--foreground)" }}>
                 Aulas Matriculadas
               </CardTitle>
             </CardHeader>
@@ -4186,19 +4183,19 @@ export default function SissoneResponsivePrototype() {
                     <div
                       key={index}
                       className="flex items-center justify-between p-3 rounded"
-                      style={{ backgroundColor: "#F5F0EB" }}
+                      style={{ backgroundColor: "var(--background)" }}
                     >
                       <div>
-                        <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                        <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                           {className}
                         </p>
                         {classInfo && (
-                          <p className="text-xs" style={{ color: "#3D2C2E", opacity: 0.7 }}>
+                          <p className="text-xs" style={{ color: "var(--foreground)", opacity: 0.7 }}>
                             {classInfo.frequency || "Evento único"} - {classInfo.time}
                           </p>
                         )}
                       </div>
-                      <span className="text-sm" style={{ color: "#3D2C2E" }}>
+                      <span className="text-sm" style={{ color: "var(--foreground)" }}>
                         R$ {classInfo?.price || "0"},00
                       </span>
                     </div>
@@ -4208,9 +4205,9 @@ export default function SissoneResponsivePrototype() {
             </CardContent>
           </Card>
 
-          <Card style={{ backgroundColor: "#E5D6CD" }}>
+          <Card style={{ backgroundColor: "var(--secondary)" }}>
             <CardHeader>
-              <CardTitle className="text-lg" style={{ color: "#3D2C2E" }}>
+              <CardTitle className="text-lg" style={{ color: "var(--foreground)" }}>
                 Histórico de Pagamentos
               </CardTitle>
             </CardHeader>
@@ -4224,20 +4221,20 @@ export default function SissoneResponsivePrototype() {
                   <div
                     key={index}
                     className="flex items-center justify-between p-3 rounded"
-                    style={{ backgroundColor: "#F5F0EB" }}
+                    style={{ backgroundColor: "var(--background)" }}
                   >
                     <div>
-                      <p className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                      <p className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                         {payment.month}
                       </p>
                       <span
                         className="text-xs px-2 py-0.5 rounded"
-                        style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                        style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
                       >
                         {payment.status}
                       </span>
                     </div>
-                    <span className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+                    <span className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                       {payment.value}
                     </span>
                   </div>
@@ -4288,19 +4285,19 @@ export default function SissoneResponsivePrototype() {
   }
 
   return (
-    <div className="min-h-screen flex overflow-x-hidden" style={{ backgroundColor: "#F5F0EB" }}>
+    <div className="min-h-screen flex overflow-x-hidden" style={{ backgroundColor: "var(--background)" }}>
       <div className="fixed top-4 right-4 z-50 space-y-2">
         {toasts.map((toast) => (
           <div
             key={toast.id}
             className="flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg animate-in slide-in-from-right"
             style={{
-              backgroundColor: toast.type === "success" ? "#CFB2A8" : "#F5F0EB",
-              border: `1px solid ${toast.type === "success" ? "#CFB2A8" : "#E5D6CD"}`,
+              backgroundColor: toast.type === "success" ? "var(--primary)" : "var(--background)",
+              border: `1px solid ${toast.type === "success" ? "var(--primary)" : "var(--secondary)"}`,
             }}
           >
-            <Check className="w-4 h-4" style={{ color: "#3D2C2E" }} />
-            <span className="text-sm font-medium" style={{ color: "#3D2C2E" }}>
+            <Check className="w-4 h-4" style={{ color: "var(--foreground)" }} />
+            <span className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
               {toast.message}
             </span>
           </div>
@@ -4351,7 +4348,7 @@ export default function SissoneResponsivePrototype() {
       {/* Mobile Bottom Navigation */}
       <div
         className="lg:hidden fixed bottom-0 left-0 right-0 flex justify-around items-center px-2 py-3 border-t z-30 shadow-lg"
-        style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD" }}
+        style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)" }}
       >
         {navigationItems.map((item) => {
           const Icon = item.icon
@@ -4365,11 +4362,11 @@ export default function SissoneResponsivePrototype() {
             >
               <Icon
                 className="w-5 h-5 flex-shrink-0"
-                style={{ color: currentScreen === item.id ? "#CFB2A8" : "#3D2C2E" }}
+                style={{ color: currentScreen === item.id ? "var(--primary)" : "var(--foreground)" }}
               />
               <span
                 className="text-[10px] leading-tight text-center"
-                style={{ color: currentScreen === item.id ? "#CFB2A8" : "#3D2C2E" }}
+                style={{ color: currentScreen === item.id ? "var(--primary)" : "var(--foreground)" }}
               >
                 {item.label.split(" ")[0]}
               </span>
@@ -4381,24 +4378,24 @@ export default function SissoneResponsivePrototype() {
       {/* Share Link Modal */}
       {showShareLinkModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <Card className="w-full max-w-md" style={{ backgroundColor: "#E5D6CD" }}>
+          <Card className="w-full max-w-md" style={{ backgroundColor: "var(--secondary)" }}>
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle style={{ color: "#3D2C2E" }}>Compartilhar Página da Escola</CardTitle>
+                <CardTitle style={{ color: "var(--foreground)" }}>Compartilhar Página da Escola</CardTitle>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setShowShareLinkModal(false)}
                   className="hover:bg-white/50"
                 >
-                  <X className="w-4 h-4" style={{ color: "#3D2C2E" }} />
+                  <X className="w-4 h-4" style={{ color: "var(--foreground)" }} />
                 </Button>
               </div>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* QR Code */}
               <div className="flex justify-center">
-                <div className="p-4 rounded-lg" style={{ backgroundColor: "#F5F0EB" }}>
+                <div className="p-4 rounded-lg" style={{ backgroundColor: "var(--background)" }}>
                   <img
                     src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(schoolLink)}`}
                     alt="QR Code"
@@ -4409,7 +4406,7 @@ export default function SissoneResponsivePrototype() {
 
               {/* Link */}
               <div>
-                <Label className="text-sm font-medium mb-2 block" style={{ color: "#3D2C2E" }}>
+                <Label className="text-sm font-medium mb-2 block" style={{ color: "var(--foreground)" }}>
                   Link da Escola
                 </Label>
                 <div className="flex gap-2">
@@ -4417,9 +4414,9 @@ export default function SissoneResponsivePrototype() {
                     value={schoolLink}
                     readOnly
                     className="flex-1 text-sm"
-                    style={{ backgroundColor: "#F5F0EB", borderColor: "#E5D6CD", color: "#3D2C2E" }}
+                    style={{ backgroundColor: "var(--background)", borderColor: "var(--secondary)", color: "var(--foreground)" }}
                   />
-                  <Button onClick={copySchoolLink} style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}>
+                  <Button onClick={copySchoolLink} style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}>
                     <Copy className="w-4 h-4" />
                   </Button>
                 </div>
@@ -4432,7 +4429,7 @@ export default function SissoneResponsivePrototype() {
                   onClick={() => {
                     showToast("QR Code baixado com sucesso!", "success")
                   }}
-                  style={{ backgroundColor: "#CFB2A8", color: "#3D2C2E" }}
+                  style={{ backgroundColor: "var(--primary)", color: "var(--foreground)" }}
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Baixar QR Code
@@ -4441,7 +4438,7 @@ export default function SissoneResponsivePrototype() {
                   variant="outline"
                   className="w-full bg-transparent"
                   onClick={() => setShowShareLinkModal(false)}
-                  style={{ borderColor: "#CFB2A8", color: "#3D2C2E" }}
+                  style={{ borderColor: "var(--primary)", color: "var(--foreground)" }}
                 >
                   Fechar
                 </Button>
