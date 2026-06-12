@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+
 import { Geist_Mono, Karla as V0_Font_Karla, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
 // Initialize fonts
@@ -24,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased`}>
+    <html lang="en" className="bg-background" style={{ colorScheme: 'light' }}>
+      <body className={`font-sans antialiased bg-background text-foreground`}>
         {children}
         <Analytics />
       </body>
