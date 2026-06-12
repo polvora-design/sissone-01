@@ -97,6 +97,7 @@
 
 @theme inline {
   --font-sans: var(--v0-font-karla);
+  --font-serif: var(--v0-font-source-serif-4);
   --font-mono: var(--v0-font-geist-mono);
 
   --color-background: var(--background);
@@ -144,7 +145,7 @@
   @keyframes accordion-down {
     from {
       height: 0;
-  --font-serif: var(--v0-font-source-serif-4);}
+    }
     to {
       height: var(--radix-accordion-content-height);
     }
@@ -157,7 +158,6 @@
       height: 0;
     }
   }
-  --font-serif: var(--v0-font-source-serif-4);
   --shadow-2xs: var(--shadow-x) var(--shadow-y) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent);
   --shadow-xs: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--shadow-spread) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent);
   --shadow-sm: var(--shadow-x) var(--shadow-y) calc(var(--shadow-blur) * 1.5) var(--shadow-spread) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent);
