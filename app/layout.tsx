@@ -4,6 +4,12 @@ import { GeistMono } from 'geist/font/mono'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
+import { Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+
+// Initialize fonts
+const _sourceSerif_4 = V0_Font_Source_Serif_4({ subsets: ['latin'], weight: ["200","300","400","500","600","700","800","900"], variable: '--v0-font-source-serif-4' })
+const _v0_fontVariables = `${_sourceSerif_4.variable}`
+
 export const metadata: Metadata = {
   title: 'v0 App',
   description: 'Created with v0',
@@ -38,12 +44,12 @@ export default function RootLayout({
         <style>{`
 html {
   font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
-  --font-mono: ${GeistMono.variable};
+  --font-serif: ${GeistSans.variable};
+  --font-serif: ${GeistMono.variable};
 }
         `}</style>
       </head>
-      <body>
+      <body className={_v0_fontVariables}>
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
