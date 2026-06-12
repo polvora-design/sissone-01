@@ -140,7 +140,7 @@
   @keyframes accordion-down {
     from {
       height: 0;
-    }
+  --font-serif: var(--v0-font-source-serif-4);}
     to {
       height: var(--radix-accordion-content-height);
     }
